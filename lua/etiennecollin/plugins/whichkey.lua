@@ -97,11 +97,12 @@ return {
 
 			x = {
 				name = "Trouble",
-				x = { "<cmd>TroubleToggle<cr>", "Toggle trouble" },
-				w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace diagnostics" },
 				d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document diagnostics" },
-				q = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
 				l = { "<cmd>TroubleToggle loclist<cr>", "Loclist" },
+				q = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
+				t = { "<cmd>TodoTrouble<cr>", "Todo" },
+				w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace diagnostics" },
+				x = { "<cmd>TroubleToggle<cr>", "Toggle trouble" },
 			},
 			X = {
 				name = "Utilities",
