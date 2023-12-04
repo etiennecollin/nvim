@@ -1,11 +1,22 @@
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = "nvim-tree/nvim-web-devicons",
+	init = function()
+		require("etiennecollin.utils").set_colorscheme()
+	end,
 	config = function()
+		local custom_theme = require("lualine.themes.auto")
+		local utils = require("etiennecollin.utils")
+
+		local keys = { "inactive", "visual", "replace", "normal", "insert", "command" }
+		for _, key in ipairs(keys) do
+			utils.set_key_recursive(custom_theme, key .. ".c.bg", nil)
+		end
+
 		local lazy_status = require("lazy.status") -- to configure lazy pending updates count
 		require("lualine").setup({
 			options = {
-				theme = "tokyonight",
+				theme = custom_theme,
 			},
 			sections = {
 				lualine_c = {
