@@ -52,6 +52,9 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", {
 -- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 -- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
+vim.keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment number under cursor" })
+vim.keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number under cursor" })
+
 -- Fighting one-eyed kirby
 vim.keymap.set(
 	"v",

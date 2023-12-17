@@ -2,11 +2,23 @@ return {
 	"nvimtools/none-ls.nvim",
 	lazy = true,
 	event = { "BufReadPre", "BufNewFile" },
-	dependencies = { "nvim-lua/plenary.nvim", "williamboman/mason.nvim", "jay-babu/mason-null-ls.nvim" },
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		{ "jay-babu/mason-null-ls.nvim", dependencies = "williamboman/mason.nvim" },
+	},
 	config = function()
-		local null_ls = require("null-ls")
-		local null_ls_utils = require("null-ls.utils")
+		-----------------------------------------------------------------------
+		-- Install linters and formatters with mason
+		-----------------------------------------------------------------------
+		require("mason-null-ls").setup({
+			ensure_installed = {},
+			automatic_installation = true,
+			handlers = {},
+		})
 
+		-----------------------------------------------------------------------
+		-- Set lsp formatter client to null-ls
+		-----------------------------------------------------------------------
 		local lsp_formatting = function(bufnr)
 			vim.lsp.buf.format({
 				filter = function(client)
@@ -16,7 +28,10 @@ return {
 			})
 		end
 
-		-- Formatting on save
+		-----------------------------------------------------------------------
+		-- Formatting on save and setup null-ls
+		-----------------------------------------------------------------------
+		local null_ls = require("null-ls")
 		local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 		null_ls.setup({
 			sources = {
@@ -27,7 +42,13 @@ return {
 					extra_args = { "--aosp" },
 				}),
 				null_ls.builtins.formatting.codespell.with({
-					disabled_filetypes = { "tex" },
+					disabled_filetypes = { "tex", "python", "rust" },
+				}),
+				null_ls.builtins.formatting.black.with({
+					extra_args = { "--line-length=120" },
+				}),
+				null_ls.builtins.formatting.ruff.with({
+					disabled_filetypes = { "python" },
 				}),
 			},
 			on_attach = function(client, bufnr)
@@ -45,12 +66,6 @@ return {
 					})
 				end
 			end,
-		})
-
-		require("mason-null-ls").setup({
-			-- ensure_installed = {},
-			automatic_installation = true,
-			handlers = {},
 		})
 	end,
 }

@@ -112,4 +112,14 @@ function M.print_table(table)
 	print(vim.inspect(table))
 end
 
+function M.get_lsp_capabilities()
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+	capabilities.textDocument.foldingRange = {
+		dynamicRegistration = false,
+		lineFoldingOnly = true,
+	}
+	return capabilities
+end
+
 return M

@@ -27,14 +27,18 @@ return {
 
 			b = {
 				name = "Buffer",
+				c = { "<cmd>close<cr>", "Close buffer" },
 				D = { "<cmd>%bd|e#|bd#<cr>", "Delete all buffers" },
-				f = { "<cmd>BufferLinePick<cr>", "Pick buffer" },
-				F = { "<cmd>BufferLinePickClose<cr>", "Pick buffer to close" },
-				h = { "<cmd>split<cr>", "Hsplit window" },
-				n = { "<cmd>new<cr>", "New buffer" },
-				p = { "<cmd>BufferLineTogglePin<cr>", "Toggle buffer pin" },
-				t = { "<cmd>tabnew<cr>", "New tab" },
-				v = { "<cmd>vsplit<cr>", "Vsplit window" },
+				h = { "<cmd>FocusSplitDown<cr>", "Hsplit window" },
+				n = { "<cmd>FocusSplitNicely<cr>", "New buffer" },
+				v = { "<cmd>FocusSplitRight<cr>", "Vsplit window" },
+			},
+			B = {
+				name = "Tab",
+				c = { "<cmd>tabclose<cr>", "Close tab" },
+				n = { "<cmd>tabn<cr>", "Next tab" },
+				o = { "<cmd>tabnew<cr>", "Open tab" },
+				p = { "<cmd>tabp<cr>", "Previous tab" },
 			},
 
 			c = {
@@ -52,17 +56,11 @@ return {
 			e = { "<cmd>Neotree toggle reveal<cr>", "Toggle Neotree" },
 
 			f = {
-				'<cmd>lua vim.lsp.buf.format({filter = function(client) return client.name == "null-ls" end})<cr>',
+				"<cmd>lua vim.lsp.buf.format()<cr>",
 				"Format file",
 			},
 
-			h = { "<cmd>BufferLineCyclePrev<cr>", "Buffer cycle prev" },
-			H = { "<cmd>BufferLineMovePrev<cr>", "Buffer move prev" },
-
 			k = { ":s/\\(\\S.*\\)/ \\1/g<left><left><left><left><left>", "Fighting one-eyed kirby" },
-
-			l = { "<cmd>BufferLineCycleNext<cr>", "Buffer cycle next" },
-			L = { "<cmd>BufferLineMoveNext<cr>", "Buffer move next" },
 
 			m = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle markdown preview" },
 
@@ -77,7 +75,7 @@ return {
 				v = { "<cmd>Alpha<cr>", "Open Alpha" },
 			},
 
-			q = { "<cmd>bd<cr>", "Close buffer" },
+			q = { "<cmd>bd<cr>", "Delete buffer" },
 			Q = { "<cmd>q<cr>", "Quit" },
 
 			s = { ":%s//gI<left><left><left>", "Replace all" },

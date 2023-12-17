@@ -1,7 +1,9 @@
 return {
 	"mfussenegger/nvim-dap",
 	event = { "BufReadPre", "BufNewFile" },
-	dependencies = { "nvim-treesitter/nvim-treesitter", "theHamsta/nvim-dap-virtual-text" },
+	dependencies = {
+		{ "jay-babu/mason-nvim-dap.nvim", dependencies = "williamboman/mason.nvim" },
+	},
 	keys = {
 		{
 			"<leader>dB",
@@ -126,14 +128,24 @@ return {
 		},
 	},
 	config = function()
-		local dap = require("dap")
+		-----------------------------------------------------------------------
+		-- Install DAPs with mason
+		-----------------------------------------------------------------------
+		require("mason-nvim-dap").setup({
+			ensure_installed = { "codelldb" },
+			automatic_installation = true,
+			automatic_setup = true,
+			handlers = {},
+		})
 
+		-----------------------------------------------------------------------
+		-- Setup DAP
+		-----------------------------------------------------------------------
 		vim.api.nvim_set_hl(0, "DapStoppedLine", {
 			default = true,
 			link = "Visual",
 		})
 
-		-- Set DAP symbols
 		local signs = {
 			Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
 			Breakpoint = " ",

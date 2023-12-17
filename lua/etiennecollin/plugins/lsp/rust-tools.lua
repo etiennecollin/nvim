@@ -1,0 +1,74 @@
+return {
+	"simrat39/rust-tools.nvim",
+	dependencies = {
+		"neovim/nvim-lspconfig",
+		"nvim-lua/plenary.nvim",
+		"mfussenegger/nvim-dap",
+		"williamboman/mason.nvim",
+		"hrsh7th/cmp-nvim-lsp",
+	},
+	ft = { "rust" },
+	config = function()
+		local capabilities = require("etiennecollin.utils").get_lsp_capabilities()
+		local on_attach = require("etiennecollin.core.remaps_plugin").lsp_remaps
+
+		-- Setup codelldb path for DAP
+		local extension_path = require("mason-registry").get_package("codelldb"):get_install_path() .. "/extension/"
+		local codelldb_path = extension_path .. "adapter/codelldb"
+		local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+		if not vim.fn.filereadable(codelldb_path) or not vim.fn.filereadable(liblldb_path) then
+			local msg = "Installing codelldb via Mason...\nEither codelldb or liblldb was not readable.\ncodelldb: "
+				.. codelldb_path
+				.. "\nliblldb: "
+				.. liblldb_path
+			vim.notify(msg, vim.log.levels.INFO)
+			vim.cmd(":MasonInstall codelldb")
+		end
+
+		require("rust-tools").setup({
+			tools = {
+				reload_workspace_from_cargo_toml = true,
+				executor = require("rust-tools.executors").toggleterm,
+				hover_actions = {
+					auto_focus = true,
+				},
+				inlay_hints = {
+					auto = true,
+					parameter_hints_prefix = "<-",
+					other_hints_prefix = "->",
+				},
+			},
+			dap = {
+				adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+			},
+			server = {
+				standalone = false,
+				capabilities = capabilities,
+				on_attach = function(client, bufnr)
+					on_attach(client, bufnr)
+					require("etiennecollin.core.remaps_plugin").rust_remaps(client, bufnr)
+				end,
+				settings = {
+					-- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+					["rust-analyzer"] = {
+						check = {
+							command = "clippy",
+							extraArgs = { "--all", "--", "-W", "clippy::all" },
+						},
+						checkOnSave = {
+							command = "clippy",
+						},
+						inlayHints = {
+							chainingHints = {
+								enable = false,
+							},
+							closingBraceHints = {
+								enable = false,
+							},
+						},
+					},
+				},
+			},
+		})
+	end,
+}

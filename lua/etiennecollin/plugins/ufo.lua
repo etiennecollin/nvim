@@ -10,11 +10,9 @@ return {
 		vim.o.foldenable = true
 	end,
 	config = function()
+		require("etiennecollin.core.remaps_plugin").ufo_remaps()
+
 		local ufo = require("ufo")
-
-		vim.keymap.set("n", "zR", ufo.openAllFolds)
-		vim.keymap.set("n", "zM", ufo.closeAllFolds)
-
 		ufo.setup()
 	end,
 }

@@ -1,7 +1,7 @@
 return {
 	"michaelb/sniprun",
 	branch = "master",
-	cmd = "SnipRun",
+	cmd = { "SnipRun", "SnipRunOperator" },
 	build = "sh install.sh",
 	config = function()
 		require("sniprun").setup({
@@ -44,9 +44,5 @@ return {
 			borders = "single", --# display borders around floating windows
 			--# possible values are 'none', 'single', 'double', or 'shadow'
 		})
-
-		vim.api.nvim_set_keymap("v", "<leader>rr", "<Plug>SnipRun", { silent = true })
-		vim.api.nvim_set_keymap("n", "<leader>ro", "<Plug>SnipRunOperator", { silent = true })
-		vim.api.nvim_set_keymap("n", "<leader>rr", "<Plug>SnipRun", { silent = true })
 	end,
 }

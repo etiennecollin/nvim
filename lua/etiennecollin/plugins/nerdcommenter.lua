@@ -28,10 +28,5 @@ return {
 
 		-- Enable NERDCommenterToggle to check all selected lines is commented or not
 		vim.g.NERDToggleCheckAllLines = 1
-
-		-- Set mappings
-		vim.keymap.set("v", "<leader>cc", "<plug>NERDCommenterToggle", {
-			desc = "Toggle commenting",
-		})
 	end,
 }
