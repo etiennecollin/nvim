@@ -159,5 +159,14 @@ return {
 		cmp.event:on("menu_closed", function()
 			vim.b.copilot_suggestion_hidden = false
 		end)
+
+		-- Enable completion in Cargo.toml files for crates
+		vim.api.nvim_create_autocmd("BufRead", {
+			group = vim.api.nvim_create_augroup("CmpSourceCargo", { clear = true }),
+			pattern = "Cargo.toml",
+			callback = function()
+				cmp.setup.buffer({ sources = { { name = "crates" } } })
+			end,
+		})
 	end,
 }
