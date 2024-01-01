@@ -14,6 +14,10 @@ vim.keymap.set("v", "<leader>cc", "<plug>NERDCommenterToggle", { desc = "Toggle 
 -- This is done by calling the function in its corresponding plugin config
 local M = {}
 
+function M.markdown_remaps()
+	vim.keymap.set("n", "<leader>m", "<cmd>MarkdownPreviewToggle<CR>", { desc = "Toggle markdown preview" })
+end
+
 function M.ufo_remaps()
 	local ufo = require("ufo")
 
