@@ -21,7 +21,7 @@ end
 ---------------------------------
 -- Doesn't work for some reason???
 tex_utils.in_env = function(name) -- generic environment detection
-	local x, y = unpack(vim.fn["vimtex#env#is_inside"](name))
+	local x, y = table.unpack(vim.fn["vimtex#env#is_inside"](name))
 	return x ~= "0" and y ~= "0"
 end
 ---------------------------------
