@@ -25,6 +25,17 @@ function M.ufo_remaps()
 	vim.keymap.set("n", "zM", ufo.closeAllFolds, { desc = "Close all folds" })
 end
 
+function M.harpoon_remaps()
+	local harpoon = require("harpoon")
+
+	vim.keymap.set("n", "<leader>a", function()
+		harpoon.ui:toggle_quick_menu(harpoon:list())
+	end, { desc = "Harpoon" })
+	vim.keymap.set("n", "<leader>A", function()
+		harpoon:list():append()
+	end, { desc = "Add to Harpoon" })
+end
+
 function M.rust_remaps(_, bufnr)
 	local rust_tools = require("rust-tools")
 	local opts = {

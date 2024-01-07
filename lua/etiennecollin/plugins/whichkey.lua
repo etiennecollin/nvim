@@ -22,9 +22,6 @@ return {
 		}
 
 		local mappings = {
-			a = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Harpoon" },
-			A = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Add to Harpoon" },
-
 			b = {
 				name = "Buffer",
 				c = { "<cmd>close<cr>", "Close buffer" },
