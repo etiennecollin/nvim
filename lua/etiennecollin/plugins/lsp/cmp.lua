@@ -7,38 +7,17 @@ return {
 		"hrsh7th/cmp-cmdline", -- Source for commandline completion
 		"hrsh7th/cmp-nvim-lua", -- Source for completion of Neovim's Lua API
 		"hrsh7th/cmp-nvim-lsp-signature-help", -- Source for function signature
-		{ "zbirenbaum/copilot-cmp", dependencies = "zbirenbaum/copilot.lua" }, -- Source for copilot
-		"L3MON4D3/LuaSnip", -- Snippet engine
-		"saadparwaiz1/cmp_luasnip", -- Source for completion of LuaSnip snippets
-		"rafamadriz/friendly-snippets", -- Collection of useful snippets
+		{ "zbirenbaum/copilot-cmp", dependencies = "zbirenbaum/copilot.lua", config = true }, -- Source for copilot
+		{ "saadparwaiz1/cmp_luasnip", dependencies = "L3MON4D3/LuaSnip" }, -- Source for completion of LuaSnip snippets
 		"onsails/lspkind.nvim", -- Pictograms in completion menu
 	},
 	config = function()
-		local cmp = require("cmp")
 		local luasnip = require("luasnip")
+		local cmp = require("cmp")
 		local lspkind = require("lspkind")
-		require("copilot_cmp").setup()
 
 		-- Set color for copilot suggestions
 		vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#aa7de8" })
-
-		-----------------------------------------------------------------------
-		-- Setup LuaSnip
-		-----------------------------------------------------------------------
-		luasnip.setup({
-			-- Enable autotriggered snippets
-			enable_autosnippets = true,
-			-- Auto update fields sharing same argument
-			update_events = "TextChanged,TextChangedI",
-			-- Use <Tab> to trigger visual selection
-			store_selection_keys = "<Tab>",
-		})
-
-		-- Loads snippets from friendly-snippets and custom snippets
-		require("luasnip.loaders.from_lua").lazy_load({
-			paths = "~/.config/nvim/lua/etiennecollin/snippets",
-		})
-		require("luasnip.loaders.from_vscode").lazy_load()
 
 		-----------------------------------------------------------------------
 		-- Aux function
@@ -48,7 +27,7 @@ return {
 			if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
 				return false
 			end
-			local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+			local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
 			return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 		end
 
@@ -116,14 +95,14 @@ return {
 				["<C-p>"] = cmp.mapping.select_prev_item(),
 				["<C-n>"] = cmp.mapping.select_next_item(),
 				["<Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.confirm({
-							select = true,
-						})
-					elseif luasnip.expand_or_locally_jumpable() then
+					if luasnip.expand_or_locally_jumpable() then
 						-- Replace the expand_or_jumpable() with expand_or_locally_jumpable()
 						-- to only jump inside the snippet region
 						luasnip.expand_or_jump()
+					elseif cmp.visible() then
+						cmp.confirm({
+							select = true,
+						})
 					elseif has_words_before() then
 						cmp.complete()
 					else
@@ -131,10 +110,10 @@ return {
 					end
 				end, { "i", "s" }),
 				["<S-Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item()
-					elseif luasnip.jumpable(-1) then
+					if luasnip.jumpable(-1) then
 						luasnip.jump(-1)
+					elseif cmp.visible() then
+						cmp.select_next_item()
 					elseif has_words_before() then
 						cmp.complete()
 					else
@@ -144,12 +123,14 @@ return {
 			}),
 		})
 
+		-- Add completion to search mode
 		cmp.setup.cmdline("/", {
 			sources = {
 				{ name = "buffer" },
 			},
 		})
 
+		-- Add completion to command mode
 		cmp.setup.cmdline(":", {
 			sources = cmp.config.sources({
 				{ name = "path" },
@@ -157,14 +138,6 @@ return {
 				{ name = "cmdline" },
 			}),
 		})
-
-		cmp.event:on("menu_opened", function()
-			vim.b.copilot_suggestion_hidden = true
-		end)
-
-		cmp.event:on("menu_closed", function()
-			vim.b.copilot_suggestion_hidden = false
-		end)
 
 		-- Enable completion in Cargo.toml files for crates
 		vim.api.nvim_create_autocmd("BufRead", {
