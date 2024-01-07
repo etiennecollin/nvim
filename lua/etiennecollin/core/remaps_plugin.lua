@@ -109,6 +109,12 @@ function M.lsp_remaps(_, bufnr)
 	-- Mapping to restart lsp if necessary
 	opts.desc = "Restart LSP"
 	vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+
+	-- Help with function signature
+	opts.desc = "Signature help"
+	vim.keymap.set("i", "<C-h>", function()
+		vim.lsp.buf.signature_help()
+	end, opts)
 end
 
 return M
