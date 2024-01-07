@@ -7,8 +7,7 @@ return {
 		"hrsh7th/cmp-cmdline", -- Source for commandline completion
 		"hrsh7th/cmp-nvim-lua", -- Source for completion of Neovim's Lua API
 		"hrsh7th/cmp-nvim-lsp-signature-help", -- Source for function signature
-		"github/copilot.vim",
-		"zbirenbaum/copilot-cmp", -- Source for copilot
+		{ "zbirenbaum/copilot-cmp", dependencies = "zbirenbaum/copilot.lua" }, -- Source for copilot
 		"L3MON4D3/LuaSnip", -- Snippet engine
 		"saadparwaiz1/cmp_luasnip", -- Source for completion of LuaSnip snippets
 		"rafamadriz/friendly-snippets", -- Collection of useful snippets
@@ -18,11 +17,14 @@ return {
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		local lspkind = require("lspkind")
-
 		require("copilot_cmp").setup()
 
-		vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+		-- Set color for copilot suggestions
+		vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#aa7de8" })
 
+		-----------------------------------------------------------------------
+		-- Setup LuaSnip
+		-----------------------------------------------------------------------
 		luasnip.setup({
 			-- Enable autotriggered snippets
 			enable_autosnippets = true,
@@ -38,6 +40,9 @@ return {
 		})
 		require("luasnip.loaders.from_vscode").lazy_load()
 
+		-----------------------------------------------------------------------
+		-- Aux function
+		-----------------------------------------------------------------------
 		local has_words_before = function()
 			--     unpack = unpack or table.unpack
 			if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
@@ -47,6 +52,9 @@ return {
 			return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 		end
 
+		-----------------------------------------------------------------------
+		-- Setup nvim-cmp
+		-----------------------------------------------------------------------
 		cmp.setup({
 			completion = {
 				completeopt = "menu,menuone,preview,noselect,noinsert",
@@ -60,14 +68,14 @@ return {
 			},
 
 			sources = cmp.config.sources({
-				-- {
-				--     name = "copilot", -- Copilot
-				-- },
 				{
-					name = "nvim_lsp", -- LSP
+					name = "copilot", -- Copilot
 				},
 				{
 					name = "nvim_lsp_signature_help", -- Complete function info
+				},
+				{
+					name = "nvim_lsp", -- LSP
 				},
 				{
 					name = "luasnip", -- Snippets
@@ -99,26 +107,22 @@ return {
 			},
 
 			mapping = cmp.mapping.preset.insert({
-				-- ["<CR>"] = vim.NIL, -- Disable completion with return key
 				["<CR>"] = cmp.mapping.confirm({
 					select = false,
 				}),
-				["<C-Space>"] = cmp.mapping.complete(),
 				["<C-e>"] = cmp.mapping.abort(),
 				["<C-u>"] = cmp.mapping.scroll_docs(-4),
 				["<C-d>"] = cmp.mapping.scroll_docs(4),
 				["<C-p>"] = cmp.mapping.select_prev_item(),
 				["<C-n>"] = cmp.mapping.select_next_item(),
 				["<Tab>"] = cmp.mapping(function(fallback)
-					if require("copilot.suggestion").is_visible() then
-						require("copilot.suggestion").accept()
-					elseif cmp.visible() then
+					if cmp.visible() then
 						cmp.confirm({
 							select = true,
 						})
 					elseif luasnip.expand_or_locally_jumpable() then
-						-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-						-- they way you will only jump inside the snippet region
+						-- Replace the expand_or_jumpable() with expand_or_locally_jumpable()
+						-- to only jump inside the snippet region
 						luasnip.expand_or_jump()
 					elseif has_words_before() then
 						cmp.complete()
@@ -131,6 +135,8 @@ return {
 						cmp.select_next_item()
 					elseif luasnip.jumpable(-1) then
 						luasnip.jump(-1)
+					elseif has_words_before() then
+						cmp.complete()
 					else
 						fallback()
 					end
