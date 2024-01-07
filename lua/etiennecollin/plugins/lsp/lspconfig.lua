@@ -19,7 +19,7 @@ return {
 		-- Setup handlers
 		-----------------------------------------------------------------------
 		local capabilities = require("etiennecollin.utils").get_lsp_capabilities()
-		local on_attach = require("etiennecollin.core.remaps_plugin").lsp_remaps
+		local on_attach = require("etiennecollin.core.remaps_plugin").lsp_remaps()
 
 		local default_handler = function(server_name)
 			require("lspconfig")[server_name].setup({
@@ -34,6 +34,9 @@ return {
 			["rust_analyzer"] = function() end,
 			["jdtls"] = function()
 				require("etiennecollin.plugins.lsp.servers.jdtls")(capabilities, on_attach)
+			end,
+			["lua_ls"] = function()
+				require("etiennecollin.plugins.lsp.servers.lua_ls")(capabilities, on_attach)
 			end,
 		})
 
