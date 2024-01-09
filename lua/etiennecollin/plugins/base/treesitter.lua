@@ -5,7 +5,7 @@ return {
 	dependencies = { "nvim-treesitter/nvim-treesitter-context" },
 	config = function()
 		require("nvim-treesitter.configs").setup({
-			ensure_installed = { "java", "markdown", "markdown_inline", "rust", "toml", "python", "lua", "comment" },
+			ensure_installed = { "lua", "markdown_inline", "comment" },
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
 			sync_install = false,
