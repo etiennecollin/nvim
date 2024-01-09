@@ -3,7 +3,7 @@
 -- Set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
-require("etiennecollin.utils").default_theme = "sonokai"
+require("etiennecollin.utils").default_colorscheme = "sonokai"
 
 -- Set cursor options and line highlighting
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"

@@ -15,10 +15,10 @@ local M = {}
 
     The default theme to use if no theme is specified in the Neovim configuration.
 
-    @field default_theme
-    @usage utils.default_theme = "slate"
+    @field default_colorscheme
+    @usage utils.default_colorscheme = "slate"
 ]]
-M.default_theme = "slate"
+M.default_colorscheme = "slate"
 
 --[[
     Set Color Scheme
@@ -31,7 +31,7 @@ M.default_theme = "slate"
 ]]
 function M.set_colorscheme(theme_name)
 	-- Set the default theme if no theme is specified
-	theme_name = theme_name or M.default_theme
+	theme_name = theme_name or M.default_colorscheme
 
 	-- Set the color scheme and print an error if it fails to load
 	if not pcall(function()
