@@ -38,14 +38,6 @@ return {
 				p = { "<cmd>tabp<cr>", "Previous tab" },
 			},
 
-			c = {
-				name = "Commenting",
-				t = { "<plug>NERDCommenterAltDelims", "Alternative" },
-				c = { "<plug>NERDCommenterToggle", "Toggle commenting" },
-				m = { "<plug>NERDCommenterMinimal", "Minimal" },
-				s = { "<plug>NERDCommenterSexy", "Pretty" },
-			},
-
 			d = {
 				name = "Debug",
 			},
