@@ -66,6 +66,14 @@ return {
 								enable = false,
 							},
 						},
+						procMacro = {
+							ignored = {
+								leptos_macro = {
+									"component",
+									"server",
+								},
+							},
+						},
 					},
 				},
 			},
