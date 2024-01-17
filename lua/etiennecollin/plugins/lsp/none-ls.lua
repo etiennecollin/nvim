@@ -11,7 +11,17 @@ return {
 		-- Install linters and formatters with mason
 		-----------------------------------------------------------------------
 		require("mason-null-ls").setup({
-			ensure_installed = {},
+			ensure_installed = {
+				"black",
+				"isort",
+				"beautysh",
+				"shfmt",
+				"stylua",
+				"clang-format",
+				"google-java-format",
+				"prettier",
+				"latexindent",
+			},
 			automatic_installation = true,
 			handlers = {},
 		})
@@ -41,14 +51,14 @@ return {
 				null_ls.builtins.formatting.google_java_format.with({
 					extra_args = { "--aosp" },
 				}),
-				null_ls.builtins.formatting.codespell.with({
-					disabled_filetypes = { "tex", "python", "rust" },
-				}),
 				null_ls.builtins.formatting.black.with({
 					extra_args = { "--line-length=120" },
 				}),
 				null_ls.builtins.formatting.ruff.with({
 					disabled_filetypes = { "python" },
+				}),
+				null_ls.builtins.formatting.clang_format.with({
+					extra_args = { "--style={BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 120}" },
 				}),
 			},
 			on_attach = function(client, bufnr)
