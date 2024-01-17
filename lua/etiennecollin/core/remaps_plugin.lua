@@ -1,5 +1,5 @@
 -- ToggleTerm
-vim.keymap.set({ "n", "i", "v", "t" }, "<S-F1>", "<cmd>ToggleTermToggleAll<cr>", {
+vim.keymap.set({ "n", "i", "v", "t" }, "<F1>", "<cmd>ToggleTermToggleAll<cr>", {
 	desc = "Toggle terminal",
 })
 
@@ -34,6 +34,19 @@ function M.harpoon_remaps()
 	vim.keymap.set("n", "<leader>A", function()
 		harpoon:list():append()
 	end, { desc = "Add to Harpoon" })
+
+	vim.keymap.set("n", "<leader>1", function()
+		harpoon:list():select(1)
+	end, { desc = "Harpoon select 1" })
+	vim.keymap.set("n", "<leader>2", function()
+		harpoon:list():select(2)
+	end, { desc = "Harpoon select 2" })
+	vim.keymap.set("n", "<leader>3", function()
+		harpoon:list():select(3)
+	end, { desc = "Harpoon select 3" })
+	vim.keymap.set("n", "<leader>4", function()
+		harpoon:list():select(4)
+	end, { desc = "Harpoon select 4" })
 end
 
 function M.rust_remaps(_, bufnr)
