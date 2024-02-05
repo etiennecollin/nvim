@@ -32,6 +32,9 @@ return {
 			default_handler,
 			-- Specific servers
 			["rust_analyzer"] = function() end,
+			["pylsp"] = function()
+				require("etiennecollin.plugins.lsp.servers.pylsp")(capabilities, on_attach)
+			end,
 			["jdtls"] = function()
 				require("etiennecollin.plugins.lsp.servers.jdtls")(capabilities, on_attach)
 			end,
