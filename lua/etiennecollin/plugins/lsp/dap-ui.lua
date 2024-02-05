@@ -20,7 +20,6 @@ return {
 				require("dapui").eval()
 			end,
 			desc = "Eval",
-			mode = { "n", "v" },
 		},
 	},
 	config = function()
