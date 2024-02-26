@@ -29,12 +29,13 @@ return {
 		-- Set lsp formatter client to null-ls
 		-----------------------------------------------------------------------
 		local lsp_formatting = function(bufnr)
-			vim.lsp.buf.format({
-				filter = function(client)
-					return client.name == "null-ls"
-				end,
-				bufnr = bufnr,
-			})
+			-- vim.lsp.buf.format({
+			-- 	filter = function(client)
+			-- 		return client.name == "null-ls"
+			-- 	end,
+			-- 	bufnr = bufnr,
+			-- })
+			vim.lsp.buf.format()
 		end
 
 		-----------------------------------------------------------------------
