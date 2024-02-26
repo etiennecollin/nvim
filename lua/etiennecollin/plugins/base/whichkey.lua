@@ -51,6 +51,11 @@ return {
 
 			k = { ":s/\\(\\S.*\\)/ \\1/g<left><left><left><left><left>", "Fighting one-eyed kirby" },
 
+			m = {
+				name = "Language Commands",
+				r = { name = "Run" },
+			},
+
 			p = {
 				name = "Telescope and Files",
 				b = { "<cmd>Telescope buffers<cr>", "Buffers" },
