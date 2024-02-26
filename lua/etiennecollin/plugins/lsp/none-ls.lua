@@ -14,13 +14,12 @@ return {
 			ensure_installed = {
 				"black",
 				"isort",
-				"beautysh",
 				"shfmt",
 				"stylua",
 				"clang-format",
 				"google-java-format",
 				"prettier",
-				"latexindent",
+				"texlab",
 			},
 			automatic_installation = true,
 			handlers = {},
@@ -53,9 +52,6 @@ return {
 				}),
 				null_ls.builtins.formatting.black.with({
 					extra_args = { "--line-length=120" },
-				}),
-				null_ls.builtins.formatting.ruff.with({
-					disabled_filetypes = { "python" },
 				}),
 				null_ls.builtins.formatting.clang_format.with({
 					extra_args = { "--style={BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 120}" },
