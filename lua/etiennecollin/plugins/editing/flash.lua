@@ -20,7 +20,7 @@ return {
 			desc = "Flash",
 		},
 		{
-			"<CR>",
+			"<cr>",
 			mode = { "n", "x", "o" },
 			function()
 				require("flash").treesitter()
