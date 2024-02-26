@@ -3,12 +3,16 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-path", -- Source for completion of paths
+		"hrsh7th/cmp-calc", -- Source for calculations
 		"hrsh7th/cmp-buffer", -- Source for completion of words in buffers
 		"hrsh7th/cmp-cmdline", -- Source for commandline completion
 		"hrsh7th/cmp-nvim-lua", -- Source for completion of Neovim's Lua API
 		"hrsh7th/cmp-nvim-lsp-signature-help", -- Source for function signature
 		{ "zbirenbaum/copilot-cmp", dependencies = "zbirenbaum/copilot.lua", config = true }, -- Source for copilot
 		{ "saadparwaiz1/cmp_luasnip", dependencies = "L3MON4D3/LuaSnip" }, -- Source for completion of LuaSnip snippets
+		"jmbuhr/otter.nvim", -- Source for otter
+		"kdheepak/cmp-latex-symbols", -- Source for latex symbols
+		"jmbuhr/cmp-pandoc-references", -- Source for pandoc refs
 		"onsails/lspkind.nvim", -- Pictograms in completion menu
 	},
 	config = function()
@@ -47,27 +51,17 @@ return {
 			},
 
 			sources = cmp.config.sources({
-				{
-					name = "copilot", -- Copilot
-				},
-				{
-					name = "nvim_lsp_signature_help", -- Complete function info
-				},
-				{
-					name = "nvim_lsp", -- LSP
-				},
-				{
-					name = "luasnip", -- Snippets
-				},
-				{
-					name = "buffer", -- Text within current buffer
-				},
-				{
-					name = "nvim_lua", -- Neovim Lua API
-				},
-				{
-					name = "path", -- File paths
-				},
+				{ name = "copilot" },
+				{ name = "nvim_lsp_signature_help" },
+				{ name = "nvim_lsp" },
+				{ name = "otter" },
+				{ name = "luasnip" },
+				{ name = "pandoc_references" },
+				{ name = "calc" },
+				{ name = "latex_symbols" },
+				{ name = "buffer" },
+				{ name = "nvim_lua" },
+				{ name = "path" },
 			}),
 
 			window = {

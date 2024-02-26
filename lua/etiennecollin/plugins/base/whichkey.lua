@@ -77,6 +77,7 @@ return {
 				i = { '<cmd>TermExec cmd="ipython"<cr>', "IPython" },
 				p = { '<cmd>TermExec cmd="python"<cr>', "Python" },
 				j = { '<cmd>TermExec cmd="julia"<cr>', "Julia" },
+				s = { name = "Slime" },
 			},
 
 			u = { "<cmd>UndotreeToggle<cr>", "Undotree" },

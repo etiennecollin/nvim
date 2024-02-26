@@ -30,5 +30,8 @@ return {
 			paths = "~/.config/nvim/lua/etiennecollin/snippets",
 		})
 		require("luasnip.loaders.from_vscode").lazy_load()
+
+		-- Link quarto to markdown snippets
+		luasnip.filetype_extend("quarto", { "markdown" })
 	end,
 }
