@@ -39,6 +39,9 @@ vim.opt.splitright = true
 
 -- Enable line wrapping
 vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+vim.opt.showbreak = "↪"
 
 -- Enable hidden buffers
 vim.opt.hidden = true
