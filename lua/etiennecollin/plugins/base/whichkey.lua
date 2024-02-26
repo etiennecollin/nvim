@@ -74,6 +74,9 @@ return {
 				h = { "<cmd>ToggleTerm direction=horizontal<cr>", "Horizontal" },
 				v = { "<cmd>ToggleTerm direction=vertical<cr>", "Vertical" },
 				t = { "<cmd>ToggleTerm<cr>", "Bottom" },
+				i = { '<cmd>TermExec cmd="ipython"<cr>', "IPython" },
+				p = { '<cmd>TermExec cmd="python"<cr>', "Python" },
+				j = { '<cmd>TermExec cmd="julia"<cr>', "Julia" },
 			},
 
 			u = { "<cmd>UndotreeToggle<cr>", "Undotree" },
