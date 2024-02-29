@@ -2,7 +2,7 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	event = { "BufReadPre", "BufNewFile" },
 	build = ":TSUpdate",
-	dependencies = { "nvim-treesitter/nvim-treesitter-context" },
+	dependencies = { "nvim-treesitter/nvim-treesitter-context", "andymass/vim-matchup" },
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = { "lua", "markdown_inline", "comment" },
@@ -24,6 +24,11 @@ return {
 			},
 
 			indent = {
+				enable = true,
+			},
+
+			-- For vim-matchup
+			matchup = {
 				enable = true,
 			},
 		})
