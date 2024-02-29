@@ -26,7 +26,7 @@ return {
 			dashboard.button("a", "  > New File", "<cmd>ene<CR>"),
 			dashboard.button("SPC e", "  > File explorer", "<cmd>Neotree toggle<CR>"),
 			dashboard.button("SPC pf", "󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
-			dashboard.button("SPC ps", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
+			dashboard.button("SPC pS", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
 			dashboard.button("q", "  > Quit NVIM", "<cmd>qa<CR>"),
 		}
 
