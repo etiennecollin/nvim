@@ -19,7 +19,7 @@ return {
 		-- Setup handlers
 		-----------------------------------------------------------------------
 		local capabilities = require("etiennecollin.utils").get_lsp_capabilities()
-		local on_attach = require("etiennecollin.core.remaps_plugin").lsp_remaps()
+		local on_attach = require("etiennecollin.core.remaps_plugin").lsp()
 
 		local default_handler = function(server_name)
 			require("lspconfig")[server_name].setup({

@@ -12,6 +12,6 @@ return {
 		vim.g.mkdp_page_title = "${name}.md"
 	end,
 	config = function()
-		require("etiennecollin.core.remaps_plugin").markdown_remaps()
+		require("etiennecollin.core.remaps_plugin").markdown()
 	end,
 }

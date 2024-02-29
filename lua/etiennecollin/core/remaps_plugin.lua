@@ -14,18 +14,18 @@ vim.keymap.set("v", "<leader>cc", "<plug>NERDCommenterToggle", { desc = "Toggle 
 -- This is done by calling the function in its corresponding plugin config
 local M = {}
 
-function M.markdown_remaps()
-	vim.keymap.set("n", "<leader>m", "<cmd>MarkdownPreviewToggle<CR>", { desc = "Toggle markdown preview" })
+function M.markdown()
+	vim.keymap.set("n", "<leader>mm", "<cmd>MarkdownPreviewToggle<CR>", { desc = "Toggle markdown preview" })
 end
 
-function M.ufo_remaps()
+function M.ufo()
 	local ufo = require("ufo")
 
 	vim.keymap.set("n", "zR", ufo.openAllFolds, { desc = "Open all folds" })
 	vim.keymap.set("n", "zM", ufo.closeAllFolds, { desc = "Close all folds" })
 end
 
-function M.harpoon_remaps()
+function M.harpoon()
 	local harpoon = require("harpoon")
 
 	vim.keymap.set("n", "<leader>a", function()
@@ -49,7 +49,24 @@ function M.harpoon_remaps()
 	end, { desc = "Harpoon select 4" })
 end
 
-function M.rust_remaps(_, bufnr)
+function M.quarto()
+	vim.keymap.set("n", "<leader>mqa", "<cmd>QuartoActivate<cr>", { desc = "Quarto activate" })
+	vim.keymap.set("n", "<leader>mqp", "<cmd>QuartoPreview<cr>", { desc = "Quarto preview" })
+	vim.keymap.set("n", "<leader>mqq", "<cmd>QuartoClosePreview<cr>", { desc = "Quarto close" })
+	vim.keymap.set("n", "<leader>mqe", "<cmd>lua require('otter').export()<cr>", { desc = "Quarto export" })
+	vim.keymap.set(
+		"n",
+		"<leader>mqE",
+		"<cmd>lua require('otter').export(true)<cr>",
+		{ desc = "Quarto export overwrite" }
+	)
+	vim.keymap.set("n", "<leader>mqrr", "<cmd>QuartoSendAbove<cr>", { desc = "Run to cursor" })
+	vim.keymap.set("n", "<leader>mqra", "<cmd>QuartoSendAll<cr>", { desc = "Run all" })
+	vim.keymap.set("n", "<leader><cr>", "<Plug>SlimeSendCell<cr>", { desc = "Send code chunk" })
+	vim.keymap.set("v", "<leader><cr>", "<Plug>SlimeRegionSend<cr>", { desc = "Send code chunk" })
+end
+
+function M.rust(_, bufnr)
 	local rust_tools = require("rust-tools")
 	local opts = {
 		silent = true,
@@ -60,10 +77,10 @@ function M.rust_remaps(_, bufnr)
 	vim.keymap.set("n", "<leader>ca", rust_tools.hover_actions.hover_actions, opts)
 
 	opts.desc = "Rust Tools code actions"
-	vim.keymap.set("n", "<Leader>rc", rust_tools.code_action_group.code_action_group, opts)
+	vim.keymap.set("n", "<leader>rc", rust_tools.code_action_group.code_action_group, opts)
 end
 
-function M.lsp_remaps(_, bufnr)
+function M.lsp(_, bufnr)
 	-- Setup lspconfig
 	local opts = {
 		noremap = true,

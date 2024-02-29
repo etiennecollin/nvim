@@ -10,7 +10,7 @@ return {
 	ft = { "rust" },
 	config = function()
 		local capabilities = require("etiennecollin.utils").get_lsp_capabilities()
-		local on_attach = require("etiennecollin.core.remaps_plugin").lsp_remaps
+		local on_attach = require("etiennecollin.core.remaps_plugin").lsp
 
 		-- Setup codelldb path for DAP
 		local extension_path = require("mason-registry").get_package("codelldb"):get_install_path() .. "/extension/"
@@ -46,7 +46,7 @@ return {
 				capabilities = capabilities,
 				on_attach = function(client, bufnr)
 					on_attach(client, bufnr)
-					require("etiennecollin.core.remaps_plugin").rust_remaps(client, bufnr)
+					require("etiennecollin.core.remaps_plugin").rust(client, bufnr)
 				end,
 				settings = {
 					-- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
