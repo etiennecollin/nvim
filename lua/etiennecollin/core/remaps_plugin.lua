@@ -22,6 +22,10 @@ function M.typst()
 	vim.keymap.set("n", "<leader>mtw", "<cmd>TypstWatch<cr>", { desc = "Typst Watch" })
 end
 
+function M.neogen()
+	vim.keymap.set("n", "<leader>n", "<cmd>Neogen<cr>", { desc = "Generate annotation" })
+end
+
 function M.ufo()
 	local ufo = require("ufo")
 
