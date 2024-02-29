@@ -11,7 +11,4 @@ return {
 		vim.g.mkdp_echo_preview_url = 1
 		vim.g.mkdp_page_title = "${name}.md"
 	end,
-	config = function()
-		require("etiennecollin.core.remaps_plugin").markdown()
-	end,
 }

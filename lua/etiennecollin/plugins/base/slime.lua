@@ -66,4 +66,7 @@ return {
 		vim.keymap.set("n", "<leader>tss", set_terminal, { desc = "Set terminal" })
 		vim.keymap.set("n", "<leader>tso", toggle_slime_tmux_nvim, { desc = "Toggle tmux/nvim terminal" })
 	end,
+	config = function()
+		require("etiennecollin.core.remaps_plugin").slime()
+	end,
 }

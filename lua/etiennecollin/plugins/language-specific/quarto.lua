@@ -7,7 +7,4 @@ return {
 	},
 	ft = "quarto",
 	dependencies = { "jmbuhr/otter.nvim" },
-	config = function()
-		require("etiennecollin.core.remaps_plugin").quarto()
-	end,
 }

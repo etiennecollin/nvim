@@ -16,8 +16,7 @@ return {
 		}
 
 		local opts = {
-			mode = "n", -- NORMAL mode
-			-- the prefix is prepended to every mapping
+			mode = "n",
 			prefix = "<leader>",
 		}
 
@@ -45,16 +44,6 @@ return {
 			e = { "<cmd>Neotree toggle reveal<cr>", "Toggle Neotree" },
 
 			k = { ":s/\\(\\S.*\\)/ \\1/g<left><left><left><left><left>", "Fighting one-eyed kirby" },
-
-			m = {
-				name = "Language Commands",
-				q = {
-					name = "Quarto",
-					r = { name = "Run" },
-				},
-				t = { name = "Typst" },
-				m = { name = "Markdown" },
-			},
 
 			p = {
 				name = "Telescope and Files",
@@ -114,5 +103,7 @@ return {
 
 		whichkey.setup(conf)
 		whichkey.register(mappings, opts)
+
+		require("etiennecollin.core.remaps_plugin").language_specific()
 	end,
 }

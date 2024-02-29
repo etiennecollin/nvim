@@ -7,12 +7,54 @@ vim.keymap.set({ "n", "i", "v", "t" }, "<F1>", "<cmd>ToggleTermToggleAll<cr>", {
 -- This is done by calling the function in its corresponding plugin config
 local M = {}
 
-function M.markdown()
-	vim.keymap.set("n", "<leader>mm", "<cmd>MarkdownPreviewToggle<CR>", { desc = "Toggle markdown preview" })
+function M.slime()
+	vim.keymap.set("n", "<leader><cr>", "<Plug>SlimeSendCell<cr>", { desc = "Send code chunk" })
+	vim.keymap.set("v", "<leader><cr>", "<Plug>SlimeRegionSend<cr>", { desc = "Send code chunk" })
 end
 
-function M.typst()
-	vim.keymap.set("n", "<leader>mtw", "<cmd>TypstWatch<cr>", { desc = "Typst Watch" })
+function M.language_specific()
+	local wk = require("which-key")
+	function set_keybinds()
+		local fileTy = vim.api.nvim_buf_get_option(0, "filetype")
+		local opts = {
+			mode = "n",
+			prefix = "<leader>",
+			buffer = 0,
+		}
+
+		if fileTy == "quarto" then
+			wk.register({
+				m = {
+					name = "Quarto",
+					a = { "<cmd>QuartoActivate<cr>", "Quarto activate" },
+					p = { "<cmd>QuartoPreview<cr>", "Quarto preview" },
+					q = { "<cmd>QuartoClosePreview<cr>", "Quarto close" },
+					e = { "<cmd>lua require('otter').export()<cr>", "Quarto export" },
+					E = { "<cmd>lua require('otter').export(true)<cr>", "Quarto export overwrite" },
+					r = {
+						name = "Run",
+						r = { "<cmd>QuartoSendAbove<cr>", "Run to cursor" },
+						a = { "<cmd>QuartoSendAll<cr>", "Run all" },
+					},
+				},
+			}, opts)
+		elseif fileTy == "typst" then
+			wk.register({
+				m = { "<cmd>TypstWatch<cr>", "Typst watch" },
+			}, opts)
+		elseif fileTy == "markdown" then
+			wk.register({
+				m = { "<cmd>MarkdownPreviewToggle<CR>", "Toggle markdown preview" },
+			}, opts)
+		end
+	end
+
+	-- Update keybinds when filetype changes
+	vim.cmd("autocmd FileType * lua set_keybinds()")
+
+	-- Run the function manually for the first time
+	-- This is necessary to run when opening file with `nvim file.ext`
+	set_keybinds()
 end
 
 function M.neogen()
@@ -48,23 +90,6 @@ function M.harpoon()
 	vim.keymap.set("n", "<leader>4", function()
 		harpoon:list():select(4)
 	end, { desc = "Harpoon select 4" })
-end
-
-function M.quarto()
-	vim.keymap.set("n", "<leader>mqa", "<cmd>QuartoActivate<cr>", { desc = "Quarto activate" })
-	vim.keymap.set("n", "<leader>mqp", "<cmd>QuartoPreview<cr>", { desc = "Quarto preview" })
-	vim.keymap.set("n", "<leader>mqq", "<cmd>QuartoClosePreview<cr>", { desc = "Quarto close" })
-	vim.keymap.set("n", "<leader>mqe", "<cmd>lua require('otter').export()<cr>", { desc = "Quarto export" })
-	vim.keymap.set(
-		"n",
-		"<leader>mqE",
-		"<cmd>lua require('otter').export(true)<cr>",
-		{ desc = "Quarto export overwrite" }
-	)
-	vim.keymap.set("n", "<leader>mqrr", "<cmd>QuartoSendAbove<cr>", { desc = "Run to cursor" })
-	vim.keymap.set("n", "<leader>mqra", "<cmd>QuartoSendAll<cr>", { desc = "Run all" })
-	vim.keymap.set("n", "<leader><cr>", "<Plug>SlimeSendCell<cr>", { desc = "Send code chunk" })
-	vim.keymap.set("v", "<leader><cr>", "<Plug>SlimeRegionSend<cr>", { desc = "Send code chunk" })
 end
 
 function M.rust(_, bufnr)
