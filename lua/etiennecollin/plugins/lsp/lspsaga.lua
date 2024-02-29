@@ -5,5 +5,10 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-tree/nvim-web-devicons",
 	},
-	config = true,
+	opts = {
+		ui = {
+			code_action = " ",
+			actionfix = "󰠠 ",
+		},
+	},
 }
