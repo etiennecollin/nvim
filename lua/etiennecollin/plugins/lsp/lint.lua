@@ -1,6 +1,6 @@
 return {
 	"mfussenegger/nvim-lint",
-	enabled = not require("plugins.lsp.none-ls").enabled,
+	enabled = not require("etiennecollin.plugins.lsp.none-ls").enabled,
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = { "rshkarin/mason-nvim-lint", dependencies = "williamboman/mason.nvim" },
 	config = function()
