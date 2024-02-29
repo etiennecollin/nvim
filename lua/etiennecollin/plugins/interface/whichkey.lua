@@ -53,7 +53,12 @@ return {
 
 			m = {
 				name = "Language Commands",
-				r = { name = "Run" },
+				q = {
+					name = "Quarto",
+					r = { name = "Run" },
+				},
+				t = { name = "Typst" },
+				m = { name = "Markdown" },
 			},
 
 			p = {
