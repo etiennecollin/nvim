@@ -44,11 +44,6 @@ return {
 
 			e = { "<cmd>Neotree toggle reveal<cr>", "Toggle Neotree" },
 
-			f = {
-				"<cmd>lua vim.lsp.buf.format()<cr>",
-				"Format file",
-			},
-
 			k = { ":s/\\(\\S.*\\)/ \\1/g<left><left><left><left><left>", "Fighting one-eyed kirby" },
 
 			m = {
