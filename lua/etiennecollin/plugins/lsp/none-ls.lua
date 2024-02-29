@@ -48,6 +48,7 @@ return {
 				null_ls.builtins.formatting.clang_format.with({
 					extra_args = { "--style={BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 120}" },
 				}),
+				null_ls.builtins.formatting.typstfmt,
 			},
 			on_attach = function(client, bufnr)
 				if client.supports_method("textDocument/formatting") then
