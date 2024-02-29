@@ -1,6 +1,6 @@
 return {
 	"jpalardy/vim-slime",
-	event = { "BufReadPre", "BufNewFile" },
+	ft = { "markdown", "typst", "quarto" },
 	dependencies = { "jmbuhr/otter.nvim" },
 	init = function()
 		vim.b["quarto_is_" .. "python" .. "_chunk"] = false
