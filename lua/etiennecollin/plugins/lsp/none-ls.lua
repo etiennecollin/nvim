@@ -11,16 +11,7 @@ return {
 		-- Install linters and formatters with mason
 		-----------------------------------------------------------------------
 		require("mason-null-ls").setup({
-			ensure_installed = {
-				"black",
-				"isort",
-				"shfmt",
-				"stylua",
-				"clang-format",
-				"google-java-format",
-				"prettier",
-				"texlab",
-			},
+			ensure_installed = require("etiennecollin.utils").ensure_installed_linter_formatter,
 			automatic_installation = true,
 			handlers = {},
 		})

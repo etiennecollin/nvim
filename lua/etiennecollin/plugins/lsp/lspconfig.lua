@@ -11,7 +11,7 @@ return {
 		-- Install LSPs with mason
 		-----------------------------------------------------------------------
 		require("mason-lspconfig").setup({
-			ensure_installed = { "lua_ls", "rust_analyzer", "jdtls", "ruff_lsp", "pyright" },
+			ensure_installed = require("etiennecollin.utils").ensure_installed_lsp,
 			automatic_installation = true,
 		})
 

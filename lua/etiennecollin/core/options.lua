@@ -3,7 +3,14 @@
 -- Set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
+
+-- Set the colorscheme and ensure installed plugins
 require("etiennecollin.utils").default_colorscheme = "sonokai"
+require("etiennecollin.utils").ensure_installed_treesitter = { "lua", "markdown_inline", "comment" }
+require("etiennecollin.utils").ensure_installed_lsp = { "lua_ls", "rust_analyzer", "jdtls", "ruff_lsp", "pyright" }
+require("etiennecollin.utils").ensure_installed_linter_formatter =
+	{ "black", "isort", "shfmt", "stylua", "clang-format", "google-java-format", "prettier", "texlab" }
+require("etiennecollin.utils").ensure_installed_dap = { "codelldb" }
 
 -- Set cursor options and line highlighting
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"

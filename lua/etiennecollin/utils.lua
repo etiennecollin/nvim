@@ -10,15 +10,20 @@
 ]]
 local M = {}
 
---[[
-    Default Theme
-
-    The default theme to use if no theme is specified in the Neovim configuration.
-
-    @field default_colorscheme
-    @usage utils.default_colorscheme = "slate"
-]]
+--- The default theme to use if no theme is specified in the Neovim configuration.
 M.default_colorscheme = "slate"
+
+--- The Treesitter languages to be installed.
+M.ensure_installed_treesitter = {}
+
+--- The LSPs to be installed by Mason.
+M.ensure_installed_lsp = {}
+
+--- The Linters and Formatters to be installed by Mason.
+M.ensure_installed_linter_formatter = {}
+
+--- The DAPs to be installed by Mason.
+M.ensure_installed_dap = {}
 
 --[[
     Set Color Scheme

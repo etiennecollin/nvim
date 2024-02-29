@@ -5,7 +5,7 @@ return {
 	dependencies = { "nvim-treesitter/nvim-treesitter-context", "andymass/vim-matchup" },
 	config = function()
 		require("nvim-treesitter.configs").setup({
-			ensure_installed = { "lua", "markdown_inline", "comment" },
+			ensure_installed = require("etiennecollin.utils").ensure_installed_treesitter,
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
 			sync_install = false,

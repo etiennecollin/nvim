@@ -132,7 +132,7 @@ return {
 		-- Install DAPs with mason
 		-----------------------------------------------------------------------
 		require("mason-nvim-dap").setup({
-			ensure_installed = { "codelldb" },
+			ensure_installed = require("etiennecollin.utils").ensure_installed_dap,
 			automatic_installation = true,
 			automatic_setup = true,
 			handlers = {},
