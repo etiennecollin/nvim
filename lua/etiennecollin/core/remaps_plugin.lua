@@ -3,13 +3,6 @@ vim.keymap.set({ "n", "i", "v", "t" }, "<F1>", "<cmd>ToggleTermToggleAll<cr>", {
 	desc = "Toggle terminal",
 })
 
--- SnipRun commands
-vim.keymap.set({ "n", "v" }, "<leader>rr", "<plug>SnipRun", { silent = true, desc = "Run code snippet" })
-vim.keymap.set("n", "<leader>ro", "<plug>SnipRunOperator", { silent = true, desc = "Run code snippet with operator" })
-
--- NerdCommenter
-vim.keymap.set("v", "<leader>cc", "<plug>NERDCommenterToggle", { desc = "Toggle commenting" })
-
 -- These functions create mappings that are only loaded when the plugin is loaded
 -- This is done by calling the function in its corresponding plugin config
 local M = {}
