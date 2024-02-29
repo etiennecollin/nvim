@@ -18,6 +18,10 @@ function M.markdown()
 	vim.keymap.set("n", "<leader>mm", "<cmd>MarkdownPreviewToggle<CR>", { desc = "Toggle markdown preview" })
 end
 
+function M.typst()
+	vim.keymap.set("n", "<leader>mtw", "<cmd>TypstWatch<cr>", { desc = "Typst Watch" })
+end
+
 function M.ufo()
 	local ufo = require("ufo")
 
