@@ -69,4 +69,4 @@ vim.opt.updatetime = 50
 vim.cmd("autocmd InsertEnter * norm zz")
 
 -- Remove trailing whitespace on save
-vim.cmd("autocmd BufWritePre,FileWritePre * :%s/\\s\\+$//e")
+vim.cmd("autocmd BufWritePre, FileWritePre * :%s/\\s\\+$//e")
