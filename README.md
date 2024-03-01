@@ -2,27 +2,14 @@
 
 ## Packages
 
-### Arch Linux
+- Arch Linux: `yay -Syu ripgrep sioyek`
+- macOS: `brew install ripgrep sioyek pngpaste`
+- [`typstfmt`](https://github.com/astrale-sharp/typstfmt) is required by
+  `typst-lsp` to format code. See repo for intall instructions.
 
-- `yay -Syu ripgrep zathura xdotool`
-
-> `ripgrep` is required for telescope word finding
-
-> `zathura` and `xdotools` are required by `vimtex`
-
-> [typstfmt](https://github.com/astrale-sharp/typstfmt) is required by `typst-lsp` to format code.
-
-### macOS
-
-- `brew install ripgrep skim pngpaste`
-
-> `ripgrep` is required for telescope word finding.
-
-> `skim` is required by `vimtex` for tex file preview.
-
-> `pngpaste` is optionally required by `img-clip`.
-
-> [typstfmt](https://github.com/astrale-sharp/typstfmt) is required by `typst-lsp` to format code.
+> - `ripgrep` is required by `telescope` for word finding.
+> - `sioyek` is required by `vimtex` and `typst.vim` for file preview.
+> - `pngpaste` is optionally required by `img-clip`.
 
 ## Python
 
