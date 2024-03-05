@@ -8,21 +8,45 @@ vim.keymap.set({ "n", "i", "v", "t" }, "<F1>", "<cmd>ToggleTermToggleAll<cr>", {
 local M = {}
 
 function M.slime()
-	vim.keymap.set("n", "<leader><cr>", "<Plug>SlimeSendCell<cr>", { desc = "Send code chunk" })
-	vim.keymap.set("v", "<leader><cr>", "<Plug>SlimeRegionSend<cr>", { desc = "Send code chunk" })
+	local function toggle_slime_tmux_nvim()
+		pcall(function()
+			vim.b.slime_config = nil
+			vim.g.slime_default_config = nil
+		end)
+		if vim.g.slime_target == "tmux" then
+			-- Use neovim terminal for slime
+			vim.g.slime_target = "neovim"
+			vim.g.slime_bracketed_paste = 0
+			vim.g.slime_python_ipython = 1
+		elseif vim.g.slime_target == "neovim" then
+			-- Use tmux for slime
+			vim.g.slime_target = "tmux"
+			vim.g.slime_bracketed_paste = 1
+			vim.g.slime_default_config = { socket_name = "default", target_pane = ".2" }
+		end
+	end
+
+	vim.keymap.set("n", "<leader>tsc", "<cmd>SlimeConfig<cr>", { desc = "Configure slime" })
+	vim.keymap.set("n", "<leader>tso", toggle_slime_tmux_nvim, { desc = "Toggle tmux/nvim terminal for slime" })
 end
 
 function M.language_specific()
 	local wk = require("which-key")
 	function set_keybinds()
-		local fileTy = vim.api.nvim_buf_get_option(0, "filetype")
-		local opts = {
+		local file_type = vim.api.nvim_buf_get_option(0, "filetype")
+		local opts_n = {
 			mode = "n",
 			prefix = "<leader>",
 			buffer = 0,
 		}
+		local opts_v = {
+			mode = "v",
+			prefix = "<leader>",
+			buffer = 0,
+		}
+		local use_slime = false
 
-		if fileTy == "quarto" then
+		if file_type == "quarto" then
 			wk.register({
 				m = {
 					name = "Quarto",
@@ -32,20 +56,41 @@ function M.language_specific()
 					e = { "<cmd>lua require('otter').export()<cr>", "Quarto export" },
 					E = { "<cmd>lua require('otter').export(true)<cr>", "Quarto export overwrite" },
 					r = {
-						name = "Run",
-						r = { "<cmd>QuartoSendAbove<cr>", "Run to cursor" },
+						name = "Quarto run",
+						c = { "<cmd>QuartoSendAbove<cr>", "Run to cursor" },
 						a = { "<cmd>QuartoSendAll<cr>", "Run all" },
 					},
 				},
-			}, opts)
-		elseif fileTy == "typst" then
+			}, opts_n)
+			wk.register({}, opts_v)
+		elseif file_type == "typst" then
+			use_slime = true
 			wk.register({
 				m = { "<cmd>TypstWatch<cr>", "Typst watch" },
-			}, opts)
-		elseif fileTy == "markdown" then
+			}, opts_n)
+		elseif file_type == "markdown" then
+			use_slime = true
 			wk.register({
-				m = { "<cmd>MarkdownPreviewToggle<CR>", "Toggle markdown preview" },
-			}, opts)
+				m = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle markdown preview" },
+			}, opts_n)
+		end
+
+		if use_slime then
+			wk.register({
+				["<cr>"] = { "<plug>SlimeSendCell", "Slime send cell" },
+			}, opts_n)
+			wk.register({
+				["<cr>"] = { "<plug>SlimeRegionSend", "Slime send visual" },
+			}, opts_v)
+		else
+			wk.register({
+				E = { "<plug>SlimeSendCell", "Slime send cell" },
+				["<cr>"] = { "<cmd>QuartoSend<cr>", "Run cell" },
+			}, opts_n)
+			wk.register({
+				E = { "<plug>SlimeRegionSend", "Slime send visual" },
+				["<cr>"] = { "<cmd>QuartoSendRange<cr>", "Run visual range" },
+			}, opts_v)
 		end
 	end
 
@@ -99,11 +144,11 @@ function M.rust(_, bufnr)
 		buffer = bufnr,
 	}
 
-	opts.desc = "Rust Tools hover actions"
-	vim.keymap.set("n", "<leader>ca", rust_tools.hover_actions.hover_actions, opts)
+	opts.desc = "See available hover actions"
+	vim.keymap.set("n", "<leader>ch", rust_tools.hover_actions.hover_actions, opts)
 
-	opts.desc = "Rust Tools code actions"
-	vim.keymap.set("n", "<leader>rc", rust_tools.code_action_group.code_action_group, opts)
+	opts.desc = "See available code actions"
+	vim.keymap.set("n", "<leader>ca", rust_tools.code_action_group.code_action_group, opts)
 end
 
 function M.lsp(_, bufnr)
@@ -116,7 +161,7 @@ function M.lsp(_, bufnr)
 
 	-- Show definition, references
 	opts.desc = "Show LSP references"
-	vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
+	vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
 
 	-- Go to declaration
 	opts.desc = "Go to declaration"
