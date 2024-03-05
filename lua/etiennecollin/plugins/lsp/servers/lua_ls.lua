@@ -6,6 +6,9 @@ return function(capabilities, on_attach)
 				diagnostics = {
 					globals = { "vim" },
 				},
+				telemetry = {
+					enable = false,
+				},
 			},
 		},
 		capabilities = capabilities,
