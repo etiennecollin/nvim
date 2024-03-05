@@ -47,6 +47,9 @@ return {
 			["tailwindcss"] = function()
 				require("etiennecollin.plugins.lsp.servers.tailwindcss")(capabilities, on_attach)
 			end,
+			["marksman"] = function()
+				require("etiennecollin.plugins.lsp.servers.marksman")(capabilities, on_attach)
+			end,
 		})
 
 		-----------------------------------------------------------------------
