@@ -12,6 +12,7 @@ return {
 				python = { "isort", "black" },
 				sh = { "shfmt" },
 				bash = { "shfmt" },
+				zsh = { "shfmt" },
 				c = { "clang_format" },
 				cpp = { "clang_format" },
 				java = { "google-java-format" },
