@@ -32,74 +32,75 @@ end
 
 function M.language_specific()
 	local wk = require("which-key")
-	function set_keybinds()
-		local file_type = vim.api.nvim_buf_get_option(0, "filetype")
-		local opts_n = {
-			mode = "n",
-			prefix = "<leader>",
-			buffer = 0,
-		}
-		local opts_v = {
-			mode = "v",
-			prefix = "<leader>",
-			buffer = 0,
-		}
-		local use_slime = false
+	local opts_n = {
+		mode = "n",
+		prefix = "<leader>",
+		buffer = 0,
+	}
+	local opts_v = {
+		mode = "v",
+		prefix = "<leader>",
+		buffer = 0,
+	}
 
-		if file_type == "quarto" then
-			wk.register({
-				m = {
-					name = "Quarto",
-					a = { "<cmd>QuartoActivate<cr>", "Quarto activate" },
-					p = { "<cmd>QuartoPreview<cr>", "Quarto preview" },
-					q = { "<cmd>QuartoClosePreview<cr>", "Quarto close" },
-					e = { "<cmd>lua require('otter').export()<cr>", "Quarto export" },
-					E = { "<cmd>lua require('otter').export(true)<cr>", "Quarto export overwrite" },
-					r = {
-						name = "Quarto run",
-						c = { "<cmd>QuartoSendAbove<cr>", "Run to cursor" },
-						a = { "<cmd>QuartoSendAll<cr>", "Run all" },
-					},
+	local file_type = vim.api.nvim_buf_get_option(0, "filetype")
+	local use_molten = false
+
+	-- Add keymaps for quarto, typst, and markdown
+	if file_type == "quarto" then
+		use_molten = true
+		wk.register({
+			m = {
+				name = "Quarto",
+				a = { "<cmd>QuartoActivate<cr>", "Quarto activate" },
+				p = { "<cmd>QuartoPreview<cr>", "Quarto preview" },
+				q = { "<cmd>QuartoClosePreview<cr>", "Quarto close" },
+				e = { "<cmd>lua require('otter').export()<cr>", "Quarto export" },
+				E = { "<cmd>lua require('otter').export(true)<cr>", "Quarto export overwrite" },
+				r = {
+					name = "Quarto run",
+					c = { "<cmd>QuartoSendAbove<cr>", "Run to cursor" },
+					a = { "<cmd>QuartoSendAll<cr>", "Run all" },
 				},
-			}, opts_n)
-			wk.register({}, opts_v)
-		elseif file_type == "typst" then
-			use_slime = true
-			wk.register({
-				m = { "<cmd>TypstWatch<cr>", "Typst watch" },
-			}, opts_n)
-		elseif file_type == "markdown" then
-			use_slime = true
-			wk.register({
-				m = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle markdown preview" },
-			}, opts_n)
-		end
-
-		if use_slime then
-			wk.register({
-				["<cr>"] = { "<plug>SlimeSendCell", "Slime send cell" },
-			}, opts_n)
-			wk.register({
-				["<cr>"] = { "<plug>SlimeRegionSend", "Slime send visual" },
-			}, opts_v)
-		else
-			wk.register({
-				E = { "<plug>SlimeSendCell", "Slime send cell" },
-				["<cr>"] = { "<cmd>QuartoSend<cr>", "Run cell" },
-			}, opts_n)
-			wk.register({
-				E = { "<plug>SlimeRegionSend", "Slime send visual" },
-				["<cr>"] = { "<cmd>QuartoSendRange<cr>", "Run visual range" },
-			}, opts_v)
-		end
+			},
+		}, opts_n)
+	elseif file_type == "typst" then
+		wk.register({
+			m = { "<cmd>TypstWatch<cr>", "Typst watch" },
+		}, opts_n)
+	elseif file_type == "markdown" then
+		wk.register({
+			m = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle markdown preview" },
+		}, opts_n)
 	end
 
-	-- Update keybinds when filetype changes
-	vim.cmd("autocmd FileType * lua set_keybinds()")
-
-	-- Run the function manually for the first time
-	-- This is necessary to run when opening file with `nvim file.ext`
-	set_keybinds()
+	-- Add keymaps for molten if it is being used and for slime otherwise
+	if use_molten then
+		wk.register({
+			E = { "<plug>SlimeSendCell", "Slime send cell" },
+			["<cr>"] = { "<cmd>QuartoSend<cr>", "Run cell" },
+			["mm"] = {
+				name = "Molten",
+				e = { "<cmd>MoltenExport<cr>", "Export notebook" },
+				h = { "<cmd>MoltenHideOutput<cr>", "Hide output" },
+				o = { "<cmd>noautocmd MoltenEnterOutput<cr>", "Enter output" },
+				p = { "<cmd>MoltenImagePopup<cr>", "Image popup" },
+				q = { "<cmd>MoltenInterrupt<cr>", "Interrupt kernel" },
+				r = { "<cmd>MoltenRestart<cr>", "Restart kernel" },
+			},
+		}, opts_n)
+		wk.register({
+			E = { "<plug>SlimeRegionSend", "Slime send visual" },
+			["<cr>"] = { "<cmd>QuartoSendRange<cr>", "Run visual range" },
+		}, opts_v)
+	else
+		wk.register({
+			["<cr>"] = { "<plug>SlimeSendCell", "Slime send cell" },
+		}, opts_n)
+		wk.register({
+			["<cr>"] = { "<plug>SlimeRegionSend", "Slime send visual" },
+		}, opts_v)
+	end
 end
 
 function M.neogen()

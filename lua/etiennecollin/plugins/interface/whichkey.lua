@@ -104,6 +104,15 @@ return {
 		whichkey.setup(conf)
 		whichkey.register(mappings, opts)
 
+		-- Update keybinds when filetype changes
+		vim.api.nvim_create_autocmd("FileType", {
+			desc = "Set keybinds when filetype changes",
+			group = vim.api.nvim_create_augroup("filetype_keybinds", { clear = true }),
+			callback = require("etiennecollin.core.remaps_plugin").language_specific,
+		})
+
+		-- Run the function manually for the first time
+		-- This is necessary to run when opening file with `nvim file.ext`
 		require("etiennecollin.core.remaps_plugin").language_specific()
 	end,
 }
