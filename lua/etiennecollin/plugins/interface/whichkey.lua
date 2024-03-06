@@ -59,8 +59,7 @@ return {
 			q = { "<cmd>bd<cr>", "Delete buffer" },
 			Q = { "<cmd>q<cr>", "Quit" },
 
-			s = { ":%s//gI<left><left><left>", "Replace all" },
-			S = { ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<left><left><left>", "Replace current word" },
+			s = { ":%s//gI<left><left><left>", "Replace" },
 
 			t = {
 				name = "Terminal",

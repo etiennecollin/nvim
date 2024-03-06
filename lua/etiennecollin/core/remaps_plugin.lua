@@ -107,6 +107,10 @@ function M.neogen()
 	vim.keymap.set("n", "<leader>n", "<cmd>Neogen<cr>", { desc = "Generate annotation" })
 end
 
+function M.spectre()
+	vim.keymap.set("n", "<leader>S", "<cmd>Spectre<cr>", { desc = "Spectre" })
+end
+
 function M.ufo()
 	local ufo = require("ufo")
 
