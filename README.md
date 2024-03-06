@@ -7,7 +7,7 @@ Start by installing the main packages, then install the other packages.
 ## Packages
 
 - Arch Linux: `yay -Syu ripgrep sioyek imagemagick luarocks`
-- macOS: `brew install ripgrep sioyek pngpaste imagemagick luarocks`
+- macOS: `brew install ripgrep sioyek pngpaste imagemagick luarocks gnu-sed`
 - [`typstfmt`](https://github.com/astrale-sharp/typstfmt) is required by
   `typst-lsp` to format code. See repo for intall instructions.
 
@@ -15,6 +15,7 @@ Start by installing the main packages, then install the other packages.
 > - `sioyek` is required by `vimtex` and `typst.vim` for file preview.
 > - `pngpaste` is optionally required by `img-clip`.
 > - `imagemagick luarocks` are required by `image.nvim` used by `molten-nvim`.
+> - `gnu-sed` is required by `nvim-spectre`.
 
 ## Other
 
