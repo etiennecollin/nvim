@@ -4,11 +4,6 @@ return {
 	opts = {
 		labels = "asdfghjklqwertyuiopzxcvbnm",
 		mode = "exact",
-		modes = {
-			char = {
-				enabled = false,
-			},
-		},
 	},
 	keys = {
 		{
