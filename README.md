@@ -6,8 +6,8 @@ Start by installing the main packages, then install the other packages.
 
 ## Packages
 
-- Arch Linux: `yay -Syu ripgrep sioyek xclip imagemagick luarocks`
-- macOS: `brew install ripgrep sioyek pngpaste imagemagick luarocks gnu-sed`
+- Arch Linux: `yay -Syu ripgrep sioyek xclip imagemagick luarocks silicon`
+- macOS: `brew install ripgrep sioyek pngpaste imagemagick luarocks gnu-sed silicon`
 - [`typstfmt`](https://github.com/astrale-sharp/typstfmt) is required by
   `typst-lsp` to format code. See repo for intall instructions.
 
@@ -17,6 +17,7 @@ Start by installing the main packages, then install the other packages.
 > - `xclip` is required by `img-clip`.
 > - `imagemagick luarocks` are required by `image.nvim` used by `molten-nvim`.
 > - `gnu-sed` is required by `nvim-spectre`.
+> - `silicon` is required by `nvim-silicon`.
 
 ## Other
 
@@ -25,3 +26,12 @@ Start by installing the main packages, then install the other packages.
 
 > - `magick` is required by `image.nvim` for `molten-nvim`
 > - `pynvim jupyter_client cairosvg pnglatex plotly kaleido pyperclip nbformat` are required by `molten-nvim`
+
+## Specific languages
+
+### Quarto/Typst
+
+- Arch Linux: `yay -Syu quarto-cli typst`
+- macOS: `brew install quarto typst`
+
+> - `quarto install tinytex` is recommended to export quarto files to PDF.

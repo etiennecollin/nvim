@@ -30,6 +30,10 @@ function M.slime()
 	vim.keymap.set("n", "<leader>tso", toggle_slime_tmux_nvim, { desc = "Toggle tmux/nvim terminal for slime" })
 end
 
+function M.silicon()
+	vim.keymap.set("v", "<leader>S", "<cmd>Silicon<cr>", { desc = "Silicon" })
+end
+
 function M.language_specific()
 	local wk = require("which-key")
 	local opts_n = {
