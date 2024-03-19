@@ -5,6 +5,7 @@ return {
 		"folke/neodev.nvim",
 		"mfussenegger/nvim-dap",
 		{ "theHamsta/nvim-dap-virtual-text", dependencies = "nvim-treesitter/nvim-treesitter" },
+		"nvim-neotest/nvim-nio",
 	},
 	keys = {
 		{
