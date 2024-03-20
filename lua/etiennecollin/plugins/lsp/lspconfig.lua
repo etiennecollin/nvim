@@ -41,6 +41,9 @@ return {
 			["lua_ls"] = function()
 				require("etiennecollin.plugins.lsp.servers.lua_ls")(capabilities, on_attach)
 			end,
+			["typst_lsp"] = function()
+				require("etiennecollin.plugins.lsp.servers.typst_lsp")(capabilities, on_attach)
+			end,
 			["clangd"] = function()
 				require("etiennecollin.plugins.lsp.servers.clangd")(capabilities, on_attach)
 			end,

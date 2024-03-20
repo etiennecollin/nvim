@@ -70,7 +70,7 @@ function M.language_specific()
 		}, opts_n)
 	elseif file_type == "typst" then
 		wk.register({
-			m = { "<cmd>TypstWatch<cr>", "Typst watch" },
+			m = { "<cmd>TypstWatch --root ~<cr>", "Typst watch" },
 		}, opts_n)
 	elseif file_type == "markdown" then
 		wk.register({
