@@ -31,7 +31,7 @@ function M.slime()
 end
 
 function M.silicon()
-	vim.keymap.set("v", "<leader>S", "<cmd>Silicon<cr>", { desc = "Silicon" })
+	vim.keymap.set("v", "<leader>S", ":Silicon<cr>", { desc = "Silicon" })
 end
 
 function M.language_specific()
