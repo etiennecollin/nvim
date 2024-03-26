@@ -3,7 +3,6 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-path", -- Source for completion of paths
-		"hrsh7th/cmp-calc", -- Source for calculations
 		"hrsh7th/cmp-buffer", -- Source for completion of words in buffers
 		"hrsh7th/cmp-cmdline", -- Source for commandline completion
 		"hrsh7th/cmp-nvim-lua", -- Source for completion of Neovim's Lua API
@@ -59,7 +58,6 @@ return {
 				{ name = "luasnip" },
 				{ name = "pandoc_references" },
 				{ name = "buffer" },
-				{ name = "calc" },
 				{ name = "nvim_lua" },
 				{ name = "emoji" },
 			}),
@@ -83,15 +81,13 @@ return {
 			},
 
 			mapping = cmp.mapping.preset.insert({
-				["<CR>"] = cmp.mapping.confirm({
-					select = false,
-				}),
-				["<C-e>"] = cmp.mapping.abort(),
-				["<C-u>"] = cmp.mapping.scroll_docs(-4),
-				["<C-d>"] = cmp.mapping.scroll_docs(4),
-				["<C-p>"] = cmp.mapping.select_prev_item(),
-				["<C-n>"] = cmp.mapping.select_next_item(),
-				["<Tab>"] = cmp.mapping(function(fallback)
+				["<cr>"] = nil,
+				["<c-e>"] = cmp.mapping.abort(),
+				["<c-u>"] = cmp.mapping.scroll_docs(-4),
+				["<c-d>"] = cmp.mapping.scroll_docs(4),
+				["<c-p>"] = cmp.mapping.select_prev_item(),
+				["<c-n>"] = cmp.mapping.select_next_item(),
+				["<tab>"] = cmp.mapping(function(fallback)
 					if luasnip.expand_or_locally_jumpable() then
 						-- Replace the expand_or_jumpable() with expand_or_locally_jumpable()
 						-- to only jump inside the snippet region
