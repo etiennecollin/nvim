@@ -12,12 +12,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	{ import = "etiennecollin.plugins.base" },
 	{ import = "etiennecollin.plugins.colorscheme" },
-	{ import = "etiennecollin.plugins.interface" },
+	{ import = "etiennecollin.plugins.base" },
 	{ import = "etiennecollin.plugins.language-specific" },
 	{ import = "etiennecollin.plugins.lsp" },
-	{ import = "etiennecollin.plugins.other" },
 }, {
 	checker = { enabled = true, notify = false },
 	change_detection = { enabled = true, notify = false },
