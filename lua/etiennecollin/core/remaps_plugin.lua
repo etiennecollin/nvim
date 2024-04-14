@@ -32,6 +32,10 @@ function M.slime()
 	vim.keymap.set("n", "<leader>tso", toggle_slime_tmux_nvim, { desc = "Toggle tmux/nvim terminal for slime" })
 end
 
+function M.gen()
+	vim.keymap.set({ "n", "v" }, "<leader>]", ":Gen<CR>")
+end
+
 function M.silicon()
 	vim.keymap.set("v", "<leader>S", ":Silicon<cr>", { desc = "Silicon" })
 end
