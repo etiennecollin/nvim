@@ -39,5 +39,7 @@ return {
 				},
 			},
 		})
+
+		require("etiennecollin.core.remaps_plugin").telescope()
 	end,
 }

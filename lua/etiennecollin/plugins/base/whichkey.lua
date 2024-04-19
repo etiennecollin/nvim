@@ -45,31 +45,20 @@ return {
 
 			k = { ":s/\\(\\S.*\\)/ \\1/g<left><left><left><left><left>", "Fighting one-eyed kirby" },
 
-			p = {
-				name = "Telescope and Files",
-				b = { "<cmd>Telescope buffers<cr>", "Buffers" },
-				f = { "<cmd>Telescope find_files<cr>", "Files" },
-				h = { "<cmd>Telescope help_tags<cr>", "Help tags" },
-				r = { "<cmd>Telescope oldfiles<cr>", "Recent files" },
-				s = { "<cmd>Telescope grep_string<cr>", "Search local" },
-				S = { "<cmd>Telescope live_grep<cr>", "Search global" },
-				v = { "<cmd>Alpha<cr>", "Open Alpha" },
-			},
-
 			q = { "<cmd>bd<cr>", "Delete buffer" },
 			Q = { "<cmd>q<cr>", "Quit" },
 
-			s = { ":%s//gI<left><left><left>", "Replace" },
+			s = { name = "Search" },
 
 			t = {
-				name = "Terminal",
-				f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-				h = { "<cmd>ToggleTerm direction=horizontal<cr>", "Horizontal" },
-				v = { "<cmd>ToggleTerm direction=vertical<cr>", "Vertical" },
-				t = { "<cmd>ToggleTerm<cr>", "Bottom" },
-				i = { '<cmd>TermExec cmd="ipython"<cr>', "IPython" },
-				p = { '<cmd>TermExec cmd="python"<cr>', "Python" },
-				j = { '<cmd>TermExec cmd="julia"<cr>', "Julia" },
+				name = "Toggle",
+				f = { "<cmd>ToggleTerm direction=float<cr>", " Terminal float" },
+				t = { "<cmd>ToggleTerm direction=horizontal<cr>", "Terminal horizontal" },
+				v = { "<cmd>ToggleTerm direction=vertical<cr>", "Terminal vertical" },
+				T = {
+					name = "Specific Terminal",
+					p = { '<cmd>TermExec cmd="python"<cr>', "Python" },
+				},
 				s = { name = "Slime" },
 			},
 

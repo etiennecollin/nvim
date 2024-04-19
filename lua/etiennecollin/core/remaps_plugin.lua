@@ -125,11 +125,26 @@ function M.spectre()
 	vim.keymap.set("n", "<leader>S", "<cmd>Spectre<cr>", { desc = "Spectre" })
 end
 
-function M.ufo()
-	local ufo = require("ufo")
-
-	vim.keymap.set("n", "zR", ufo.openAllFolds, { desc = "Open all folds" })
-	vim.keymap.set("n", "zM", ufo.closeAllFolds, { desc = "Close all folds" })
+function M.telescope()
+	local builtin = require("telescope.builtin")
+	vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "Buffers" })
+	vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Diagnostics" })
+	vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Files" })
+	vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Global" })
+	vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Help tags" })
+	vim.keymap.set("n", "<leader>sl", builtin.grep_string, { desc = "Local" })
+	vim.keymap.set("n", "<leader>so", builtin.oldfiles, { desc = "Recent files" })
+	vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Resume" })
+	vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "Select Telescope" })
+	vim.keymap.set("n", "<leader>s/", function()
+		builtin.live_grep({
+			grep_open_files = true,
+			prompt_title = "Live Grep in Open Files",
+		})
+	end, { desc = "Open Files" })
+	vim.keymap.set("n", "<leader>sn", function()
+		builtin.find_files({ cwd = vim.fn.stdpath("config") })
+	end, { desc = "Neovim files" })
 end
 
 function M.harpoon()
@@ -171,70 +186,54 @@ function M.rust(_, bufnr)
 end
 
 function M.lsp(_, bufnr)
-	-- Setup lspconfig
-	local opts = {
-		noremap = true,
-		silent = true,
-		buffer = bufnr,
-	}
+	local map = function(keys, func, desc)
+		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
+	end
 
-	-- Show definition, references
-	opts.desc = "Show LSP references"
-	vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
+	-- Jump to the definition of the word under your cursor.
+	map("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
 
-	-- Go to declaration
-	opts.desc = "Go to declaration"
-	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+	-- Find references for the word under your cursor.
+	map("gr", require("telescope.builtin").lsp_references, "Goto References")
 
-	-- Show lsp definitions
-	opts.desc = "Show LSP definitions"
-	vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+	-- Jump to the implementation of the word under your cursor.
+	map("gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
 
-	-- Show lsp implementations
-	opts.desc = "Show LSP implementations"
-	vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+	-- Jump to the type of the word under your cursor.
+	map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type Definition")
 
-	-- Show lsp type definitions
-	opts.desc = "Show LSP type definitions"
-	vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+	-- Fuzzy find all the symbols in your current document.
+	map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
 
-	-- See available code actions, in visual mode will apply to selection
-	opts.desc = "See available code actions"
-	vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+	-- Fuzzy find all the symbols in your current workspace.
+	map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
 
-	-- Smart rename
-	opts.desc = "Smart rename"
-	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+	-- Rename the variable under your cursor.
+	map("<leader>rn", vim.lsp.buf.rename, "Rename")
 
-	-- Show  diagnostics for file
-	opts.desc = "Show buffer diagnostics"
-	vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
-
-	-- Show diagnostics for line
-	opts.desc = "Show line diagnostics"
-	vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
-
-	-- Jump to previous diagnostic in buffer
-	opts.desc = "Go to previous diagnostic"
-	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-
-	-- Jump to next diagnostic in buffer
-	opts.desc = "Go to next diagnostic"
-	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+	-- Execute a code action, usually your cursor needs to be on top of an error
+	-- or a suggestion from your LSP for this to activate.
+	map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 
 	-- Show documentation for what is under cursor
-	opts.desc = "Show documentation for what is under cursor"
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+	map("K", vim.lsp.buf.hover, "Hover Documentation")
+
+	-- This is not Goto Definition, this is Goto Declaration.
+	map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 
 	-- Mapping to restart lsp if necessary
-	opts.desc = "Restart LSP"
-	vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+	map("<leader>rs", ":LspRestart<CR>", "Restart")
+
+	-- Jump to previous diagnostic in buffer
+	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Goto previous diagnostic" })
+
+	-- Jump to next diagnostic in buffer
+	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Goto next diagnostic" })
 
 	-- Help with function signature
-	opts.desc = "Signature help"
 	vim.keymap.set("i", "<C-h>", function()
 		vim.lsp.buf.signature_help()
-	end, opts)
+	end, { desc = "Signature help" })
 end
 
 return M
