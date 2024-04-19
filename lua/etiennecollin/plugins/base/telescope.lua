@@ -6,13 +6,18 @@ return {
 		{
 			"nvim-telescope/telescope-fzf-native.nvim",
 			build = "make",
+			cond = function()
+				return vim.fn.executable("make") == 1
+			end,
 		},
+		"nvim-telescope/telescope-ui-select.nvim",
 		"nvim-tree/nvim-web-devicons",
 	},
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
 		telescope.load_extension("fzf")
+		telescope.load_extension("ui-select")
 
 		telescope.setup({
 			defaults = {
@@ -36,6 +41,11 @@ return {
 				},
 				colorscheme = {
 					enable_preview = true,
+				},
+			},
+			extensions = {
+				["ui-select"] = {
+					require("telescope.themes").get_dropdown(),
 				},
 			},
 		})

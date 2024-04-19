@@ -145,6 +145,12 @@ function M.telescope()
 	vim.keymap.set("n", "<leader>sn", function()
 		builtin.find_files({ cwd = vim.fn.stdpath("config") })
 	end, { desc = "Neovim files" })
+	vim.keymap.set("n", "<leader>/", function()
+		builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+			winblend = 10,
+			previewer = false,
+		}))
+	end, { desc = "Fuzzy search in current buffer" })
 end
 
 function M.harpoon()
