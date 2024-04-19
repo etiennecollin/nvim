@@ -64,6 +64,9 @@ vim.keymap.set(
 )
 
 -- Exit insert mode
-vim.keymap.set("i", "jk", "<esc>", {
+vim.keymap.set("i", "jj", "<esc>", {
+	desc = "Exit insert mode",
+})
+vim.keymap.set("i", "kk", "<esc>", {
 	desc = "Exit insert mode",
 })
