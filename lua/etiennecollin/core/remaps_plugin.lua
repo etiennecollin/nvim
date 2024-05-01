@@ -118,7 +118,7 @@ function M.language_specific()
 end
 
 function M.neogen()
-	vim.keymap.set("n", "<leader>n", "<cmd>Neogen<cr>", { desc = "Generate annotation" })
+	vim.keymap.set("n", "<leader>na", "<cmd>Neogen<cr>", { desc = "Generate annotation" })
 end
 
 function M.spectre()
@@ -135,7 +135,7 @@ function M.telescope()
 	vim.keymap.set("n", "<leader>sl", builtin.grep_string, { desc = "Local" })
 	vim.keymap.set("n", "<leader>so", builtin.oldfiles, { desc = "Recent files" })
 	vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Resume" })
-	vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "Select Telescope" })
+	vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "Select Telescope" })
 	vim.keymap.set("n", "<leader>s/", function()
 		builtin.live_grep({
 			grep_open_files = true,
@@ -212,7 +212,7 @@ function M.lsp(_, bufnr)
 	map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
 
 	-- Fuzzy find all the symbols in your current workspace.
-	map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
+	map("<leader>ss", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
 
 	-- Rename the variable under your cursor.
 	map("<leader>rn", vim.lsp.buf.rename, "Rename")

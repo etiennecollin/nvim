@@ -41,6 +41,10 @@ return {
 
 			k = { ":s/\\(\\S.*\\)/ \\1/g<left><left><left><left><left>", "Fighting one-eyed kirby" },
 
+			n = {
+				name = "New",
+			},
+
 			q = { "<cmd>bd<cr>", "Delete buffer" },
 			Q = { "<cmd>q<cr>", "Quit" },
 
