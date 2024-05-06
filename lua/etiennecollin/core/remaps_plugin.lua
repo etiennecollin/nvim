@@ -68,6 +68,19 @@ function M.language_specific()
 		wk.register({
 			m = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle markdown preview" },
 		}, opts_n)
+	elseif file_type == "rust" then
+		wk.register({
+			m = {
+				name = "rust",
+				c = { "<cmd>RustLsp codeAction<cr>", "Code Actions" },
+				e = { "<cmd>RustLsp explainError<cr>", "Explain Error" },
+				x = { "<cmd>RustLsp renderDiagnostic<cr>", "Render Diagnostics" },
+				o = { "<cmd>RustLsp openDocs<cr>", "Open Documentation" },
+				r = { "<cmd>RustLsp runnables<cr>", "Run" },
+				d = { "<cmd>RustLsp debuggables<cr>", "Debug" },
+				t = { "<cmd>RustLsp testables<cr>", "Test" },
+			},
+		}, opts_n)
 	end
 
 	wk.register({
@@ -136,20 +149,6 @@ function M.harpoon()
 	vim.keymap.set("n", "<leader>4", function()
 		harpoon:list():select(4)
 	end, { desc = "Harpoon select 4" })
-end
-
-function M.rust(_, bufnr)
-	local rust_tools = require("rust-tools")
-	local opts = {
-		silent = true,
-		buffer = bufnr,
-	}
-
-	opts.desc = "See available hover actions"
-	vim.keymap.set("n", "<leader>ch", rust_tools.hover_actions.hover_actions, opts)
-
-	opts.desc = "See available code actions"
-	vim.keymap.set("n", "<leader>ca", rust_tools.code_action_group.code_action_group, opts)
 end
 
 function M.lsp(_, bufnr)

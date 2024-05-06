@@ -1,11 +1,10 @@
 return {
-	"simrat39/rust-tools.nvim",
+	"mrcjkb/rustaceanvim",
+	version = "^4", -- Recommended
 	dependencies = {
 		"neovim/nvim-lspconfig",
-		"nvim-lua/plenary.nvim",
 		"mfussenegger/nvim-dap",
 		"williamboman/mason.nvim",
-		"hrsh7th/cmp-nvim-lsp",
 	},
 	ft = { "rust" },
 	config = function()
@@ -25,10 +24,9 @@ return {
 			vim.cmd(":MasonInstall codelldb")
 		end
 
-		require("rust-tools").setup({
+		vim.g.rustaceanvim = {
 			tools = {
 				reload_workspace_from_cargo_toml = true,
-				executor = require("rust-tools.executors").toggleterm,
 				hover_actions = {
 					auto_focus = true,
 				},
@@ -39,16 +37,14 @@ return {
 				},
 			},
 			dap = {
-				adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+				adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path),
 			},
 			server = {
-				standalone = false,
 				capabilities = capabilities,
 				on_attach = function(client, bufnr)
 					on_attach(client, bufnr)
-					require("etiennecollin.core.remaps_plugin").rust(client, bufnr)
 				end,
-				settings = {
+				default_settings = {
 					-- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
 					["rust-analyzer"] = {
 						check = {
@@ -77,6 +73,6 @@ return {
 					},
 				},
 			},
-		})
+		}
 	end,
 }
