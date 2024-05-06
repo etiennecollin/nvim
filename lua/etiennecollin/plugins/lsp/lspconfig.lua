@@ -25,7 +25,13 @@ return {
 				-- word under your cursor when your cursor rests there for a little while.
 				-- When you move your cursor, the highlights will be cleared (the second autocommand).
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
-				if client and client.server_capabilities.documentHighlightProvider then
+				if
+					client
+					and (
+						client.server_capabilities.documentHighlightProvider
+						or client.server_capabilities.document_highlight
+					)
+				then
 					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 						buffer = event.buf,
 						callback = vim.lsp.buf.document_highlight,
