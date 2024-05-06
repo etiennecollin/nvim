@@ -12,7 +12,7 @@ return {
 				clear_in_insert_mode = false,
 				download_remote_images = true,
 				only_render_image_at_cursor = false,
-				filetypes = { "markdown", "vimwiki", "quarto" },
+				filetypes = { "markdown", "vimwiki", "typst" },
 			},
 		},
 		max_width = 100,
