@@ -10,7 +10,6 @@ return {
 		"hrsh7th/cmp-emoji", -- Source for emojis
 		{ "zbirenbaum/copilot-cmp", dependencies = "zbirenbaum/copilot.lua", config = true }, -- Source for copilot
 		{ "saadparwaiz1/cmp_luasnip", dependencies = "L3MON4D3/LuaSnip" }, -- Source for completion of LuaSnip snippets
-		"jmbuhr/otter.nvim", -- Source for otter
 		"jmbuhr/cmp-pandoc-references", -- Source for pandoc refs
 		"onsails/lspkind.nvim", -- Pictograms in completion menu
 	},
@@ -53,7 +52,6 @@ return {
 				{ name = "copilot" },
 				{ name = "nvim_lsp" },
 				{ name = "nvim_lsp_signature_help" },
-				{ name = "otter" },
 				{ name = "path" },
 				{ name = "luasnip" },
 				{ name = "pandoc_references" },
@@ -74,7 +72,6 @@ return {
 					maxwidth = 50,
 					ellipsis_char = "...",
 					symbol_map = {
-						otter = "[🦦]",
 						Copilot = "",
 					},
 				}),

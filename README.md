@@ -29,9 +29,7 @@ Start by installing the main packages, then install the other packages.
 
 ## Specific languages
 
-### Quarto/Typst
+### Typst
 
-- Arch Linux: `yay -Syu quarto-cli typst`
-- macOS: `brew install quarto typst`
-
-> - `quarto install tinytex` is recommended to export quarto files to PDF.
+- Arch Linux: `yay -Syu typst`
+- macOS: `brew install typst`
