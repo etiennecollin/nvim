@@ -1,6 +1,5 @@
 return {
 	"stevearc/conform.nvim",
-	enabled = not require("etiennecollin.plugins.lsp.none-ls").enabled,
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = { "zapling/mason-conform.nvim", dependencies = "williamboman/mason.nvim" },
 	cmd = { "ConformInfo" },
