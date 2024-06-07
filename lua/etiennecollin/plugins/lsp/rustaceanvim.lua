@@ -53,6 +53,7 @@ return {
 						},
 						checkOnSave = {
 							command = "clippy",
+							allTargets = false,
 						},
 						inlayHints = {
 							chainingHints = {
