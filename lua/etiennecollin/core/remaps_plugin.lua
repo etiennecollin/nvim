@@ -40,6 +40,11 @@ function M.silicon()
 	vim.keymap.set("v", "<leader>S", ":Silicon<cr>", { desc = "Silicon" })
 end
 
+function M.boole()
+	vim.keymap.set({ "n", "v" }, "<leader>=", "<cmd>Boole increment<cr>", { desc = "Boole increment" })
+	vim.keymap.set({ "n", "v" }, "<leader>-", "<cmd>Boole decrement<cr>", { desc = "Boole decrement" })
+end
+
 function M.language_specific()
 	local wk = require("which-key")
 	local opts_n = {
