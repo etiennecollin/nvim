@@ -6,7 +6,7 @@ vim.opt.termguicolors = true
 vim.opt.background = "dark"
 
 -- Set the colorscheme and ensure installed plugins
-require("etiennecollin.utils").default_colorscheme = "sonokai"
+require("etiennecollin.utils").default_colorscheme = "gruvbox-material"
 require("etiennecollin.utils").ensure_installed_treesitter = { "lua", "markdown_inline", "comment" }
 require("etiennecollin.utils").ensure_installed_lsp =
 	{ "lua_ls", "rust_analyzer", "jdtls", "ruff_lsp", "pyright", "typst_lsp" }
