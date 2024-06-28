@@ -30,6 +30,8 @@ function M.slime()
 
 	vim.keymap.set("n", "<leader>tsc", "<cmd>SlimeConfig<cr>", { desc = "Configure slime" })
 	vim.keymap.set("n", "<leader>tso", toggle_slime_tmux_nvim, { desc = "Toggle tmux/nvim terminal for slime" })
+	vim.keymap.set("n", "<leader><cr>", "<plug>SlimeSendCell", { desc = "Slime send cell" })
+	vim.keymap.set("v", "<leader><cr>", "<plug>SlimeRegionSend", { desc = "Slime send visual" })
 end
 
 function M.gen()
@@ -87,13 +89,6 @@ function M.language_specific()
 			},
 		}, opts_n)
 	end
-
-	wk.register({
-		["<cr>"] = { "<plug>SlimeSendCell", "Slime send cell" },
-	}, opts_n)
-	wk.register({
-		["<cr>"] = { "<plug>SlimeRegionSend", "Slime send visual" },
-	}, opts_v)
 end
 
 function M.neogen()
