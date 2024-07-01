@@ -17,13 +17,16 @@ M.default_colorscheme = "slate"
 M.ensure_installed_treesitter = {}
 
 --- The LSPs to be installed by Mason.
-M.ensure_installed_lsp = {}
+M.ensure_installed_lsps = {}
 
---- The Linters and Formatters to be installed by Mason.
-M.ensure_installed_linter_formatter = {}
+--- The Linters to be installed by Mason.
+M.ensure_installed_linters = {}
+
+--- The Formatters to be installed by Mason.
+M.ensure_installed_formatters = {}
 
 --- The DAPs to be installed by Mason.
-M.ensure_installed_dap = {}
+M.ensure_installed_daps = {}
 
 --[[
     Set Color Scheme

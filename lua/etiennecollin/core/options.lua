@@ -8,11 +8,40 @@ vim.opt.background = "dark"
 -- Set the colorscheme and ensure installed plugins
 require("etiennecollin.utils").default_colorscheme = "gruvbox-material"
 require("etiennecollin.utils").ensure_installed_treesitter = { "lua", "markdown_inline", "comment" }
-require("etiennecollin.utils").ensure_installed_lsp =
-	{ "lua_ls", "rust_analyzer", "jdtls", "ruff_lsp", "pyright", "typst_lsp" }
-require("etiennecollin.utils").ensure_installed_linter_formatter =
-	{ "black", "isort", "shfmt", "stylua", "clang-format", "google-java-format", "prettier", "texlab" }
-require("etiennecollin.utils").ensure_installed_dap = { "codelldb" }
+require("etiennecollin.utils").ensure_installed_lsps =
+	{ "lua_ls", "rust_analyzer", "jdtls", "basedpyright", "typst_lsp" }
+require("etiennecollin.utils").ensure_installed_linters = {
+	c = { "trivy" },
+	cpp = { "trivy" },
+	rust = { "trivy" },
+	python = { "trivy" },
+	java = { "trivy" },
+	javascript = { "trivy" },
+	typescript = { "trivy" },
+}
+require("etiennecollin.utils").ensure_installed_formatters = {
+	lua = { "stylua" },
+	python = { "isort", "black" },
+	sh = { "shfmt" },
+	bash = { "shfmt" },
+	zsh = { "shfmt" },
+	c = { "clang_format" },
+	cpp = { "clang_format" },
+	java = { "google-java-format" },
+	typst = { "typstfmt" },
+	javascript = { "prettier" },
+	typescript = { "prettier" },
+	javascriptreact = { "prettier" },
+	typescriptreact = { "prettier" },
+	svelte = { "prettier" },
+	css = { "prettier" },
+	html = { "prettier" },
+	json = { "prettier" },
+	yaml = { "prettier" },
+	markdown = { "prettier" },
+	graphql = { "prettier" },
+}
+require("etiennecollin.utils").ensure_installed_daps = { "codelldb" }
 
 -- Set cursor options and line highlighting
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
@@ -20,7 +49,7 @@ vim.opt.cursorline = true
 vim.opt.colorcolumn = { "80", "120" }
 
 -- Enable incrementing hex numbers and letters
-vim.api.nvim_set_option("nrformats", "hex,alpha")
+vim.api.nvim_set_option_value("nrformats", "hex,alpha", {})
 
 -- Enable numbers and relative numbers
 vim.opt.number = true
@@ -86,3 +115,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+-- Floating linting messages on cursor hold and disable virtual text
+vim.cmd([[au CursorHold * lua vim.diagnostic.open_float(0,{scope = "cursor"})]])

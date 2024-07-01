@@ -5,15 +5,7 @@ return {
 	config = function()
 		local lint = require("lint")
 
-		lint.linters_by_ft = {
-			c = { "trivy" },
-			cpp = { "trivy" },
-			rust = { "trivy" },
-			python = { "trivy" },
-			java = { "trivy" },
-			javascript = { "trivy" },
-			typescript = { "trivy" },
-		}
+		lint.linters_by_ft = require("etiennecollin.utils").ensure_installed_linters
 
 		-- Install linters with mason
 		require("mason-nvim-lint").setup()

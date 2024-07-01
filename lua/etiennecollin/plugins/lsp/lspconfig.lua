@@ -11,7 +11,7 @@ return {
 		-- Install LSPs with mason
 		-----------------------------------------------------------------------
 		require("mason-lspconfig").setup({
-			ensure_installed = require("etiennecollin.utils").ensure_installed_lsp,
+			ensure_installed = require("etiennecollin.utils").ensure_installed_lsps,
 			automatic_installation = true,
 		})
 

@@ -6,28 +6,7 @@ return {
 	config = function()
 		local conform = require("conform")
 		conform.setup({
-			formatters_by_ft = {
-				lua = { "stylua" },
-				python = { "isort", "black" },
-				sh = { "shfmt" },
-				bash = { "shfmt" },
-				zsh = { "shfmt" },
-				c = { "clang_format" },
-				cpp = { "clang_format" },
-				java = { "google-java-format" },
-				typst = { "typstfmt" },
-				javascript = { "prettier" },
-				typescript = { "prettier" },
-				javascriptreact = { "prettier" },
-				typescriptreact = { "prettier" },
-				svelte = { "prettier" },
-				css = { "prettier" },
-				html = { "prettier" },
-				json = { "prettier" },
-				yaml = { "prettier" },
-				markdown = { "prettier" },
-				graphql = { "prettier" },
-			},
+			formatters_by_ft = require("etiennecollin.utils").ensure_installed_formatters,
 			format_on_save = function(bufnr)
 				-- Disable with a global or buffer-local variable
 				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
