@@ -5,8 +5,10 @@ vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 
--- Set the colorscheme and ensure installed plugins
+-- Set the colorscheme
 require("etiennecollin.utils").default_colorscheme = "gruvbox-material"
+
+-- Ensure installed plugins
 require("etiennecollin.utils").ensure_installed_treesitter = { "lua", "markdown_inline", "comment" }
 require("etiennecollin.utils").ensure_installed_lsps =
 	{ "lua_ls", "rust_analyzer", "jdtls", "basedpyright", "typst_lsp" }

@@ -12,4 +12,7 @@ return {
 		vim.g.sonokai_style = "shusia" --  Available values: 'default', 'atlantis', 'andromeda', 'shusia', 'maia','espresso'
 		vim.g.sonokai_transparent_background = 0
 	end,
+	config = function()
+		require("etiennecollin.utils").set_colorscheme()
+	end,
 }

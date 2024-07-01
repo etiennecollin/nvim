@@ -15,4 +15,7 @@ return {
 		vim.g.gruvbox_material_transparent_background = 0
 		vim.g.gruvbox_material_ui_contrast = "high"
 	end,
+	config = function()
+		require("etiennecollin.utils").set_colorscheme()
+	end,
 }
