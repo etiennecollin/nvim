@@ -47,7 +47,7 @@ return {
 				-- code, if the language server you are using supports them
 				if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
 					vim.keymap.set("n", "<leader>th", function()
-						vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 					end, { buffer = event.buf, desc = "LSP: Inlay Hints" })
 				end
 			end,
@@ -70,8 +70,8 @@ return {
 			default_handler,
 			-- Specific servers
 			["rust_analyzer"] = function() end,
-			["pylsp"] = function()
-				require("etiennecollin.plugins.lsp.servers.pylsp")(capabilities, on_attach)
+			["basedpyright"] = function()
+				require("etiennecollin.plugins.lsp.servers.basedpyright")(capabilities, on_attach)
 			end,
 			["jdtls"] = function()
 				require("etiennecollin.plugins.lsp.servers.jdtls")(capabilities, on_attach)
@@ -112,11 +112,13 @@ return {
 		end
 
 		vim.diagnostic.config({
-			virtual_text = true,
+			virtual_text = {
+				severity = { min = vim.diagnostic.severity.WARN },
+			},
 			signs = true,
 			update_in_insert = true,
 			underline = true,
-			severity_sort = false,
+			severity_sort = true,
 			float = {
 				focusable = false,
 				style = "minimal",
