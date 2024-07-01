@@ -30,7 +30,18 @@ return {
 			"<leader>da",
 			function()
 				require("dap").continue({
-					before = get_args,
+					-- From LazyVim
+					-- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/extras/dap/core.lua
+					before = function(config)
+						local args = type(config.args) == "function" and (config.args() or {}) or config.args or {}
+						config = vim.deepcopy(config)
+						---@cast args string[]
+						config.args = function()
+							local new_args = vim.fn.input("Run with args: ", table.concat(args, " ")) --[[@as string]]
+							return vim.split(vim.fn.expand(new_args) --[[@as string]], " ")
+						end
+						return config
+					end,
 				})
 			end,
 			desc = "Run with Args",
