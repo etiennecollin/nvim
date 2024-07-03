@@ -12,14 +12,14 @@ return {
 		},
 		"nvim-telescope/telescope-ui-select.nvim",
 		"nvim-tree/nvim-web-devicons",
-		"folke/noice.nvim",
+		-- "folke/noice.nvim",
 	},
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
 		telescope.load_extension("fzf")
 		telescope.load_extension("ui-select")
-		telescope.load_extension("noice")
+		-- telescope.load_extension("noice")
 
 		telescope.setup({
 			defaults = require("telescope.themes").get_ivy({
