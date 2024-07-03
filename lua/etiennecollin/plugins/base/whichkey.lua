@@ -88,8 +88,8 @@ return {
 
 		-- Update keybinds when filetype changes
 		vim.api.nvim_create_autocmd("FileType", {
+			group = vim.api.nvim_create_augroup("etiennecollin-filetype-keybinds", { clear = true }),
 			desc = "Set keybinds when filetype changes",
-			group = vim.api.nvim_create_augroup("filetype_keybinds", { clear = true }),
 			callback = require("etiennecollin.core.remaps_plugin").language_specific,
 		})
 

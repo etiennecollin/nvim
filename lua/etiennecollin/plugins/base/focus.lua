@@ -36,26 +36,26 @@ return {
 			"", -- Hover popups such as Treesitter syntax investigation popup, lsp popups...
 		}
 
-		local augroup = vim.api.nvim_create_augroup("FocusDisable", { clear = true })
+		local augroup = vim.api.nvim_create_augroup("plugin-focus-disable", { clear = true })
 
 		vim.api.nvim_create_autocmd("WinEnter", {
 			group = augroup,
+			desc = "Disable focus autoresize for BufType",
 			callback = function(_)
 				if vim.tbl_contains(ignore_buftypes, vim.bo.buftype) then
 					vim.b.focus_disable = true
 				end
 			end,
-			desc = "Disable focus autoresize for BufType",
 		})
 
 		vim.api.nvim_create_autocmd("FileType", {
 			group = augroup,
+			desc = "Disable focus autoresize for FileType",
 			callback = function(_)
 				if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
 					vim.b.focus_disable = true
 				end
 			end,
-			desc = "Disable focus autoresize for FileType",
 		})
 	end,
 }

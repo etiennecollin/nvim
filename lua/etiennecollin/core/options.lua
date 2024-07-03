@@ -1,17 +1,11 @@
--- Setting global options
-
--- Set termguicolors to enable highlight groups
-vim.g.have_nerd_font = true
-vim.opt.termguicolors = true
-vim.opt.background = "dark"
-
 -- Set the colorscheme
 require("etiennecollin.utils").default_colorscheme = "gruvbox-material"
 
 -- Ensure installed plugins
-require("etiennecollin.utils").ensure_installed_treesitter = { "lua", "markdown_inline", "comment" }
+require("etiennecollin.utils").ensure_installed_treesitter =
+	{ "vim", "regex", "lua", "bash", "markdown", "markdown_inline", "comment" }
 require("etiennecollin.utils").ensure_installed_lsps =
-	{ "lua_ls", "rust_analyzer", "jdtls", "basedpyright", "typst_lsp" }
+	{ "lua_ls", "rust_analyzer", "jdtls", "basedpyright", "typst_lsp", "tailwindcss" }
 require("etiennecollin.utils").ensure_installed_linters = {
 	c = { "trivy" },
 	cpp = { "trivy" },
@@ -45,6 +39,11 @@ require("etiennecollin.utils").ensure_installed_formatters = {
 }
 require("etiennecollin.utils").ensure_installed_daps = { "codelldb" }
 
+-- Set termguicolors to enable highlight groups
+vim.g.have_nerd_font = true
+vim.opt.termguicolors = true
+vim.opt.background = "dark"
+
 -- Set cursor options and line highlighting
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 vim.opt.cursorline = true
@@ -74,7 +73,7 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 -- Substitution
-vim.opt.inccommand = "split"
+vim.opt.inccommand = "nosplit"
 
 -- Set how splits open
 vim.opt.splitbelow = true
@@ -111,8 +110,8 @@ vim.cmd("autocmd BufWritePre, FileWritePre * :%s/\\s\\+$//e")
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
 	group = vim.api.nvim_create_augroup("etiennecollin-highlight-yank", { clear = true }),
+	desc = "Highlight when yanking (copying) text",
 	callback = function()
 		vim.highlight.on_yank()
 	end,

@@ -4,3 +4,4 @@ _G.utils = require("etiennecollin.utils")
 -- Load modules
 require("etiennecollin.core")
 require("etiennecollin.lazy")
+require("etiennecollin.autocmds")

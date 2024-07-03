@@ -12,11 +12,11 @@ return {
 		{ "saadparwaiz1/cmp_luasnip", dependencies = "L3MON4D3/LuaSnip" }, -- Source for completion of LuaSnip snippets
 		"jmbuhr/cmp-pandoc-references", -- Source for pandoc refs
 		"onsails/lspkind.nvim", -- Pictograms in completion menu
+		"brenoprata10/nvim-highlight-colors", -- Highlight colors in completion menu
 	},
 	config = function()
 		local luasnip = require("luasnip")
 		local cmp = require("cmp")
-		local lspkind = require("lspkind")
 
 		-- Set color for copilot suggestions
 		vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#aa7de8" })
@@ -26,7 +26,7 @@ return {
 		-----------------------------------------------------------------------
 		local has_words_before = function()
 			--     unpack = unpack or table.unpack
-			if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+			if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt" then
 				return false
 			end
 			local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
@@ -50,6 +50,7 @@ return {
 
 			sources = cmp.config.sources({
 				{ name = "copilot" },
+				{ name = "lazydev" },
 				{ name = "nvim_lsp" },
 				{ name = "nvim_lsp_signature_help" },
 				{ name = "path" },
@@ -67,16 +68,23 @@ return {
 
 			-- Set formatting of completion menu
 			formatting = {
-				format = lspkind.cmp_format({
-					mode = "symbol",
-					maxwidth = 50,
-					ellipsis_char = "...",
-					symbol_map = {
-						Copilot = "",
-					},
-				}),
+				format = function(entry, item)
+					local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
+					item = require("lspkind").cmp_format({
+						mode = "symbol",
+						maxwidth = 50,
+						ellipsis_char = "...",
+						symbol_map = {
+							Copilot = "",
+						},
+					})(entry, item)
+					if color_item.abbr_hl_group then
+						item.kind_hl_group = color_item.abbr_hl_group
+						item.kind = color_item.abbr
+					end
+					return item
+				end,
 			},
-
 			mapping = cmp.mapping.preset.insert({
 				["<cr>"] = nil,
 				["<c-e>"] = cmp.mapping.abort(),
@@ -114,7 +122,8 @@ return {
 		})
 
 		-- Add completion to search mode
-		cmp.setup.cmdline("/", {
+		cmp.setup.cmdline({ "/", "?" }, {
+			mapping = cmp.mapping.preset.cmdline(),
 			sources = {
 				{ name = "buffer" },
 			},
@@ -122,16 +131,19 @@ return {
 
 		-- Add completion to command mode
 		cmp.setup.cmdline(":", {
+			mapping = cmp.mapping.preset.cmdline(),
 			sources = cmp.config.sources({
 				{ name = "path" },
 			}, {
 				{ name = "cmdline" },
 			}),
+			matching = { disallow_symbol_nonprefix_matching = false },
 		})
 
 		-- Enable completion in Cargo.toml files for crates
 		vim.api.nvim_create_autocmd("BufRead", {
-			group = vim.api.nvim_create_augroup("CmpSourceCargo", { clear = true }),
+			group = vim.api.nvim_create_augroup("plugin-cmp-sources", { clear = true }),
+			desc = "Enable completion in Cargo.toml files for crates",
 			pattern = "Cargo.toml",
 			callback = function()
 				cmp.setup.buffer({ sources = { { name = "crates" } } })

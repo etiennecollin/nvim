@@ -2,7 +2,6 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"folke/neodev.nvim",
 		"hrsh7th/cmp-nvim-lsp",
 		{ "williamboman/mason-lspconfig.nvim", dependencies = "williamboman/mason.nvim" },
 	},
@@ -20,18 +19,13 @@ return {
 		-----------------------------------------------------------------------
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("etiennecollin-lsp-attach", { clear = true }),
+			desc = "LSP Attach",
 			callback = function(event)
 				-- The following two autocommands are used to highlight references of the
 				-- word under your cursor when your cursor rests there for a little while.
 				-- When you move your cursor, the highlights will be cleared (the second autocommand).
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
-				if
-					client
-					and (
-						client.server_capabilities.documentHighlightProvider
-						or client.server_capabilities.document_highlight
-					)
-				then
+				if client and client.server_capabilities.documentHighlightProvider then
 					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 						buffer = event.buf,
 						callback = vim.lsp.buf.document_highlight,
@@ -99,7 +93,7 @@ return {
 		local signs = {
 			Error = " ",
 			Warn = " ",
-			Hint = " ",
+			Hint = "󰌵 ",
 			Info = " ",
 		}
 		for type, icon in pairs(signs) do
@@ -123,7 +117,7 @@ return {
 				focusable = false,
 				style = "minimal",
 				border = "rounded",
-				source = "always",
+				source = true,
 				header = "",
 				prefix = "",
 			},
