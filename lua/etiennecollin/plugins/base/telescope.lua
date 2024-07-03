@@ -22,8 +22,8 @@ return {
 		telescope.load_extension("noice")
 
 		telescope.setup({
-			defaults = {
-				path_display = { "truncate " },
+			defaults = require("telescope.themes").get_ivy({
+				path_display = { "truncate" },
 				mappings = {
 					i = {
 						["<C-k>"] = actions.move_selection_previous,
@@ -32,7 +32,7 @@ return {
 						["<CR>"] = actions.select_default + actions.center,
 					},
 				},
-			},
+			}),
 			pickers = {
 				buffers = {
 					mappings = {
@@ -47,7 +47,7 @@ return {
 			},
 			extensions = {
 				["ui-select"] = {
-					require("telescope.themes").get_dropdown(),
+					require("telescope.themes").get_ivy(),
 				},
 			},
 		})
