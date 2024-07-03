@@ -87,33 +87,32 @@ return {
 			},
 			mapping = cmp.mapping.preset.insert({
 				["<cr>"] = nil,
+				["<c-space>"] = cmp.mapping.complete(),
 				["<c-e>"] = cmp.mapping.abort(),
 				["<c-u>"] = cmp.mapping.scroll_docs(-4),
 				["<c-d>"] = cmp.mapping.scroll_docs(4),
 				["<c-p>"] = cmp.mapping.select_prev_item(),
 				["<c-n>"] = cmp.mapping.select_next_item(),
 				["<tab>"] = cmp.mapping(function(fallback)
-					if luasnip.expand_or_locally_jumpable() then
-						-- Replace the expand_or_jumpable() with expand_or_locally_jumpable()
-						-- to only jump inside the snippet region
+					local entry = cmp.get_selected_entry()
+					if luasnip.expand_or_locally_jumpable() and (not cmp.visible or (cmp.visible and not entry)) then
 						luasnip.expand_or_jump()
 					elseif cmp.visible() then
-						cmp.confirm({
-							select = true,
-						})
-					elseif has_words_before() then
-						cmp.complete()
+						-- This snippet will confirm with tab, and if no entry is selected, will confirm the first item
+						if not entry then
+							cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+						end
+						cmp.confirm()
 					else
 						fallback()
 					end
 				end, { "i", "s" }),
 				["<S-Tab>"] = cmp.mapping(function(fallback)
-					if luasnip.jumpable(-1) then
+					local entry = cmp.get_selected_entry()
+					if luasnip.jumpable(-1) and (not cmp.visible or (cmp.visible and not entry)) then
 						luasnip.jump(-1)
 					elseif cmp.visible() then
 						cmp.select_next_item()
-					elseif has_words_before() then
-						cmp.complete()
 					else
 						fallback()
 					end

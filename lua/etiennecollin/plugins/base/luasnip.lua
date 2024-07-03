@@ -21,8 +21,6 @@ return {
 			enable_autosnippets = true,
 			-- Auto update fields sharing same argument
 			update_events = "TextChanged,TextChangedI",
-			-- Use <Tab> to trigger visual selection
-			store_selection_keys = "<Tab>",
 		})
 
 		-- Load snippets
