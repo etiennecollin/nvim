@@ -49,45 +49,33 @@ end
 
 function M.language_specific()
 	local wk = require("which-key")
-	local opts_n = {
-		mode = "n",
-		prefix = "<leader>",
-		buffer = 0,
-	}
-	local opts_v = {
-		mode = "v",
-		prefix = "<leader>",
-		buffer = 0,
-	}
-
 	local file_type = vim.api.nvim_buf_get_option(0, "filetype")
 
 	-- Add keymaps for typst, and markdown
 	if file_type == "typst" then
-		wk.register({
-			m = {
-				name = "typst",
-				m = { "<cmd>TypstPreviewToggle<cr>", "Toggle preview" },
-				w = { "<cmd>TypstWatch --root ~<cr>", "PDF watch" },
-			},
-		}, opts_n)
+		wk.add({
+			mode = { "n" },
+			{ "<leader>m", group = "typst" },
+			{ "<leader>mm", "<cmd>TypstPreviewToggle<cr>", desc = "Toggle preview" },
+			{ "<leader>mw", "<cmd>TypstWatch --root ~<cr>", desc = "PDF watch" },
+		})
 	elseif file_type == "markdown" then
-		wk.register({
-			m = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle markdown preview" },
-		}, opts_n)
+		wk.add({
+			mode = { "n" },
+			m = { "<cmd>MarkdownPreviewToggle<cr>", desc = "Toggle markdown preview" },
+		})
 	elseif file_type == "rust" then
-		wk.register({
-			m = {
-				name = "rust",
-				c = { "<cmd>RustLsp codeAction<cr>", "Code Actions" },
-				e = { "<cmd>RustLsp explainError<cr>", "Explain Error" },
-				x = { "<cmd>RustLsp renderDiagnostic<cr>", "Render Diagnostics" },
-				o = { "<cmd>RustLsp openDocs<cr>", "Open Documentation" },
-				r = { "<cmd>RustLsp runnables<cr>", "Run" },
-				d = { "<cmd>RustLsp debuggables<cr>", "Debug" },
-				t = { "<cmd>RustLsp testables<cr>", "Test" },
-			},
-		}, opts_n)
+		wk.add({
+			mode = { "n" },
+			{ "<leader>m", group = "rust" },
+			{ "<leader>mc", "<cmd>RustLsp codeAction<cr>", desc = "Code Actions" },
+			{ "<leader>me", "<cmd>RustLsp explainError<cr>", desc = "Explain Error" },
+			{ "<leader>mx", "<cmd>RustLsp renderDiagnostic<cr>", desc = "Render Diagnostics" },
+			{ "<leader>mo", "<cmd>RustLsp openDocs<cr>", desc = "Open Documentation" },
+			{ "<leader>mr", "<cmd>RustLsp runnables<cr>", desc = "Run" },
+			{ "<leader>md", "<cmd>RustLsp debuggables<cr>", desc = "Debug" },
+			{ "<leader>mt", "<cmd>RustLsp testables<cr>", desc = "Test" },
+		})
 	end
 end
 
@@ -134,7 +122,7 @@ function M.harpoon()
 		harpoon.ui:toggle_quick_menu(harpoon:list())
 	end, { desc = "Harpoon" })
 	vim.keymap.set("n", "<leader>A", function()
-		harpoon:list():append()
+		harpoon:list():add()
 	end, { desc = "Add to Harpoon" })
 
 	vim.keymap.set("n", "<leader>1", function()

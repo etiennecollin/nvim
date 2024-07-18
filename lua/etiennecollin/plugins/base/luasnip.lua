@@ -25,7 +25,7 @@ return {
 
 		-- Load snippets
 		require("luasnip.loaders.from_lua").lazy_load({
-			paths = "~/.config/nvim/lua/etiennecollin/snippets",
+			paths = { "~/.config/nvim/lua/etiennecollin/snippets" },
 		})
 		require("luasnip.loaders.from_vscode").lazy_load()
 	end,
