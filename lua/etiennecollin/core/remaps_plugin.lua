@@ -62,7 +62,7 @@ function M.language_specific()
 	elseif file_type == "markdown" then
 		wk.add({
 			mode = { "n" },
-			m = { "<cmd>MarkdownPreviewToggle<cr>", desc = "Toggle markdown preview" },
+			{ "<leader>m", "<cmd>MarkdownPreviewToggle<cr>", desc = "Toggle markdown preview" },
 		})
 	elseif file_type == "rust" then
 		wk.add({
