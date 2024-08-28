@@ -119,3 +119,19 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- Floating linting messages on cursor hold and disable virtual text
 vim.cmd([[au CursorHold * lua vim.diagnostic.open_float(0,{scope = "cursor"})]])
+
+local function commit_on_save()
+	-- Check if the file is in a git repository
+	if vim.fn.system("git rev-parse --is-inside-work-tree 2>/dev/null") ~= "" then
+		-- Add the current file to the staging area
+		vim.fn.system("git add " .. vim.fn.expand("%:p"))
+
+		-- Commit the file with a generic message
+		vim.fn.system('git commit -q -m "squash! $(git log -1 --format=%H)"')
+	end
+end
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+	pattern = "*",
+	callback = commit_on_save,
+})
