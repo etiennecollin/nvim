@@ -131,7 +131,7 @@ local function commit_on_save()
 	end
 end
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-	pattern = "*",
-	callback = commit_on_save,
-})
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+-- 	pattern = "*",
+-- 	callback = commit_on_save,
+-- })
