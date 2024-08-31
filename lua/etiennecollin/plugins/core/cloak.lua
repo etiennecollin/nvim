@@ -10,8 +10,9 @@ return {
 		patterns = {
 			{
 				file_pattern = {
-					".env*",
 					"*.asc",
+					"*.env",
+					"*.secret",
 				},
 				cloak_pattern = { "=.+", ":.+" },
 			},
