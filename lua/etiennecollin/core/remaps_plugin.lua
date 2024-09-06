@@ -48,34 +48,32 @@ function M.boole()
 end
 
 function M.language_specific()
-	local wk = require("which-key")
-	local file_type = vim.api.nvim_buf_get_option(0, "filetype")
+	local is_file_type = function(x)
+		local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+		return filetype == x
+	end
+
+	local local_map = function(lhs, rhs, desc)
+		vim.keymap.set("n", lhs, rhs, { buffer = 0, silent = true, desc = desc })
+	end
 
 	-- Add keymaps for typst, and markdown
-	if file_type == "typst" then
-		wk.add({
-			mode = { "n" },
-			{ "<leader>m", group = "typst" },
-			{ "<leader>mm", "<cmd>TypstPreviewToggle<cr>", desc = "Toggle preview" },
-			{ "<leader>mw", "<cmd>TypstWatch --root ~<cr>", desc = "PDF watch" },
-		})
-	elseif file_type == "markdown" then
-		wk.add({
-			mode = { "n" },
-			{ "<leader>m", "<cmd>MarkdownPreviewToggle<cr>", desc = "Toggle markdown preview" },
-		})
-	elseif file_type == "rust" then
-		wk.add({
-			mode = { "n" },
-			{ "<leader>m", group = "rust" },
-			{ "<leader>mc", "<cmd>RustLsp codeAction<cr>", desc = "Code Actions" },
-			{ "<leader>me", "<cmd>RustLsp explainError<cr>", desc = "Explain Error" },
-			{ "<leader>mx", "<cmd>RustLsp renderDiagnostic<cr>", desc = "Render Diagnostics" },
-			{ "<leader>mo", "<cmd>RustLsp openDocs<cr>", desc = "Open Documentation" },
-			{ "<leader>mr", "<cmd>RustLsp runnables<cr>", desc = "Run" },
-			{ "<leader>md", "<cmd>RustLsp debuggables<cr>", desc = "Debug" },
-			{ "<leader>mt", "<cmd>RustLsp testables<cr>", desc = "Test" },
-		})
+	if is_file_type("typst") then
+		local_map("<leader>m", "", "Typst")
+		local_map("<leader>mm", "<cmd>TypstPreviewToggle<cr>", "Toggle live preview")
+		local_map("<leader>mc", "<cmd>TypstCompile<cr>", "Compile")
+		local_map("<leader>mw", "<cmd>TypstWatch --root ~<cr>", "PDF Watch")
+	elseif is_file_type("markdown") then
+		local_map("<leader>m", "<cmd>MarkdownPreviewToggle<cr>", "Toggle markdown preview")
+	elseif is_file_type("rust") then
+		local_map("<leader>m", "", "Rust")
+		local_map("<leader>mc", "<cmd>RustLsp codeAction<cr>", "Code Actions")
+		local_map("<leader>me", "<cmd>RustLsp explainError<cr>", "Explain Error")
+		local_map("<leader>mx", "<cmd>RustLsp renderDiagnostic<cr>", "Render Diagnostics")
+		local_map("<leader>mo", "<cmd>RustLsp openDocs<cr>", "Open Documentation")
+		local_map("<leader>mr", "<cmd>RustLsp runnables<cr>", "Run")
+		local_map("<leader>md", "<cmd>RustLsp debuggables<cr>", "Debug")
+		local_map("<leader>mt", "<cmd>RustLsp testables<cr>", "Test")
 	end
 end
 
