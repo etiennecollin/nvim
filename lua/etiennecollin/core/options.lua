@@ -58,9 +58,9 @@ vim.opt.relativenumber = true
 
 -- Set indentation
 vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+vim.opt.softtabstop = 0 -- Set to 0 to match tabstop
+vim.opt.shiftwidth = 0 -- Set to 0 to match tabstop
+vim.opt.expandtab = true -- Use spaces instead of tabs
 
 vim.opt.autoindent = true
 vim.opt.smartindent = true
