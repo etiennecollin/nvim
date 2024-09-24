@@ -109,24 +109,6 @@ vim.opt.updatetime = 50
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
--- Vertically center document when entering insert mode
-vim.cmd("autocmd InsertEnter * norm zz")
-
--- Remove trailing whitespace on save
-vim.cmd("autocmd BufWritePre, FileWritePre * :%s/\\s\\+$//e")
-
--- Highlight when yanking (copying) text
-vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("etiennecollin-highlight-yank", { clear = true }),
-	desc = "Highlight when yanking (copying) text",
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})
-
--- Floating linting messages on cursor hold and disable virtual text
-vim.cmd([[au CursorHold * lua vim.diagnostic.open_float(0,{scope = "cursor"})]])
-
 local function commit_on_save()
 	-- Check if the file is in a git repository
 	if vim.fn.system("git rev-parse --is-inside-work-tree 2>/dev/null") ~= "" then
