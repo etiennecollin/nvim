@@ -36,7 +36,11 @@ end
 require("lazy").setup(imports, {
 	checker = { enabled = true, notify = false },
 	change_detection = { enabled = true, notify = false },
+	dev = { path = "~/github/" },
 	install = {
 		colorscheme = { require("etiennecollin.utils").default_colorscheme },
+	},
+	rocks = {
+		hererocks = true,
 	},
 })
