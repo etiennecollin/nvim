@@ -1,6 +1,5 @@
 return {
 	"3rd/image.nvim",
-	dev = true,
 	dependencies = {
 		"leafo/magick",
 	},
