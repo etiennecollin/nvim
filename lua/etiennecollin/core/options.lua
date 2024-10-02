@@ -5,15 +5,15 @@ require("etiennecollin.utils").default_colorscheme = "gruvbox-material"
 require("etiennecollin.utils").ensure_installed_treesitter =
 	{ "vim", "regex", "lua", "bash", "markdown", "markdown_inline", "comment" }
 require("etiennecollin.utils").ensure_installed_lsps =
-	{ "lua_ls", "rust_analyzer", "jdtls", "basedpyright", "typst_lsp", "tailwindcss" }
+	{ "lua_ls", "rust_analyzer", "zls", "clangd", "basedpyright", "jdtls", "typst_lsp", "tailwindcss", "ts_ls" }
 require("etiennecollin.utils").ensure_installed_linters = {
-	c = { "trivy" },
-	cpp = { "trivy" },
+	c = { "trivy", "cpplint" },
+	cpp = { "trivy", "cpplint" },
 	rust = { "trivy" },
 	python = { "trivy" },
 	java = { "trivy" },
-	javascript = { "trivy" },
-	typescript = { "trivy" },
+	javascript = { "trivy", "oxlint" },
+	typescript = { "trivy", "oxlint" },
 }
 require("etiennecollin.utils").ensure_installed_formatters = {
 	lua = { "stylua" },
@@ -24,7 +24,7 @@ require("etiennecollin.utils").ensure_installed_formatters = {
 	c = { "clang_format" },
 	cpp = { "clang_format" },
 	java = { "google-java-format" },
-	typst = { "typstfmt" },
+	typst = { "typstyle" },
 	javascript = { "prettier" },
 	typescript = { "prettier" },
 	javascriptreact = { "prettier" },
