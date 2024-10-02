@@ -21,7 +21,6 @@ return {
 			internal = true,
 			indent_heuristic = true,
 		},
-		word_diff = true,
 		on_attach = function(buffer)
 			require("etiennecollin.core.remaps_plugin").gitsigns(buffer)
 		end,
