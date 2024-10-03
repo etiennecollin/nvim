@@ -95,6 +95,7 @@ vim.opt.hidden = true
 vim.opt.undofile = true
 
 -- Setup folds
+vim.o.foldtext = ""
 vim.o.foldcolumn = "0"
 vim.o.foldenable = false
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
