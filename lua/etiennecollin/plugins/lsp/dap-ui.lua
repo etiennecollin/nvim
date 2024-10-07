@@ -1,6 +1,5 @@
 return {
 	"rcarriga/nvim-dap-ui",
-	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"mfussenegger/nvim-dap",
 		{ "theHamsta/nvim-dap-virtual-text", dependencies = "nvim-treesitter/nvim-treesitter" },
