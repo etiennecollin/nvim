@@ -6,20 +6,23 @@ return {
 	},
 	opts = {
 		backend = "kitty",
+		kitty_method = "normal",
 		integrations = {
 			typst = {
 				enabled = true,
+				clear_in_insert_mode = true,
 				download_remote_images = true,
 				only_render_image_at_cursor = true,
 			},
 			html = {
 				enabled = true,
+				clear_in_insert_mode = true,
 				download_remote_images = true,
 				only_render_image_at_cursor = true,
 			},
 			markdown = {
 				enabled = true,
-				clear_in_insert_mode = false,
+				clear_in_insert_mode = true,
 				download_remote_images = true,
 				only_render_image_at_cursor = true,
 				filetypes = { "markdown", "vimwiki" },
@@ -35,6 +38,6 @@ return {
 		window_overlap_clear_enabled = true,
 		window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
 		-- auto show/hide images in the correct Tmux window (needs visual-activity off)
-		tmux_show_only_in_active_window = false,
+		tmux_show_only_in_active_window = true,
 	},
 }
