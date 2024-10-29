@@ -76,6 +76,9 @@ return {
 			["typst_lsp"] = function()
 				require("etiennecollin.plugins.lsp.servers.typst_lsp")(capabilities, on_attach)
 			end,
+			["tinymist"] = function()
+				require("etiennecollin.plugins.lsp.servers.tinymist")(capabilities, on_attach)
+			end,
 			["clangd"] = function()
 				require("etiennecollin.plugins.lsp.servers.clangd")(capabilities, on_attach)
 			end,
