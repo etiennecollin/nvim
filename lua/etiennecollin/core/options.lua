@@ -5,7 +5,7 @@ require("etiennecollin.utils").default_colorscheme = "gruvbox-material"
 require("etiennecollin.utils").ensure_installed_treesitter =
 	{ "vim", "regex", "lua", "bash", "markdown", "markdown_inline", "comment" }
 require("etiennecollin.utils").ensure_installed_lsps =
-	{ "lua_ls", "rust_analyzer", "zls", "clangd", "basedpyright", "jdtls", "typst_lsp", "tailwindcss", "ts_ls" }
+	{ "lua_ls", "rust_analyzer", "zls", "clangd", "basedpyright", "jdtls", "tinymist", "tailwindcss", "ts_ls" }
 require("etiennecollin.utils").ensure_installed_linters = {
 	c = { "trivy", "cpplint" },
 	cpp = { "trivy", "cpplint" },
