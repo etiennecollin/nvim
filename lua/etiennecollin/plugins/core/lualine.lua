@@ -14,6 +14,25 @@ return {
 		require("lualine").setup({
 			options = {
 				theme = custom_theme,
+				disabled_filetypes = {
+					-- Filetypes to disable lualine for.
+					"TelescopePrompt",
+					"Trouble",
+					"dap-repl",
+					"dapui-terminal",
+					"dapui_breakpoints",
+					"dapui_console",
+					"dapui_scopes",
+					"dapui_stacks",
+					"dapui_watches",
+					"neo-tree",
+					"spectre_panel",
+					"terminal",
+					"toggleterm",
+					"", -- Hover popups such as Treesitter syntax investigation popup, lsp popups...
+					statusline = {}, -- only ignores the ft for statusline.
+					winbar = {}, -- only ignores the ft for winbar.
+				},
 			},
 			sections = {
 				lualine_c = {
