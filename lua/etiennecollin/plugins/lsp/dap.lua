@@ -1,5 +1,6 @@
 return {
 	"mfussenegger/nvim-dap",
+	ft = { "cpp", "c", "rust" },
 	dependencies = {
 		{ "jay-babu/mason-nvim-dap.nvim", dependencies = "williamboman/mason.nvim" },
 	},
@@ -23,7 +24,7 @@ return {
 			function()
 				require("dap").continue()
 			end,
-			desc = "Continue",
+			desc = "Run/Continue",
 		},
 		{
 			"<leader>da",
