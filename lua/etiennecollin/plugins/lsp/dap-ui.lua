@@ -3,24 +3,7 @@ return {
 	ft = { "cpp", "c", "rust" },
 	dependencies = {
 		"mfussenegger/nvim-dap",
-		{ "theHamsta/nvim-dap-virtual-text", dependencies = "nvim-treesitter/nvim-treesitter" },
 		"nvim-neotest/nvim-nio",
-	},
-	keys = {
-		{
-			"<leader>du",
-			function()
-				require("dapui").toggle()
-			end,
-			desc = "Dap UI",
-		},
-		{
-			"<leader>de",
-			function()
-				require("dapui").eval()
-			end,
-			desc = "Eval",
-		},
 	},
 	config = function()
 		local dap = require("dap")
@@ -47,5 +30,7 @@ return {
 				border = "rounded",
 			},
 		})
+
+		require("etiennecollin.core.remaps_plugin").dapui()
 	end,
 }

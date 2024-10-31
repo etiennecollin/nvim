@@ -237,4 +237,94 @@ function M.lsp(_, bufnr)
 	end, { desc = "Signature help" })
 end
 
+function M.dap()
+	local map = function(keys, func, desc)
+		vim.keymap.set({ "n", "v" }, keys, func, { desc = desc })
+	end
+
+	-- From lazyvim
+	-- https://github.com/lazyvim/lazyvim/blob/main/lua/lazyvim/plugins/extras/dap/core.lua
+	---@param config {args?:string[]|fun():string[]?}
+	local function get_args(config)
+		local args = type(config.args) == "function" and (config.args() or {}) or config.args or {}
+		config = vim.deepcopy(config)
+		---@cast args string[]
+		config.args = function()
+			local new_args = vim.fn.input("Run with args: ", table.concat(args, " ")) --[[@as string]]
+			return vim.split(vim.fn.expand(new_args) --[[@as string]], " ")
+		end
+		return config
+	end
+
+	local dap = require("dap")
+
+	-- Set breakpoint with condition
+	map("<leader>dB", function()
+		dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+	end, "breakpoint condition")
+
+	-- Toggle breakpoint
+	map("<leader>db", dap.toggle_breakpoint, "Toggle breakpoint")
+
+	-- Run/Continue
+	map("<leader>dc", dap.continue, "Run/Continue")
+
+	-- Run with arguments
+	map("<leader>da", function()
+		dap.continue({ before = get_args })
+	end, "Run with args")
+
+	-- Run to cursor
+	map("<leader>dC", dap.run_to_cursor, "Run to cursor")
+
+	-- Go to line (no execute)
+	map("<leader>dg", dap.goto_, "Go to line (no execute)")
+
+	-- Step into
+	map("<leader>di", dap.step_into, "Step into")
+
+	-- Down
+	map("<leader>dj", dap.down, "Down")
+
+	-- Up
+	map("<leader>dk", dap.up, "Up")
+
+	-- Run last
+	map("<leader>dl", dap.run_last, "Run last")
+
+	-- Step out
+	map("<leader>do", dap.step_out, "Step out")
+
+	-- Step over
+	map("<leader>dO", dap.step_over, "Step over")
+
+	-- Pause
+	map("<leader>dp", dap.pause, "Pause")
+
+	-- Toggle repl
+	map("<leader>dr", dap.repl.toggle, "Toggle repl")
+
+	-- Session
+	map("<leader>ds", dap.session, "Session")
+
+	-- Terminate
+	map("<leader>dt", dap.terminate, "Terminate")
+
+	-- Widgets
+	map("<leader>dw", require("dap.ui.widgets").hover, "Widgets")
+end
+
+function M.dapui()
+	local map = function(keys, func, desc)
+		vim.keymap.set({ "n", "v" }, keys, func, { desc = desc })
+	end
+	local dapui = require("dapui")
+	map("<leader>du", function()
+		dapui.toggle()
+	end, "Dap UI Toggle")
+	map("<leader>de", function()
+		dapui.eval()
+	end, "Dap UI Eval")
+end
+
 return M
