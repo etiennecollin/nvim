@@ -6,6 +6,9 @@ return {
 		local lint = require("lint")
 
 		lint.linters_by_ft = require("etiennecollin.utils").ensure_installed_linters
+		lint.linters.cpplint.args = {
+			"--linelength=120",
+		}
 
 		-- Install linters with mason
 		require("mason-nvim-lint").setup()
