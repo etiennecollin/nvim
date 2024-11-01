@@ -57,21 +57,18 @@ vim.keymap.set("n", "<leader>Bc", "<cmd>tabclose<cr>", { desc = "Close tab" })
 vim.keymap.set("n", "<leader>Bn", "<cmd>tabn<cr>", { desc = "Next tab" })
 vim.keymap.set("n", "<leader>Bo", "<cmd>tabnew<cr>", { desc = "Open tab" })
 vim.keymap.set("n", "<leader>Bp", "<cmd>tabp<cr>", { desc = "Previous tab" })
+
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle reveal<cr>", { desc = "Toggle Neotree" })
-vim.keymap.set(
-	{ "n", "v" },
-	"<leader>k",
-	":s/\\(\\S.*\\)/ \\1/g<left><left><left><left><left>",
-	{ desc = "Fighting one-eyed kirby" }
-)
 vim.keymap.set("n", "<leader>q", "<cmd>bd<cr>", { desc = "Delete buffer" })
 vim.keymap.set("n", "<leader>Q", "<cmd>q<cr>", { desc = "Quit" })
+vim.keymap.set("n", "<leader>w", "<cmd>update!<cr>", { desc = "Save" })
+
+-- TODO: Move to plugins mappings
 vim.keymap.set("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = " Terminal float" })
 vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", { desc = "Terminal horizontal" })
 vim.keymap.set("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", { desc = "Terminal vertical" })
 vim.keymap.set("n", "<leader>tTp", '<cmd>TermExec cmd="python"<cr>', { desc = "Python" })
 vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Undotree" })
-vim.keymap.set("n", "<leader>w", "<cmd>update!<cr>", { desc = "Save" })
 vim.keymap.set("n", "<leader>XA", "<cmd>CellularAutomaton make_it_rain<cr>", { desc = "Cellular automaton" })
 vim.keymap.set("n", "<leader>XX", "<cmd>!chmod +x %<cr>", { desc = "Make executable" })
 vim.keymap.set("n", "<leader>XZ", "<cmd>ZenMode<cr>", { desc = "Toggle zen mode" })
@@ -84,9 +81,9 @@ vim.keymap.set("n", "<leader>zl", "<cmd>Lazy<cr>", { desc = "Lazy" })
 -- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- Exit insert mode
-vim.keymap.set("i", "jj", "<esc>", {
-	desc = "Exit insert mode",
-})
-vim.keymap.set("i", "kk", "<esc>", {
-	desc = "Exit insert mode",
-})
+-- vim.keymap.set("i", "jj", "<esc>", {
+-- 	desc = "Exit insert mode",
+-- })
+-- vim.keymap.set("i", "kk", "<esc>", {
+-- 	desc = "Exit insert mode",
+-- })
