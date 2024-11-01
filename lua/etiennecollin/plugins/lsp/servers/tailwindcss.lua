@@ -13,7 +13,7 @@ return function(capabilities, on_attach)
 			"typescriptreact",
 			"svelte",
 			"vue",
-			"rust",
+			-- "rust",
 		},
 		init_options = {
 			-- Set languages to be considered as different ones by lsp
