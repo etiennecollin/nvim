@@ -49,7 +49,14 @@ return {
 					["rust-analyzer"] = {
 						check = {
 							command = "clippy",
-							extraArgs = { "--all", "--", "-W", "clippy::all" },
+							extraArgs = {
+								"--all",
+								"--all-targets",
+								"--all-features",
+								"--",
+								"-W",
+								"clippy::all",
+							},
 						},
 						checkOnSave = {
 							command = "clippy",
