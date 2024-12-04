@@ -7,7 +7,7 @@ return {
 		"MunifTanjim/nui.nvim",
 		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 	},
-	config = function()
+	config = function(_, opts)
 		local inputs = require("neo-tree.ui.inputs")
 
 		-- Diff the source file against the target
@@ -76,6 +76,16 @@ return {
 				require("neo-tree.sources.manager").refresh(state)
 			end)
 		end
+
+		local function on_move(state)
+			Snacks.rename.on_rename_file(state.source, state.destination)
+		end
+		local events = require("neo-tree.events")
+		opts.event_handlers = opts.event_handlers or {}
+		vim.list_extend(opts.event_handlers, {
+			{ event = events.FILE_MOVED, handler = on_move },
+			{ event = events.FILE_RENAMED, handler = on_move },
+		})
 
 		require("neo-tree").setup({
 			popup_border_style = "rounded",

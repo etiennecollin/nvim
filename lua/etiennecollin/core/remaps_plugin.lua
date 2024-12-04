@@ -1,7 +1,24 @@
 -- ToggleTerm
-vim.keymap.set({ "n", "i", "v", "t" }, "<F1>", "<cmd>ToggleTermToggleAll<cr>", {
+vim.keymap.set({ "n", "i", "v", "t" }, "<F1>", "<cmd>ToggleTerm<cr>", {
 	desc = "Toggle terminal",
 })
+vim.keymap.set(
+	{ "n", "i", "v", "t" },
+	"<F2>",
+	"<cmd>TermExec cmd='lazygit' direction='float'<cr>",
+	{ desc = "Lazygit" }
+)
+vim.keymap.set(
+	{ "n", "i", "v", "t" },
+	"<leader>gl",
+	"<cmd>TermExec cmd='lazygit log' direction='float'<cr>",
+	{ desc = "Lazygit logs" }
+)
+vim.keymap.set({ "n", "i", "v", "t" }, "<leader>gf", function()
+	local filepath = vim.fn.expand("%:p") -- Get the full path of the current file
+	local command = string.format("TermExec cmd='lazygit log -f %s' direction='float'", filepath)
+	vim.cmd(command) -- Execute the command
+end, { desc = "Lazygit file logs" })
 
 -- These functions create mappings that are only loaded when the plugin is loaded
 -- This is done by calling the function in its corresponding plugin config
@@ -106,24 +123,46 @@ function M.gitsigns(buffer)
 	end, "First Hunk")
 
 	-- These two mappings use a "command" form to allow ranges in visual mode
-	map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-	map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+	map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+	map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
 
-	map("n", "<leader>hS", gs.stage_buffer, "Stage Buffer")
-	map("n", "<leader>hu", gs.undo_stage_hunk, "Undo Stage Hunk")
-	map("n", "<leader>hR", gs.reset_buffer, "Reset Buffer")
-	map("n", "<leader>hp", gs.preview_hunk_inline, "Preview Hunk Inline")
-	map("n", "<leader>hb", function()
+	map("n", "<leader>gb", function()
 		gs.blame_line({ full = true })
-	end, "Blame Line")
-	map("n", "<leader>hB", function()
+	end, "Blame Hunk")
+	map("n", "<leader>gB", function()
 		gs.blame()
 	end, "Blame Buffer")
-	map("n", "<leader>hd", gs.diffthis, "Diff This")
-	map("n", "<leader>hD", function()
+	map("n", "<leader>gd", gs.diffthis, "Diff This")
+	map("n", "<leader>gD", function()
 		gs.diffthis("~")
 	end, "Diff This ~")
+	map("n", "<leader>gp", gs.preview_hunk_inline, "Preview Hunk Inline")
+	map("n", "<leader>gR", gs.reset_buffer, "Reset Buffer")
+	map("n", "<leader>gS", gs.stage_buffer, "Stage Buffer")
+	map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
 	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+end
+
+function M.snacks()
+	vim.keymap.set("n", "<leader>zh", function()
+		Snacks.notifier.show_history()
+	end, { desc = "Notification History" })
+
+	vim.keymap.set("n", "<leader>rf", function()
+		Snacks.rename.rename_file()
+	end, { desc = "Rename File" })
+
+	vim.keymap.set("n", "<leader>go", function()
+		Snacks.gitbrowse()
+	end, { desc = "Git Browse" })
+
+	vim.keymap.set({ "n", "t" }, "]]", function()
+		Snacks.words.jump(vim.v.count1)
+	end, { desc = "Next Reference" })
+
+	vim.keymap.set({ "n", "t" }, "[[", function()
+		Snacks.words.jump(-vim.v.count1)
+	end, { desc = "Prev Reference" })
 end
 
 function M.neogen()
