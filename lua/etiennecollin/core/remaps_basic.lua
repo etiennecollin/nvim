@@ -62,6 +62,7 @@ vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle reveal<cr>", { desc = "Tog
 vim.keymap.set("n", "<leader>q", "<cmd>bd<cr>", { desc = "Delete buffer" })
 vim.keymap.set("n", "<leader>Q", "<cmd>q<cr>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>w", "<cmd>update!<cr>", { desc = "Save" })
+vim.keymap.set("n", "<leader>XE", "<cmd>set fileformat=unix<cr>", { desc = "Set file format to unix" })
 
 -- TODO: Move to plugins mappings
 vim.keymap.set("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = " Terminal float" })
