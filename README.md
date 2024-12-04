@@ -12,3 +12,11 @@ imagemagick pkg-config
 <!-- # Fix imagemagick path -->
 <!-- export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH" -->
 <!-- ``` -->
+
+## Snacks
+
+- The dashboard requires `chafa`
+
+## ToggleTerm
+
+- A mapping requires `lazygit`
