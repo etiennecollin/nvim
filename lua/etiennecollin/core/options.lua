@@ -30,6 +30,7 @@ require("etiennecollin.utils").ensure_installed_formatters = {
 	javascriptreact = { "prettier" },
 	typescriptreact = { "prettier" },
 	svelte = { "prettier" },
+	tex = { "latexindent" },
 	css = { "prettier" },
 	html = { "prettier" },
 	json = { "prettier" },
