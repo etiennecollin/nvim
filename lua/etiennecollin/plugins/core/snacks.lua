@@ -34,17 +34,17 @@ return {
 					},
 					{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
 					{
+						icon = " ",
+						key = "m",
+						desc = "Mason",
+						action = ":Mason",
+					},
+					{
 						icon = "󰒲 ",
 						key = "l",
 						desc = "Lazy",
 						action = ":Lazy",
 						enabled = package.loaded.lazy ~= nil,
-					},
-					{
-						icon = " ",
-						key = "m",
-						desc = "Mason",
-						action = ":Mason",
 					},
 					{
 						icon = "󰖟 ",
@@ -83,10 +83,9 @@ return {
 			enabled = true,
 			timeout = 3000,
 		},
-		statuscolumn = { enabled = true },
 		words = {
 			enabled = true,
-			debounce = 500,
+			debounce = 100,
 		},
 		styles = {
 			notification = {
