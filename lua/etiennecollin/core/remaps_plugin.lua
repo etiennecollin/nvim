@@ -9,12 +9,12 @@ vim.keymap.set(
 	{ desc = "Lazygit" }
 )
 vim.keymap.set(
-	{ "n", "i", "v", "t" },
+	{ "n", "v", "t" },
 	"<leader>gl",
 	"<cmd>TermExec cmd='lazygit log' direction='float'<cr>",
 	{ desc = "Lazygit logs" }
 )
-vim.keymap.set({ "n", "i", "v", "t" }, "<leader>gf", function()
+vim.keymap.set({ "n", "v", "t" }, "<leader>gf", function()
 	local filepath = vim.fn.expand("%:p") -- Get the full path of the current file
 	local command = string.format("TermExec cmd='lazygit log -f %s' direction='float'", filepath)
 	vim.cmd(command) -- Execute the command
