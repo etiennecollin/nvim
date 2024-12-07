@@ -1,3 +1,5 @@
+local IMG_PATH = vim.fn.expand("~/Pictures/wallpapers/a_moonlit_night_at_sea.jpg")
+
 return {
 	"folke/snacks.nvim",
 	priority = 1000,
@@ -67,13 +69,26 @@ return {
 			},
 			sections = {
 				{
-					section = "terminal",
-					cmd = "chafa ~/Pictures/wallpapers/a_moonlit_night_at_sea.jpg --format symbols --symbols vhalf --size 60x17 --stretch",
-					height = 17,
-					padding = 1,
+					enabled = function()
+						return (vim.fn.executable("chafa") == 1) and (vim.fn.filereadable(IMG_PATH) == 1)
+					end,
+					{
+						section = "terminal",
+						cmd = "chafa " .. IMG_PATH .. " --format symbols --symbols vhalf --size 60x17 --stretch",
+						height = 17,
+						padding = 1,
+					},
+					{
+						pane = 2,
+						{ section = "keys", gap = 1, padding = 1 },
+						{ section = "startup" },
+					},
 				},
 				{
-					pane = 2,
+					enabled = function()
+						return not ((vim.fn.executable("chafa") == 1) and (vim.fn.filereadable(IMG_PATH) == 1))
+					end,
+					{ section = "header" },
 					{ section = "keys", gap = 1, padding = 1 },
 					{ section = "startup" },
 				},
