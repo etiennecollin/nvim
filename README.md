@@ -15,7 +15,7 @@ imagemagick pkg-config
 
 ## Snacks
 
-- The dashboard requires `chafa`
+- The dashboard optionally requires `chafa`
 
 ## ToggleTerm
 
