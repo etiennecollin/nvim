@@ -5,6 +5,10 @@ return {
 	priority = 1000,
 	lazy = false,
 	opts = {
+		animate = {
+			enabled = true,
+			fps = 120,
+		},
 		bigfile = {
 			enabled = true,
 			notify = true,
@@ -94,13 +98,33 @@ return {
 				},
 			},
 		},
+		dim = {
+			enabled = true,
+		},
+		indent = {
+			enabled = true,
+			scope = {
+				animate = {
+					enabled = false,
+				},
+			},
+		},
+		input = {
+			enabled = true,
+		},
 		notifier = {
 			enabled = true,
 			timeout = 3000,
 		},
+		scope = {
+			enabled = true,
+		},
 		words = {
 			enabled = true,
 			debounce = 100,
+		},
+		zen = {
+			enabled = true,
 		},
 		styles = {
 			notification = {
