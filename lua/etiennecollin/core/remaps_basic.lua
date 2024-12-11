@@ -64,15 +64,9 @@ vim.keymap.set("n", "<leader>Q", "<cmd>q<cr>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>w", "<cmd>update!<cr>", { desc = "Save" })
 vim.keymap.set("n", "<leader>XE", "<cmd>set fileformat=unix<cr>", { desc = "Set file format to unix" })
 
--- TODO: Move to plugins mappings
-vim.keymap.set("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = " Terminal float" })
-vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", { desc = "Terminal horizontal" })
-vim.keymap.set("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", { desc = "Terminal vertical" })
-vim.keymap.set("n", "<leader>tTp", '<cmd>TermExec cmd="python"<cr>', { desc = "Python" })
 vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Undotree" })
 vim.keymap.set("n", "<leader>XA", "<cmd>CellularAutomaton make_it_rain<cr>", { desc = "Cellular automaton" })
 vim.keymap.set("n", "<leader>XX", "<cmd>!chmod +x %<cr>", { desc = "Make executable" })
-vim.keymap.set("n", "<leader>XZ", "<cmd>ZenMode<cr>", { desc = "Toggle zen mode" })
 vim.keymap.set("n", "<leader>zm", "<cmd>Mason<cr>", { desc = "Mason" })
 vim.keymap.set("n", "<leader>zl", "<cmd>Lazy<cr>", { desc = "Lazy" })
 

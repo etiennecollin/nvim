@@ -1,28 +1,32 @@
--- ToggleTerm
-vim.keymap.set({ "n", "i", "v", "t" }, "<F1>", "<cmd>ToggleTerm<cr>", {
-	desc = "Toggle terminal",
-})
-vim.keymap.set(
-	{ "n", "i", "v", "t" },
-	"<F2>",
-	"<cmd>TermExec cmd='lazygit' direction='float'<cr>",
-	{ desc = "Lazygit" }
-)
-vim.keymap.set(
-	{ "n", "v", "t" },
-	"<leader>gl",
-	"<cmd>TermExec cmd='lazygit log' direction='float'<cr>",
-	{ desc = "Lazygit logs" }
-)
-vim.keymap.set({ "n", "v", "t" }, "<leader>gf", function()
-	local filepath = vim.fn.expand("%:p") -- Get the full path of the current file
-	local command = string.format("TermExec cmd='lazygit log -f %s' direction='float'", filepath)
-	vim.cmd(command) -- Execute the command
-end, { desc = "Lazygit file logs" })
-
 -- These functions create mappings that are only loaded when the plugin is loaded
 -- This is done by calling the function in its corresponding plugin config
 local M = {}
+
+function M.toggleterm()
+	vim.keymap.set("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = " Terminal float" })
+	vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", { desc = "Terminal horizontal" })
+	vim.keymap.set("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", { desc = "Terminal vertical" })
+	vim.keymap.set("n", "<leader>tTp", '<cmd>TermExec cmd="python"<cr>', { desc = "Python" })
+
+	vim.keymap.set({ "n", "i", "v", "t" }, "<F1>", "<cmd>ToggleTerm<cr>", {
+		desc = "Toggle terminal",
+	})
+	vim.keymap.set(
+		{ "n", "i", "v", "t" },
+		"<F2>",
+		"<cmd>TermExec cmd='lazygit' direction='float'<cr>",
+		{ desc = "Lazygit" }
+	)
+	vim.keymap.set(
+		{ "n", "v", "t" },
+		"<leader>gl",
+		"<cmd>TermExec cmd='lazygit log' direction='float'<cr>",
+		{ desc = "Lazygit logs" }
+	)
+	vim.keymap.set({ "n", "v", "t" }, "<leader>gf", function()
+		vim.cmd("TermExec cmd='lazygit log -f " .. vim.fn.expand("%:p") .. "' direction='float'")
+	end, { desc = "Lazygit file logs" })
+end
 
 function M.slime()
 	local function toggle_slime_tmux_nvim()
@@ -163,6 +167,10 @@ function M.snacks()
 	vim.keymap.set({ "n", "t" }, "[[", function()
 		Snacks.words.jump(-vim.v.count1)
 	end, { desc = "Prev Reference" })
+
+	vim.keymap.set("n", "<leader>XZ", function()
+		Snacks.zen()
+	end, { desc = "Toggle zen mode" })
 end
 
 function M.neogen()
