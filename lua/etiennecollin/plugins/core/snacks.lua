@@ -103,10 +103,11 @@ return {
 		},
 		indent = {
 			enabled = true,
+			animate = {
+				enabled = false,
+			},
 			scope = {
-				animate = {
-					enabled = false,
-				},
+				enabled = true,
 			},
 		},
 		input = {
