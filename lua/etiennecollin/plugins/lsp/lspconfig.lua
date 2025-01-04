@@ -73,9 +73,6 @@ return {
 			["lua_ls"] = function()
 				require("etiennecollin.plugins.lsp.servers.lua_ls")(capabilities, on_attach)
 			end,
-			["typst_lsp"] = function()
-				require("etiennecollin.plugins.lsp.servers.typst_lsp")(capabilities, on_attach)
-			end,
 			["tinymist"] = function()
 				require("etiennecollin.plugins.lsp.servers.tinymist")(capabilities, on_attach)
 			end,
