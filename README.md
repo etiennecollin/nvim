@@ -1,4 +1,4 @@
-# Depencencies
+# Dependencies
 
 ## `image.nvim`
 
