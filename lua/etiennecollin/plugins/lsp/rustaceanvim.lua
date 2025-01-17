@@ -51,8 +51,8 @@ return {
 							command = "clippy",
 							extraArgs = {
 								"--all",
-								"--all-targets",
-								"--all-features",
+								-- "--all-targets",
+								-- "--all-features",
 								"--",
 								"-W",
 								"clippy::all",
