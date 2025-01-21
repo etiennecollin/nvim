@@ -101,6 +101,7 @@ return {
 				trash = trash,
 				trash_visual = trash_visual,
 			},
+			opts.event_handlers,
 		})
 	end,
 }
