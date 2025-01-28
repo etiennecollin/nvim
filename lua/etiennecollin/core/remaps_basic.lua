@@ -1,5 +1,8 @@
 vim.g.mapleader = " "
 
+-- Unmap F1 which is used for ghostty's quick term
+vim.keymap.set({ "n", "i", "v", "t" }, "<F1>", "")
+
 -- Move up/down selected lines
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
