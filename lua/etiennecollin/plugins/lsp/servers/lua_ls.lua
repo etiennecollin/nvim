@@ -4,7 +4,7 @@ return function(capabilities, on_attach)
 		settings = {
 			Lua = {
 				diagnostics = {
-					globals = { "vim" },
+					globals = { "vim", "Snacks" },
 				},
 				telemetry = {
 					enable = false,
