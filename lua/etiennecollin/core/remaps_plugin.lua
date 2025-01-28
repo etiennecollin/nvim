@@ -8,24 +8,9 @@ function M.toggleterm()
 	vim.keymap.set("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", { desc = "Terminal vertical" })
 	vim.keymap.set("n", "<leader>tTp", '<cmd>TermExec cmd="python"<cr>', { desc = "Python" })
 
-	vim.keymap.set({ "n", "i", "v", "t" }, "<F1>", "<cmd>ToggleTerm<cr>", {
+	vim.keymap.set({ "n", "i", "v", "t" }, "<F3>", "<cmd>ToggleTerm<cr>", {
 		desc = "Toggle terminal",
 	})
-	vim.keymap.set(
-		{ "n", "i", "v", "t" },
-		"<F2>",
-		"<cmd>TermExec cmd='lazygit' direction='float'<cr>",
-		{ desc = "Lazygit" }
-	)
-	vim.keymap.set(
-		{ "n", "v", "t" },
-		"<leader>gl",
-		"<cmd>TermExec cmd='lazygit log' direction='float'<cr>",
-		{ desc = "Lazygit logs" }
-	)
-	vim.keymap.set({ "n", "v", "t" }, "<leader>gf", function()
-		vim.cmd("TermExec cmd='lazygit log -f " .. vim.fn.expand("%:p") .. "' direction='float'")
-	end, { desc = "Lazygit file logs" })
 end
 
 function M.slime()
@@ -171,6 +156,16 @@ function M.snacks()
 	vim.keymap.set("n", "<leader>XZ", function()
 		Snacks.zen()
 	end, { desc = "Toggle zen mode" })
+
+	vim.keymap.set({ "n", "i", "v", "t" }, "<F2>", function()
+		Snacks.lazygit()
+	end, { desc = "Lazygit" })
+	vim.keymap.set({ "n", "v", "t" }, "<leader>gl", function()
+		Snacks.lazygit.log()
+	end, { desc = "Lazygit logs" })
+	vim.keymap.set({ "n", "v", "t" }, "<leader>gf", function()
+		Snacks.lazygit.log_file()
+	end, { desc = "Lazygit file logs" })
 end
 
 function M.neogen()
