@@ -113,9 +113,18 @@ return {
 		input = {
 			enabled = true,
 		},
+		lazygit = {
+			enabled = true,
+			theme = {
+				selectedLineBgColor = { bg = "CursorLine" },
+			},
+		},
 		notifier = {
 			enabled = true,
 			timeout = 3000,
+		},
+		quickfile = {
+			enabled = true,
 		},
 		scope = {
 			enabled = true,
