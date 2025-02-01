@@ -20,8 +20,6 @@ return {
 		local ignore_buftypes = { "nofile", "prompt", "popup" }
 
 		local ignore_filetypes = {
-			"TelescopePrompt",
-			"Trouble",
 			"dap-repl",
 			"dapui-terminal",
 			"dapui_breakpoints",
@@ -31,9 +29,12 @@ return {
 			"dapui_watches",
 			"diff",
 			"neo-tree",
+			"snacks_picker_list",
 			"spectre_panel",
 			"terminal",
 			"toggleterm",
+			"TelescopePrompt",
+			"Trouble",
 			"undotree",
 			"", -- Hover popups such as Treesitter syntax investigation popup, lsp popups...
 		}

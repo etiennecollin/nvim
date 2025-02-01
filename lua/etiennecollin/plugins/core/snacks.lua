@@ -101,6 +101,9 @@ return {
 		dim = {
 			enabled = true,
 		},
+		explorer = {
+			enabled = true,
+		},
 		indent = {
 			enabled = true,
 			animate = {
@@ -122,6 +125,35 @@ return {
 		notifier = {
 			enabled = true,
 			timeout = 3000,
+		},
+		picker = {
+			enabled = true,
+			layout = { preset = "ivy" },
+			sources = {
+				explorer = {
+					auto_close = true,
+					layout = { preset = "ivy", preview = true },
+					win = {
+						list = {
+							keys = {
+								["."] = "explorer_focus",
+								["<BS>"] = "explorer_up",
+								["<space>"] = "select_and_next",
+								["<c-c>"] = "explorer_cd",
+								["a"] = "explorer_add",
+								["c"] = "explorer_copy",
+								["d"] = "explorer_del",
+								["h"] = "toggle_hidden",
+								["H"] = "toggle_ignored",
+								["l"] = "confirm",
+								["m"] = "explorer_move",
+								["r"] = "explorer_rename",
+								["y"] = "explorer_yank",
+							},
+						},
+					},
+				},
+			},
 		},
 		quickfile = {
 			enabled = true,

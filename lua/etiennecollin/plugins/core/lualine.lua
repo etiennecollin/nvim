@@ -16,8 +16,6 @@ return {
 				theme = custom_theme,
 				disabled_filetypes = {
 					-- Filetypes to disable lualine for.
-					"TelescopePrompt",
-					"Trouble",
 					"dap-repl",
 					"dapui-terminal",
 					"dapui_breakpoints",
@@ -27,9 +25,12 @@ return {
 					"dapui_watches",
 					"diff",
 					"neo-tree",
+					"snacks_picker_list",
 					"spectre_panel",
+					"TelescopePrompt",
 					"terminal",
 					"toggleterm",
+					"Trouble",
 					"undotree",
 					"", -- Hover popups such as Treesitter syntax investigation popup, lsp popups...
 					statusline = {}, -- only ignores the ft for statusline.

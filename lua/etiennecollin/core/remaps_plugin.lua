@@ -2,15 +2,13 @@
 -- This is done by calling the function in its corresponding plugin config
 local M = {}
 
+-- stylua: ignore start
 function M.toggleterm()
 	vim.keymap.set("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = " Terminal float" })
 	vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", { desc = "Terminal horizontal" })
 	vim.keymap.set("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", { desc = "Terminal vertical" })
 	vim.keymap.set("n", "<leader>tTp", '<cmd>TermExec cmd="python"<cr>', { desc = "Python" })
-
-	vim.keymap.set({ "n", "i", "v", "t" }, "<F3>", "<cmd>ToggleTerm<cr>", {
-		desc = "Toggle terminal",
-	})
+	vim.keymap.set({ "n", "i", "v", "t" }, "<F3>", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal", })
 end
 
 function M.slime()
@@ -104,128 +102,98 @@ function M.gitsigns(buffer)
 			gs.nav_hunk("prev")
 		end
 	end, "Prev Hunk")
-	map("n", "]H", function()
-		gs.nav_hunk("last")
-	end, "Last Hunk")
-	map("n", "[H", function()
-		gs.nav_hunk("first")
-	end, "First Hunk")
+	map("n", "]H", function() gs.nav_hunk("last") end, "Last Hunk")
+	map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
 
 	-- These two mappings use a "command" form to allow ranges in visual mode
-	map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-	map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+	map({ "n", "v" }, "<leader>Gr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+	map({ "n", "v" }, "<leader>Gs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
 
-	map("n", "<leader>gb", function()
-		gs.blame_line({ full = true })
-	end, "Blame Hunk")
-	map("n", "<leader>gB", function()
-		gs.blame()
-	end, "Blame Buffer")
-	map("n", "<leader>gd", gs.diffthis, "Diff This")
-	map("n", "<leader>gD", function()
-		gs.diffthis("~")
-	end, "Diff This ~")
-	map("n", "<leader>gp", gs.preview_hunk_inline, "Preview Hunk Inline")
-	map("n", "<leader>gR", gs.reset_buffer, "Reset Buffer")
-	map("n", "<leader>gS", gs.stage_buffer, "Stage Buffer")
-	map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
+	map("n", "<leader>Gb", function() gs.blame_line({ full = true }) end, "Blame Hunk")
+	map("n", "<leader>GB", function() gs.blame() end, "Blame Buffer")
+	map("n", "<leader>Gd", gs.diffthis, "Diff This")
+	map("n", "<leader>GD", function() gs.diffthis("~") end, "Diff This ~")
+	map("n", "<leader>Gp", gs.preview_hunk_inline, "Preview Hunk Inline")
+	map("n", "<leader>GR", gs.reset_buffer, "Reset Buffer")
+	map("n", "<leader>GS", gs.stage_buffer, "Stage Buffer")
 	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
 end
 
 function M.snacks()
-	vim.keymap.set("n", "<leader>zh", function()
-		Snacks.notifier.show_history()
-	end, { desc = "Notification History" })
+	-- Snacks other
+	vim.keymap.set("n", "<leader>zh", function() Snacks.notifier.show_history() end, { desc = "Notification History" })
+	vim.keymap.set("n", "<leader>rf", function() Snacks.rename.rename_file() end, { desc = "Rename File" })
+	vim.keymap.set({ "n", "t" }, "]]", function() Snacks.words.jump(vim.v.count1) end, { desc = "Next Reference" })
+	vim.keymap.set({ "n", "t" }, "[[", function() Snacks.words.jump(-vim.v.count1) end, { desc = "Prev Reference" })
+	vim.keymap.set("n", "<leader>XZ", function() Snacks.zen() end, { desc = "Toggle zen mode" })
 
-	vim.keymap.set("n", "<leader>rf", function()
-		Snacks.rename.rename_file()
-	end, { desc = "Rename File" })
+	-- Snacks git
+	vim.keymap.set({ "n", "i", "v", "t" }, "<F2>", function() Snacks.lazygit() end, { desc = "Lazygit" })
+	vim.keymap.set({ "n" }, "<leader>GL", function() Snacks.picker.git_log() end, { desc = "Git Log" })
+	vim.keymap.set({ "n", "v", "t" }, "<leader>Gf", function() Snacks.lazygit.log_file() end, { desc = "Lazygit file logs" })
+	vim.keymap.set({ "n", "v", "t" }, "<leader>Gl", function() Snacks.lazygit.log() end, { desc = "Lazygit logs" })
+	vim.keymap.set("n", "<leader>Go", function() Snacks.gitbrowse() end, { desc = "Git Browse" })
+	vim.keymap.set({ "n" }, "<leader>Gx", function() Snacks.picker.git_status() end, { desc = "Git Status" })
 
-	vim.keymap.set("n", "<leader>go", function()
-		Snacks.gitbrowse()
-	end, { desc = "Git Browse" })
+	-- Snacks explorer
+	vim.keymap.set({ "n" }, "<leader>e", function() Snacks.picker.explorer() end, { desc = "Toggle Explorer" })
 
-	vim.keymap.set({ "n", "t" }, "]]", function()
-		Snacks.words.jump(vim.v.count1)
-	end, { desc = "Next Reference" })
+	-- Snacks picker
+	vim.keymap.set({ "n" }, "<leader><leader>", function() Snacks.picker.buffers() end, { desc = "Buffers" })
+	vim.keymap.set({ "n" }, "<leader>qp", function() Snacks.picker.projects() end, { desc = "Projects" })
+    vim.keymap.set({ "n" }, '<leader>s"', function() Snacks.picker.registers() end, { desc = "Registers" })
+	vim.keymap.set({ "n" }, "<leader>s:", function() Snacks.picker.commands() end, { desc = "Commands" })
+	vim.keymap.set({ "n" }, "<leader>s;", function() Snacks.picker.command_history() end, { desc = "Command History" })
+	vim.keymap.set({ "n" }, "<leader>sa", function() Snacks.picker.autocmds() end, { desc = "Autocmds" })
+	vim.keymap.set({ "n" }, "<leader>sB", function() Snacks.picker.grep_buffers() end, { desc = "Grep Open Buffers" })
+	vim.keymap.set({ "n" }, "<leader>sb", function() Snacks.picker.lines() end, { desc = "Buffer Lines" })
+	vim.keymap.set({ "n" }, "<leader>sc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find Config File" })
+    vim.keymap.set({ "n" }, "<leader>sC", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes" })
+	vim.keymap.set({ "n" }, "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" })
+	vim.keymap.set({ "n" }, "<leader>sf", function() Snacks.picker.files() end, { desc = "Files" })
+	vim.keymap.set({ "n" }, "<leader>sg", function() Snacks.picker.grep() end, { desc = "Grep" })
+    vim.keymap.set({ "n" }, "<leader>sG", function() Snacks.picker.git_files() end, { desc = "Git Files" })
+	vim.keymap.set({ "n" }, "<leader>sh", function() Snacks.picker.help() end, { desc = "Help Pages" })
+	vim.keymap.set({ "n" }, "<leader>sH", function() Snacks.picker.highlights() end, { desc = "Highlights" })
+	vim.keymap.set({ "n" }, "<leader>sj", function() Snacks.picker.jumps() end, { desc = "Jumps" })
+	vim.keymap.set({ "n" }, "<leader>sk", function() Snacks.picker.keymaps() end, { desc = "Keymaps" })
+	vim.keymap.set({ "n" }, "<leader>sl", function() Snacks.picker.loclist() end, { desc = "Location List" })
+	vim.keymap.set({ "n" }, "<leader>sm", function() Snacks.picker.marks() end, { desc = "Marks" })
+	vim.keymap.set({ "n" }, "<leader>sM", function() Snacks.picker.man() end, { desc = "Man Pages" })
+    vim.keymap.set({ "n" }, "<leader>sp", function() Snacks.picker() end, { desc = "Picker" })
+	vim.keymap.set({ "n" }, "<leader>sq", function() Snacks.picker.qflist() end, { desc = "Quickfix List" })
+	vim.keymap.set({ "n" }, "<leader>sr", function() Snacks.picker.resume() end, { desc = "Resume" })
+	vim.keymap.set({ "n" }, "<leader>sR", function() Snacks.picker.recent() end, { desc = "Recent" })
+	vim.keymap.set({ "n" }, "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols" })
+	vim.keymap.set({ "n" }, "<leader>st", function() Snacks.picker.todo_comments() end, { desc = "All Todo" })
+	vim.keymap.set({ "n" }, "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, { desc = "Todo/Fix/Fixme" })
+    vim.keymap.set({ "n", "x" }, "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Visual selection or word" })
 
-	vim.keymap.set({ "n", "t" }, "[[", function()
-		Snacks.words.jump(-vim.v.count1)
-	end, { desc = "Prev Reference" })
-
-	vim.keymap.set("n", "<leader>XZ", function()
-		Snacks.zen()
-	end, { desc = "Toggle zen mode" })
-
-	vim.keymap.set({ "n", "i", "v", "t" }, "<F2>", function()
-		Snacks.lazygit()
-	end, { desc = "Lazygit" })
-	vim.keymap.set({ "n", "v", "t" }, "<leader>gl", function()
-		Snacks.lazygit.log()
-	end, { desc = "Lazygit logs" })
-	vim.keymap.set({ "n", "v", "t" }, "<leader>gf", function()
-		Snacks.lazygit.log_file()
-	end, { desc = "Lazygit file logs" })
+    -- Snacks LSP
+	vim.keymap.set({ "n" }, "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition" })
+	vim.keymap.set({ "n" }, "gI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" })
+	vim.keymap.set({ "n" }, "gr", function() Snacks.picker.lsp_references() end, { nowait = true, desc = "References" })
+	vim.keymap.set({ "n" }, "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" })
 end
 
 function M.neogen()
-	vim.keymap.set("n", "<leader>na", "<cmd>Neogen<cr>", { desc = "Generate annotation" })
+	vim.keymap.set("n", "<leader>na", "<cmd>Neogen<cr>", { desc = "Annotation" })
 end
 
 function M.spectre()
 	vim.keymap.set("n", "<leader>S", "<cmd>Spectre<cr>", { desc = "Spectre" })
 end
 
-function M.telescope()
-	local builtin = require("telescope.builtin")
-	vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "Buffers" })
-	vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Diagnostics" })
-	vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Files" })
-	vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Global" })
-	vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Help tags" })
-	vim.keymap.set("n", "<leader>sl", builtin.grep_string, { desc = "Local" })
-	vim.keymap.set("n", "<leader>so", builtin.oldfiles, { desc = "Recent files" })
-	vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Resume" })
-	vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "Select Telescope" })
-	vim.keymap.set("n", "<leader>s/", function()
-		builtin.live_grep({
-			grep_open_files = true,
-			prompt_title = "Live Grep in Open Files",
-		})
-	end, { desc = "Open Files" })
-	vim.keymap.set("n", "<leader>sn", function()
-		builtin.find_files({ cwd = vim.fn.stdpath("config") })
-	end, { desc = "Neovim files" })
-	vim.keymap.set("n", "<leader>/", function()
-		builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-			winblend = 10,
-			previewer = false,
-		}))
-	end, { desc = "Fuzzy search in current buffer" })
-end
-
 function M.harpoon()
 	local harpoon = require("harpoon")
 
-	vim.keymap.set("n", "<leader>a", function()
-		harpoon.ui:toggle_quick_menu(harpoon:list())
-	end, { desc = "Harpoon" })
-	vim.keymap.set("n", "<leader>A", function()
-		harpoon:list():add()
-	end, { desc = "Add to Harpoon" })
+	vim.keymap.set("n", "<leader>a", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon" })
+	vim.keymap.set("n", "<leader>A", function() harpoon:list():add() end, { desc = "Add to Harpoon" })
 
-	vim.keymap.set("n", "<leader>1", function()
-		harpoon:list():select(1)
-	end, { desc = "Harpoon select 1" })
-	vim.keymap.set("n", "<leader>2", function()
-		harpoon:list():select(2)
-	end, { desc = "Harpoon select 2" })
-	vim.keymap.set("n", "<leader>3", function()
-		harpoon:list():select(3)
-	end, { desc = "Harpoon select 3" })
-	vim.keymap.set("n", "<leader>4", function()
-		harpoon:list():select(4)
-	end, { desc = "Harpoon select 4" })
+	vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end, { desc = "Harpoon select 1" })
+	vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end, { desc = "Harpoon select 2" })
+	vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end, { desc = "Harpoon select 3" })
+	vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end, { desc = "Harpoon select 4" })
 end
 
 function M.lsp(_, bufnr)
@@ -233,50 +201,14 @@ function M.lsp(_, bufnr)
 		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
 	end
 
-	-- Jump to the definition of the word under your cursor.
-	map("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
-
-	-- Find references for the word under your cursor.
-	map("gr", require("telescope.builtin").lsp_references, "Goto References")
-
-	-- Jump to the implementation of the word under your cursor.
-	map("gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
-
-	-- Jump to the type of the word under your cursor.
-	map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type Definition")
-
-	-- Fuzzy find all the symbols in your current document.
-	map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
-
-	-- Fuzzy find all the symbols in your current workspace.
-	map("<leader>ss", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
-
-	-- Rename the variable under your cursor.
 	map("<leader>rn", vim.lsp.buf.rename, "Rename")
-
-	-- Execute a code action, usually your cursor needs to be on top of an error
-	-- or a suggestion from your LSP for this to activate.
 	map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
-
-	-- Show documentation for what is under cursor
 	map("K", vim.lsp.buf.hover, "Hover Documentation")
-
-	-- This is not Goto Definition, this is Goto Declaration.
 	map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-
-	-- Mapping to restart lsp if necessary
 	map("<leader>rs", ":LspRestart<CR>", "Restart")
-
-	-- Jump to previous diagnostic in buffer
-	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Goto previous diagnostic" })
-
-	-- Jump to next diagnostic in buffer
-	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Goto next diagnostic" })
-
-	-- Help with function signature
-	vim.keymap.set("i", "<C-h>", function()
-		vim.lsp.buf.signature_help()
-	end, { desc = "Signature help" })
+	vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Goto previous diagnostic" })
+	vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Goto next diagnostic" })
+	vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, { desc = "Signature help" })
 end
 
 function M.dap()
@@ -300,73 +232,35 @@ function M.dap()
 
 	local dap = require("dap")
 
-	-- Set breakpoint with condition
-	map("<leader>dB", function()
-		dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-	end, "breakpoint condition")
-
-	-- Toggle breakpoint
-	map("<leader>db", dap.toggle_breakpoint, "Toggle breakpoint")
-
-	-- Run/Continue
-	map("<leader>dc", dap.continue, "Run/Continue")
-
-	-- Run with arguments
-	map("<leader>da", function()
-		dap.continue({ before = get_args })
-	end, "Run with args")
-
-	-- Run to cursor
-	map("<leader>dC", dap.run_to_cursor, "Run to cursor")
-
-	-- Go to line (no execute)
-	map("<leader>dg", dap.goto_, "Go to line (no execute)")
-
-	-- Step into
-	map("<leader>di", dap.step_into, "Step into")
-
-	-- Down
-	map("<leader>dj", dap.down, "Down")
-
-	-- Up
-	map("<leader>dk", dap.up, "Up")
-
-	-- Run last
-	map("<leader>dl", dap.run_last, "Run last")
-
-	-- Step out
-	map("<leader>do", dap.step_out, "Step out")
-
-	-- Step over
-	map("<leader>dO", dap.step_over, "Step over")
-
-	-- Pause
-	map("<leader>dp", dap.pause, "Pause")
-
-	-- Toggle repl
-	map("<leader>dr", dap.repl.toggle, "Toggle repl")
-
-	-- Session
-	map("<leader>ds", dap.session, "Session")
-
-	-- Terminate
-	map("<leader>dt", dap.terminate, "Terminate")
-
-	-- Widgets
-	map("<leader>dw", require("dap.ui.widgets").hover, "Widgets")
+	map("<leader>DB", function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, "breakpoint condition")
+	map("<leader>Db", dap.toggle_breakpoint, "Toggle breakpoint")
+	map("<leader>Dc", dap.continue, "Run/Continue")
+	map("<leader>Da", function() dap.continue({ before = get_args }) end, "Run with args")
+	map("<leader>DC", dap.run_to_cursor, "Run to cursor")
+	map("<leader>Dg", dap.goto_, "Go to line (no execute)")
+	map("<leader>Di", dap.step_into, "Step into")
+	map("<leader>Dj", dap.down, "Down")
+	map("<leader>Dk", dap.up, "Up")
+	map("<leader>Dl", dap.run_last, "Run last")
+	map("<leader>Do", dap.step_out, "Step out")
+	map("<leader>DO", dap.step_over, "Step over")
+	map("<leader>Dp", dap.pause, "Pause")
+	map("<leader>Dr", dap.repl.toggle, "Toggle repl")
+	map("<leader>Ds", dap.session, "Session")
+	map("<leader>Dt", dap.terminate, "Terminate")
+	map("<leader>Dw", require("dap.ui.widgets").hover, "Widgets")
 end
 
 function M.dapui()
 	local map = function(keys, func, desc)
-		vim.keymap.set({ "n", "v" }, keys, func, { desc = desc })
-	end
+        vim.keymap.set({ "n", "v" }, keys, func, { desc = desc })
+    end
+
 	local dapui = require("dapui")
-	map("<leader>du", function()
-		dapui.toggle()
-	end, "Dap UI Toggle")
-	map("<leader>de", function()
-		dapui.eval()
-	end, "Dap UI Eval")
+
+	map("<leader>Du", function() dapui.toggle() end, "Dap UI Toggle")
+	map("<leader>De", function() dapui.eval() end, "Dap UI Eval")
 end
+-- stylua: ignore end
 
 return M
