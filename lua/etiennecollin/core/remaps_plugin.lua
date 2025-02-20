@@ -105,16 +105,16 @@ function M.gitsigns(buffer)
 	map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
 
 	-- These two mappings use a "command" form to allow ranges in visual mode
-	map({ "n", "v" }, "<leader>Gr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-	map({ "n", "v" }, "<leader>Gs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+	map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+	map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
 
-	map("n", "<leader>Gb", function() gs.blame_line({ full = true }) end, "Blame Hunk")
-	map("n", "<leader>GB", function() gs.blame() end, "Blame Buffer")
-	map("n", "<leader>Gd", gs.diffthis, "Diff This")
-	map("n", "<leader>GD", function() gs.diffthis("~") end, "Diff This ~")
-	map("n", "<leader>Gp", gs.preview_hunk_inline, "Preview Hunk Inline")
-	map("n", "<leader>GR", gs.reset_buffer, "Reset Buffer")
-	map("n", "<leader>GS", gs.stage_buffer, "Stage Buffer")
+	map("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "Blame Hunk")
+	map("n", "<leader>gB", function() gs.blame() end, "Blame Buffer")
+	map("n", "<leader>gd", gs.diffthis, "Diff This")
+	map("n", "<leader>gD", function() gs.diffthis("~") end, "Diff This ~")
+	map("n", "<leader>gp", gs.preview_hunk_inline, "Preview Hunk Inline")
+	map("n", "<leader>gR", gs.reset_buffer, "Reset Buffer")
+	map("n", "<leader>gS", gs.stage_buffer, "Stage Buffer")
 	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
 end
 
@@ -128,11 +128,11 @@ function M.snacks()
 
 	-- Snacks git
 	vim.keymap.set({ "n", "i", "v", "t" }, "<F2>", function() Snacks.lazygit() end, { desc = "Lazygit" })
-	vim.keymap.set({ "n" }, "<leader>GL", function() Snacks.picker.git_log() end, { desc = "Git Log" })
-	vim.keymap.set({ "n", "v", "t" }, "<leader>Gf", function() Snacks.lazygit.log_file() end, { desc = "Lazygit file logs" })
-	vim.keymap.set({ "n", "v", "t" }, "<leader>Gl", function() Snacks.lazygit.log() end, { desc = "Lazygit logs" })
-	vim.keymap.set("n", "<leader>Go", function() Snacks.gitbrowse() end, { desc = "Git Browse" })
-	vim.keymap.set({ "n" }, "<leader>Gx", function() Snacks.picker.git_status() end, { desc = "Git Status" })
+	vim.keymap.set({ "n" }, "<leader>gL", function() Snacks.picker.git_log() end, { desc = "Git Log" })
+	vim.keymap.set({ "n", "v", "t" }, "<leader>gf", function() Snacks.lazygit.log_file() end, { desc = "Lazygit file logs" })
+	vim.keymap.set({ "n", "v", "t" }, "<leader>gl", function() Snacks.lazygit.log() end, { desc = "Lazygit logs" })
+	vim.keymap.set("n", "<leader>go", function() Snacks.gitbrowse() end, { desc = "Git Browse" })
+	vim.keymap.set({ "n" }, "<leader>gx", function() Snacks.picker.git_status() end, { desc = "Git Status" })
 
 	-- Snacks explorer
 	vim.keymap.set({ "n" }, "<leader>e", function() Snacks.picker.explorer() end, { desc = "Toggle Explorer" })
