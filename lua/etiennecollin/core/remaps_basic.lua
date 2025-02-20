@@ -37,16 +37,31 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], {
 vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Insert mode escape" })
 
 -- Window navigation
-vim.keymap.set("n", "<C-h>", "<C-w>h", {
+vim.keymap.set({ "n", "v", "i" }, "<C-h>", "<C-w>h", {
 	desc = "Navigate window left",
 })
-vim.keymap.set("n", "<C-j>", "<C-w>j", {
+vim.keymap.set({ "n", "v", "i" }, "<C-j>", "<C-w>j", {
 	desc = "Navigate window down",
 })
-vim.keymap.set("n", "<C-k>", "<C-w>k", {
+vim.keymap.set({ "n", "v", "i" }, "<C-k>", "<C-w>k", {
 	desc = "Navigate window up",
 })
-vim.keymap.set("n", "<C-l>", "<C-w>l", {
+vim.keymap.set({ "n", "v", "i" }, "<C-l>", "<C-w>l", {
+	desc = "Navigate window right",
+})
+
+-- Window navigation with arrows
+-- On my COLEMAK mod-DH layout, I have a layer with the arrows in place of hjkl
+vim.keymap.set({ "n", "v", "i", "t" }, "<C-Left>", "<C-w>h", {
+	desc = "Navigate window left",
+})
+vim.keymap.set({ "n", "v", "i", "t" }, "<C-Down>", "<C-w>j", {
+	desc = "Navigate window down",
+})
+vim.keymap.set({ "n", "v", "i", "t" }, "<C-Up>", "<C-w>k", {
+	desc = "Navigate window up",
+})
+vim.keymap.set({ "n", "v", "i", "t" }, "<C-Right>", "<C-w>l", {
 	desc = "Navigate window right",
 })
 
