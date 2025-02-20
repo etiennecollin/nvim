@@ -6,12 +6,17 @@ return {
 
 		-- Use neovim terminal for slime
 		vim.g.slime_target = "neovim"
-		vim.g.slime_dont_ask_default = 0
-		vim.g.slime_bracketed_paste = 1
-		vim.g.slime_python_ipython = 0
+		vim.g.slime_bracketed_paste = true
+		vim.g.slime_python_ipython = false
+
+		vim.g.slime_dont_ask_default = false
+		vim.g.slime_input_pid = false
+		vim.g.slime_menu_config = false
+		vim.g.slime_neovim_ignore_unlisted = false
+		vim.g.slime_suggest_default = true
 
 		-- Do not use default mappings
-		vim.g.slime_no_mappings = 1
+		vim.g.slime_no_mappings = true
 
 		require("etiennecollin.core.remaps_plugin").slime()
 	end,

@@ -3,14 +3,6 @@
 local M = {}
 
 -- stylua: ignore start
-function M.toggleterm()
-	vim.keymap.set("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = " Terminal float" })
-	vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm direction=horizontal<cr>", { desc = "Terminal horizontal" })
-	vim.keymap.set("n", "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", { desc = "Terminal vertical" })
-	vim.keymap.set("n", "<leader>tTp", '<cmd>TermExec cmd="python"<cr>', { desc = "Python" })
-	vim.keymap.set({ "n", "i", "v", "t" }, "<F3>", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal", })
-end
-
 function M.slime()
 	local function toggle_slime_tmux_nvim()
 		pcall(function()
@@ -20,13 +12,14 @@ function M.slime()
 		if vim.g.slime_target == "tmux" then
 			-- Use neovim terminal for slime
 			vim.g.slime_target = "neovim"
-			vim.g.slime_bracketed_paste = 0
-			vim.g.slime_python_ipython = 1
+			vim.g.slime_bracketed_paste = true
+			vim.g.slime_python_ipython = false
 			print("Using neovim terminal for slime")
 		elseif vim.g.slime_target == "neovim" then
 			-- Use tmux for slime
 			vim.g.slime_target = "tmux"
-			vim.g.slime_bracketed_paste = 1
+			vim.g.slime_bracketed_paste = true
+			vim.g.slime_python_ipython = false
 			vim.g.slime_default_config = { socket_name = "default", target_pane = ".2" }
 			print("Using tmux for slime")
 		end
@@ -126,6 +119,10 @@ function M.snacks()
 	vim.keymap.set({ "n", "t" }, "[[", function() Snacks.words.jump(-vim.v.count1) end, { desc = "Prev Reference" })
 	vim.keymap.set("n", "<leader>XZ", function() Snacks.zen() end, { desc = "Toggle zen mode" })
 
+	-- Snacks terminal
+	vim.keymap.set({ "n", "i", "v", "t" }, "<F3>", function() Snacks.terminal.toggle() end, { desc = "Toggle terminal", })
+	vim.keymap.set("n", "<leader>ttp", function() Snacks.terminal.toggle("python") end, { desc = "Python" })
+
 	-- Snacks git
 	vim.keymap.set({ "n", "i", "v", "t" }, "<F2>", function() Snacks.lazygit() end, { desc = "Lazygit" })
 	vim.keymap.set({ "n" }, "<leader>gL", function() Snacks.picker.git_log() end, { desc = "Git Log" })
@@ -139,18 +136,18 @@ function M.snacks()
 
 	-- Snacks picker
 	vim.keymap.set({ "n" }, "<leader><leader>", function() Snacks.picker.buffers() end, { desc = "Buffers" })
-    vim.keymap.set({ "n" }, '<leader>s"', function() Snacks.picker.registers() end, { desc = "Registers" })
+	vim.keymap.set({ "n" }, '<leader>s"', function() Snacks.picker.registers() end, { desc = "Registers" })
 	vim.keymap.set({ "n" }, "<leader>s:", function() Snacks.picker.commands() end, { desc = "Commands" })
 	vim.keymap.set({ "n" }, "<leader>s;", function() Snacks.picker.command_history() end, { desc = "Command History" })
 	vim.keymap.set({ "n" }, "<leader>sa", function() Snacks.picker.autocmds() end, { desc = "Autocmds" })
 	vim.keymap.set({ "n" }, "<leader>sB", function() Snacks.picker.grep_buffers() end, { desc = "Grep Open Buffers" })
 	vim.keymap.set({ "n" }, "<leader>sb", function() Snacks.picker.lines() end, { desc = "Buffer Lines" })
 	vim.keymap.set({ "n" }, "<leader>sc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find Config File" })
-    vim.keymap.set({ "n" }, "<leader>sC", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes" })
+	vim.keymap.set({ "n" }, "<leader>sC", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes" })
 	vim.keymap.set({ "n" }, "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" })
 	vim.keymap.set({ "n" }, "<leader>sf", function() Snacks.picker.files() end, { desc = "Files" })
 	vim.keymap.set({ "n" }, "<leader>sg", function() Snacks.picker.grep() end, { desc = "Grep" })
-    vim.keymap.set({ "n" }, "<leader>sG", function() Snacks.picker.git_files() end, { desc = "Git Files" })
+	vim.keymap.set({ "n" }, "<leader>sG", function() Snacks.picker.git_files() end, { desc = "Git Files" })
 	vim.keymap.set({ "n" }, "<leader>sh", function() Snacks.picker.help() end, { desc = "Help Pages" })
 	vim.keymap.set({ "n" }, "<leader>sH", function() Snacks.picker.highlights() end, { desc = "Highlights" })
 	vim.keymap.set({ "n" }, "<leader>sj", function() Snacks.picker.jumps() end, { desc = "Jumps" })
@@ -158,7 +155,7 @@ function M.snacks()
 	vim.keymap.set({ "n" }, "<leader>sl", function() Snacks.picker.loclist() end, { desc = "Location List" })
 	vim.keymap.set({ "n" }, "<leader>sm", function() Snacks.picker.marks() end, { desc = "Marks" })
 	vim.keymap.set({ "n" }, "<leader>sM", function() Snacks.picker.man() end, { desc = "Man Pages" })
-    vim.keymap.set({ "n" }, "<leader>sp", function() Snacks.picker() end, { desc = "Picker" })
+	vim.keymap.set({ "n" }, "<leader>sp", function() Snacks.picker() end, { desc = "Picker" })
 	vim.keymap.set({ "n" }, "<leader>sP", function() Snacks.picker.projects() end, { desc = "Projects" })
 	vim.keymap.set({ "n" }, "<leader>sq", function() Snacks.picker.qflist() end, { desc = "Quickfix List" })
 	vim.keymap.set({ "n" }, "<leader>sr", function() Snacks.picker.resume() end, { desc = "Resume" })
@@ -166,9 +163,9 @@ function M.snacks()
 	vim.keymap.set({ "n" }, "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols" })
 	vim.keymap.set({ "n" }, "<leader>st", function() Snacks.picker.todo_comments() end, { desc = "All Todo" })
 	vim.keymap.set({ "n" }, "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, { desc = "Todo/Fix/Fixme" })
-    vim.keymap.set({ "n", "x" }, "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Visual selection or word" })
+	vim.keymap.set({ "n", "x" }, "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Visual selection or word" })
 
-    -- Snacks LSP
+	-- Snacks LSP
 	vim.keymap.set({ "n" }, "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition" })
 	vim.keymap.set({ "n" }, "gI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" })
 	vim.keymap.set({ "n" }, "gr", function() Snacks.picker.lsp_references() end, { nowait = true, desc = "References" })
@@ -252,8 +249,8 @@ end
 
 function M.dapui()
 	local map = function(keys, func, desc)
-        vim.keymap.set({ "n", "v" }, keys, func, { desc = desc })
-    end
+		vim.keymap.set({ "n", "v" }, keys, func, { desc = desc })
+	end
 
 	local dapui = require("dapui")
 

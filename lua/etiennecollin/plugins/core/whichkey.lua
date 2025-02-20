@@ -17,7 +17,7 @@ return {
 			{ "<leader>r", group = "LSP" },
 			{ "<leader>s", group = "Search" },
 			{ "<leader>t", group = "Toggle" },
-			{ "<leader>tT", group = "Specific Terminal" },
+			{ "<leader>tt", group = "Specific Terminal" },
 			{ "<leader>ts", group = "Slime" },
 			{ "<leader>x", group = "Trouble" },
 			{ "<leader>X", group = "Utilities" },
