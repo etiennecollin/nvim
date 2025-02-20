@@ -103,6 +103,14 @@ return {
 		},
 		explorer = {
 			enabled = true,
+			replace_netrw = true,
+		},
+		image = {
+			enabled = true,
+			doc = {
+				inline = false,
+				img_dirs = { "img", "images", "assets", "static", "public", "media", "attachments", "resources" },
+			},
 		},
 		indent = {
 			enabled = true,
