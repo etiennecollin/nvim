@@ -120,8 +120,8 @@ function M.snacks()
 	vim.keymap.set("n", "<leader>XZ", function() Snacks.zen() end, { desc = "Toggle zen mode" })
 
 	-- Snacks terminal
-	vim.keymap.set({ "n", "i", "v", "t" }, "<F3>", function() Snacks.terminal.toggle() end, { desc = "Toggle terminal", })
-	vim.keymap.set("n", "<leader>ttp", function() Snacks.terminal.toggle("python") end, { desc = "Python" })
+	vim.keymap.set({ "n", "i", "v", "t" }, "<F3>", function() Snacks.terminal.toggle(nil, { auto_insert = false }) end, { desc = "Toggle terminal", })
+	vim.keymap.set("n", "<leader>ttp", function() Snacks.terminal.toggle("python", { auto_insert = false }) end, { desc = "Python" })
 
 	-- Snacks git
 	vim.keymap.set({ "n", "i", "v", "t" }, "<F2>", function() Snacks.lazygit() end, { desc = "Lazygit" })
