@@ -169,6 +169,12 @@ return {
 		scope = {
 			enabled = true,
 		},
+		scroll = {
+			enabled = false,
+		},
+		terminal = {
+			enabled = true,
+		},
 		words = {
 			enabled = true,
 			debounce = 100,

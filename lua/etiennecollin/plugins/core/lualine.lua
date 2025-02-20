@@ -26,6 +26,7 @@ return {
 					"diff",
 					"neo-tree",
 					"snacks_picker_list",
+					"snacks_terminal",
 					"spectre_panel",
 					"TelescopePrompt",
 					"terminal",

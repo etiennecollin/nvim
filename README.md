@@ -16,7 +16,4 @@ imagemagick pkg-config
 ## Snacks
 
 - The dashboard optionally requires `chafa`
-
-## ToggleTerm
-
 - A mapping requires `lazygit`
