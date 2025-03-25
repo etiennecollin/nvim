@@ -68,7 +68,7 @@ vim.keymap.set({ "n", "v", "i", "t" }, "<C-Right>", "<C-w>l", {
 vim.keymap.set("n", "<leader>bc", "<cmd>close<cr>", { desc = "Close buffer" })
 vim.keymap.set("n", "<leader>bD", "<cmd>%bd|e#|bd#<cr>", { desc = "Delete all buffers" })
 vim.keymap.set("n", "<leader>bh", "<cmd>FocusSplitDown<cr>", { desc = "Hsplit window" })
-vim.keymap.set("n", "<leader>bn", "<cmd>FocusSplitNicely<cr>", { desc = "New buffer" })
+vim.keymap.set("n", "<leader>bn", "<cmd>ene | startinsert<cr>", { desc = "New buffer" })
 vim.keymap.set("n", "<leader>bv", "<cmd>FocusSplitRight<cr>", { desc = "Vsplit window" })
 
 vim.keymap.set("n", "<leader>Bc", "<cmd>tabclose<cr>", { desc = "Close tab" })
