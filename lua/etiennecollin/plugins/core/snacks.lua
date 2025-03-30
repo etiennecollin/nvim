@@ -111,6 +111,9 @@ return {
 				inline = false,
 				img_dirs = { "img", "images", "assets", "static", "public", "media", "attachments", "resources" },
 			},
+			math = {
+				enabled = false,
+			},
 		},
 		indent = {
 			enabled = true,
