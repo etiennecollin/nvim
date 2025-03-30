@@ -46,6 +46,44 @@ vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 
+-- Set floating window border
+vim.o.winborder = "rounded"
+
+-- Set diagnostics
+local signs = {
+	Error = " ",
+	Warn = " ",
+	Hint = "󰌵 ",
+	Info = " ",
+}
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, {
+		text = icon,
+		texthl = hl,
+		numhl = "",
+	})
+end
+
+vim.diagnostic.config({
+	virtual_text = {
+		severity = { min = vim.diagnostic.severity.WARN },
+	},
+	virtual_lines = { current_line = true },
+	signs = true,
+	update_in_insert = true,
+	underline = true,
+	severity_sort = true,
+	float = {
+		focusable = false,
+		style = "minimal",
+		border = "rounded",
+		source = true,
+		header = "",
+		prefix = "",
+	},
+})
+
 -- Set cursor options and line highlighting
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 vim.opt.cursorline = true
