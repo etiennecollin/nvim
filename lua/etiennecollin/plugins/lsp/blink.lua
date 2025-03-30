@@ -2,8 +2,10 @@ return {
 	"saghen/blink.cmp",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
+		"L3MON4D3/LuaSnip",
 		"rafamadriz/friendly-snippets",
 		"folke/lazydev.nvim",
+		{ "jmbuhr/cmp-pandoc-references", dev = true },
 		{ "fang2hou/blink-copilot", dependencies = "zbirenbaum/copilot.lua" },
 	},
 	version = "1.*",
@@ -33,6 +35,9 @@ return {
 		snippets = { preset = "luasnip" },
 		sources = {
 			default = { "copilot", "lsp", "snippets", "lazydev", "path", "snippets", "buffer" },
+			per_filetype = {
+				typst = { "references", "copilot", "lsp", "snippets", "lazydev", "path", "snippets", "buffer" },
+			},
 			providers = {
 				copilot = {
 					name = "copilot",
@@ -44,6 +49,10 @@ return {
 					name = "LazyDev",
 					module = "lazydev.integrations.blink",
 					score_offset = 100,
+				},
+				references = {
+					name = "pandoc_references",
+					module = "cmp-pandoc-references.blink",
 				},
 			},
 		},
