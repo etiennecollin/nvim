@@ -1,7 +1,7 @@
 return {
 	"sainnhe/sonokai",
 	name = "sonokai",
-	lazy = false,
+	lazy = true,
 	priority = 1000,
 	init = function()
 		vim.g.sonokai_diagnostic_line_highlight = 1
@@ -11,8 +11,5 @@ return {
 		vim.g.sonokai_inlay_hints_background = "dimmed"
 		vim.g.sonokai_style = "shusia" --  Available values: 'default', 'atlantis', 'andromeda', 'shusia', 'maia','espresso'
 		vim.g.sonokai_transparent_background = 0
-	end,
-	config = function()
-		require("etiennecollin.utils").set_colorscheme()
 	end,
 }

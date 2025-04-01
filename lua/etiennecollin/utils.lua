@@ -112,6 +112,8 @@ function M.set_colorscheme(theme_name)
 	-- Set the default theme if no theme is specified
 	theme_name = theme_name or M.default_colorscheme
 
+	require("lazy").load({ plugins = { theme_name } })
+
 	-- Set the color scheme and print an error if it fails to load
 	if not pcall(function()
 		vim.cmd("colorscheme " .. theme_name)

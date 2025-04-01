@@ -1,7 +1,7 @@
 return {
 	"sainnhe/gruvbox-material",
 	name = "gruvbox-material",
-	lazy = false,
+	lazy = true,
 	priority = 1000,
 	init = function()
 		vim.g.gruvbox_material_background = "medium"
@@ -14,8 +14,5 @@ return {
 		vim.g.gruvbox_material_inlay_hints_background = "dimmed"
 		vim.g.gruvbox_material_transparent_background = 0
 		vim.g.gruvbox_material_ui_contrast = "high"
-	end,
-	config = function()
-		require("etiennecollin.utils").set_colorscheme()
 	end,
 }

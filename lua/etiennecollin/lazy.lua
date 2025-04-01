@@ -44,3 +44,5 @@ require("lazy").setup(imports, {
 		hererocks = true,
 	},
 })
+
+require("etiennecollin.utils").set_colorscheme()
