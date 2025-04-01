@@ -34,9 +34,9 @@ return {
 		},
 		snippets = { preset = "luasnip" },
 		sources = {
-			default = { "copilot", "lsp", "snippets", "lazydev", "path", "snippets", "buffer" },
+			default = { "copilot", "lsp", "lazydev", "path", "snippets", "buffer" },
 			per_filetype = {
-				typst = { "references", "copilot", "lsp", "snippets", "lazydev", "path", "snippets", "buffer" },
+				typst = { "references", "copilot", "lsp", "lazydev", "path", "snippets", "buffer" },
 			},
 			providers = {
 				copilot = {
