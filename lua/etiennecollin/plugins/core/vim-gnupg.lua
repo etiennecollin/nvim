@@ -1,4 +1,4 @@
 return {
 	"jamessan/vim-gnupg",
-	lazy = true,
+	ft = { "asc", "pgp", "gpg" },
 }
