@@ -2,7 +2,6 @@ return {
 	"saghen/blink.cmp",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"L3MON4D3/LuaSnip",
 		"rafamadriz/friendly-snippets",
 		"folke/lazydev.nvim",
 		"jmbuhr/cmp-pandoc-references",
@@ -32,7 +31,6 @@ return {
 				show_documentation = false,
 			},
 		},
-		snippets = { preset = "luasnip" },
 		sources = {
 			default = { "copilot", "lsp", "lazydev", "path", "snippets", "buffer" },
 			per_filetype = {
