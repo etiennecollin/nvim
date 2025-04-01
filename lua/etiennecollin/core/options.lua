@@ -1,5 +1,5 @@
 -- Set the colorscheme
-require("etiennecollin.utils").default_colorscheme = "gruvbox-material"
+require("etiennecollin.utils").default_colorscheme = "gruvbox"
 
 -- Ensure installed plugins
 require("etiennecollin.utils").ensure_installed_treesitter =
