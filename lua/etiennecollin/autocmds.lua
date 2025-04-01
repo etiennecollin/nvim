@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 local augroup_indent = vim.api.nvim_create_augroup("etiennecollin-filetype-indent", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
 	group = augroup_indent,
-	pattern = { "javascript", "javascriptreact", "typst", "markdown", "json", "jsonc" },
+	pattern = { "javascript", "javascriptreact", "typst", "markdown", "json", "jsonc", "lua" },
 	callback = function()
 		vim.opt_local.tabstop = 2
 	end,
