@@ -4,9 +4,6 @@ vim.cmd("autocmd InsertEnter * norm zz")
 -- Remove trailing whitespace on save
 vim.cmd("autocmd BufWritePre, FileWritePre * :%s/\\s\\+$//e")
 
--- Floating linting messages on cursor hold and disable virtual text
-vim.cmd([[au CursorHold * lua vim.diagnostic.open_float(0,{scope = "cursor"})]])
-
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("etiennecollin-highlight-yank", { clear = true }),
