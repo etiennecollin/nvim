@@ -41,6 +41,14 @@ require("etiennecollin.utils").ensure_installed_formatters = {
 }
 require("etiennecollin.utils").ensure_installed_daps = { "codelldb" }
 
+-- Add some filetypes
+vim.filetype.add({
+	extension = {
+		fpp = "fpp",
+		fppi = "fpp",
+	},
+})
+
 -- Set termguicolors to enable highlight groups
 vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
