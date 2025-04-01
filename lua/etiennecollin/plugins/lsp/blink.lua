@@ -15,7 +15,7 @@ return {
 				auto_show_delay_ms = 0,
 			},
 			ghost_text = {
-				enabled = true,
+				enabled = false,
 			},
 			menu = {
 				draw = { treesitter = { "lsp" } },
