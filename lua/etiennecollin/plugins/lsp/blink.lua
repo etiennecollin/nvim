@@ -32,9 +32,10 @@ return {
 			},
 		},
 		sources = {
-			default = { "copilot", "lsp", "lazydev", "path", "snippets", "buffer" },
+			default = { "copilot", "lsp", "path", "snippets", "buffer" },
 			per_filetype = {
-				typst = { "references", "copilot", "lsp", "lazydev", "path", "snippets", "buffer" },
+				typst = { "references", "copilot", "lsp", "path", "snippets", "buffer" },
+				lua = { "lazydev", "copilot", "lsp", "path", "snippets", "buffer" },
 			},
 			providers = {
 				copilot = {
