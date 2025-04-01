@@ -5,7 +5,7 @@ return {
 		"L3MON4D3/LuaSnip",
 		"rafamadriz/friendly-snippets",
 		"folke/lazydev.nvim",
-		{ "jmbuhr/cmp-pandoc-references", dev = true },
+		"jmbuhr/cmp-pandoc-references",
 		{ "fang2hou/blink-copilot", dependencies = "zbirenbaum/copilot.lua" },
 	},
 	version = "1.*",
