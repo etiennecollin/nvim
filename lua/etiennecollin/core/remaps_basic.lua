@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 -- Unmap F1 which is used for ghostty's quick term
 vim.keymap.set({ "n", "i", "v", "t" }, "<F1>", "")

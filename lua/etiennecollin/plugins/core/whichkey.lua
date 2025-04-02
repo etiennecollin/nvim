@@ -23,6 +23,12 @@ return {
 			{ "<leader>X", group = "Utilities" },
 			{ "<leader>z", group = "Lazy/Mason" },
 		})
+		whichkey.add({
+			mode = { "v" },
+			{ "<leader>g", group = "Git" },
+			{ "<leader>s", group = "Search" },
+			{ "<leader>X", group = "Utilities" },
+		})
 
 		-- Update keybinds when filetype changes
 		vim.api.nvim_create_autocmd("FileType", {

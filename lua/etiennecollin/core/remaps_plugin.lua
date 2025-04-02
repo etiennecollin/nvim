@@ -36,7 +36,7 @@ function M.gen()
 end
 
 function M.silicon()
-	vim.keymap.set("v", "<leader>S", ":Silicon<cr>", { desc = "Silicon" })
+	vim.keymap.set("v", "<leader>XS", ":Silicon<cr>", { desc = "Silicon" })
 end
 
 function M.boole()
@@ -176,8 +176,9 @@ function M.neogen()
 	vim.keymap.set("n", "<leader>na", "<cmd>Neogen<cr>", { desc = "Annotation" })
 end
 
-function M.spectre()
-	vim.keymap.set("n", "<leader>S", "<cmd>Spectre<cr>", { desc = "Spectre" })
+function M.grug_far()
+	vim.keymap.set("n", "<leader>S", "<cmd>GrugFar<cr>", { desc = "GrugFar" })
+	vim.keymap.set("v", "<leader>S", ":GrugFarWithin<cr>", { desc = "GrugFarWithin" })
 end
 
 function M.harpoon()
