@@ -2,7 +2,7 @@ return {
 	"nat-418/boole.nvim",
 	cmd = "Boole",
 	init = function()
-		require("etiennecollin.core.remaps_plugin").boole()
+		require("etiennecollin.core.mappings.plugin").boole()
 	end,
 	opts = {
 		mappings = {

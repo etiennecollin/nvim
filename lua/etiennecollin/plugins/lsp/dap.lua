@@ -9,7 +9,7 @@ return {
 		-- Install DAPs with mason
 		-----------------------------------------------------------------------
 		require("mason-nvim-dap").setup({
-			ensure_installed = require("etiennecollin.utils").ensure_installed_daps,
+			ensure_installed = require("etiennecollin.config").ensure_installed_daps,
 			automatic_installation = true,
 			automatic_setup = true,
 			handlers = {},
@@ -18,7 +18,7 @@ return {
 		-----------------------------------------------------------------------
 		-- Setup DAP
 		-----------------------------------------------------------------------
-		require("etiennecollin.core.remaps_plugin").dap()
+		require("etiennecollin.core.mappings.plugin").dap()
 
 		vim.api.nvim_set_hl(0, "DapStoppedLine", {
 			default = true,

@@ -9,7 +9,7 @@ return {
 	ft = { "rust" },
 	config = function()
 		local capabilities = require("etiennecollin.utils").get_lsp_capabilities()
-		local on_attach = require("etiennecollin.core.remaps_plugin").lsp
+		local on_attach = require("etiennecollin.core.mappings.plugin").lsp
 
 		-- Setup codelldb path for DAP
 		local extension_path = require("mason-registry").get_package("codelldb"):get_install_path() .. "/extension/"

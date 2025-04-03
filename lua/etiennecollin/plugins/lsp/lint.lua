@@ -5,7 +5,7 @@ return {
 	config = function()
 		local lint = require("lint")
 
-		lint.linters_by_ft = require("etiennecollin.utils").ensure_installed_linters
+		lint.linters_by_ft = require("etiennecollin.config").ensure_installed_linters
 		lint.linters.cpplint.args = {
 			"--linelength=120",
 		}

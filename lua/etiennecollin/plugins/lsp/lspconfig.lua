@@ -10,7 +10,7 @@ return {
 		-- Install LSPs with mason
 		-----------------------------------------------------------------------
 		require("mason-lspconfig").setup({
-			ensure_installed = require("etiennecollin.utils").ensure_installed_lsps,
+			ensure_installed = require("etiennecollin.config").ensure_installed_lsps,
 			automatic_installation = true,
 		})
 
@@ -51,7 +51,7 @@ return {
 		-- Setup handlers
 		-----------------------------------------------------------------------
 		local capabilities = require("etiennecollin.utils").get_lsp_capabilities()
-		local on_attach = require("etiennecollin.core.remaps_plugin").lsp
+		local on_attach = require("etiennecollin.core.mappings.plugin").lsp
 
 		local default_handler = function(server_name)
 			require("lspconfig")[server_name].setup({

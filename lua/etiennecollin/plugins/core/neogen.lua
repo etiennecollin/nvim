@@ -7,6 +7,6 @@ return {
 			enabled = true,
 			input_after_comment = true,
 		})
-		require("etiennecollin.core.remaps_plugin").neogen()
+		require("etiennecollin.core.mappings.plugin").neogen()
 	end,
 }

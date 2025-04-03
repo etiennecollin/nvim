@@ -34,11 +34,11 @@ return {
 		vim.api.nvim_create_autocmd("FileType", {
 			group = vim.api.nvim_create_augroup("etiennecollin-filetype-keybinds", { clear = true }),
 			desc = "Set keybinds when filetype changes",
-			callback = require("etiennecollin.core.remaps_plugin").language_specific,
+			callback = require("etiennecollin.core.mappings.plugin").language_specific,
 		})
 
 		-- Run the function manually for the first time
 		-- This is necessary to run when opening file with `nvim file.ext`
-		require("etiennecollin.core.remaps_plugin").language_specific()
+		require("etiennecollin.core.mappings.plugin").language_specific()
 	end,
 }

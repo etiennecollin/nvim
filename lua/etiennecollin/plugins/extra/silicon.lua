@@ -2,7 +2,7 @@ return {
 	"michaelrommel/nvim-silicon",
 	cmd = "Silicon",
 	init = function()
-		require("etiennecollin.core.remaps_plugin").silicon()
+		require("etiennecollin.core.mappings.plugin").silicon()
 	end,
 	opts = {},
 	config = function()

@@ -1,7 +1,7 @@
 --[[
     Lua Module Documentation
 
-    This Lua module provides utility functions for configuring and manipulating data in a Lua environment, with a focus on integration with Neovim.
+    This Lua module provides utility functions for configuring and manipulating data.
 
     Usage:
     local utils = require("etiennecollin.utils")
@@ -9,24 +9,6 @@
     @module etiennecollin.utils
 ]]
 local M = {}
-
---- The default theme to use if no theme is specified in the Neovim configuration.
-M.default_colorscheme = "slate"
-
---- The Treesitter languages to be installed.
-M.ensure_installed_treesitter = {}
-
---- The LSPs to be installed by Mason.
-M.ensure_installed_lsps = {}
-
---- The Linters to be installed by Mason.
-M.ensure_installed_linters = {}
-
---- The Formatters to be installed by Mason.
-M.ensure_installed_formatters = {}
-
---- The DAPs to be installed by Mason.
-M.ensure_installed_daps = {}
 
 --[[
     Is Full Config
@@ -58,7 +40,7 @@ end
     Create Config File
 
     Creates a configuration file in the Neovim configuration directory.
-    
+
     @function create_config_file
     @usage utils.create_config_file()
 ]]
@@ -110,7 +92,7 @@ end
 ]]
 function M.set_colorscheme(theme_name)
 	-- Set the default theme if no theme is specified
-	theme_name = theme_name or M.default_colorscheme
+	theme_name = theme_name or require("etiennecollin.config").default_colorscheme
 
 	require("lazy").load({ plugins = { theme_name } })
 
@@ -187,12 +169,18 @@ end
 
     @function print_table
     @tparam table table The table to print.
-    @usage myModule.print_table(myTable)
+    @usage utils.print_table(myTable)
 ]]
 function M.print_table(table)
 	print(vim.inspect(table))
 end
 
+--[[
+  Returns the LSP capabilities merged with the capabilities from the blink module.
+
+  @function get_lsp_capabilities
+  @usage local capabilities = utils.get_lsp_capabilities()
+]]
 function M.get_lsp_capabilities()
 	local capabilities = {
 		textDocument = {

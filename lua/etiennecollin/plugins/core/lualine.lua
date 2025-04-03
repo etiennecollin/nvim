@@ -5,6 +5,7 @@ return {
 		local custom_theme = require("lualine.themes.auto")
 		local utils = require("etiennecollin.utils")
 
+		-- Fix lualine background colors
 		local keys = { "inactive", "visual", "replace", "normal", "insert", "command" }
 		for _, key in ipairs(keys) do
 			utils.set_key_recursive(custom_theme, key .. ".c.bg", nil)

@@ -31,6 +31,6 @@ return {
 			},
 		})
 
-		require("etiennecollin.core.remaps_plugin").dapui()
+		require("etiennecollin.core.mappings.plugin").dapui()
 	end,
 }

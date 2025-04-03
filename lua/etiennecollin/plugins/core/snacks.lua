@@ -192,6 +192,6 @@ return {
 		},
 	},
 	init = function()
-		require("etiennecollin.core.remaps_plugin").snacks()
+		require("etiennecollin.core.mappings.plugin").snacks()
 	end,
 }

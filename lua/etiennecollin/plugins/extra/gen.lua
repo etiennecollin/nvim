@@ -25,6 +25,6 @@ return {
 			debug = false, -- Prints errors and the command which is run.
 		})
 
-		require("etiennecollin.core.remaps_plugin").gen()
+		require("etiennecollin.core.mappings.plugin").gen()
 	end,
 }

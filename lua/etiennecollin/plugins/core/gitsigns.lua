@@ -22,7 +22,7 @@ return {
 			indent_heuristic = true,
 		},
 		on_attach = function(buffer)
-			require("etiennecollin.core.remaps_plugin").gitsigns(buffer)
+			require("etiennecollin.core.mappings.plugin").gitsigns(buffer)
 		end,
 	},
 }

@@ -1,3 +1,4 @@
 require("etiennecollin.core.options")
-require("etiennecollin.core.remaps_basic")
-require("etiennecollin.core.remaps_plugin")
+require("etiennecollin.core.filetypes")
+require("etiennecollin.core.mappings")
+require("etiennecollin.core.aucmd")

@@ -18,6 +18,6 @@ return {
 		-- Do not use default mappings
 		vim.g.slime_no_mappings = true
 
-		require("etiennecollin.core.remaps_plugin").slime()
+		require("etiennecollin.core.mappings.plugin").slime()
 	end,
 }

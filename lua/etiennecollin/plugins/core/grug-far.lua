@@ -3,6 +3,6 @@ return {
 	opts = {},
 	config = function(_, opts)
 		require("grug-far").setup(opts)
-		require("etiennecollin.core.remaps_plugin").grug_far()
+		require("etiennecollin.core.mappings.plugin").grug_far()
 	end,
 }
