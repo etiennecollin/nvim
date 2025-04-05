@@ -15,14 +15,35 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
 })
 
-local augroup_indent = vim.api.nvim_create_augroup("etiennecollin-filetype-indent", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-	group = augroup_indent,
-	pattern = { "javascript", "javascriptreact", "typst", "markdown", "json", "jsonc", "lua" },
+	group = vim.api.nvim_create_augroup("etiennecollin-filetype-indent", { clear = true }),
+	pattern = require("etiennecollin.config").reduced_tabstop,
 	callback = function()
 		vim.opt_local.tabstop = 2
 	end,
-	desc = "Set tabstop to 2 spaces for certain filetypes",
+	desc = "Decrease tabstop for certain filetypes",
+})
+
+-- After creating the autocmdh we run the function manually for the first time.
+-- This is necessary to run when opening file with `nvim file.ext`.
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("etiennecollin-filetype-keybinds", { clear = true }),
+	callback = require("etiennecollin.core.mappings.plugin").language_specific,
+	desc = "Set keybinds when filetype changes",
+})
+require("etiennecollin.core.mappings.plugin").language_specific()
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("etiennecollin-lsp-attach", { clear = true }),
+	callback = function(event)
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
+		if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+			vim.keymap.set("n", "<leader>th", function()
+				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+			end, { buffer = event.buf, desc = "LSP: Inlay Hints" })
+		end
+	end,
+	desc = "Enable inlay hints if the server supports them",
 })
 
 -- https://www.reddit.com/r/neovim/comments/10383z1/open_help_in_buffer_instead_of_split/

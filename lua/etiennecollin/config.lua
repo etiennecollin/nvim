@@ -60,5 +60,7 @@ M.ensure_installed_formatters = {
 --- The DAPs to be installed by Mason.
 M.ensure_installed_daps = { "codelldb" }
 
-print("coucou")
+--- Decrease tabstop for certain filetypes
+M.reduced_tabstop = { "javascript", "javascriptreact", "typst", "markdown", "json", "jsonc", "lua" }
+
 return M
