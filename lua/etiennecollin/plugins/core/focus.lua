@@ -45,7 +45,7 @@ return {
 		vim.api.nvim_create_autocmd("WinEnter", {
 			group = augroup,
 			desc = "Disable focus autoresize for BufType",
-			callback = function(_)
+			callback = function()
 				if vim.tbl_contains(ignore_buftypes, vim.bo.buftype) then
 					vim.b.focus_disable = true
 				end
@@ -55,7 +55,7 @@ return {
 		vim.api.nvim_create_autocmd("FileType", {
 			group = augroup,
 			desc = "Disable focus autoresize for FileType",
-			callback = function(_)
+			callback = function()
 				if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
 					vim.b.focus_disable = true
 				end
