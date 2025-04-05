@@ -1,6 +1,9 @@
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = "nvim-tree/nvim-web-devicons",
+	init = function()
+		require("etiennecollin.utils").set_colorscheme()
+	end,
 	config = function()
 		local custom_theme = require("lualine.themes.auto")
 		local utils = require("etiennecollin.utils")

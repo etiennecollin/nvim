@@ -103,7 +103,7 @@ function M.set_colorscheme(theme_name)
 		print(
 			'Error: Could not set colorscheme "'
 				.. theme_name
-				.. '". Make sure the theme is installed and available in your runtimepath.'
+				.. '". Make sure the colorscheme is installed and available in your runtimepath.'
 		)
 		print("")
 	end
