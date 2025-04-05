@@ -1,8 +1,6 @@
 # Dependencies
 
-## Other dependencies
-
-- `pkg-config fzf`
+- `pkg-config`
 
 ## Grug-Far
 
@@ -10,6 +8,6 @@
 
 ## Snacks
 
-- `Snacks.dashboard` **optionally** requires `chafa`
+- `Snacks.dashboard` **optionally** requires `chafa` to display images
 - `Snacks.lazygit` requires `lazygit`
-- `Snacks.image` requires `imagemagick`
+- `Snacks.image` requires `imagemagick` for images and `mmdc` for mermaid diagrams
