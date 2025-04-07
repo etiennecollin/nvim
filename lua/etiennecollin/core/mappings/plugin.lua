@@ -44,6 +44,14 @@ function M.img_clip()
   end, { desc = "Pick image" })
 end
 
+function M.cellular_automaton()
+  vim.keymap.set("n", "<leader>XA", "<cmd>CellularAutomaton make_it_rain<cr>", { desc = "Cellular automaton" })
+end
+
+function M.undotree()
+  vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Undotree" })
+end
+
 function M.gen()
 	vim.keymap.set({ "n", "v" }, "<leader>]", ":Gen<CR>", {desc = "AI Gen"})
 end
