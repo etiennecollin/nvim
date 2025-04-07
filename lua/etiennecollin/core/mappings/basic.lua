@@ -20,7 +20,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- Apparently the greatest remaps ever
+-- Yanking and pasting
 vim.keymap.set("x", "<leader>P", [["_dP]], {
 	desc = "Delete and paste (keep clipboard)",
 })
@@ -66,22 +66,34 @@ vim.keymap.set({ "n", "v", "i", "t" }, "<C-Right>", "<C-w>l", {
 	desc = "Navigate window right",
 })
 
+-- Window resizing
+vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]], { desc = "Make window bigger vertically" })
+vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]], { desc = "Make window smaller vertically" })
+vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]], { desc = "Make window bigger horizontally" })
+vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]], { desc = "Make window smaller horizontally" })
+
+-- Window splitting
+vim.keymap.set("n", "<leader>h", "<cmd>vsplit<cr>", { desc = "VSplit window" })
+vim.keymap.set("n", "<leader>H", "<cmd>split<cr>", { desc = "HSplit window" })
+
+-- Buffers
 vim.keymap.set("n", "<leader>bc", "<cmd>close<cr>", { desc = "Close buffer" })
 vim.keymap.set("n", "<leader>bD", "<cmd>%bd|e#|bd#<cr>", { desc = "Delete all buffers" })
-vim.keymap.set("n", "<leader>bh", "<cmd>FocusSplitDown<cr>", { desc = "Hsplit window" })
 vim.keymap.set("n", "<leader>bn", "<cmd>ene | startinsert<cr>", { desc = "New buffer" })
-vim.keymap.set("n", "<leader>bv", "<cmd>FocusSplitRight<cr>", { desc = "Vsplit window" })
 
+-- Tabs
 vim.keymap.set("n", "<leader>Bc", "<cmd>tabclose<cr>", { desc = "Close tab" })
 vim.keymap.set("n", "<leader>Bn", "<cmd>tabn<cr>", { desc = "Next tab" })
 vim.keymap.set("n", "<leader>Bo", "<cmd>tabnew<cr>", { desc = "Open tab" })
 vim.keymap.set("n", "<leader>Bp", "<cmd>tabp<cr>", { desc = "Previous tab" })
 
+-- Saving and quitting
 vim.keymap.set("n", "<leader>q", "<cmd>bd<cr>", { desc = "Delete buffer" })
 vim.keymap.set("n", "<leader>Q", "<cmd>q<cr>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>w", "<cmd>update!<cr>", { desc = "Save" })
 vim.keymap.set("n", "<leader>XE", "<cmd>set fileformat=unix<cr>", { desc = "Set file format to unix" })
 
+-- Utilities
 vim.keymap.set("n", "<leader>XX", "<cmd>!chmod +x %<cr>", { desc = "Make executable" })
 vim.keymap.set("n", "<leader>zm", "<cmd>Mason<cr>", { desc = "Mason" })
 vim.keymap.set("n", "<leader>zl", "<cmd>Lazy<cr>", { desc = "Lazy" })
