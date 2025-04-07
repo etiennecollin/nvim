@@ -11,7 +11,7 @@
 local M = {}
 
 --- The default theme to use
-M.default_colorscheme = "tokyonight"
+M.default_colorscheme = "rose-pine"
 
 --- The background style
 --- Either "light" or "dark"
