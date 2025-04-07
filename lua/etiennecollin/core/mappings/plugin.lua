@@ -53,7 +53,7 @@ function M.undotree()
 end
 
 function M.gen()
-	vim.keymap.set({ "n", "v" }, "<leader>]", ":Gen<CR>", {desc = "AI Gen"})
+	vim.keymap.set({ "n", "v" }, "<leader>]", ":Gen<cr>", {desc = "AI Gen"})
 end
 
 function M.silicon()
@@ -119,8 +119,8 @@ function M.gitsigns(buffer)
 	map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
 
 	-- These two mappings use a "command" form to allow ranges in visual mode
-	map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-	map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+	map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<cr>", "Reset Hunk")
+	map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<cr>", "Stage Hunk")
 
 	map("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "Blame Hunk")
 	map("n", "<leader>gB", function() gs.blame() end, "Blame Buffer")
@@ -129,7 +129,7 @@ function M.gitsigns(buffer)
 	map("n", "<leader>gp", gs.preview_hunk_inline, "Preview Hunk Inline")
 	map("n", "<leader>gR", gs.reset_buffer, "Reset Buffer")
 	map("n", "<leader>gS", gs.stage_buffer, "Stage Buffer")
-	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<cr>", "GitSigns Select Hunk")
 end
 
 function M.snacks()
@@ -224,7 +224,7 @@ function M.lsp(_, bufnr)
 	map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 	map("K", vim.lsp.buf.hover, "Hover Documentation")
 	map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-	map("<leader>rs", ":LspRestart<CR>", "Restart")
+	map("<leader>rs", ":LspRestart<cr>", "Restart")
 	vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Goto previous diagnostic" })
 	vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Goto next diagnostic" })
 	vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, { desc = "Signature help" })

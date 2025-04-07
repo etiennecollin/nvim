@@ -5,8 +5,8 @@ vim.g.maplocalleader = ","
 vim.keymap.set({ "n", "i", "v", "t" }, "<F1>", "")
 
 -- Move up/down selected lines
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
 
 -- Join current line with line below and replace
 -- cursor at initial position
@@ -98,10 +98,10 @@ vim.keymap.set("n", "<leader>XX", "<cmd>!chmod +x %<cr>", { desc = "Make executa
 vim.keymap.set("n", "<leader>zm", "<cmd>Mason<cr>", { desc = "Mason" })
 vim.keymap.set("n", "<leader>zl", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
--- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
--- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
--- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
--- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+-- vim.keymap.set("n", "<C-k>", "<cmd>cnext<cr>zz")
+-- vim.keymap.set("n", "<C-j>", "<cmd>cprev<cr>zz")
+-- vim.keymap.set("n", "<leader>k", "<cmd>lnext<cr>zz")
+-- vim.keymap.set("n", "<leader>j", "<cmd>lprev<cr>zz")
 
 -- Exit insert mode
 -- vim.keymap.set("i", "jj", "<esc>", {
