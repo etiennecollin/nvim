@@ -1,8 +1,8 @@
 return {
 	"MagicDuck/grug-far.nvim",
+	cmd = { "GrugFar", "GrugFarWithin" },
 	opts = {},
-	config = function(_, opts)
-		require("grug-far").setup(opts)
+	init = function()
 		require("etiennecollin.core.mappings.plugin").grug_far()
 	end,
 }

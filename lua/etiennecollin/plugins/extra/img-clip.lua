@@ -1,6 +1,6 @@
 return {
 	"HakonHarnes/img-clip.nvim",
-	event = { "BufReadPre", "BufNewFile" },
+	cmd = "PasteImage",
 	opts = {
 		default = {
 			-- File and directory options
@@ -40,7 +40,7 @@ return {
 			},
 		},
 	},
-	keys = {
-		{ "<leader>P", "<cmd>PasteImage<cr>", desc = "Paste clipboard image" },
-	},
+	init = function()
+		require("etiennecollin.core.mappings.plugin").img_clip()
+	end,
 }

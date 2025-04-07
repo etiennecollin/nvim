@@ -31,8 +31,21 @@ function M.slime()
 	vim.keymap.set("v", "<leader><cr>", "<plug>SlimeRegionSend", { desc = "Slime send visual" })
 end
 
+function M.img_clip()
+  vim.keymap.set("n", "<leader>i", "<cmd>PasteImage<cr>", { desc = "Paste image" })
+  vim.keymap.set("n", "<leader>I", function()
+    Snacks.picker.files({
+      ft = { "jpg", "jpeg", "png", "webp" },
+      confirm = function(self, item, _)
+        self:close()
+        require("img-clip").paste_image({}, "./" .. item.file) -- ./ is necessary for img-clip to recognize it as path
+      end,
+    })
+  end, { desc = "Pick image" })
+end
+
 function M.gen()
-	vim.keymap.set({ "n", "v" }, "<leader>]", ":Gen<CR>")
+	vim.keymap.set({ "n", "v" }, "<leader>]", ":Gen<CR>", {desc = "AI Gen"})
 end
 
 function M.silicon()
@@ -118,6 +131,7 @@ function M.snacks()
 	vim.keymap.set({ "n", "t" }, "]]", function() Snacks.words.jump(vim.v.count1) end, { desc = "Next Reference" })
 	vim.keymap.set({ "n", "t" }, "[[", function() Snacks.words.jump(-vim.v.count1) end, { desc = "Prev Reference" })
 	vim.keymap.set("n", "<leader>XZ", function() Snacks.zen() end, { desc = "Toggle zen mode" })
+  vim.keymap.set("n", "<leader>zs", function() Snacks.scratch() end, { desc = "Scratch buffer" })
 
 	-- Snacks terminal
 	vim.keymap.set({ "n", "i", "v", "t" }, "<F3>", function() Snacks.terminal.toggle(nil, { auto_insert = false }) end, { desc = "Toggle terminal", })
@@ -229,23 +243,23 @@ function M.dap()
 
 	local dap = require("dap")
 
-	map("<leader>DB", function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, "breakpoint condition")
-	map("<leader>Db", dap.toggle_breakpoint, "Toggle breakpoint")
-	map("<leader>Dc", dap.continue, "Run/Continue")
-	map("<leader>Da", function() dap.continue({ before = get_args }) end, "Run with args")
-	map("<leader>DC", dap.run_to_cursor, "Run to cursor")
-	map("<leader>Dg", dap.goto_, "Go to line (no execute)")
-	map("<leader>Di", dap.step_into, "Step into")
-	map("<leader>Dj", dap.down, "Down")
-	map("<leader>Dk", dap.up, "Up")
-	map("<leader>Dl", dap.run_last, "Run last")
-	map("<leader>Do", dap.step_out, "Step out")
-	map("<leader>DO", dap.step_over, "Step over")
-	map("<leader>Dp", dap.pause, "Pause")
-	map("<leader>Dr", dap.repl.toggle, "Toggle repl")
-	map("<leader>Ds", dap.session, "Session")
-	map("<leader>Dt", dap.terminate, "Terminate")
-	map("<leader>Dw", require("dap.ui.widgets").hover, "Widgets")
+	map("<leader>dB", function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, "breakpoint condition")
+	map("<leader>db", dap.toggle_breakpoint, "Toggle breakpoint")
+	map("<leader>dc", dap.continue, "Run/Continue")
+	map("<leader>da", function() dap.continue({ before = get_args }) end, "Run with args")
+	map("<leader>dC", dap.run_to_cursor, "Run to cursor")
+	map("<leader>dg", dap.goto_, "Go to line (no execute)")
+	map("<leader>di", dap.step_into, "Step into")
+	map("<leader>dj", dap.down, "Down")
+	map("<leader>dk", dap.up, "Up")
+	map("<leader>dl", dap.run_last, "Run last")
+	map("<leader>do", dap.step_out, "Step out")
+	map("<leader>dO", dap.step_over, "Step over")
+	map("<leader>dp", dap.pause, "Pause")
+	map("<leader>dr", dap.repl.toggle, "Toggle repl")
+	map("<leader>ds", dap.session, "Session")
+	map("<leader>dt", dap.terminate, "Terminate")
+	map("<leader>dw", require("dap.ui.widgets").hover, "Widgets")
 end
 
 function M.dapui()

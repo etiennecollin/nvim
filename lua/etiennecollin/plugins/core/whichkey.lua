@@ -11,7 +11,7 @@ return {
 			mode = { "n" },
 			{ "<leader>b", group = "Buffer" },
 			{ "<leader>B", group = "Tab" },
-			{ "<leader>D", group = "Debug" },
+			{ "<leader>d", group = "Debug" },
 			{ "<leader>g", group = "Git" },
 			{ "<leader>n", group = "New" },
 			{ "<leader>r", group = "LSP" },

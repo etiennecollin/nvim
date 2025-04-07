@@ -21,7 +21,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Apparently the greatest remaps ever
-vim.keymap.set("x", "<leader>p", [["_dP]], {
+vim.keymap.set("x", "<leader>P", [["_dP]], {
 	desc = "Delete and paste (keep clipboard)",
 })
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], {
@@ -30,7 +30,7 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], {
 vim.keymap.set("n", "<leader>Y", [["+Y]], {
 	desc = "Yank whole line to system clipboard",
 })
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], {
+vim.keymap.set({ "n", "v" }, "<leader>D", [["_d]], {
 	desc = "Delete without yank",
 })
 

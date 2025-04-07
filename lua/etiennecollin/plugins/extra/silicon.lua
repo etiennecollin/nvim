@@ -1,30 +1,26 @@
 return {
 	"michaelrommel/nvim-silicon",
 	cmd = "Silicon",
+	opts = {
+		font = "Maple Mono NF=34",
+		theme = "gruvbox-dark",
+		background = nil,
+		background_image = vim.fn.expand("~/Pictures/wallpapers/ancient_bristlecone_pine_forest.jpg"),
+		shadow_color = "#161618",
+		to_clipboard = true,
+		line_offset = 0,
+		window_title = function()
+			local file = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
+			-- Fullname
+			return vim.fn.fnamemodify(file, ":t")
+		end,
+		output = function()
+			local file = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
+			-- Basename .. timestamp .. _code.png
+			return vim.fn.fnamemodify(file, ":r") .. os.date("!%Y%m%dT%H%M%S") .. "_code.png"
+		end,
+	},
 	init = function()
 		require("etiennecollin.core.mappings.plugin").silicon()
-	end,
-	opts = {},
-	config = function()
-		local file = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
-		local fullname = vim.fn.fnamemodify(file, ":t")
-		local basename = vim.fn.fnamemodify(file, ":r")
-		local background_path = vim.fn.expand("~/Pictures/wallpapers/ancient_bristlecone_pine_forest.jpg")
-
-		require("nvim-silicon").setup({
-			font = "Maple Mono NF=34",
-			theme = "gruvbox-dark",
-			background = nil,
-			background_image = background_path,
-			shadow_color = "#161618",
-			to_clipboard = true,
-			line_offset = 0,
-			window_title = function()
-				return fullname
-			end,
-			output = function()
-				return basename .. os.date("!%Y%m%dT%H%M%S") .. "_code.png"
-			end,
-		})
 	end,
 }

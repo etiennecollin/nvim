@@ -1,9 +1,6 @@
 return {
 	"nat-418/boole.nvim",
 	cmd = "Boole",
-	init = function()
-		require("etiennecollin.core.mappings.plugin").boole()
-	end,
 	opts = {
 		mappings = {
 			increment = nil,
@@ -21,4 +18,7 @@ return {
 			-- ENABLE → DISABLE
 		},
 	},
+	init = function()
+		require("etiennecollin.core.mappings.plugin").boole()
+	end,
 }

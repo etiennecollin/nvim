@@ -1,12 +1,12 @@
 return {
 	"danymat/neogen",
-	event = { "BufReadPre", "BufNewFile" },
+	cmd = "Neogen",
 	dependencies = "nvim-treesitter/nvim-treesitter",
-	config = function()
-		require("neogen").setup({
-			enabled = true,
-			input_after_comment = true,
-		})
+	opts = {
+		enabled = true,
+		input_after_comment = true,
+	},
+	init = function()
 		require("etiennecollin.core.mappings.plugin").neogen()
 	end,
 }
