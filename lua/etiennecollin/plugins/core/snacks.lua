@@ -172,6 +172,9 @@ return {
 		scope = {
 			enabled = true,
 		},
+		scratch = {
+			enabled = true,
+		},
 		scroll = {
 			enabled = false,
 		},
