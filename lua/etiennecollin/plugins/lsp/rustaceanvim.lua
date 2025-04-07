@@ -8,7 +8,7 @@ return {
 	},
 	ft = { "rust" },
 	config = function()
-		local capabilities = require("etiennecollin.utils").get_lsp_capabilities()
+		local capabilities = require("etiennecollin.utils.local").get_lsp_capabilities()
 		local on_attach = require("etiennecollin.core.mappings.plugin").lsp
 
 		-- Setup codelldb path for DAP

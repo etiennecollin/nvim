@@ -2,11 +2,11 @@ return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = "nvim-tree/nvim-web-devicons",
 	init = function()
-		require("etiennecollin.utils").set_colorscheme()
+		require("etiennecollin.utils.global").set_colorscheme()
 	end,
 	config = function()
 		local custom_theme = require("lualine.themes.auto")
-		local utils = require("etiennecollin.utils")
+		local utils = require("etiennecollin.utils.global")
 
 		-- Fix lualine background colors
 		local keys = { "inactive", "visual", "replace", "normal", "insert", "command" }

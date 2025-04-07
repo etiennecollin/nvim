@@ -27,7 +27,7 @@ local imports = {
 
 -- If config contains `core` file, then nothing is added to imports.
 -- If config contains `full` file, then `extra`, `language_specific` and `lsp` are added to imports.
-if require("etiennecollin.utils").is_full_config() then
+if require("etiennecollin.utils.local").is_full_config() then
 	table.insert(imports, extra)
 	table.insert(imports, language_specific)
 	table.insert(imports, lsp)
@@ -45,4 +45,4 @@ require("lazy").setup(imports, {
 	},
 })
 
-require("etiennecollin.utils").set_colorscheme()
+require("etiennecollin.utils.global").set_colorscheme()

@@ -1,7 +1,6 @@
 -- Add utils to global
-_G.utils = require("etiennecollin.utils")
+_G.Utils = require("etiennecollin.utils.global")
 
 -- Load modules
-require("etiennecollin.config")
 require("etiennecollin.core")
 require("etiennecollin.lazy")
