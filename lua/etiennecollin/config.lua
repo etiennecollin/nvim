@@ -11,7 +11,11 @@
 local M = {}
 
 --- The default theme to use
-M.default_colorscheme = "gruvbox"
+M.default_colorscheme = "tokyonight"
+
+--- The background style
+--- Either "light" or "dark"
+M.background_style = "dark"
 
 --- The Treesitter languages to be installed.
 M.ensure_installed_treesitter = { "vim", "regex", "lua", "bash", "markdown", "markdown_inline", "comment" }

@@ -9,7 +9,7 @@ vim.opt.titlestring = "nvim: %t"
 --------------------------------------------------------------------------------
 vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
-vim.opt.background = "dark"
+vim.opt.background = require("etiennecollin.config").background_style
 
 --------------------------------------------------------------------------------
 -- Set floating window border
