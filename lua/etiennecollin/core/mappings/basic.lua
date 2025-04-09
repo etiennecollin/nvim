@@ -73,8 +73,8 @@ vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]], { desc = "Make windo
 vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]], { desc = "Make window smaller horizontally" })
 
 -- Window splitting
-vim.keymap.set("n", "<leader>h", "<cmd>vsplit<cr>", { desc = "VSplit window" })
-vim.keymap.set("n", "<leader>H", "<cmd>split<cr>", { desc = "HSplit window" })
+vim.keymap.set("n", "<leader>v", "<cmd>vsplit<cr>", { desc = "VSplit window" })
+vim.keymap.set("n", "<leader>h", "<cmd>split<cr>", { desc = "HSplit window" })
 
 -- Buffers
 vim.keymap.set("n", "<leader>bc", "<cmd>close<cr>", { desc = "Close buffer" })
