@@ -265,8 +265,8 @@ function M.dapui()
 
 	local dapui = require("dapui")
 
-	map("<leader>Du", function() dapui.toggle() end, "Dap UI Toggle")
-	map("<leader>De", function() dapui.eval() end, "Dap UI Eval")
+	map("<leader>du", function() dapui.toggle() end, "Dap UI Toggle")
+	map("<leader>de", function() dapui.eval() end, "Dap UI Eval")
 end
 -- stylua: ignore end
 
