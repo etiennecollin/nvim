@@ -1,6 +1,5 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	-- enabled = false,
 	dependencies = "nvim-tree/nvim-web-devicons",
 	init = function()
 		require("etiennecollin.utils.global").set_colorscheme()
@@ -19,6 +18,8 @@ return {
 
 				return custom_theme
 			end,
+			component_separators = "│",
+			section_separators = { left = "", right = "" },
 			disabled_filetypes = {
 				-- Filetypes to disable lualine for.
 				"dap-repl",
