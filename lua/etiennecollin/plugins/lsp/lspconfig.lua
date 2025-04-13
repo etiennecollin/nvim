@@ -17,41 +17,25 @@ return {
 		-----------------------------------------------------------------------
 		-- Setup handlers
 		-----------------------------------------------------------------------
-		local capabilities = require("etiennecollin.utils.local").get_lsp_capabilities()
-		local on_attach = require("etiennecollin.core.mappings.plugin").lsp
+		-- Set default capabilities and on_attach function for all servers
+		vim.lsp.config("*", {
+			capabilities = require("etiennecollin.utils.local").get_lsp_capabilities(),
+			on_attach = require("etiennecollin.core.mappings.plugin").lsp,
+		})
 
-		local default_handler = function(server_name)
-			require("lspconfig")[server_name].setup({
-				capabilities = capabilities,
-				on_attach = on_attach,
-			})
-		end
-
+		-- Setup specific servers
 		require("mason-lspconfig").setup_handlers({
-			default_handler,
-			-- Specific servers
+			-- This is the default handler for all servers
+			function(server_name)
+				-- Load custom configuration if it exists
+				local configs = require("etiennecollin.config_lsp")
+				if configs[server_name] and type(configs[server_name]) == "function" then
+					configs[server_name]()
+				end
+				vim.lsp.enable(server_name)
+			end,
+			-- Do not configure rust_analyzer as that's handled by rustaceanvim
 			["rust_analyzer"] = function() end,
-			["basedpyright"] = function()
-				require("etiennecollin.plugins.lsp.servers.basedpyright")(capabilities, on_attach)
-			end,
-			["jdtls"] = function()
-				require("etiennecollin.plugins.lsp.servers.jdtls")(capabilities, on_attach)
-			end,
-			["lua_ls"] = function()
-				require("etiennecollin.plugins.lsp.servers.lua_ls")(capabilities, on_attach)
-			end,
-			["tinymist"] = function()
-				require("etiennecollin.plugins.lsp.servers.tinymist")(capabilities, on_attach)
-			end,
-			["clangd"] = function()
-				require("etiennecollin.plugins.lsp.servers.clangd")(capabilities, on_attach)
-			end,
-			["tailwindcss"] = function()
-				require("etiennecollin.plugins.lsp.servers.tailwindcss")(capabilities, on_attach)
-			end,
-			["marksman"] = function()
-				require("etiennecollin.plugins.lsp.servers.marksman")(capabilities, on_attach)
-			end,
 		})
 	end,
 }

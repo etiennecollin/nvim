@@ -1,16 +1,12 @@
 return {
 	"mrcjkb/rustaceanvim",
-	version = "^4", -- Recommended
+	version = "^6", -- Recommended
 	dependencies = {
-		"neovim/nvim-lspconfig",
 		"mfussenegger/nvim-dap",
 		"williamboman/mason.nvim",
 	},
 	ft = { "rust" },
 	config = function()
-		local capabilities = require("etiennecollin.utils.local").get_lsp_capabilities()
-		local on_attach = require("etiennecollin.core.mappings.plugin").lsp
-
 		-- Setup codelldb path for DAP
 		local extension_path = require("mason-registry").get_package("codelldb"):get_install_path() .. "/extension/"
 		local codelldb_path = extension_path .. "adapter/codelldb"
@@ -27,9 +23,6 @@ return {
 		vim.g.rustaceanvim = {
 			tools = {
 				reload_workspace_from_cargo_toml = true,
-				hover_actions = {
-					auto_focus = true,
-				},
 				inlay_hints = {
 					auto = true,
 					parameter_hints_prefix = "<-",
@@ -40,12 +33,21 @@ return {
 				adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path),
 			},
 			server = {
-				capabilities = capabilities,
+				capabilities = require("etiennecollin.utils.local").get_lsp_capabilities(),
 				on_attach = function(client, bufnr)
-					on_attach(client, bufnr)
+					-- Load default LSP mappings
+					require("etiennecollin.core.mappings.plugin").lsp(client, bufnr)
+
+					-- Overwrite default LSP mappings
+					vim.keymap.set("n", "<leader>ca", function()
+						vim.cmd.RustLsp("codeAction")
+					end, { silent = true, buffer = bufnr })
+					vim.keymap.set("n", "K", function()
+						vim.cmd.RustLsp({ "hover", "actions" })
+					end, { silent = true, buffer = bufnr })
 				end,
 				default_settings = {
-					-- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+					-- https://github.com/rust-lang/rust-analyzer/blob/afc367b96c093b410c8852e583ba467a196b58c8/docs/book/src/configuration_generated.md
 					["rust-analyzer"] = {
 						check = {
 							command = "clippy",
