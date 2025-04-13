@@ -20,6 +20,16 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
+-- Tab and Shift-Tab for indentation
+vim.keymap.set("n", "<tab>", ">>", { desc = "Indent line" })
+vim.keymap.set("n", "<s-tab>", "<<", { desc = "Unindent line" })
+vim.keymap.set({ "v", "x" }, "<tab>", ">gv", { desc = "Indent selection" })
+vim.keymap.set({ "v", "x" }, "<s-tab>", "<gv", { desc = "Unindent selection" })
+
+-- Search in visual mode
+vim.keymap.set("v", "/", "<Esc>/\\%V")
+vim.keymap.set("v", "?", "<Esc>?\\%V")
+
 -- Yanking and pasting
 vim.keymap.set("x", "<leader>P", [["_dP]], {
 	desc = "Delete and paste (keep clipboard)",
