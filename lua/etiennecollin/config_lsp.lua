@@ -28,6 +28,7 @@ function M.basedpyright()
 				linting = { enabled = true },
 			},
 		},
+		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
 	})
 end
 
@@ -38,6 +39,7 @@ function M.clangd()
 			"--fallback-style=Google",
 			"--offset-encoding=utf-16",
 		},
+		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
 	})
 end
 
@@ -52,6 +54,7 @@ function M.jdtls()
 			"settings.gradle", -- Gradle
 			"settings.gradle.kts" -- Gradle
 		) or vim.fn.getcwd(),
+		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
 	})
 end
 
@@ -67,6 +70,7 @@ function M.lua_ls()
 				},
 			},
 		},
+		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
 	})
 end
 
@@ -74,6 +78,7 @@ function M.marksman()
 	vim.lsp.config("marksman", {
 		filetypes = { "markdown", "markdown.mdx", "quarto" },
 		root_dir = require("lspconfig").util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
+		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
 	})
 end
 
@@ -92,6 +97,7 @@ function M.pylsp()
 				},
 			},
 		},
+		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
 	})
 end
 
@@ -117,6 +123,7 @@ function M.tailwindcss()
 				rust = "html",
 			},
 		},
+		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
 	})
 end
 
@@ -125,9 +132,8 @@ function M.tinymist()
 		settings = {
 			exportPdf = "never", -- Choose onType, onSave or never.
 		},
-		root_dir = function()
-			return os.getenv("HOME")
-		end,
+		root_dir = os.getenv("HOME"),
+		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
 	})
 end
 
