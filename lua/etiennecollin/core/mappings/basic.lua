@@ -22,6 +22,7 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 -- Tab and Shift-Tab for indentation
 vim.keymap.set("n", "<tab>", ">>", { desc = "Indent line" })
+vim.keymap.set("n", "<c-i>", "<c-i>") -- We need this as remapping <tab> also remaps <c-i>
 vim.keymap.set("n", "<s-tab>", "<<", { desc = "Unindent line" })
 vim.keymap.set({ "v", "x" }, "<tab>", ">gv", { desc = "Indent selection" })
 vim.keymap.set({ "v", "x" }, "<s-tab>", "<gv", { desc = "Unindent selection" })
