@@ -11,5 +11,12 @@ return {
 			enabled = false,
 			auto_trigger = true,
 		},
+		server_opts_overrides = {
+			settings = {
+				telemetry = {
+					telemetryLevel = "off",
+				},
+			},
+		},
 	},
 }
