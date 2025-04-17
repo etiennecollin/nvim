@@ -8,133 +8,119 @@
 
     @module etiennecollin.plugins.lsp.configs
 ]]
+
+---@type table<string, vim.lsp.Config>
 local M = {}
 
-function M.basedpyright()
-	vim.lsp.config("basedpyright", {
-		settings = {
-			basedpyright = {
-				disableOrganizeImports = true,
-				typeCheckingMode = "standard",
-				analysis = {
-					inlayHints = {
-						callArgumentNames = "all",
-						functionReturnTypes = true,
-						pytestParameters = true,
-						variableTypes = true,
-					},
-					autoFormatStrings = true,
+---@type vim.lsp.Config
+M.basedpyright = {
+	settings = {
+		basedpyright = {
+			disableOrganizeImports = true,
+			typeCheckingMode = "standard",
+			analysis = {
+				inlayHints = {
+					callArgumentNames = "all",
+					functionReturnTypes = true,
+					pytestParameters = true,
+					variableTypes = true,
 				},
-				linting = { enabled = true },
+				autoFormatStrings = true,
+			},
+			linting = { enabled = true },
+		},
+	},
+}
+
+---@type vim.lsp.Config
+M.clangd = {
+	cmd = {
+		"clangd",
+		"--fallback-style=Google",
+		"--offset-encoding=utf-16",
+	},
+}
+
+---@type vim.lsp.Config
+M.jdtls = {
+	root_dir = require("lspconfig").util.root_pattern(
+		"build.xml", -- Ant
+		"pom.xml", -- Maven
+		".git",
+		".java_project",
+		"build.gradle",
+		"settings.gradle", -- Gradle
+		"settings.gradle.kts" -- Gradle
+	) or vim.fn.getcwd(),
+}
+
+---@type vim.lsp.Config
+M.lua_ls = {
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "vim", "Snacks" },
+			},
+			telemetry = {
+				enable = false,
 			},
 		},
-		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
-	})
-end
+	},
+}
 
-function M.clangd()
-	vim.lsp.config("clangd", {
-		cmd = {
-			"clangd",
-			"--fallback-style=Google",
-			"--offset-encoding=utf-16",
-		},
-		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
-	})
-end
+---@type vim.lsp.Config
+M.marksman = {
+	filetypes = { "markdown", "markdown.mdx", "quarto" },
+	root_dir = require("lspconfig").util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
+}
 
-function M.jdtls()
-	vim.lsp.config("jdtls", {
-		root_dir = require("lspconfig").util.root_pattern(
-			"build.xml", -- Ant
-			"pom.xml", -- Maven
-			".git",
-			".java_project",
-			"build.gradle",
-			"settings.gradle", -- Gradle
-			"settings.gradle.kts" -- Gradle
-		) or vim.fn.getcwd(),
-		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
-	})
-end
-
-function M.lua_ls()
-	vim.lsp.config("lua_ls", {
-		settings = {
-			Lua = {
-				diagnostics = {
-					globals = { "vim", "Snacks" },
+---@type vim.lsp.Config
+M.pylsp = {
+	settings = {
+		pylsp = {
+			configurationSources = "null",
+			plugins = {
+				autopep8 = {
+					enabled = false,
 				},
-				telemetry = {
-					enable = false,
-				},
-			},
-		},
-		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
-	})
-end
-
-function M.marksman()
-	vim.lsp.config("marksman", {
-		filetypes = { "markdown", "markdown.mdx", "quarto" },
-		root_dir = require("lspconfig").util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
-		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
-	})
-end
-
-function M.pylsp()
-	vim.lsp.config("pylsp", {
-		settings = {
-			pylsp = {
-				configurationSources = "null",
-				plugins = {
-					autopep8 = {
-						enabled = false,
-					},
-					pycodestyle = {
-						enabled = false,
-					},
+				pycodestyle = {
+					enabled = false,
 				},
 			},
 		},
-		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
-	})
-end
+	},
+}
 
-function M.tailwindcss()
-	vim.lsp.config("tailwindcss", {
-		filetypes = {
-			"css",
-			"scss",
-			"sass",
-			"postcss",
-			"html",
-			"javascript",
-			"javascriptreact",
-			"typescript",
-			"typescriptreact",
-			"svelte",
-			"vue",
-			-- "rust",
+---@type vim.lsp.Config
+M.tailwindcss = {
+	filetypes = {
+		"css",
+		"scss",
+		"sass",
+		"postcss",
+		"html",
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"svelte",
+		"vue",
+		-- "rust",
+	},
+	init_options = {
+		-- Set languages to be considered as different ones by lsp
+		userLanguages = {
+			rust = "html",
 		},
-		init_options = {
-			-- Set languages to be considered as different ones by lsp
-			userLanguages = {
-				rust = "html",
-			},
-		},
-		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
-	})
-end
+	},
+}
 
-function M.tinymist()
-	vim.lsp.config("tinymist", {
-		settings = {
-			exportPdf = "never", -- Choose onType, onSave or never.
-		},
-		root_dir = os.getenv("HOME"),
-		on_attach = require("etiennecollin.core.mappings.plugin").lsp,
-	})
-end
+---@type vim.lsp.Config
+M.tinymist = {
+	settings = {
+		exportPdf = "never", -- Choose onType, onSave or never.
+	},
+	root_dir = os.getenv("HOME"),
+}
 
 return M
