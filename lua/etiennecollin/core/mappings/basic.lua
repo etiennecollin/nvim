@@ -24,15 +24,15 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<tab>", ">>", { desc = "Indent line" })
 vim.keymap.set("n", "<c-i>", "<c-i>") -- We need this as remapping <tab> also remaps <c-i>
 vim.keymap.set("n", "<s-tab>", "<<", { desc = "Unindent line" })
-vim.keymap.set({ "v", "x" }, "<tab>", ">gv", { desc = "Indent selection" })
-vim.keymap.set({ "v", "x" }, "<s-tab>", "<gv", { desc = "Unindent selection" })
+vim.keymap.set("v", "<tab>", ">gv", { desc = "Indent selection" })
+vim.keymap.set("v", "<s-tab>", "<gv", { desc = "Unindent selection" })
 
 -- Search in visual mode
 vim.keymap.set("v", "/", "<Esc>/\\%V")
 vim.keymap.set("v", "?", "<Esc>?\\%V")
 
 -- Yanking and pasting
-vim.keymap.set("x", "<leader>P", [["_dP]], {
+vim.keymap.set("v", "<leader>P", [["_dP]], {
 	desc = "Delete and paste (keep clipboard)",
 })
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], {
