@@ -60,10 +60,7 @@ return {
 								"clippy::all",
 							},
 						},
-						checkOnSave = {
-							command = "clippy",
-							allTargets = false,
-						},
+						checkOnSave = true,
 						inlayHints = {
 							chainingHints = {
 								enable = false,
