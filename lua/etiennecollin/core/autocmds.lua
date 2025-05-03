@@ -15,6 +15,18 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
 })
 
+vim.api.nvim_create_autocmd("CursorHold", {
+	group = vim.api.nvim_create_augroup("etiennecollin-hold-diagnostic", { clear = true }),
+	callback = function()
+		vim.diagnostic.open_float(nil, {
+			focusable = false,
+			scope = "cursor",
+			close_events = { "BufLeave", "CursorMoved", "ModeChanged", "FocusLost" },
+		})
+	end,
+	desc = "Show diagnostics on cursor hold",
+})
+
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("etiennecollin-filetype-indent", { clear = true }),
 	pattern = require("etiennecollin.config").reduced_tabstop,
