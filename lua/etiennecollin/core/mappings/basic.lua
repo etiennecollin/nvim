@@ -24,8 +24,8 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<tab>", ">>", { desc = "Indent line" })
 vim.keymap.set("n", "<c-i>", "<c-i>") -- We need this as remapping <tab> also remaps <c-i>
 vim.keymap.set("n", "<s-tab>", "<<", { desc = "Unindent line" })
-vim.keymap.set("v", "<tab>", ">gv", { desc = "Indent selection" })
-vim.keymap.set("v", "<s-tab>", "<gv", { desc = "Unindent selection" })
+vim.keymap.set("x", "<tab>", ">gv", { desc = "Indent selection" })
+vim.keymap.set("x", "<s-tab>", "<gv", { desc = "Unindent selection" })
 
 -- Search in visual mode
 vim.keymap.set("v", "/", "<Esc>/\\%V")
