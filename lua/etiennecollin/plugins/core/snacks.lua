@@ -54,8 +54,8 @@ return {
 					},
 					{
 						icon = "󰖟 ",
-						key = "b",
-						desc = "Browse Repo",
+						key = "o",
+						desc = "Open Repo",
 						action = ":lua Snacks.gitbrowse()",
 						enabled = function()
 							return Snacks.git.get_root() ~= nil
