@@ -21,8 +21,7 @@ M.background_style = "dark"
 M.ensure_installed_treesitter = { "vim", "regex", "lua", "bash", "markdown", "markdown_inline", "comment" }
 
 --- The LSPs to be installed by Mason.
-M.ensure_installed_lsps =
-	{ "lua_ls", "rust_analyzer", "zls", "clangd", "basedpyright", "jdtls", "tinymist", "tailwindcss", "ts_ls" }
+M.ensure_installed_lsps = { "lua_ls", "zls", "clangd", "basedpyright", "jdtls", "tinymist", "ts_ls" }
 
 --- The Linters to be installed by Mason.
 M.ensure_installed_linters = {

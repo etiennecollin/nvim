@@ -1,25 +1,9 @@
 return {
 	"mrcjkb/rustaceanvim",
 	version = "^6", -- Recommended
-	dependencies = {
-		"mfussenegger/nvim-dap",
-		"williamboman/mason.nvim",
-	},
+	dependencies = { "mfussenegger/nvim-dap" },
 	ft = { "rust" },
 	config = function()
-		-- Setup codelldb path for DAP
-		local extension_path = require("mason-registry").get_package("codelldb"):get_install_path() .. "/extension/"
-		local codelldb_path = extension_path .. "adapter/codelldb"
-		local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
-		if not vim.fn.filereadable(codelldb_path) or not vim.fn.filereadable(liblldb_path) then
-			local msg = "Installing codelldb via Mason...\nEither codelldb or liblldb was not readable.\ncodelldb: "
-				.. codelldb_path
-				.. "\nliblldb: "
-				.. liblldb_path
-			vim.notify(msg, vim.log.levels.INFO)
-			vim.cmd(":MasonInstall codelldb")
-		end
-
 		vim.g.rustaceanvim = {
 			tools = {
 				reload_workspace_from_cargo_toml = true,
@@ -28,9 +12,6 @@ return {
 					parameter_hints_prefix = "<-",
 					other_hints_prefix = "->",
 				},
-			},
-			dap = {
-				adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path),
 			},
 			server = {
 				capabilities = require("etiennecollin.utils.local").get_lsp_capabilities(),
@@ -43,8 +24,8 @@ return {
 						vim.cmd.RustLsp({ "hover", "actions" })
 					end, { silent = true, buffer = bufnr })
 				end,
-				default_settings = {
-					-- https://github.com/rust-lang/rust-analyzer/blob/afc367b96c093b410c8852e583ba467a196b58c8/docs/book/src/configuration_generated.md
+				settings = {
+					-- https://github.com/rust-lang/rust-analyzer/blob/8b624868e4ce2cb5b39559175f0978bee86bdeea/docs/book/src/configuration_generated.md
 					["rust-analyzer"] = {
 						check = {
 							command = "clippy",
