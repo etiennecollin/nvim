@@ -1,7 +1,7 @@
 return {
 	"stevearc/conform.nvim",
 	event = { "BufReadPre", "BufNewFile" },
-	dependencies = { "zapling/mason-conform.nvim", dependencies = "mason-org/mason.nvim" },
+	dependencies = { "zapling/mason-conform.nvim", dependencies = "mason-org/mason.nvim", config = false },
 	cmd = { "ConformInfo" },
 	config = function()
 		local conform = require("conform")

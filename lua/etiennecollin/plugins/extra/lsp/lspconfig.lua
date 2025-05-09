@@ -3,7 +3,7 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"saghen/blink.cmp",
-		{ "mason-org/mason-lspconfig.nvim", dependencies = "mason-org/mason.nvim" },
+		{ "mason-org/mason-lspconfig.nvim", dependencies = "mason-org/mason.nvim", config = false },
 	},
 	config = function()
 		-----------------------------------------------------------------------
