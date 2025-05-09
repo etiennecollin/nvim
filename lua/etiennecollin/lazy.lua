@@ -14,23 +14,42 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- ============
+-- Core config
+-- ============
 local colorscheme = { import = "etiennecollin.plugins.colorscheme" }
 local core = { import = "etiennecollin.plugins.core" }
-local extra = { import = "etiennecollin.plugins.extra" }
+-- ============
+
+-- ============
+-- Full config
+-- ============
 local language_specific = { import = "etiennecollin.plugins.language-specific" }
-local lsp = { import = "etiennecollin.plugins.lsp" }
+local misc = { import = "etiennecollin.plugins.misc" }
 
-local imports = {
-	colorscheme,
-	core,
-}
+-- Mason, LSPs, DAPs, Linters, Formatters
+local extra = { import = "etiennecollin.plugins.extra" }
+local lsp = { import = "etiennecollin.plugins.extra.lsp" }
+local dap = { import = "etiennecollin.plugins.extra.dap" }
+-- ============
 
--- If config contains `core` file, then nothing is added to imports.
--- If config contains `full` file, then `extra`, `language_specific` and `lsp` are added to imports.
+-- Check if the full config should be loaded
+local imports
 if require("etiennecollin.utils.local").is_full_config() then
-	table.insert(imports, extra)
-	table.insert(imports, language_specific)
-	table.insert(imports, lsp)
+	imports = {
+		colorscheme,
+		core,
+		language_specific,
+		misc,
+		extra,
+		lsp,
+		dap,
+	}
+else
+	imports = {
+		colorscheme,
+		core,
+	}
 end
 
 require("lazy").setup(imports, {

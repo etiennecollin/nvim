@@ -1,6 +1,6 @@
 return {
 	"mrcjkb/rustaceanvim",
-	version = "^6", -- Recommended
+	version = "^6",
 	dependencies = { "mfussenegger/nvim-dap" },
 	ft = { "rust" },
 	config = function()
@@ -25,6 +25,7 @@ return {
 					end, { silent = true, buffer = bufnr })
 				end,
 				settings = {
+					-- https://rust-analyzer.github.io/book/configuration.html
 					-- https://github.com/rust-lang/rust-analyzer/blob/8b624868e4ce2cb5b39559175f0978bee86bdeea/docs/book/src/configuration_generated.md
 					["rust-analyzer"] = {
 						check = {
