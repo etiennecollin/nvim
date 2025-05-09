@@ -2,7 +2,7 @@ return {
 	"mfussenegger/nvim-dap",
 	ft = { "cpp", "c", "rust" },
 	dependencies = {
-		{ "jay-babu/mason-nvim-dap.nvim", dependencies = "williamboman/mason.nvim" },
+		{ "jay-babu/mason-nvim-dap.nvim", dependencies = "mason-org/mason.nvim" },
 	},
 	config = function()
 		-----------------------------------------------------------------------
