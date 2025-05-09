@@ -36,13 +36,13 @@ vim.api.nvim_create_autocmd("FileType", {
 	desc = "Decrease tabstop for certain filetypes",
 })
 
--- After creating the autocmdh we run the function manually for the first time.
--- This is necessary to run when opening file with `nvim file.ext`.
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("etiennecollin-filetype-keybinds", { clear = true }),
 	callback = require("etiennecollin.core.mappings.plugin").language_specific,
 	desc = "Set keybinds when filetype changes",
 })
+-- After creating the autocmd we run the function manually for the first time.
+-- This is necessary to run when opening file with `nvim file.ext`.
 require("etiennecollin.core.mappings.plugin").language_specific()
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -105,7 +105,13 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorMoved", "CursorHoldI" }, {
 			vim.fn.winrestview(view)
 		end
 	end,
-	desc = "When at EOB, bring the current line towards center screen",
+	desc = "Always respect scrolloff",
+})
+
+vim.api.nvim_create_autocmd("VimResized", {
+	group = vim.api.nvim_create_augroup("etiennecollin-resize", { clear = true }),
+	command = "tabdo wincmd =",
+	desc = "Resize all windows to fit the current tab",
 })
 
 -- local function commit_on_save()

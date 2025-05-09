@@ -108,16 +108,3 @@ vim.keymap.set("n", "<leader>XE", "<cmd>set fileformat=unix<cr>", { desc = "Set 
 vim.keymap.set("n", "<leader>XX", "<cmd>!chmod +x %<cr>", { desc = "Make executable" })
 vim.keymap.set("n", "<leader>zm", "<cmd>Mason<cr>", { desc = "Mason" })
 vim.keymap.set("n", "<leader>zl", "<cmd>Lazy<cr>", { desc = "Lazy" })
-
--- vim.keymap.set("n", "<C-k>", "<cmd>cnext<cr>zz")
--- vim.keymap.set("n", "<C-j>", "<cmd>cprev<cr>zz")
--- vim.keymap.set("n", "<leader>k", "<cmd>lnext<cr>zz")
--- vim.keymap.set("n", "<leader>j", "<cmd>lprev<cr>zz")
-
--- Exit insert mode
--- vim.keymap.set("i", "jj", "<esc>", {
--- 	desc = "Exit insert mode",
--- })
--- vim.keymap.set("i", "kk", "<esc>", {
--- 	desc = "Exit insert mode",
--- })
