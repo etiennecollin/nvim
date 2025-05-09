@@ -3,7 +3,6 @@ return {
 	cmd = "Neogen",
 	dependencies = "nvim-treesitter/nvim-treesitter",
 	opts = {
-		enabled = true,
 		input_after_comment = true,
 	},
 	init = function()
