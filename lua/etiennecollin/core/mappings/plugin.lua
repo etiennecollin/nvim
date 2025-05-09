@@ -210,6 +210,11 @@ function M.lsp(_, bufnr)
 
 	map("<leader>rn", vim.lsp.buf.rename, "Rename")
 	map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+  map(
+    "H",
+		function() vim.diagnostic.open_float(nil, { focusable = true, scope = "cursor" }) end,
+    "Hover Diagnostics"
+  )
 	map("K", vim.lsp.buf.hover, "Hover Documentation")
 	map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 	map("<leader>rs", ":LspRestart<cr>", "Restart")

@@ -10,21 +10,9 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("etiennecollin-highlight-yank", { clear = true }),
 	callback = function()
-		vim.highlight.on_yank()
+		vim.hl.on_yank()
 	end,
-	desc = "Highlight when yanking (copying) text",
-})
-
-vim.api.nvim_create_autocmd("CursorHold", {
-	group = vim.api.nvim_create_augroup("etiennecollin-hold-diagnostic", { clear = true }),
-	callback = function()
-		vim.diagnostic.open_float(nil, {
-			focusable = false,
-			scope = "cursor",
-			close_events = { "BufLeave", "CursorMoved", "ModeChanged", "FocusLost" },
-		})
-	end,
-	desc = "Show diagnostics on cursor hold",
+	desc = "Highlight on yank",
 })
 
 vim.api.nvim_create_autocmd("FileType", {

@@ -160,7 +160,7 @@ vim.opt.foldmethod = "expr"
 --------------------------------------------------------------------------------
 -- Scrolloff settings
 --------------------------------------------------------------------------------
-vim.opt.scrolloff = 30
+vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 5
 
 --------------------------------------------------------------------------------
@@ -173,6 +173,6 @@ vim.opt.timeoutlen = 300
 -- Other settings
 --------------------------------------------------------------------------------
 vim.opt.isfname:append("@-@")
-vim.opt.updatetime = 50
-vim.opt.redrawtime = 150
+vim.opt.updatetime = 2000
+vim.opt.redrawtime = 1000
 vim.opt.showcmd = false
