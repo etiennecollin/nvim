@@ -203,6 +203,13 @@ function M.grug_far()
 	vim.keymap.set("v", "<leader>S", ":GrugFarWithin<cr>", { desc = "GrugFarWithin" })
 end
 
+function M.dropbar()
+		local dropbar_api = require("dropbar.api")
+		vim.keymap.set("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
+		vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
+		vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
+end
+
 function M.lsp(_, bufnr)
 	local map = function(keys, func, desc)
 		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })

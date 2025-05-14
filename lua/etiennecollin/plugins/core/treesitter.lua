@@ -2,7 +2,7 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	event = { "BufReadPre", "BufNewFile" },
 	build = ":TSUpdate",
-	dependencies = { "nvim-treesitter/nvim-treesitter-context", "andymass/vim-matchup" },
+	dependencies = { "andymass/vim-matchup" },
 	opts = {
 		ensure_installed = require("etiennecollin.config").ensure_installed_treesitter,
 		sync_install = false, -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -25,8 +25,5 @@ return {
 	},
 	config = function(_, opts)
 		require("nvim-treesitter.configs").setup(opts)
-		require("treesitter-context").setup({
-			separator = "─",
-		})
 	end,
 }
