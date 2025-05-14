@@ -11,30 +11,32 @@
 local M = {}
 
 --[[
-    Set Color Scheme
+    Set Colorscheme
 
-    Sets the color scheme for the Neovim environment.
+    Sets the colorscheme for the Neovim environment.
 
     @function set_colorscheme
-    @tparam string theme_name The name of the color scheme to set. Default is "tokyonight" if no theme_name is provided.
-    @usage utils.set_colorscheme("sonokai")
+    @usage utils.set_colorscheme()
 ]]
-function M.set_colorscheme(theme_name)
-	-- Set the default theme if no theme is specified
-	theme_name = theme_name or require("etiennecollin.config").default_colorscheme
+function M.set_colorscheme()
+	local colorscheme = require("etiennecollin.config").colorscheme
 
-	require("lazy").load({ plugins = { theme_name } })
+	-- Make sure the colorscheme is loaded
+	require("lazy").load({ plugins = { colorscheme } })
 
-	-- Set the color scheme and print an error if it fails to load
+	-- Set the colorscheme and fallback on error
 	if not pcall(function()
-		vim.cmd("colorscheme " .. theme_name)
+		vim.cmd("colorscheme " .. colorscheme)
 	end) then
+		local fallback = require("etiennecollin.config").colorscheme_fallback
 		print(
 			'Error: Could not set colorscheme "'
-				.. theme_name
-				.. '". Make sure the colorscheme is installed and available in your runtimepath.'
+				.. colorscheme
+				.. '". Make sure the colorscheme is installed and loaded. Using "'
+				.. fallback
+				.. '" instead.'
 		)
-		print("")
+		vim.cmd("colorscheme " .. fallback)
 	end
 end
 

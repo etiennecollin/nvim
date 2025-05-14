@@ -10,8 +10,11 @@
 ]]
 local M = {}
 
---- The default theme to use
-M.default_colorscheme = "rose-pine"
+--- The colorscheme to use
+M.colorscheme = "rose-pine"
+
+--- The default colorscheme to use if the specified colorscheme is not available
+M.colorscheme_fallback = "retrobox"
 
 --- The background style
 --- Either "light" or "dark"
