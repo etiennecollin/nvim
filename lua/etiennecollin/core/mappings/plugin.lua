@@ -245,7 +245,7 @@ function M.snacks()
 end
 
 function M.neogen()
-	vim.keymap.set("n", "<leader>Na", "<cmd>Neogen<cr>", { desc = "Annotation" })
+	vim.keymap.set("n", "<leader>cn", "<cmd>Neogen<cr>", { desc = "Annotation" })
 end
 
 function M.lsp(_, bufnr)
