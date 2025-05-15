@@ -1,4 +1,4 @@
 return {
-	"jamessan/vim-gnupg",
-	ft = { "asc", "pgp", "gpg" },
+  "jamessan/vim-gnupg",
+  ft = { "asc", "pgp", "gpg" },
 }

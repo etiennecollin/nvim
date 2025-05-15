@@ -24,41 +24,41 @@ vim.opt.signcolumn = "yes:1"
 -- Set the signs for diagnostics
 local s = vim.diagnostic.severity
 vim.diagnostic.config({
-	virtual_text = {
-		severity = { min = vim.diagnostic.severity.WARN },
-	},
-	-- virtual_lines = { current_line = true },
-	update_in_insert = true,
-	underline = true,
-	severity_sort = true,
-	float = {
-		focusable = false,
-		style = "minimal",
-		border = "rounded",
-		source = true,
-		header = "",
-		prefix = "",
-	},
-	signs = {
-		text = {
-			[s.ERROR] = " ",
-			[s.WARN] = " ",
-			[s.INFO] = " ",
-			[s.HINT] = "󰌵 ",
-		},
-		linehl = {
-			[s.ERROR] = "DiagnosticSignError",
-			[s.WARN] = "DiagnosticSignWarn",
-			[s.INFO] = "DiagnosticSignInfo",
-			[s.HINT] = "DiagnosticSignHint",
-		},
-		numhl = {
-			[s.ERROR] = "",
-			[s.WARN] = "",
-			[s.INFO] = "",
-			[s.HINT] = "",
-		},
-	},
+  virtual_text = {
+    severity = { min = vim.diagnostic.severity.WARN },
+  },
+  -- virtual_lines = { current_line = true },
+  update_in_insert = true,
+  underline = true,
+  severity_sort = true,
+  float = {
+    focusable = false,
+    style = "minimal",
+    border = "rounded",
+    source = true,
+    header = "",
+    prefix = "",
+  },
+  signs = {
+    text = {
+      [s.ERROR] = " ",
+      [s.WARN] = " ",
+      [s.INFO] = " ",
+      [s.HINT] = "󰌵 ",
+    },
+    linehl = {
+      [s.ERROR] = "DiagnosticSignError",
+      [s.WARN] = "DiagnosticSignWarn",
+      [s.INFO] = "DiagnosticSignInfo",
+      [s.HINT] = "DiagnosticSignHint",
+    },
+    numhl = {
+      [s.ERROR] = "",
+      [s.WARN] = "",
+      [s.INFO] = "",
+      [s.HINT] = "",
+    },
+  },
 })
 
 --------------------------------------------------------------------------------
@@ -66,9 +66,9 @@ vim.diagnostic.config({
 --------------------------------------------------------------------------------
 vim.opt.list = true
 vim.opt.listchars = {
-	nbsp = "␣", -- Show zero-width space
-	tab = "  ", -- Make sure tab doesn't show as I
-	trail = "·", -- Show trailing whitespace
+  nbsp = "␣", -- Show zero-width space
+  tab = "  ", -- Make sure tab doesn't show as I
+  trail = "·", -- Show trailing whitespace
 }
 
 --------------------------------------------------------------------------------

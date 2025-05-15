@@ -19,25 +19,25 @@ local M = {}
     @usage utils.set_colorscheme()
 ]]
 function M.set_colorscheme()
-	local colorscheme = require("etiennecollin.config").colorscheme
+  local colorscheme = require("etiennecollin.config").colorscheme
 
-	-- Make sure the colorscheme is loaded
-	require("lazy").load({ plugins = { colorscheme } })
+  -- Make sure the colorscheme is loaded
+  require("lazy").load({ plugins = { colorscheme } })
 
-	-- Set the colorscheme and fallback on error
-	if not pcall(function()
-		vim.cmd("colorscheme " .. colorscheme)
-	end) then
-		local fallback = require("etiennecollin.config").colorscheme_fallback
-		print(
-			'Error: Could not set colorscheme "'
-				.. colorscheme
-				.. '". Make sure the colorscheme is installed and loaded. Using "'
-				.. fallback
-				.. '" instead.'
-		)
-		vim.cmd("colorscheme " .. fallback)
-	end
+  -- Set the colorscheme and fallback on error
+  if not pcall(function()
+    vim.cmd("colorscheme " .. colorscheme)
+  end) then
+    local fallback = require("etiennecollin.config").colorscheme_fallback
+    print(
+      'Error: Could not set colorscheme "'
+        .. colorscheme
+        .. '". Make sure the colorscheme is installed and loaded. Using "'
+        .. fallback
+        .. '" instead.'
+    )
+    vim.cmd("colorscheme " .. fallback)
+  end
 end
 
 --[[
@@ -52,16 +52,16 @@ end
     @usage local parts = utils.split("Hello, World!", ",")
 ]]
 function M.split(input_string, sep)
-	if sep == nil then
-		sep = "%s"
-	end
+  if sep == nil then
+    sep = "%s"
+  end
 
-	local result = {}
-	for substr in string.gmatch(input_string, "([^" .. sep .. "]+)") do
-		table.insert(result, substr)
-	end
+  local result = {}
+  for substr in string.gmatch(input_string, "([^" .. sep .. "]+)") do
+    table.insert(result, substr)
+  end
 
-	return result
+  return result
 end
 
 --[[
@@ -77,20 +77,20 @@ end
     @usage utils.set_key_recursive(myTable, "nested.key", "new value")
 ]]
 function M.set_key_recursive(table, keys, value)
-	local current_table = table
-	local parsed_keys = M.split(keys, ".")
+  local current_table = table
+  local parsed_keys = M.split(keys, ".")
 
-	for i, subkey in ipairs(parsed_keys) do
-		-- Set the value if we are at the last key
-		if i == #parsed_keys then
-			current_table[subkey] = value
-			return table
-		end
+  for i, subkey in ipairs(parsed_keys) do
+    -- Set the value if we are at the last key
+    if i == #parsed_keys then
+      current_table[subkey] = value
+      return table
+    end
 
-		-- Create an empty table if the key does not exist
-		current_table[subkey] = current_table[subkey] or {}
-		current_table = current_table[subkey]
-	end
+    -- Create an empty table if the key does not exist
+    current_table[subkey] = current_table[subkey] or {}
+    current_table = current_table[subkey]
+  end
 end
 
 --[[
@@ -103,7 +103,7 @@ end
     @usage utils.print_table(myTable)
 ]]
 function M.print_table(table)
-	print(vim.inspect(table))
+  print(vim.inspect(table))
 end
 
 return M

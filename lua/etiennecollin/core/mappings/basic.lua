@@ -33,16 +33,16 @@ vim.keymap.set("v", "?", "<Esc>?\\%V")
 
 -- Yanking and pasting
 vim.keymap.set("v", "<leader>P", [["_dP]], {
-	desc = "Delete and paste (keep clipboard)",
+  desc = "Delete and paste (keep clipboard)",
 })
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], {
-	desc = "Yank selection to system clipboard",
+  desc = "Yank selection to system clipboard",
 })
 vim.keymap.set("n", "<leader>Y", [["+Y]], {
-	desc = "Yank whole line to system clipboard",
+  desc = "Yank whole line to system clipboard",
 })
 vim.keymap.set({ "n", "v" }, "<leader>D", [["_d]], {
-	desc = "Delete without yank",
+  desc = "Delete without yank",
 })
 
 -- I'll get cancelled too...
@@ -50,31 +50,31 @@ vim.keymap.set("i", "<c-c>", "<Esc>", { desc = "Insert mode escape" })
 
 -- Window navigation
 vim.keymap.set({ "n", "v", "i" }, "<c-h>", "<c-w>h", {
-	desc = "Navigate window left",
+  desc = "Navigate window left",
 })
 vim.keymap.set({ "n", "v", "i" }, "<c-j>", "<c-w>j", {
-	desc = "Navigate window down",
+  desc = "Navigate window down",
 })
 vim.keymap.set({ "n", "v", "i" }, "<c-k>", "<c-w>k", {
-	desc = "Navigate window up",
+  desc = "Navigate window up",
 })
 vim.keymap.set({ "n", "v", "i" }, "<c-l>", "<c-w>l", {
-	desc = "Navigate window right",
+  desc = "Navigate window right",
 })
 
 -- Window navigation with arrows
 -- On my COLEMAK mod-DH layout, I have a layer with the arrows in place of hjkl
 vim.keymap.set({ "n", "v", "i", "t" }, "<c-left>", "<c-w>h", {
-	desc = "Navigate window left",
+  desc = "Navigate window left",
 })
 vim.keymap.set({ "n", "v", "i", "t" }, "<c-down>", "<c-w>j", {
-	desc = "Navigate window down",
+  desc = "Navigate window down",
 })
 vim.keymap.set({ "n", "v", "i", "t" }, "<c-up>", "<c-w>k", {
-	desc = "Navigate window up",
+  desc = "Navigate window up",
 })
 vim.keymap.set({ "n", "v", "i", "t" }, "<c-right>", "<c-w>l", {
-	desc = "Navigate window right",
+  desc = "Navigate window right",
 })
 
 -- Window resizing
