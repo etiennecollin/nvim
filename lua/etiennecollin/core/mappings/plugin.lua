@@ -52,10 +52,6 @@ function M.undotree()
   vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Undotree" })
 end
 
-function M.gen()
-	vim.keymap.set({ "n", "v" }, "<leader>]", ":Gen<cr>", {desc = "AI Gen"})
-end
-
 function M.silicon()
 	vim.keymap.set("v", "<leader>XS", ":Silicon<cr>", { desc = "Silicon" })
 end
