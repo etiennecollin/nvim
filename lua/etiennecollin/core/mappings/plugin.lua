@@ -2,7 +2,6 @@
 -- This is done by calling the function in its corresponding plugin config
 local M = {}
 
--- stylua: ignore start
 function M.slime()
 	local function toggle_slime_tmux_nvim()
 		pcall(function()
@@ -32,24 +31,24 @@ function M.slime()
 end
 
 function M.img_clip()
-  vim.keymap.set("n", "<leader>i", "<cmd>PasteImage<cr>", { desc = "Paste image" })
-  vim.keymap.set("n", "<leader>I", function()
-    Snacks.picker.files({
-      ft = { "jpg", "jpeg", "png", "webp" },
-      confirm = function(self, item, _)
-        self:close()
-        require("img-clip").paste_image({}, "./" .. item.file) -- ./ is necessary for img-clip to recognize it as path
-      end,
-    })
-  end, { desc = "Pick image" })
+	vim.keymap.set("n", "<leader>i", "<cmd>PasteImage<cr>", { desc = "Paste image" })
+	vim.keymap.set("n", "<leader>I", function()
+		Snacks.picker.files({
+			ft = { "jpg", "jpeg", "png", "webp" },
+			confirm = function(self, item, _)
+				self:close()
+				require("img-clip").paste_image({}, "./" .. item.file) -- ./ is necessary for img-clip to recognize it as path
+			end,
+		})
+	end, { desc = "Pick image" })
 end
 
 function M.cellular_automaton()
-  vim.keymap.set("n", "<leader>XA", "<cmd>CellularAutomaton make_it_rain<cr>", { desc = "Cellular automaton" })
+	vim.keymap.set("n", "<leader>XA", "<cmd>CellularAutomaton make_it_rain<cr>", { desc = "Cellular automaton" })
 end
 
 function M.undotree()
-  vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Undotree" })
+	vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Undotree" })
 end
 
 function M.silicon()
@@ -111,6 +110,8 @@ function M.gitsigns(buffer)
 			gs.nav_hunk("prev")
 		end
 	end, "Prev Hunk")
+
+  -- stylua: ignore start
 	map("n", "]H", function() gs.nav_hunk("last") end, "Last Hunk")
 	map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
 
@@ -126,8 +127,61 @@ function M.gitsigns(buffer)
 	map("n", "<leader>gR", gs.reset_buffer, "Reset Buffer")
 	map("n", "<leader>gS", gs.stage_buffer, "Stage Buffer")
 	map({ "o", "x" }, "ih", ":<c-U>Gitsigns select_hunk<cr>", "GitSigns Select Hunk")
+	-- stylua: ignore end
 end
 
+function M.grug_far()
+	vim.keymap.set("n", "<leader>S", "<cmd>GrugFar<cr>", { desc = "GrugFar" })
+	vim.keymap.set("v", "<leader>S", ":GrugFarWithin<cr>", { desc = "GrugFarWithin" })
+end
+
+function M.dropbar()
+	local dropbar_api = require("dropbar.api")
+	vim.keymap.set("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
+	vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
+	vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
+end
+
+function M.multicursor()
+	local mc = require("multicursor-nvim")
+
+	-- stylua: ignore start
+	-- Add or skip cursor above/below the main cursor
+	vim.keymap.set({ "n", "x" }, "<m-up>", function() mc.lineAddCursor(-1) end, { desc = "Add cursor above" })
+	vim.keymap.set({ "n", "x" }, "<m-down>", function() mc.lineAddCursor(1) end, { desc = "Add cursor below" })
+	vim.keymap.set({ "n", "x" }, "<leader><up>", function() mc.lineSkipCursor(-1) end, { desc = "Skip cursor above" })
+	vim.keymap.set({ "n", "x" }, "<leader><down>", function() mc.lineSkipCursor(1) end, { desc = "Skip cursor below" })
+
+	-- Add or skip adding a new cursor by matching word/selection
+	vim.keymap.set({ "n", "x" }, "<leader>nn", function() mc.matchAddCursor(1) end, { desc = "Add cursor to next match of current word" })
+	vim.keymap.set({ "n", "x" }, "<leader>ns", function() mc.matchSkipCursor(1) end, { desc = "Skip cursor to next match of current word" })
+	vim.keymap.set({ "n", "x" }, "<leader>nN", function() mc.matchAddCursor(-1) end, { desc = "Add cursor to previous match of current word" })
+	vim.keymap.set({ "n", "x" }, "<leader>nS", function() mc.matchSkipCursor(-1) end, { desc = "Skip cursor to previous match of current word" })
+
+	-- Add and remove cursors with mouse
+	vim.keymap.set("n", "<m-leftmouse>", mc.handleMouse)
+	vim.keymap.set("n", "<m-leftdrag>", mc.handleMouseDrag)
+	vim.keymap.set("n", "<m-leftrelease>", mc.handleMouseRelease)
+	-- stylua: ignore end
+
+	-- Mappings defined in a keymap layer only apply when there are multiple cursors
+	mc.addKeymapLayer(function(layerSet)
+		layerSet({ "n", "x" }, "<left>", mc.prevCursor, { desc = "Previous cursor" })
+		layerSet({ "n", "x" }, "<right>", mc.nextCursor, { desc = "Next cursor" })
+		layerSet({ "n", "x" }, "<m-x>", mc.deleteCursor, { desc = "Delete cursor" })
+
+		-- Enable and clear cursors using escape
+		layerSet("n", "<esc>", function()
+			if not mc.cursorsEnabled() then
+				mc.enableCursors()
+			else
+				mc.clearCursors()
+			end
+		end)
+	end)
+end
+
+-- stylua: ignore start
 function M.snacks()
 	-- Snacks other
 	vim.keymap.set("n", "<leader>zh", function() Snacks.notifier.show_history() end, { desc = "Notification History" })
@@ -192,18 +246,6 @@ end
 
 function M.neogen()
 	vim.keymap.set("n", "<leader>Na", "<cmd>Neogen<cr>", { desc = "Annotation" })
-end
-
-function M.grug_far()
-	vim.keymap.set("n", "<leader>S", "<cmd>GrugFar<cr>", { desc = "GrugFar" })
-	vim.keymap.set("v", "<leader>S", ":GrugFarWithin<cr>", { desc = "GrugFarWithin" })
-end
-
-function M.dropbar()
-		local dropbar_api = require("dropbar.api")
-		vim.keymap.set("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
-		vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
-		vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
 end
 
 function M.lsp(_, bufnr)
