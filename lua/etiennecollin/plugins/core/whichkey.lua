@@ -13,7 +13,7 @@ return {
 			{ "<leader>B", group = "Tab" },
 			{ "<leader>d", group = "Debug" },
 			{ "<leader>g", group = "Git" },
-			{ "<leader>n", group = "New" },
+			{ "<leader>N", group = "New" },
 			{ "<leader>r", group = "LSP" },
 			{ "<leader>s", group = "Search" },
 			{ "<leader>t", group = "Toggle" },
