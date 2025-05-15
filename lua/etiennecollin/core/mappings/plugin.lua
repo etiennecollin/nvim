@@ -244,10 +244,6 @@ function M.snacks()
 	vim.keymap.set({ "n" }, "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" })
 end
 
-function M.neogen()
-	vim.keymap.set("n", "<leader>cn", "<cmd>Neogen<cr>", { desc = "Annotation" })
-end
-
 function M.lsp(_, bufnr)
 	local map = function(keys, func, desc)
 		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
