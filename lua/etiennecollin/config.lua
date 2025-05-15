@@ -61,6 +61,7 @@ M.ensure_installed_formatters = {
 	yaml = { "prettier" },
 	markdown = { "prettier" },
 	graphql = { "prettier" },
+	sql = { "sql_formatter" },
 }
 
 --- The DAPs to be installed by Mason.
