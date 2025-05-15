@@ -245,23 +245,21 @@ function M.snacks()
 end
 
 function M.lsp(_, bufnr)
-	local map = function(keys, func, desc)
-		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
+	local map = function(mode, keys, func, desc)
+		vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
 	end
 
-	map("<leader>rn", vim.lsp.buf.rename, "Rename")
-	map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
-  map(
-    "H",
-		function() vim.diagnostic.open_float(nil, { focusable = true, scope = "cursor" }) end,
-    "Hover Diagnostics"
-  )
-	map("K", vim.lsp.buf.hover, "Hover Documentation")
-	map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-	map("<leader>rs", ":LspRestart<cr>", "Restart")
+	map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
+	map({"n", "x"}, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
+  map("n", "H", function() vim.diagnostic.open_float(nil, { focusable = true, scope = "cursor" }) end, "Hover Diagnostics")
+	map("n", "K", vim.lsp.buf.hover, "Hover Documentation")
+	map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
+	map("n", "<leader>rs", ":LspRestart<cr>", "Restart")
+	map({"n", "i"}, "<c-h>", vim.lsp.buf.signature_help, "Signature help")
+
+  -- TODO: I should find a better place for these mappings as they are not necessarily LSP specific
 	vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Goto previous diagnostic" })
-	vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Goto next diagnostic" })
-	vim.keymap.set("i", "<c-h>", function() vim.lsp.buf.signature_help() end, { desc = "Signature help" })
+  vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Goto next diagnostic" })
 end
 
 function M.dap()
