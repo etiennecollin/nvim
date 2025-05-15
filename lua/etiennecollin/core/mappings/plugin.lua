@@ -125,7 +125,7 @@ function M.gitsigns(buffer)
 	map("n", "<leader>gp", gs.preview_hunk_inline, "Preview Hunk Inline")
 	map("n", "<leader>gR", gs.reset_buffer, "Reset Buffer")
 	map("n", "<leader>gS", gs.stage_buffer, "Stage Buffer")
-	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<cr>", "GitSigns Select Hunk")
+	map({ "o", "x" }, "ih", ":<c-U>Gitsigns select_hunk<cr>", "GitSigns Select Hunk")
 end
 
 function M.snacks()
@@ -223,7 +223,7 @@ function M.lsp(_, bufnr)
 	map("<leader>rs", ":LspRestart<cr>", "Restart")
 	vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Goto previous diagnostic" })
 	vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Goto next diagnostic" })
-	vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, { desc = "Signature help" })
+	vim.keymap.set("i", "<c-h>", function() vim.lsp.buf.signature_help() end, { desc = "Signature help" })
 end
 
 function M.dap()
