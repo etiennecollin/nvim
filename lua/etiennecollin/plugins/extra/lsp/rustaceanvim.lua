@@ -38,6 +38,7 @@ return {
                 "-W",
                 "clippy::all",
               },
+              allTargets = false,
             },
             checkOnSave = true,
             inlayHints = {
