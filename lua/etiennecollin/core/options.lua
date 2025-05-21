@@ -167,7 +167,7 @@ vim.opt.sidescrolloff = 5
 -- Command timeout (used for WhichKey)
 --------------------------------------------------------------------------------
 vim.opt.timeout = true
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 500
 
 --------------------------------------------------------------------------------
 -- Other settings
