@@ -68,9 +68,9 @@ return {
     sources = {
       default = { "copilot", "lsp", "path", "snippets", "buffer" },
       per_filetype = {
-        typst = { "references", "copilot", "lsp", "path", "snippets", "buffer" },
-        markdown = { "references", "copilot", "lsp", "path", "snippets", "buffer" },
-        lua = { "lazydev", "copilot", "lsp", "path", "snippets", "buffer" },
+        typst = { inherit_defaults = true, "references" },
+        markdown = { inherit_defaults = true, "references" },
+        lua = { inherit_defaults = true, "lazydev" },
       },
       providers = {
         copilot = {
