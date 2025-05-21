@@ -142,6 +142,12 @@ function M.dropbar()
   vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
 end
 
+function M.flash()
+  local flash = require("flash")
+  vim.keymap.set({ "n", "x" }, "<cr>", flash.jump, { desc = "Flash" })
+  vim.keymap.set({ "n", "x", "o" }, "<s-cr>", flash.treesitter, { desc = "Flash Treesitter" })
+end
+
 function M.multicursor()
   local mc = require("multicursor-nvim")
 
