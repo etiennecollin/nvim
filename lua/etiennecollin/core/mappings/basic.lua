@@ -41,7 +41,7 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], {
 vim.keymap.set("n", "<leader>Y", [["+Y]], {
   desc = "Yank whole line to system clipboard",
 })
-vim.keymap.set({ "n", "v" }, "<leader>D", [["_d]], {
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], {
   desc = "Delete without yank",
 })
 
