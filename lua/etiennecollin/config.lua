@@ -24,7 +24,7 @@ M.background_style = "dark"
 M.ensure_installed_treesitter = { "vim", "regex", "lua", "bash", "markdown", "markdown_inline", "comment" }
 
 --- The LSPs to be installed by Mason.
-M.ensure_installed_lsps = { "lua_ls", "zls", "clangd", "basedpyright", "jdtls", "tinymist", "ts_ls" }
+M.ensure_installed_lsps = { "lua_ls", "clangd", "basedpyright", "bashls", "jdtls", "tinymist", "ts_ls" }
 
 --- The Linters to be installed by Mason.
 M.ensure_installed_linters = {
@@ -65,7 +65,7 @@ M.ensure_installed_formatters = {
 }
 
 --- The DAPs to be installed by Mason.
-M.ensure_installed_daps = { "codelldb" }
+M.ensure_installed_daps = { "codelldb", "cpptools" }
 
 --- Decrease tabstop for certain filetypes
 M.reduced_tabstop = { "javascript", "javascriptreact", "typst", "markdown", "json", "jsonc", "lua" }
