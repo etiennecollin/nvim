@@ -1,6 +1,7 @@
 return {
   "mfussenegger/nvim-dap",
   ft = { "cpp", "c", "rust" },
+  cmd = { "DapNew" },
   dependencies = {
     { "jay-babu/mason-nvim-dap.nvim", dependencies = "mason-org/mason.nvim", config = false },
   },
