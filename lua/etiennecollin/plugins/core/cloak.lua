@@ -1,6 +1,7 @@
 return {
   "laytan/cloak.nvim",
-  ft = { "asc", "sh", "secret" },
+  ft = { "asc", "config", "sh", "secret" },
+  cmd = { "CloackToggle", "CloakDisable", "CloakEnable", "CloakPreviewLine" },
   opts = {
     cloak_character = "*",
     cloak_length = 8,
