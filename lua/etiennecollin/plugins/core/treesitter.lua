@@ -1,6 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   branch = "master",
+  -- branch = "main",
   lazy = false,
   build = ":TSUpdate",
   dependencies = { "andymass/vim-matchup" },
@@ -26,5 +27,16 @@ return {
   },
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)
+    -- require("nvim-treesitter").install(require("etiennecollin.config").ensure_installed_treesitter)
+    -- vim.api.nvim_create_autocmd("FileType", {
+    --   pattern = { "*" },
+    --   callback = function()
+    --     vim.treesitter.start()
+    --     vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    --
+    --     -- Indent is experimental
+    --     vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
+    --   end,
+    -- })
   end,
 }
