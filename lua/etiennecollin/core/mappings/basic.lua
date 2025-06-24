@@ -145,3 +145,29 @@ vim.keymap.set("n", "<leader>XE", "<cmd>set fileformat=unix<cr>", { desc = "Set 
 vim.keymap.set("n", "<leader>XX", "<cmd>!chmod +x %<cr>", { desc = "Make executable" })
 vim.keymap.set("n", "<leader>zl", "<cmd>Lazy<cr>", { desc = "Lazy" })
 vim.keymap.set("n", "<leader>zm", "<cmd>Mason<cr>", { desc = "Mason" })
+
+local function fire_save()
+  if
+    vim.fn.confirm(
+      "🔥 FIRE SAVE: this will stage, commit, and push all changes to a new branch. Continue?",
+      "&Yes\n&No",
+      2,
+      "Warning"
+    ) ~= 1
+  then
+    vim.notify("Fire save aborted", 3)
+    return
+  end
+
+  local ts = os.date("%Y%m%d%H%M%S")
+  local branch = "etiennecollin-fire-" .. ts
+
+  vim.cmd("!git checkout -b " .. branch)
+  vim.cmd("!git add -A")
+  vim.cmd(string.format('!git commit -m "FIRE, THIS COMMIT SAVES THE STATE OF MY WORK: %s"', ts))
+  vim.cmd("!git push -u origin " .. branch)
+
+  vim.notify("Fire save complete on branch: " .. branch, 3)
+end
+
+vim.keymap.set("n", "<leader>XF", fire_save, { desc = "Fire-save snapshot" })
