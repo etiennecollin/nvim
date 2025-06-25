@@ -32,16 +32,19 @@ vim.keymap.set("v", "/", "<Esc>/\\%V")
 vim.keymap.set("v", "?", "<Esc>?\\%V")
 
 -- Yanking and pasting
-vim.keymap.set("v", "<leader>P", [["_dP]], {
+vim.keymap.set("v", "<leader>P", '"_dp', {
   desc = "Delete and paste (keep clipboard)",
 })
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], {
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', {
+  desc = "Paste from system clipboard",
+})
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', {
   desc = "Yank selection to system clipboard",
 })
-vim.keymap.set("n", "<leader>Y", [["+Y]], {
+vim.keymap.set("n", "<leader>Y", '"+Y', {
   desc = "Yank whole line to system clipboard",
 })
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], {
+vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', {
   desc = "Delete without yank",
 })
 
