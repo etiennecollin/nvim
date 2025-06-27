@@ -18,4 +18,7 @@ return {
       },
     },
   },
+  init = function()
+    require("etiennecollin.core.mappings.plugin").cloak()
+  end,
 }

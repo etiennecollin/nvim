@@ -30,6 +30,10 @@ function M.slime()
   vim.keymap.set("v", "<leader><cr>", "<plug>SlimeRegionSend", { desc = "Slime send visual" })
 end
 
+function M.cloak()
+  vim.keymap.set("n", "<leader>`", "<cmd>CloakPreviewLine<cr>", { desc = "Cloak preview line" })
+end
+
 function M.img_clip()
   vim.keymap.set("n", "<leader>i", "<cmd>PasteImage<cr>", { desc = "Paste image" })
   vim.keymap.set("n", "<leader>I", function()
