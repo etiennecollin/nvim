@@ -1,5 +1,4 @@
 .DS_Store
 lazy-lock.json
 indent.log
-full.conf
-core.conf
+*.conf

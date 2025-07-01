@@ -1,19 +1,3 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
-end
-vim.opt.rtp:prepend(lazypath)
-
 -- ============
 -- Core config
 -- ============
@@ -34,8 +18,17 @@ local dap = { import = "etiennecollin.plugins.extra.dap" }
 -- ============
 
 -- Check if the full config should be loaded
+local config_type = require("etiennecollin.utils.local").get_config_type()
 local imports
-if require("etiennecollin.utils.local").is_full_config() then
+if config_type == 1 then
+  require("etiennecollin.utils.global").set_fallback_colorscheme()
+  return
+elseif config_type == 2 then
+  imports = {
+    colorscheme,
+    core,
+  }
+elseif config_type == 3 then
   imports = {
     colorscheme,
     core,
@@ -46,11 +39,25 @@ if require("etiennecollin.utils.local").is_full_config() then
     dap,
   }
 else
-  imports = {
-    colorscheme,
-    core,
-  }
+  vim.notify("Invalid configuration type: " .. config_type, vim.log.levels.ERROR)
+  return
 end
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup(imports, {
   checker = { enabled = true, notify = false },
