@@ -102,6 +102,22 @@ vim.api.nvim_create_autocmd("VimResized", {
   desc = "Resize all windows to fit the current tab",
 })
 
+local group_recording = vim.api.nvim_create_augroup("etiennecollin-recording", { clear = true })
+vim.api.nvim_create_autocmd("RecordingEnter", {
+  group = group_recording,
+  callback = function()
+    vim.o.cmdheight = 1
+  end,
+  desc = "Set cmdheight to 1 when recording starts",
+})
+vim.api.nvim_create_autocmd("RecordingLeave", {
+  group = group_recording,
+  callback = function()
+    vim.o.cmdheight = 0
+  end,
+  desc = "Reset cmdheight to 0 when recording stops",
+})
+
 -- local function commit_on_save()
 -- 	-- Check if the file is in a git repository
 -- 	if vim.fn.system("git rev-parse --is-inside-work-tree 2>/dev/null") ~= "" then
