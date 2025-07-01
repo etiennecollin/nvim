@@ -10,75 +10,82 @@
 ]]
 local M = {}
 
---[[
-    Is Full Config
-
-    Checks existance of `full` or `core` file to determine if the full configuration should be loaded.
-
-    @function is_full_config
-    @treturn bool True if the full configuration should be loaded, false otherwise.
-    @usage if utils.is_full_config() then
-        print("Loading full configuration...")
-    end
-]]
-function M.is_full_config()
-  local config_dir = vim.fn.stdpath("config")
-  while true do
-    if vim.fn.filereadable(config_dir .. "/full.conf") == 1 then
-      return true
-    elseif vim.fn.filereadable(config_dir .. "/core.conf") == 1 then
-      return false
-    else
-      -- Notify user that neither `full` nor `core` file was found
-      print("No configuration file found.")
-      M.create_config_file()
-    end
-  end
-end
+local config_dir = vim.fn.stdpath("config")
+local config_choices = {
+  [1] = { name = "Base configuration", file = "base.conf" },
+  [2] = { name = "Core configuration", file = "core.conf" },
+  [3] = { name = "Full configuration", file = "full.conf" },
+}
 
 --[[
     Create Config File
 
-    Creates a configuration file in the Neovim configuration directory.
+    Prompts the user to pick a configuration (base, core, or full)
+    and writes that choice out as a `.conf` file in the Neovim config directory.
 
     @function create_config_file
+    @tparam bool If true, the file is created; if false, no file is created.
     @usage utils.create_config_file()
 ]]
 function M.create_config_file()
-  -- Define the directory where the config files will be created
-  local config_dir = vim.fn.stdpath("config")
+  local labels = {}
+  for idx, choice in ipairs(config_choices) do
+    labels[idx] = choice.name
+  end
 
-  -- Define file names and their corresponding choices
-  local file_choices = { "core.conf", "full.conf" }
+  local selection = vim.fn.confirm("Select configuration:", table.concat(labels, "\n"), 1, "Info")
+  if selection < 1 or selection > #config_choices then
+    vim.notify("No configuration created.", vim.log.levels.WARN)
+    return nil
+  end
 
-  local file_name
-  local file_path
+  local cfg = config_choices[selection]
+  local path = config_dir .. "/" .. cfg.file
 
-  while true do
-    -- Prompt the user for input
-    local input = vim.fn.input("Enter configuration type (1 for core, 2 for full): ")
-    local choice = tonumber(input)
-    print("\n")
+  local fh, err = io.open(path, "w")
+  if not fh then
+    vim.notify('Error writing "' .. cfg.file .. '": ' .. err, vim.log.levels.ERROR)
+    return nil
+  end
 
-    -- Check if the input is valid
-    if choice == 1 or choice == 2 then
-      file_name = file_choices[choice]
-      file_path = config_dir .. "/" .. file_name
+  fh:write("-- " .. cfg.name .. " file\n")
+  fh:close()
+  vim.notify("Created configuration: " .. path, vim.log.levels.INFO)
+  return selection
+end
 
-      -- Create the file
-      local file = io.open(file_path, "w")
-      if file then
-        file:write("-- This is a configuration file\n")
-        file:close()
-        print("Configuration file created: " .. file_path)
-        break
-      else
-        print("Error creating the file.")
-      end
-    else
-      print('Invalid input. Please enter "1" for core or "2" for full.')
+--[[
+    Get Configuration Type
+
+    Check which plugins should be loaded based on the configuration file.
+    If no valid file exists, prompt the user to create one.
+
+    @function get_config_type
+    @treturn int 1 for base, 2 for core, 3 for full
+    @usage if utils.get_config_type() == 3 then
+             print("Loading full configuration...")
+           end
+]]
+function M.get_config_type()
+  for idx, cfg in ipairs(config_choices) do
+    if vim.fn.filereadable(config_dir .. "/" .. cfg.file) == 1 then
+      return idx
     end
   end
+
+  -- vim.notify("No configuration file found.", vim.log.levels.WARN)
+  local created = M.create_config_file()
+  if not created then
+    error("Configuration required to proceed.")
+  end
+
+  for idx, cfg in ipairs(config_choices) do
+    if vim.fn.filereadable(config_dir .. "/" .. cfg.file) == 1 then
+      return idx
+    end
+  end
+
+  error("Failed to create configuration file.")
 end
 
 --[[

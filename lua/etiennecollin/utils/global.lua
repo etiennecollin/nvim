@@ -28,16 +28,27 @@ function M.set_colorscheme()
   if not pcall(function()
     vim.cmd("colorscheme " .. colorscheme)
   end) then
-    local fallback = require("etiennecollin.config").colorscheme_fallback
-    print(
-      'Error: Could not set colorscheme "'
+    vim.notify(
+      'Warning: Could not set colorscheme "'
         .. colorscheme
-        .. '". Make sure the colorscheme is installed and loaded. Using "'
-        .. fallback
-        .. '" instead.'
+        .. '". Make sure the colorscheme is installed and loaded. Using fallback instead.',
+      vim.log.levels.WARN
     )
-    vim.cmd("colorscheme " .. fallback)
+    M.set_fallback_colorscheme()
   end
+end
+
+--[[
+    Set Fallback Colorscheme
+
+    Sets a fallback colorscheme for the Neovim environment.
+
+    @function set_fallback_colorscheme
+    @usage utils.set_fallback_colorscheme()
+--]]
+function M.set_fallback_colorscheme()
+  local fallback = require("etiennecollin.config").colorscheme_fallback
+  vim.cmd("colorscheme " .. fallback)
 end
 
 --[[
