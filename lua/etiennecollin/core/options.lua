@@ -184,7 +184,7 @@ if vim.g.neovide then
   vim.opt.guifont = "Maple Mono NF:h14"
   vim.g.neovide_scale_factor = 1.0
   vim.g.neovide_hide_mouse_when_typing = false
-  vim.g.neovide_fullscreen = true
+  vim.g.neovide_fullscreen = false
   vim.g.neovide_remember_window_size = true
   vim.g.neovide_input_macos_option_key_is_meta = "only_left"
 
