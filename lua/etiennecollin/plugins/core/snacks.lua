@@ -150,7 +150,6 @@ return {
                 ["."] = "explorer_focus",
                 ["<BS>"] = "explorer_up",
                 ["<space>"] = "select_and_next",
-                ["<c-c>"] = "explorer_cd",
                 ["a"] = "explorer_add",
                 ["c"] = "explorer_copy",
                 ["d"] = "explorer_del",
