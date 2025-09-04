@@ -153,8 +153,6 @@ return {
                 ["a"] = "explorer_add",
                 ["c"] = "explorer_copy",
                 ["d"] = "explorer_del",
-                ["h"] = "toggle_hidden",
-                ["H"] = "toggle_ignored",
                 ["l"] = "confirm",
                 ["m"] = "explorer_move",
                 ["r"] = "explorer_rename",
