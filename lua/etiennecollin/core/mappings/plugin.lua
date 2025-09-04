@@ -276,6 +276,8 @@ function M.lsp(_, bufnr)
   -- TODO: I should find a better place for these mappings as they are not necessarily LSP specific
   vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Goto previous diagnostic" })
   vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Goto next diagnostic" })
+  vim.keymap.set("n", "lh", function() vim.diagnostic.hide() end, { desc = "Hide diagnostics" })
+  vim.keymap.set("n", "ls", function() vim.diagnostic.show() end, { desc = "Show diagnostics" })
 end
 
 function M.dap()

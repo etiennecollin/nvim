@@ -12,6 +12,7 @@ return {
       { "<leader>b", group = "Buffer" },
       { "<leader>B", group = "Tab" },
       { "<leader>k", group = "Debug" },
+      { "<leader>l", group = "Linting" },
       { "<leader>g", group = "Git" },
       { "<leader>r", group = "LSP" },
       { "<leader>s", group = "Search" },
