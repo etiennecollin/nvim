@@ -68,6 +68,18 @@ M.ensure_installed_formatters = {
 M.ensure_installed_daps = { "codelldb", "cpptools" }
 
 --- Decrease tabstop for certain filetypes
-M.reduced_tabstop = { "javascript", "javascriptreact", "typst", "markdown", "json", "jsonc", "lua", "cpp", "fpp" }
+M.reduced_tabstop = {
+  "cpp",
+  "fpp",
+  "javascript",
+  "javascriptreact",
+  "json",
+  "jsonc",
+  "lua",
+  "markdown",
+  "sh",
+  "typescriptreact",
+  "typst",
+}
 
 return M
