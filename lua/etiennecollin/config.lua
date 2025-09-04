@@ -28,8 +28,8 @@ M.ensure_installed_lsps = { "lua_ls", "clangd", "basedpyright", "bashls", "jdtls
 
 --- The Linters to be installed by Mason.
 M.ensure_installed_linters = {
-  c = { "trivy", "cpplint" },
-  cpp = { "trivy", "cpplint" },
+  c = { "trivy" },
+  cpp = { "trivy" },
   rust = { "trivy" },
   python = { "trivy" },
   java = { "trivy" },
@@ -68,6 +68,6 @@ M.ensure_installed_formatters = {
 M.ensure_installed_daps = { "codelldb", "cpptools" }
 
 --- Decrease tabstop for certain filetypes
-M.reduced_tabstop = { "javascript", "javascriptreact", "typst", "markdown", "json", "jsonc", "lua" }
+M.reduced_tabstop = { "javascript", "javascriptreact", "typst", "markdown", "json", "jsonc", "lua", "cpp", "fpp" }
 
 return M
