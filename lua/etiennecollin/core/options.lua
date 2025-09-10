@@ -71,6 +71,20 @@ vim.opt.listchars = {
   trail = "·", -- Show trailing whitespace
 }
 
+-- Set fillchars for both vertical and horizontal split separators
+vim.opt.fillchars = {
+  vert = "│",
+  horiz = "─",
+  horizup = "┴",
+  horizdown = "┬",
+  verthoriz = "┼",
+}
+
+--------------------------------------------------------------------------------
+-- Set global statusine
+--------------------------------------------------------------------------------
+vim.opt.laststatus = 3
+
 --------------------------------------------------------------------------------
 -- Set cursor options and line highlighting
 --------------------------------------------------------------------------------
