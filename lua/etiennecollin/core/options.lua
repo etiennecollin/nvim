@@ -197,4 +197,13 @@ if vim.g.neovide then
   vim.keymap.set("n", "<C-->", function()
     change_scale_factor(1 / 1.25)
   end)
+  vim.keymap.set({ "n", "v" }, "<c-s-c>", '"+y', {
+    desc = "Yank selection to system clipboard",
+  })
+  vim.keymap.set({ "n", "v" }, "<c-r>", '"+p', {
+    desc = "Paste from system clipboard",
+  })
+  vim.keymap.set("i", "<c-s-v>", "<c-r>+", {
+    desc = "Paste from system clipboard",
+  })
 end
