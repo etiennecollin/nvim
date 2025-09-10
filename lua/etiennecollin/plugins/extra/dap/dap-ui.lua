@@ -3,11 +3,13 @@ return {
   ft = { "cpp", "c", "rust" },
   dependencies = {
     "mfussenegger/nvim-dap",
+    "theHamsta/nvim-dap-virtual-text",
     "nvim-neotest/nvim-nio",
   },
   config = function()
     local dap = require("dap")
     local dapui = require("dapui")
+    local virtual_text = require("nvim-dap-virtual-text")
 
     dap.listeners.after.event_initialized.dapui_config = function()
       dapui.open()
@@ -20,9 +22,11 @@ return {
     end
     dap.listeners.before.event_terminated.dapui_config = function()
       dapui.close()
+      virtual_text.refresh()
     end
     dap.listeners.before.event_exited.dapui_config = function()
       dapui.close()
+      virtual_text.refresh()
     end
 
     dapui.setup({

@@ -1,7 +1,7 @@
 return {
   "theHamsta/nvim-dap-virtual-text",
   ft = { "cpp", "c", "rust" },
-  dependencies = { "mfussenegger/nvim-dap", "nvim-treesitter/nvim-treesitter" },
+  dependencies = { "mfussenegger/nvim-dap" },
   opts = {
     -- Create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
     enable_commands = true,
