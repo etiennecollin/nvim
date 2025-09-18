@@ -73,6 +73,12 @@ return {
         lua = { inherit_defaults = true, "lazydev" },
       },
       providers = {
+        snippets = {
+          -- Disable snippets after trigger character
+          should_show_items = function(ctx)
+            return ctx.trigger.initial_kind ~= "trigger_character"
+          end,
+        },
         copilot = {
           name = "copilot",
           module = "blink-copilot",
