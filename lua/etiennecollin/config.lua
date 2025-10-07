@@ -28,13 +28,8 @@ M.ensure_installed_lsps = { "lua_ls", "clangd", "basedpyright", "bashls", "jdtls
 
 --- The Linters to be installed by Mason.
 M.ensure_installed_linters = {
-  c = { "trivy" },
-  cpp = { "trivy" },
-  rust = { "trivy" },
-  python = { "trivy" },
-  java = { "trivy" },
-  javascript = { "trivy", "oxlint" },
-  typescript = { "trivy", "oxlint" },
+  javascript = { "oxlint" },
+  typescript = { "oxlint" },
 }
 
 --- The Formatters to be installed by Mason.
