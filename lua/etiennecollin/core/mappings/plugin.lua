@@ -90,6 +90,15 @@ function M.language_specific()
     local_map("<leader>mr", "<cmd>RustLsp runnables<cr>", "Run")
     local_map("<leader>md", "<cmd>RustLsp debuggables<cr>", "Debug")
     local_map("<leader>mt", "<cmd>RustLsp testables<cr>", "Test")
+  elseif is_file_type("python") then
+    local function run_current_buffer()
+      local tmpfile = "/tmp/nvim_exec_temp.py"
+      vim.cmd("w! " .. tmpfile)
+      vim.cmd("belowright split")
+      vim.cmd("resize 15")
+      vim.cmd("terminal python3 " .. tmpfile)
+    end
+    local_map("<leader>m", run_current_buffer, "Run python buffer")
   end
 end
 
