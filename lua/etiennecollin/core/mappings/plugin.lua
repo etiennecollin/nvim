@@ -300,24 +300,27 @@ function M.dap()
   end
 
   local dap = require("dap")
+  local widgets = require("dap.ui.widgets")
 
   map("<leader>kB", function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, "breakpoint condition")
+  map("<leader>kC", dap.run_to_cursor, "Run to cursor")
+  map("<leader>kO", dap.step_out, "Step out")
+  map("<leader>ka", function() dap.continue({ before = get_args }) end, "Run with args")
   map("<leader>kb", dap.toggle_breakpoint, "Toggle breakpoint")
   map("<leader>kc", dap.continue, "Run/Continue")
-  map("<leader>ka", function() dap.continue({ before = get_args }) end, "Run with args")
-  map("<leader>kC", dap.run_to_cursor, "Run to cursor")
+  map("<leader>kf", function() widgets.centered_float(widgets.frames) end , "Frames")
   map("<leader>kg", dap.goto_, "Go to line (no execute)")
+  map("<leader>kh", widgets.hover, "Hover")
   map("<leader>ki", dap.step_into, "Step into")
   map("<leader>kj", dap.down, "Down")
   map("<leader>kk", dap.up, "Up")
   map("<leader>kl", dap.run_last, "Run last")
   map("<leader>ko", dap.step_over, "Step over")
-  map("<leader>kO", dap.step_out, "Step out")
   map("<leader>kp", dap.pause, "Pause")
   map("<leader>kr", dap.repl.toggle, "Toggle repl")
   map("<leader>ks", dap.session, "Session")
-  map("<leader>kt", dap.terminate, "Terminate")
-  map("<leader>kw", require("dap.ui.widgets").hover, "Widgets")
+  map("<leader>kT", dap.terminate, "Terminate")
+  map("<leader>kt", function() widgets.centered_float(widgets.threads) end, "Threads")
 end
 -- stylua: ignore end
 
