@@ -19,6 +19,10 @@ return {
     -----------------------------------------------------------------------
     -- Setup DAP
     -----------------------------------------------------------------------
+    -- Enable debugging threads
+    require("dap").defaults.fallback.auto_continue_if_many_stopped = false
+
+    -- Setup mappings
     require("etiennecollin.core.mappings.plugin").dap()
 
     vim.api.nvim_set_hl(0, "DapStoppedLine", {
