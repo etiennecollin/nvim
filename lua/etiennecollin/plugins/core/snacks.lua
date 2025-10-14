@@ -194,6 +194,10 @@ return {
       notification = {
         wo = { wrap = true }, -- Wrap notifications
       },
+      snacks_image = {
+        relative = "editor",
+        col = -1,
+      },
     },
   },
   init = function()
