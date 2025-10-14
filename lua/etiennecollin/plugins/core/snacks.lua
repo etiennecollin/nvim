@@ -144,7 +144,19 @@ return {
     },
     picker = {
       enabled = true,
-      layout = { preset = "ivy" },
+      formatters = {
+        file = {
+          filename_first = true, -- display filename before the file path
+          truncate = 80,
+        },
+      },
+      layout = {
+        preset = "ivy",
+      },
+      matcher = {
+        frecency = true,
+        history_bonus = true,
+      },
       sources = {
         explorer = {
           auto_close = true,
