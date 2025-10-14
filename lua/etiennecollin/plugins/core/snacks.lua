@@ -132,6 +132,11 @@ return {
       theme = {
         selectedLineBgColor = { bg = "CursorLine" },
       },
+      -- Make fullscreen
+      win = {
+        width = 0,
+        height = 0,
+      },
     },
     notifier = {
       enabled = true,
