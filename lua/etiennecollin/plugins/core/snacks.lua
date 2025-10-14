@@ -1,5 +1,36 @@
 local IMG_PATH = vim.fn.expand("~/Pictures/wallpapers/a_moonlit_night_at_sea.jpg")
 
+local gitActions = {
+  actions = {
+    ["open_file"] = function(picker)
+      local currentCommit = picker:current().commit
+      picker:close()
+      vim.cmd("Gitsigns show " .. currentCommit)
+    end,
+    ["diffview"] = function(picker)
+      local currentCommit = picker:current().commit
+      picker:close()
+      vim.cmd("DiffviewOpen HEAD " .. currentCommit)
+    end,
+  },
+  win = {
+    input = {
+      keys = {
+        ["<CR>"] = {
+          "open_file",
+          desc = "Open File",
+          mode = { "n", "i" },
+        },
+        ["<c-d>"] = {
+          "diffview",
+          desc = "Diffview",
+          mode = { "n", "i" },
+        },
+      },
+    },
+  },
+}
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -158,6 +189,9 @@ return {
         history_bonus = true,
       },
       sources = {
+        git_log = gitActions,
+        git_log_file = gitActions,
+        git_log_line = gitActions,
         explorer = {
           auto_close = true,
           layout = { preset = "ivy", preview = true },

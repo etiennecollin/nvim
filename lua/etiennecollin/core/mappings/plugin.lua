@@ -222,11 +222,11 @@ function M.snacks()
 
   -- Snacks git
   vim.keymap.set({ "n", "i", "v", "t" }, "<F2>", function() Snacks.lazygit() end, { desc = "Lazygit" })
-  vim.keymap.set({ "n" }, "<leader>gL", function() Snacks.picker.git_log() end, { desc = "Git Log" })
-  vim.keymap.set({ "n", "v", "t" }, "<leader>gf", function() Snacks.lazygit.log_file() end, { desc = "Lazygit file logs" })
-  vim.keymap.set({ "n", "v", "t" }, "<leader>gl", function() Snacks.lazygit.log() end, { desc = "Lazygit logs" })
+  vim.keymap.set("n", "<leader>gf", function() Snacks.picker.git_log_file() end, { desc = "Log file" })
+  vim.keymap.set("n", "<leader>gl", function() Snacks.picker.git_log() end, { desc = "Logs" })
+  vim.keymap.set("n", "<leader>gL", function() Snacks.picker.git_log_line() end, { desc = "Log line" })
   vim.keymap.set("n", "<leader>go", function() Snacks.gitbrowse() end, { desc = "Git Browse" })
-  vim.keymap.set({ "n" }, "<leader>gx", function() Snacks.picker.git_status() end, { desc = "Git Status" })
+  vim.keymap.set("n", "<leader>gx", function() Snacks.picker.git_status() end, { desc = "Git Status" })
 
   -- Snacks explorer
   vim.keymap.set({ "n" }, "<leader>e", function() Snacks.picker.explorer() end, { desc = "Toggle Explorer" })
