@@ -71,6 +71,7 @@ M.reduced_tabstop = {
   "jsonc",
   "lua",
   "markdown",
+  "plantuml",
   "sh",
   "typescriptreact",
   "typst",
