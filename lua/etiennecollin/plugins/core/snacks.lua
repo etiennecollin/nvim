@@ -213,6 +213,21 @@ return {
           },
         },
       },
+      -- debug = {
+      --   scores = true,
+      -- },
+      transform = function(item)
+        if not item.file then
+          return item
+        end
+
+        -- Lower priority for files inside deps/
+        if item.file:match("deps/") then
+          item.score_add = (item.score_add or 0) - 100
+        end
+
+        return item
+      end,
     },
     quickfile = {
       enabled = true,
