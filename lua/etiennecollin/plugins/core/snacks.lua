@@ -177,13 +177,14 @@ return {
       enabled = true,
       formatters = {
         file = {
-          filename_first = true, -- display filename before the file path
+          filename_first = false,
           truncate = 80,
         },
       },
-      layout = {
-        preset = "ivy",
-      },
+      -- layout = {
+      --   preset = "ivy",
+      --   layout = { title = "{title} {live} {flags} - {preview}" },
+      -- },
       matcher = {
         frecency = true,
         history_bonus = true,
