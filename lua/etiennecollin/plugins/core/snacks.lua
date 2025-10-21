@@ -208,9 +208,25 @@ return {
                 ["l"] = "confirm",
                 ["m"] = "explorer_move",
                 ["r"] = "explorer_rename",
-                ["y"] = "explorer_yank",
+                ["<c-o>"] = "explorer_yank",
+                ["y"] = "yank_relative_cwd",
+                ["Y"] = "yank_relative_home",
               },
             },
+          },
+          actions = {
+            yank_relative_cwd = function(_, item)
+              local path = vim.fn.fnamemodify(item.file, ":.")
+              vim.fn.setreg("+", path)
+              vim.fn.setreg('"', path)
+              vim.notify("Yanked: " .. path)
+            end,
+            yank_relative_home = function(_, item)
+              local path = vim.fn.fnamemodify(item.file, ":~")
+              vim.fn.setreg("+", path)
+              vim.fn.setreg('"', path)
+              vim.notify("Yanked: " .. path)
+            end,
           },
         },
       },
