@@ -4,6 +4,10 @@
 - `sudo apt install python-neovim python3-neovim`
 - `sudo pacman -S python-pynvim`
 
+## Treesitter
+
+- `tree-sitter-cli tar curl`
+
 ## Grug-Far
 
 - `ast-grep ripgrep`

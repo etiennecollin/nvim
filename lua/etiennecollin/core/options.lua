@@ -167,7 +167,7 @@ vim.opt.undofile = true
 vim.opt.foldtext = ""
 vim.opt.foldcolumn = "0"
 vim.opt.foldenable = false
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldexpr = "indent"
 vim.opt.foldlevel = 99
 vim.opt.foldmethod = "expr"
 

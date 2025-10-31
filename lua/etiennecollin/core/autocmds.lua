@@ -62,20 +62,30 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   desc = "Open help pages in a listed buffer in the current window.",
 })
 
--- https://github.com/mcauley-penney/nvim/
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-  group = vim.api.nvim_create_augroup("etiennecollin-foldmethod", { clear = true }),
-  pattern = "*",
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "*" },
+  group = vim.api.nvim_create_augroup("etiennecollin-treesitter", { clear = true }),
   callback = function()
+    -- Check if parser is installed
     local ok, parser = pcall(vim.treesitter.get_parser)
     if ok and parser then
-      vim.opt_local.foldmethod = "expr"
-      vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      -- Enable syntax highlighting
+      vim.treesitter.start()
+
+      -- Enable regex syntax highlighting
+      -- vim.bo.syntax = "on"
+
+      -- Set fold method
+      vim.wo.foldmethod = "expr"
+      vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+      -- Indent is experimental
+      vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
     else
-      vim.opt_local.foldmethod = "indent"
+      vim.wo.foldmethod = "indent"
     end
   end,
-  desc = "Set foldmethod to treesitter or indent based on filetype",
+  desc = "Enable treesitter features if parser is available",
 })
 
 -- https://github.com/mcauley-penney/nvim/
