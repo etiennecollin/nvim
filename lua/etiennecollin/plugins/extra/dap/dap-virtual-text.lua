@@ -1,17 +1,17 @@
 return {
   "theHamsta/nvim-dap-virtual-text",
-  ft = { "cpp", "c", "rust" },
+  ft = { "cpp", "c", "rust", "python" },
   dependencies = { "mfussenegger/nvim-dap" },
   opts = {
     -- Create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
     enable_commands = true,
     highlight_changed_variables = true,
-    highlight_new_as_changed = false,
+    highlight_new_as_changed = true,
     show_stop_reason = true,
     commented = true,
     only_first_definition = false,
     all_references = false,
-    clear_on_continue = false,
+    clear_on_continue = true,
     virt_text_pos = "eol", -- vim.fn.has("nvim-0.10") == 1 and "inline" or "eol"
   },
 }

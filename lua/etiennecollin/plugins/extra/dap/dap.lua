@@ -1,6 +1,6 @@
 return {
   "mfussenegger/nvim-dap",
-  ft = { "cpp", "c", "rust" },
+  ft = { "cpp", "c", "rust", "python" },
   cmd = { "DapNew" },
   dependencies = {
     { "jay-babu/mason-nvim-dap.nvim", dependencies = "mason-org/mason.nvim", config = false },
@@ -13,14 +13,49 @@ return {
       ensure_installed = require("etiennecollin.config").ensure_installed_daps,
       automatic_installation = true,
       automatic_setup = true,
-      handlers = {},
+      handlers = {}, -- Keep this line to generate default handlers
     })
 
     -----------------------------------------------------------------------
     -- Setup DAP
     -----------------------------------------------------------------------
+    local dap = require("dap")
+
     -- Enable debugging threads
-    require("dap").defaults.fallback.auto_continue_if_many_stopped = false
+    dap.defaults.fallback.auto_continue_if_many_stopped = false
+
+    -- Fix `attach` for debugpy
+    dap.adapters.python = function(cb, config)
+      if config.request == "attach" then
+        ---@diagnostic disable-next-line: undefined-field
+        local port = (config.connect or config).port
+        ---@diagnostic disable-next-line: undefined-field
+        local host = (config.connect or config).host or "127.0.0.1"
+
+        ---@type dap.ServerAdapter
+        local adapter = {
+          type = "server",
+          port = assert(port, "`connect.port` is required for a python `attach` configuration"),
+          host = host,
+          options = {
+            source_filetype = "python",
+          },
+        }
+        cb(adapter)
+      else
+        ---@type dap.ExecutableAdapter
+        local adapter = {
+          type = "executable",
+          command = vim.fn.exepath("debugpy-adapter"),
+          args = {},
+          options = {
+            source_filetype = "python",
+          },
+        }
+        cb(adapter)
+      end
+    end
+    dap.adapters.debugpy = dap.adapters.python
 
     -- Setup mappings
     require("etiennecollin.core.mappings.plugin").dap()
