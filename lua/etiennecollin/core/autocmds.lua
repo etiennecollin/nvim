@@ -24,6 +24,18 @@ vim.api.nvim_create_autocmd("FileType", {
   desc = "Decrease tabstop for certain filetypes",
 })
 
+vim.api.nvim_create_autocmd("User", {
+  group = vim.api.nvim_create_augroup("etiennecollin-git-conflicts", { clear = true }),
+  pattern = "GitConflictDetected",
+  callback = function()
+    vim.notify("Conflict detected in " .. vim.fn.expand("<afile>"))
+    vim.keymap.set("n", "cww", function()
+      engage.conflict_buster()
+      create_buffer_local_mappings()
+    end)
+  end,
+})
+
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("etiennecollin-filetype-keybinds", { clear = true }),
   callback = require("etiennecollin.core.mappings.plugin").language_specific,
@@ -101,19 +113,3 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
   end,
   desc = "Reset cmdheight to 0 when recording stops",
 })
-
--- local function commit_on_save()
--- 	-- Check if the file is in a git repository
--- 	if vim.fn.system("git rev-parse --is-inside-work-tree 2>/dev/null") ~= "" then
--- 		-- Add the current file to the staging area
--- 		vim.fn.system("git add " .. vim.fn.expand("%:p"))
---
--- 		-- Commit the file with a generic message
--- 		vim.fn.system('git commit -q -m "squash! $(git log -1 --format=%H)"')
--- 	end
--- end
---
--- vim.api.nvim_create_autocmd("BufWritePost", {
--- 	pattern = "*",
--- 	callback = commit_on_save,
--- })
