@@ -74,23 +74,23 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   desc = "Open help pages in a listed buffer in the current window.",
 })
 
--- https://github.com/mcauley-penney/nvim/
-vim.api.nvim_create_autocmd({ "BufEnter", "CursorMoved", "CursorHoldI" }, {
-  group = vim.api.nvim_create_augroup("etiennecollin-scrolloff", { clear = true }),
-  callback = function()
-    local win_h = vim.api.nvim_win_get_height(0) -- Height of window
-    local off = math.min(vim.o.scrolloff, math.floor(win_h / 2)) -- Scroll offset
-    local dist = vim.fn.line("$") - vim.fn.line(".") -- Distance from current line to last line
-    local rem = vim.fn.line("w$") - vim.fn.line("w0") + 1 -- Num visible lines in current window
-
-    if dist < off and win_h - rem + dist < off then
-      local view = vim.fn.winsaveview()
-      view.topline = view.topline + off - (win_h - rem + dist)
-      vim.fn.winrestview(view)
-    end
-  end,
-  desc = "Always respect scrolloff",
-})
+-- -- https://github.com/mcauley-penney/nvim/
+-- vim.api.nvim_create_autocmd({ "BufEnter", "CursorMoved", "CursorHoldI" }, {
+--   group = vim.api.nvim_create_augroup("etiennecollin-scrolloff", { clear = true }),
+--   callback = function()
+--     local win_h = vim.api.nvim_win_get_height(0) -- Height of window
+--     local off = math.min(vim.o.scrolloff, math.floor(win_h / 2)) -- Scroll offset
+--     local dist = vim.fn.line("$") - vim.fn.line(".") -- Distance from current line to last line
+--     local rem = vim.fn.line("w$") - vim.fn.line("w0") + 1 -- Num visible lines in current window
+--
+--     if dist < off and win_h - rem + dist < off then
+--       local view = vim.fn.winsaveview()
+--       view.topline = view.topline + off - (win_h - rem + dist)
+--       vim.fn.winrestview(view)
+--     end
+--   end,
+--   desc = "Always respect scrolloff",
+-- })
 
 vim.api.nvim_create_autocmd("VimResized", {
   group = vim.api.nvim_create_augroup("etiennecollin-resize", { clear = true }),
