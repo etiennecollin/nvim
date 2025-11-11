@@ -104,7 +104,7 @@ vim.opt.nrformats = { "alpha", "bin", "blank", "hex", "octal" }
 --------------------------------------------------------------------------------
 vim.opt.number = true
 vim.opt.numberwidth = 3
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 
 --------------------------------------------------------------------------------
 -- Set indentation
