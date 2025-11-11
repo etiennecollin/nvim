@@ -74,6 +74,22 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   desc = "Open help pages in a listed buffer in the current window.",
 })
 
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = vim.api.nvim_create_augroup("etiennecollin-restore-cursor", { clear = true }),
+  callback = function(args)
+    local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+    local line_count = vim.api.nvim_buf_line_count(args.buf)
+    if mark[1] > 0 and mark[1] <= line_count then
+      vim.api.nvim_win_set_cursor(0, mark)
+      -- defer centering slightly so it's applied after render
+      vim.schedule(function()
+        vim.cmd("normal! zz")
+      end)
+    end
+  end,
+  desc = "Restore cursor to file position in previous editing session.",
+})
+
 -- -- https://github.com/mcauley-penney/nvim/
 -- vim.api.nvim_create_autocmd({ "BufEnter", "CursorMoved", "CursorHoldI" }, {
 --   group = vim.api.nvim_create_augroup("etiennecollin-scrolloff", { clear = true }),
@@ -98,18 +114,20 @@ vim.api.nvim_create_autocmd("VimResized", {
   desc = "Resize all windows to fit the current tab",
 })
 
-local group_recording = vim.api.nvim_create_augroup("etiennecollin-recording", { clear = true })
+local group_recording = vim.api.nvim_create_augroup("etiennecollin-macro-recording", { clear = true })
 vim.api.nvim_create_autocmd("RecordingEnter", {
   group = group_recording,
   callback = function()
-    vim.o.cmdheight = 1
+    vim.opt.cmdheight = 1
+    vim.notify("Recording macro...")
   end,
   desc = "Set cmdheight to 1 when recording starts",
 })
 vim.api.nvim_create_autocmd("RecordingLeave", {
   group = group_recording,
-  callback = function()
-    vim.o.cmdheight = 0
+  callback = function(event)
+    vim.opt.cmdheight = 0
+    vim.notify("Done recording macro")
   end,
   desc = "Reset cmdheight to 0 when recording stops",
 })
