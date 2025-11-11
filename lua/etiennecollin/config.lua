@@ -17,7 +17,7 @@ M.colorscheme = "rose-pine"
 M.colorscheme_fallback = "retrobox"
 
 --- The background style
---- Either "light" or "dark"
+--- @type "light"|"dark"
 M.background_style = "dark"
 
 --- The Treesitter languages to be installed.
