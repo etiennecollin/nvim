@@ -21,10 +21,11 @@ M.colorscheme_fallback = "retrobox"
 M.background_style = "dark"
 
 --- The Treesitter languages to be installed.
-M.ensure_installed_treesitter = { "vim", "regex", "lua", "bash", "markdown", "markdown_inline", "comment" }
+M.ensure_installed_treesitter =
+  { "vim", "regex", "lua", "bash", "markdown", "markdown_inline", "comment", "python", "c", "cpp" }
 
 --- The LSPs to be installed by Mason.
-M.ensure_installed_lsps = { "lua_ls", "clangd", "basedpyright", "bashls", "jdtls", "tinymist", "ts_ls", "neocmake" }
+M.ensure_installed_lsps = { "lua_ls", "clangd", "basedpyright", "bashls", "tinymist", "ts_ls", "neocmake" }
 
 --- The Linters to be installed by Mason.
 M.ensure_installed_linters = {
@@ -60,7 +61,7 @@ M.ensure_installed_formatters = {
 }
 
 --- The DAPs to be installed by Mason.
-M.ensure_installed_daps = { "codelldb", "cpptools" }
+M.ensure_installed_daps = { "codelldb", "cpptools", "debugpy" }
 
 --- Decrease tabstop for certain filetypes
 M.reduced_tabstop = {
