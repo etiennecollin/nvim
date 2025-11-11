@@ -202,7 +202,11 @@ end
 
 function M.dapui()
   local dapui = require("dapui")
-  vim.keymap.set("n", "<leader>ku", dapui.toggle, { desc = "Dap UI Toggle" })
+  local virtual_text = require("nvim-dap-virtual-text")
+  vim.keymap.set("n", "<leader>ku", function()
+    dapui.toggle()
+    virtual_text.refresh()
+  end, { desc = "Dap UI Toggle" })
   vim.keymap.set({ "n", "x" }, "<leader>ke", dapui.eval, { desc = "Dap UI Eval" })
 end
 
