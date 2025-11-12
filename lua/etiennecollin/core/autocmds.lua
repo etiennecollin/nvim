@@ -24,15 +24,21 @@ vim.api.nvim_create_autocmd("FileType", {
   desc = "Decrease tabstop for certain filetypes",
 })
 
+local group_conflict = vim.api.nvim_create_augroup("etiennecollin-git-conflicts", { clear = true })
 vim.api.nvim_create_autocmd("User", {
-  group = vim.api.nvim_create_augroup("etiennecollin-git-conflicts", { clear = true }),
+  group = group_conflict,
   pattern = "GitConflictDetected",
-  callback = function()
-    vim.notify("Conflict detected in " .. vim.fn.expand("<afile>"))
-    vim.keymap.set("n", "cww", function()
-      engage.conflict_buster()
-      create_buffer_local_mappings()
-    end)
+  callback = function(event)
+    local buf_name = vim.api.nvim_buf_get_name(event.buf)
+    vim.notify("Conflict detected in " .. buf_name)
+  end,
+})
+vim.api.nvim_create_autocmd("User", {
+  group = group_conflict,
+  pattern = "GitConflictResolved",
+  callback = function(event)
+    local buf_name = vim.api.nvim_buf_get_name(event.buf)
+    vim.notify("Conflicts resolved in " .. buf_name)
   end,
 })
 

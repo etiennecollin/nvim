@@ -1,13 +1,15 @@
 return {
   "akinsho/git-conflict.nvim",
-  cmd = {
-    "GitConflictChooseOurs",
-    "GitConflictChooseTheirs",
-    "GitConflictChooseBoth",
-    "GitConflictChooseNone",
-    "GitConflictNextConflict",
-    "GitConflictPrevConflict",
-    "GitConflictListQf",
+  event = { "BufReadPre", "BufNewFile" },
+  opts = {
+    default_mappings = true,
+    default_commands = true,
+    disable_diagnostics = false,
+    list_opener = "copen",
+    highlights = {
+      incoming = "DiffAdd",
+      ancestor = "DiffChange",
+      current = "DiffText",
+    },
   },
-  config = true,
 }
