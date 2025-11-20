@@ -4,7 +4,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function()
     vim.cmd([[%s/\s\+$//e]])
   end,
-  desc = "Remove trailing whitespace on save",
+  desc = "Remove trailing whitespace on save.",
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.hl.on_yank()
   end,
-  desc = "Highlight on yank",
+  desc = "Highlight on yank.",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.opt_local.tabstop = 2
   end,
-  desc = "Decrease tabstop for certain filetypes",
+  desc = "Decrease tabstop for certain filetypes.",
 })
 
 local group_conflict = vim.api.nvim_create_augroup("etiennecollin-git-conflicts", { clear = true })
@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd("User", {
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("etiennecollin-filetype-keybinds", { clear = true }),
   callback = require("etiennecollin.core.mappings.plugin").language_specific,
-  desc = "Set keybinds when filetype changes",
+  desc = "Set keybinds when filetype changes.",
 })
 -- After creating the autocmd we run the function manually for the first time.
 -- This is necessary to run when opening file with `nvim file.ext`.
@@ -61,7 +61,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       end, { buffer = event.buf, desc = "LSP: Inlay Hints" })
     end
   end,
-  desc = "Enable inlay hints if the server supports them",
+  desc = "Enable inlay hints if the server supports them.",
 })
 
 -- https://www.reddit.com/r/neovim/comments/10383z1/open_help_in_buffer_instead_of_split/
@@ -97,7 +97,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- -- https://github.com/mcauley-penney/nvim/
--- vim.api.nvim_create_autocmd({ "BufEnter", "CursorMoved", "CursorHoldI" }, {
+-- vim.api.nvim_create_autocmd({ "WinScrolled", "WinResized", "VimResized" }, {
 --   group = vim.api.nvim_create_augroup("etiennecollin-scrolloff", { clear = true }),
 --   callback = function()
 --     local win_h = vim.api.nvim_win_get_height(0) -- Height of window
@@ -111,29 +111,57 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 --       vim.fn.winrestview(view)
 --     end
 --   end,
---   desc = "Always respect scrolloff",
+--   desc = "Always respect scrolloff.",
 -- })
 
 vim.api.nvim_create_autocmd("VimResized", {
   group = vim.api.nvim_create_augroup("etiennecollin-resize", { clear = true }),
   command = "tabdo wincmd =",
-  desc = "Resize all windows to fit the current tab",
+  desc = "Resize all windows to fit the current tab.",
 })
 
 local group_recording = vim.api.nvim_create_augroup("etiennecollin-macro-recording", { clear = true })
 vim.api.nvim_create_autocmd("RecordingEnter", {
   group = group_recording,
   callback = function()
-    vim.opt.cmdheight = 1
     vim.notify("Recording macro...")
   end,
-  desc = "Set cmdheight to 1 when recording starts",
+  desc = "Notify when macro recording starts.",
 })
 vim.api.nvim_create_autocmd("RecordingLeave", {
   group = group_recording,
-  callback = function(event)
-    vim.opt.cmdheight = 0
+  callback = function()
     vim.notify("Done recording macro")
   end,
-  desc = "Reset cmdheight to 0 when recording stops",
+  desc = "Notify when macro recording is done.",
+})
+
+local group_cursorline = vim.api.nvim_create_augroup("etiennecollin-cursorline", { clear = true })
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+  group = group_cursorline,
+  callback = function()
+    vim.opt_local.cursorline = true
+  end,
+  desc = "Show cursorline in active window.",
+})
+vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
+  group = group_cursorline,
+  callback = function()
+    vim.opt_local.cursorline = false
+  end,
+  desc = "Hide cursorline in inactive window.",
+})
+vim.api.nvim_create_autocmd("CmdLineEnter", {
+  group = group_cursorline,
+  callback = function()
+    vim.opt.cursorlineopt = "both"
+  end,
+  desc = "When entering command-line , highlight both number and screenline.",
+})
+vim.api.nvim_create_autocmd("CmdLineLeave", {
+  group = group_cursorline,
+  callback = function()
+    vim.opt.cursorlineopt = "number"
+  end,
+  desc = "When leaving command-line, revert cursorline highlight to just number.",
 })

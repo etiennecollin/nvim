@@ -91,7 +91,7 @@ vim.opt.laststatus = 3
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 vim.opt.cursorline = true
 -- Only highlight the line number in the cursor line
-vim.opt.cursorlineopt = { "number" }
+vim.opt.cursorlineopt = "number"
 vim.opt.colorcolumn = { "80", "120" }
 
 --------------------------------------------------------------------------------
