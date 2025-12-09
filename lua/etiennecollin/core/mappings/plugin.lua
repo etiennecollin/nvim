@@ -80,7 +80,7 @@ function M.language_specific()
     local_map("<leader>mc", "<cmd>! typst compile --root ~ " .. vim.fn.expand("%:p") .. "<cr>", "Compile PDF")
     local_map("<leader>mm", "<cmd>TypstPreviewToggle<cr>", "Toggle preview")
   elseif is_file_type("markdown") then
-    local_map("<leader>m", "<cmd>MarkdownPreviewToggle<cr>", "Toggle markdown preview")
+    local_map("<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", "Toggle markdown preview")
   elseif is_file_type("rust") then
     local_map("<leader>m", "", "Rust")
     local_map("<leader>mc", "<cmd>RustLsp codeAction<cr>", "Code Actions")
