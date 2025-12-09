@@ -5,6 +5,7 @@ return {
   cmd = { "ConformInfo" },
   config = function()
     local conform = require("conform")
+    local default_timeout_ms = 500
     conform.setup({
       formatters_by_ft = require("etiennecollin.config").ensure_installed_formatters,
       format_on_save = function(bufnr)
@@ -12,7 +13,7 @@ return {
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
           return
         end
-        return { timeout_ms = 500, lsp_fallback = true }
+        return { timeout_ms = default_timeout_ms, lsp_fallback = true }
       end,
       formatters = {
         black = {
@@ -46,7 +47,14 @@ return {
       vim.b.disable_autoformat = false
       vim.g.disable_autoformat = false
     end, {
-      desc = "Re-enable autoformat-on-save",
+      desc = "Enable autoformat-on-save",
+    })
+
+    vim.api.nvim_create_user_command("Format", function(opts)
+      local timeout = tonumber(opts.fargs[1]) or default_timeout_ms
+      conform.format({ lsp_fallback = true, async = false, timeout_ms = timeout })
+    end, {
+      desc = "Format current buffer",
     })
 
     vim.keymap.set({ "n", "v" }, "<leader>f", function()
