@@ -236,7 +236,7 @@ function M.snacks()
   vim.keymap.set({ "n" }, "<leader>e", function() Snacks.picker.explorer() end, { desc = "Toggle Explorer" })
 
   -- Snacks picker
-  vim.keymap.set({ "n" }, "<leader><leader>", function() Snacks.picker.buffers() end, { desc = "Buffers" })
+  vim.keymap.set({ "n" }, "<leader><leader>", function() Snacks.picker.buffers({ sort_lastused = false }) end, { desc = "Buffers" })
   vim.keymap.set({ "n" }, '<leader>s"', function() Snacks.picker.registers() end, { desc = "Registers" })
   vim.keymap.set({ "n" }, "<leader>s:", function() Snacks.picker.commands() end, { desc = "Commands" })
   vim.keymap.set({ "n" }, "<leader>s;", function() Snacks.picker.command_history() end, { desc = "Command History" })
