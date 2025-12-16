@@ -4,16 +4,20 @@ return {
   dependencies = { "zapling/mason-conform.nvim", dependencies = "mason-org/mason.nvim", config = false },
   cmd = { "ConformInfo" },
   config = function()
-    local conform = require("conform")
     local default_timeout_ms = 500
+
+    local conform = require("conform")
     conform.setup({
-      formatters_by_ft = require("etiennecollin.config").ensure_installed_formatters,
-      format_on_save = function(bufnr)
+      default_format_opts = {
+        lsp_format = "fallback",
+        timeout_ms = default_timeout_ms,
+      },
+      format_after_save = function(bufnr)
         -- Disable with a global or buffer-local variable
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
           return
         end
-        return { timeout_ms = default_timeout_ms, lsp_fallback = true }
+        return { lsp_format = "fallback", timeout_ms = default_timeout_ms }
       end,
       formatters = {
         black = {
@@ -29,6 +33,7 @@ return {
           prepend_args = { "--tab-width=2" },
         },
       },
+      formatters_by_ft = require("etiennecollin.config").ensure_installed_formatters,
     })
 
     -- Install formatters with mason
@@ -54,14 +59,18 @@ return {
     })
 
     vim.api.nvim_create_user_command("Format", function(opts)
-      local timeout = tonumber(opts.fargs[1]) or default_timeout_ms
-      conform.format({ lsp_fallback = true, async = false, timeout_ms = timeout })
+      conform.format({ async = false, timeout_ms = tonumber(opts.fargs[1]) or nil })
     end, {
       desc = "Format current buffer",
+      nargs = "?",
     })
 
     vim.keymap.set({ "n", "v" }, "<leader>f", function()
-      conform.format({ lsp_fallback = true, async = false })
+      conform.format({ async = true }, function(err, did_edit)
+        if err then
+          vim.notify("Formatting error (buffer edited: " .. tostring(did_edit) .. "): " .. err, vim.log.levels.WARN)
+        end
+      end)
     end, { desc = "Format buffer" })
   end,
 }
