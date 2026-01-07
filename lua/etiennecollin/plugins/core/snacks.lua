@@ -1,6 +1,9 @@
 local IMG_PATH = vim.fn.expand("~/Pictures/wallpapers/a_moonlit_night_at_sea.jpg")
+local function pdw_viewer_command(file, page)
+  return { "flatpak", "run", "com.github.ahrm.sioyek", file, "--page", tostring(page) }
+end
 
-local gitActions = {
+local git_actions = {
   actions = {
     ["open_file"] = function(picker)
       local currentCommit = picker:current().commit
@@ -26,6 +29,36 @@ local gitActions = {
           desc = "Diffview",
           mode = { "n", "i" },
         },
+      },
+    },
+  },
+}
+
+local rga_source = {
+  title = "Ripgrep-All",
+  finder = require("etiennecollin.plugins.core.snacks-pickers.ripgrep-all").finder,
+  formatter = require("etiennecollin.plugins.core.snacks-pickers.ripgrep-all").formatter,
+  format = "file",
+  preview = "file",
+  regex = true,
+  show_empty = true,
+  live = true, -- live grep by default
+  supports_live = true,
+  actions = {
+    open = function(picker, item)
+      picker:close()
+      if item.ext == "pdf" then
+        -- Open PDF at the correct page
+        vim.fn.jobstart(pdw_viewer_command(item.file, item.page), { detach = true })
+      else
+        vim.cmd(("edit +%d %s"):format(item.pos[1], vim.fn.fnameescape(item.file)))
+      end
+    end,
+  },
+  win = {
+    input = {
+      keys = {
+        ["<CR>"] = { "open", mode = { "n", "i" } },
       },
     },
   },
@@ -139,12 +172,28 @@ return {
         },
       },
       sources = {
-        git_log = gitActions,
-        git_log_file = gitActions,
-        git_log_line = gitActions,
+        git_log = git_actions,
+        git_log_file = git_actions,
+        git_log_line = git_actions,
+        rga = rga_source,
         explorer = {
           auto_close = true,
           layout = { preset = "ivy", preview = true },
+          matcher = { fuzzy = true },
+          actions = {
+            yank_relative_cwd = function(_, item)
+              local path = vim.fn.fnamemodify(item.file, ":.")
+              vim.fn.setreg("+", path)
+              vim.fn.setreg('"', path)
+              vim.notify("Yanked: " .. path)
+            end,
+            yank_relative_home = function(_, item)
+              local path = vim.fn.fnamemodify(item.file, ":~")
+              vim.fn.setreg("+", path)
+              vim.fn.setreg('"', path)
+              vim.notify("Yanked: " .. path)
+            end,
+          },
           win = {
             list = {
               keys = {
@@ -162,20 +211,6 @@ return {
                 ["Y"] = "yank_relative_home",
               },
             },
-          },
-          actions = {
-            yank_relative_cwd = function(_, item)
-              local path = vim.fn.fnamemodify(item.file, ":.")
-              vim.fn.setreg("+", path)
-              vim.fn.setreg('"', path)
-              vim.notify("Yanked: " .. path)
-            end,
-            yank_relative_home = function(_, item)
-              local path = vim.fn.fnamemodify(item.file, ":~")
-              vim.fn.setreg("+", path)
-              vim.fn.setreg('"', path)
-              vim.notify("Yanked: " .. path)
-            end,
           },
         },
       },
