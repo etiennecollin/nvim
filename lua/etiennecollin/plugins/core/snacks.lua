@@ -35,22 +35,16 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
+
+  ---@type snacks.picker.Config
   opts = {
-    animate = {
-      enabled = true,
-      fps = 120,
-    },
-    bigfile = {
-      enabled = true,
-      notify = true,
-      size = 1.5 * 1024 * 1024, -- 1.5MB
-    },
     dashboard = {
       enabled = true,
       preset = {
         keys = {
-          { icon = " ", key = "sf", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
           { icon = " ", key = "a", desc = "New File", action = ":ene | startinsert" },
+          { icon = " ", key = "r", desc = "Restore Session", section = "session" },
+          { icon = " ", key = "sf", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
           {
             icon = " ",
             key = "sg",
@@ -65,20 +59,19 @@ return {
           },
           {
             icon = " ",
-            key = "c",
+            key = "sc",
             desc = "Config",
             action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
           },
-          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
           {
             icon = " ",
-            key = "m",
+            key = "zm",
             desc = "Mason",
             action = ":Mason",
           },
           {
             icon = "󰒲 ",
-            key = "l",
+            key = "zl",
             desc = "Lazy",
             action = ":Lazy",
             enabled = package.loaded.lazy ~= nil,
@@ -129,58 +122,8 @@ return {
         },
       },
     },
-    dim = {
-      enabled = true,
-    },
-    explorer = {
-      enabled = true,
-      replace_netrw = true,
-    },
-    image = {
-      enabled = true,
-      doc = {
-        inline = false,
-        img_dirs = { "img", "images", "assets", "static", "public", "media", "attachments", "resources" },
-      },
-      math = {
-        enabled = false,
-      },
-    },
-    indent = {
-      enabled = true,
-      animate = {
-        enabled = false,
-      },
-      scope = {
-        enabled = true,
-      },
-    },
-    input = {
-      enabled = true,
-    },
-    lazygit = {
-      enabled = true,
-      theme = {
-        selectedLineBgColor = { bg = "CursorLine" },
-      },
-      -- Make fullscreen
-      win = {
-        width = 0,
-        height = 0,
-      },
-    },
-    notifier = {
-      enabled = true,
-      timeout = 3000,
-    },
     picker = {
       enabled = true,
-      formatters = {
-        file = {
-          filename_first = false,
-          truncate = 80,
-        },
-      },
       -- layout = {
       --   preset = "ivy",
       --   layout = { title = "{title} {live} {flags} - {preview}" },
@@ -188,6 +131,12 @@ return {
       matcher = {
         frecency = true,
         history_bonus = true,
+      },
+      previewers = {
+        diff = {
+          style = "terminal",
+          cmd = { "delta" },
+        },
       },
       sources = {
         git_log = gitActions,
@@ -245,6 +194,57 @@ return {
 
         return item
       end,
+    },
+    animate = {
+      enabled = true,
+      fps = 120,
+    },
+    bigfile = {
+      enabled = true,
+    },
+    dim = {
+      enabled = true,
+    },
+    explorer = {
+      enabled = true,
+      replace_netrw = true,
+    },
+    image = {
+      enabled = true,
+      doc = {
+        inline = false,
+        img_dirs = { "img", "images", "assets", "static", "public", "media", "attachments", "resources" },
+      },
+      math = {
+        enabled = false,
+      },
+    },
+    indent = {
+      enabled = true,
+      animate = {
+        enabled = false,
+      },
+      scope = {
+        enabled = true,
+      },
+    },
+    input = {
+      enabled = true,
+    },
+    lazygit = {
+      enabled = true,
+      theme = {
+        selectedLineBgColor = { bg = "CursorLine" },
+      },
+      -- Make fullscreen
+      win = {
+        width = 0,
+        height = 0,
+      },
+    },
+    notifier = {
+      enabled = true,
+      timeout = 3000,
     },
     quickfile = {
       enabled = true,
