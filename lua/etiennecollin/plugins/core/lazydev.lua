@@ -4,10 +4,10 @@ return {
   opts = {
     library = {
       "nvim-dap-ui",
+      "lazy.nvim",
       { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-      { path = "LazyVim", words = { "LazyVim" } },
       { path = "snacks.nvim", words = { "Snacks" } },
-      { path = "lazy.nvim", words = { "LazyVim" } },
+      { path = "obsidian.nvim", words = { "Obsidian" } },
     },
     integrations = {
       lspconfig = true,
