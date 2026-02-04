@@ -165,3 +165,60 @@ vim.api.nvim_create_autocmd("CmdLineLeave", {
   end,
   desc = "When leaving command-line, revert cursorline highlight to just number.",
 })
+
+local group_insert_indent = vim.api.nvim_create_augroup("etiennecollin-insert-indent", { clear = true })
+local function apply_ts_indent_if_blank(buf, lnum)
+  local line = vim.api.nvim_buf_get_lines(buf, lnum - 1, lnum, false)[1]
+  if line ~= "" then
+    return false
+  end
+
+  -- Check if indentexpr is set before evaluating
+  local indentexpr = vim.bo.indentexpr
+  if indentexpr == "" or indentexpr == nil then
+    return false
+  end
+
+  -- Get indent from indentexpr (Tree-sitter or fallback)
+  local old_lnum = vim.v.lnum
+  vim.v.lnum = lnum
+  local indent = vim.fn.eval(vim.bo.indentexpr)
+  vim.v.lnum = old_lnum
+  if indent > 0 then
+    vim.api.nvim_buf_set_lines(buf, lnum - 1, lnum, false, { string.rep(" ", indent) })
+  end
+  return true
+end
+vim.api.nvim_create_autocmd("InsertLeave", {
+  group = group_insert_indent,
+  callback = function()
+    -- Get current line
+    local buf = vim.api.nvim_get_current_buf()
+    local lnum = vim.api.nvim_win_get_cursor(0)[1]
+
+    -- Apply indentation
+    if apply_ts_indent_if_blank(buf, lnum) then
+      -- Go to end of line
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("$", true, false, true), "n", true)
+    end
+  end,
+  desc = "Apply indent on InsertLeave",
+})
+vim.api.nvim_create_autocmd("CursorMovedI", {
+  group = group_insert_indent,
+  callback = function()
+    -- Store the line we're leaving
+    local buf = vim.api.nvim_get_current_buf()
+    local prev_line = vim.b.previous_insert_line or 0
+    local current_line = vim.api.nvim_win_get_cursor(0)[1]
+
+    -- If moved, restore on previous line
+    if prev_line ~= current_line and prev_line > 0 then
+      local _ = apply_ts_indent_if_blank(buf, prev_line)
+    end
+
+    -- store current line for future
+    vim.b.previous_insert_line = current_line
+  end,
+  desc = "Apply indent in insert cursor move",
+})
