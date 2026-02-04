@@ -4,6 +4,25 @@ local function pdw_viewer_command(file, page)
 end
 
 local git_actions = {
+  layout = {
+    cycle = true,
+    preview = true,
+    layout = {
+      box = "horizontal",
+      position = "float",
+      height = 0.95,
+      width = 0,
+      border = "rounded",
+      {
+        box = "vertical",
+        width = 80,
+        min_width = 40,
+        { win = "input", height = 1, title = "{title} {live} {flags}", border = "single" },
+        { win = "list" },
+      },
+      { win = "preview", width = 0, border = "left" },
+    },
+  },
   actions = {
     ["open_file"] = function(picker)
       local currentCommit = picker:current().commit
