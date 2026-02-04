@@ -263,8 +263,8 @@ function M.snacks()
   vim.keymap.set({ "n" }, "<leader>sr", function() Snacks.picker.recent() end, { desc = "Recent" })
   vim.keymap.set({ "n" }, "<leader>sR", function() Snacks.picker.resume({ exclude = {"explorer"} }) end, { desc = "Resume" })
   vim.keymap.set({ "n" }, "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols" })
-  vim.keymap.set({ "n" }, "<leader>st", function() Snacks.picker.todo_comments() end, { desc = "All Todo" })
-  vim.keymap.set({ "n" }, "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, { desc = "Todo/Fix/Fixme" })
+  vim.keymap.set({ "n" }, "<leader>st", function() Snacks.picker.treesitter() end, { desc = "Treesitter" })
+  vim.keymap.set({ "n" }, "<leader>sT", function() Snacks.picker.todo_comments() end, { desc = "Todo/Fix/Fixme" })
   vim.keymap.set({ "n", "x" }, "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Visual selection or word" })
 
   -- Snacks LSP
