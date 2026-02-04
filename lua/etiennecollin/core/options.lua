@@ -141,12 +141,13 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 --------------------------------------------------------------------------------
--- Enable line wrapping
+-- Enable line wrapping and conceallevel
 --------------------------------------------------------------------------------
 vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.breakindent = true
 vim.opt.showbreak = "↪"
+vim.opt.conceallevel = 0
 
 --------------------------------------------------------------------------------
 -- Enable hidden buffers

@@ -14,7 +14,6 @@ return {
       "Token not allowed in a PDF string",
     }
     vim.g.vimtex_quickfix_mode = 0
-    vim.opt.conceallevel = 0
     -- vim.g.tex_conceal = "abdmg"
   end,
 }
