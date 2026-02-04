@@ -5,7 +5,6 @@ return {
     "rafamadriz/friendly-snippets",
     "folke/lazydev.nvim",
     "jmbuhr/cmp-pandoc-references",
-    { "fang2hou/blink-copilot", dependencies = "zbirenbaum/copilot.lua" },
     "brenoprata10/nvim-highlight-colors",
   },
   version = "1.*",
@@ -66,7 +65,7 @@ return {
       },
     },
     sources = {
-      default = { "copilot", "lsp", "path", "snippets", "buffer" },
+      default = { "lsp", "path", "snippets", "buffer" },
       per_filetype = {
         typst = { inherit_defaults = true, "references" },
         markdown = { inherit_defaults = true, "references" },
@@ -78,12 +77,6 @@ return {
           should_show_items = function(ctx)
             return ctx.trigger.initial_kind ~= "trigger_character"
           end,
-        },
-        copilot = {
-          name = "copilot",
-          module = "blink-copilot",
-          score_offset = 100,
-          async = true,
         },
         lazydev = {
           name = "LazyDev",
