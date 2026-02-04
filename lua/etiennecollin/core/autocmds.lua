@@ -89,7 +89,9 @@ vim.api.nvim_create_autocmd("BufReadPost", {
       vim.api.nvim_win_set_cursor(0, mark)
       -- defer centering slightly so it's applied after render
       vim.schedule(function()
-        vim.cmd("normal! zz")
+        if vim.api.nvim_get_mode().mode ~= "t" then
+          vim.cmd("normal! zz")
+        end
       end)
     end
   end,
