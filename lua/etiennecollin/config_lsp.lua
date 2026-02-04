@@ -59,7 +59,7 @@ M.lua_ls = {
   settings = {
     Lua = {
       diagnostics = {
-        globals = { "vim", "Snacks" },
+        globals = { "vim", "Snacks", "Obsidian" },
       },
       telemetry = {
         enable = false,

@@ -1,3 +1,8 @@
+local default_sources = { "lsp", "path", "snippets", "buffer" }
+local function merge_default_sources(sources)
+  return vim.list_extend(vim.deepcopy(default_sources), sources)
+end
+
 return {
   "saghen/blink.cmp",
   event = { "BufReadPre", "BufNewFile" },
@@ -65,11 +70,11 @@ return {
       },
     },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
+      default = default_sources,
       per_filetype = {
-        typst = { inherit_defaults = true, "references" },
-        markdown = { inherit_defaults = true, "references" },
-        lua = { inherit_defaults = true, "lazydev" },
+        typst = merge_default_sources({ "references" }),
+        markdown = merge_default_sources({ "references" }),
+        lua = merge_default_sources({ "lazydev" }),
       },
       providers = {
         snippets = {
