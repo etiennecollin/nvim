@@ -123,4 +123,8 @@ M.tinymist = {
   root_dir = os.getenv("HOME"),
 }
 
+M.harper_ls = {
+  filetypes = { "markdown" },
+}
+
 return M
