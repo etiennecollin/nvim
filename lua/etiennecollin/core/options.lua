@@ -114,6 +114,8 @@ vim.opt.softtabstop = 0 -- Set to 0 to match tabstop
 vim.opt.shiftwidth = 0 -- Set to 0 to match tabstop
 vim.opt.expandtab = true -- Use spaces instead of tabs
 
+vim.g.markdown_recommended_style = 0 -- Use our own config instead of the recommended one
+
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
