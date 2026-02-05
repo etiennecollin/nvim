@@ -127,5 +127,6 @@ return {
 
     require("obsidian").setup(opts)
     require("obsidian").register_command("weekly_report", { nargs = 0 })
+    require("obsidian").register_command("to_html", { nargs = 0 })
   end,
 }
