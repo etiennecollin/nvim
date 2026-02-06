@@ -16,6 +16,7 @@ return {
       { "<leader>g", group = "Git" },
       { "<leader>r", group = "LSP" },
       { "<leader>s", group = "Search" },
+      { "<leader>so", group = "Obsidian" },
       { "<leader>t", group = "Toggle" },
       { "<leader>tt", group = "Specific Terminal" },
       { "<leader>ts", group = "Slime" },
