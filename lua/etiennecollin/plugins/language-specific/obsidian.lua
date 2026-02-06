@@ -44,6 +44,10 @@ return {
         name = "work",
         path = "~/vaults/work",
       },
+      {
+        name = "personal",
+        path = "~/vaults/personal",
+      },
     },
     picker = {
       name = "snacks.pick",
