@@ -83,6 +83,16 @@ local rga_source = {
   },
 }
 
+local astgrep_source = {
+  title = "ast-grep",
+  finder = require("etiennecollin.plugins.core.snacks-pickers.ast-grep").finder,
+  format = "file",
+  preview = "file",
+  show_empty = true,
+  live = true, -- live grep by default
+  supports_live = true,
+}
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -241,6 +251,7 @@ return {
         git_log_file = git_actions,
         git_log_line = git_actions,
         rga = rga_source,
+        astgrep = astgrep_source,
         explorer = {
           auto_close = true,
           layout = { preset = "ivy", preview = true },
