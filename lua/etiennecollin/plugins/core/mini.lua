@@ -2,7 +2,7 @@ return {
   "echasnovski/mini.nvim",
   event = { "BufReadPre", "BufNewFile" },
   version = "*",
-  dependencies = { { "nvim-treesitter/nvim-treesitter-textobjects", branch = "main" } },
+  dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
   config = function()
     local ai = require("mini.ai")
     ai.setup({
