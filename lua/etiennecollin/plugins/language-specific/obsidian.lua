@@ -89,7 +89,7 @@ return {
       date_format = "%Y-%m-%d %a",
       time_format = "%H:%M:%S",
       substitutions = {
-        last_friday = function(ctx)
+        last_friday = function(_)
           local y, w = current_iso_week_and_year()
           -- 1..7 (Mon..Sun)
           local today_weekday = tonumber(os.date("%u"))
@@ -100,10 +100,10 @@ return {
           end
 
           local timestamp = find_iso_week_day(y, w, 5) -- Friday (day 5)
-          local fmt = (ctx.template_opts and ctx.template_opts.date_format) or "%Y-%m-%d"
+          local fmt = Obsidian.opts.templates.date_format or "%Y-%m-%d"
           return tostring(os.date(fmt, timestamp))
         end,
-        this_thursday = function(ctx)
+        this_thursday = function(_)
           local y, w = current_iso_week_and_year()
           -- 1..7 (Mon..Sun)
           local today_weekday = tonumber(os.date("%u"))
@@ -114,7 +114,7 @@ return {
           end
 
           local timestamp = find_iso_week_day(y, w, 4) -- Thursday
-          local fmt = ctx.template_opts.date_format or "%Y-%m-%d"
+          local fmt = Obsidian.opts.templates.date_format or "%Y-%m-%d"
           return tostring(os.date(fmt, timestamp))
         end,
       },
