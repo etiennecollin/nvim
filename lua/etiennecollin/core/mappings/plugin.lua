@@ -194,7 +194,50 @@ function M.snacks()
   vim.keymap.set("n", "<leader>gx", function() Snacks.picker.git_status() end, { desc = "Git Status" })
 
   -- Snacks explorer
-  vim.keymap.set({ "n" }, "<leader>e", function() Snacks.picker.explorer() end, { desc = "Toggle Explorer" })
+  -- Show hidden/ignored only if current buffer is hidden/ignored
+  local function buf_is_hidden_or_ignored()
+    local file = vim.api.nvim_buf_get_name(0)
+    if file == "" then return false end
+
+    -- Normalize paths
+    file = vim.fn.fnamemodify(file, ":p")
+    local cwd = vim.fn.getcwd()
+    cwd = vim.fn.fnamemodify(cwd, ":p")
+
+    -- Make file path relative to cwd (if possible)
+    local rel = file
+    if file:sub(1, #cwd) == cwd then
+      rel = file:sub(#cwd + 1)
+    end
+
+    -- Split path and check each segment for hidden (starts with ".")
+    for segment in string.gmatch(rel, "[^/\\]+") do
+      if segment:sub(1, 1) == "." then
+        return true
+      end
+    end
+
+    -- Ignored: use `git check-ignore -q <file>` if git is available
+    if vim.fn.executable("git") == 1 then
+      -- 0 = ignored, 1 = not ignored, 128 = not a git repo / error
+      vim.fn.system({ "git", "check-ignore", "-q", file })
+      if vim.v.shell_error == 0 then
+        return true
+      end
+    end
+
+    return false
+  end
+
+  local function explorer_smart()
+    if buf_is_hidden_or_ignored() then
+      Snacks.explorer({ hidden = true, ignored = true })
+    else
+      Snacks.explorer()
+    end
+  end
+
+  vim.keymap.set({ "n" }, "<leader>e", function() explorer_smart() end, { desc = "Toggle Explorer" })
 
   -- Snacks picker
   vim.keymap.set({ "n" }, "<leader><leader>", function() Snacks.picker.buffers({ sort_lastused = false }) end, { desc = "Buffers" })
