@@ -1,4 +1,4 @@
-" https://github.com/nasa/fpp/blob/824d14e0d5ecd5a12e066073f573b9c716c1918a/editors/vim/fpp.vim
+" https://github.com/nasa/fpp/blob/f24ac602f471d52102a6b4468cdc38cfbd475ee0/editors/vim/fpp.vim
 " Vim syntax file
 " Language:    fpp
 " Maintainer:  Robert Bocchino <bocchino@jpl.nasa.gov>
@@ -29,14 +29,17 @@ syn keyword fppKeyword container
 syn keyword fppKeyword cpu
 syn keyword fppKeyword default
 syn keyword fppKeyword diagnostic
+syn keyword fppKeyword dictionary
 syn keyword fppKeyword do
 syn keyword fppKeyword drop
 syn keyword fppKeyword else
-syn keyword fppKeyword entry
 syn keyword fppKeyword enter
+syn keyword fppKeyword entry
 syn keyword fppKeyword enum
 syn keyword fppKeyword event
+syn keyword fppKeyword every
 syn keyword fppKeyword exit
+syn keyword fppKeyword external
 syn keyword fppKeyword false
 syn keyword fppKeyword fatal
 syn keyword fppKeyword format
@@ -54,6 +57,7 @@ syn keyword fppKeyword include
 syn keyword fppKeyword initial
 syn keyword fppKeyword input
 syn keyword fppKeyword instance
+syn keyword fppKeyword interface
 syn keyword fppKeyword internal
 syn keyword fppKeyword locate
 syn keyword fppKeyword low
