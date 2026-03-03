@@ -22,6 +22,9 @@ return {
       topdelete = { text = "" },
       changedelete = { text = "▎" },
     },
+    numhl = true,
+    linehl = false,
+    word_diff = false,
     diff_opts = {
       internal = true,
       indent_heuristic = true,
