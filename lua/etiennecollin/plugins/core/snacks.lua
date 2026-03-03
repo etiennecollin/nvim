@@ -1,5 +1,5 @@
 local IMG_PATH = vim.fn.expand("~/Pictures/wallpapers/a_moonlit_night_at_sea.jpg")
-local function pdw_viewer_command(file, page)
+local function pdf_viewer_command(file, page)
   return { "flatpak", "run", "com.github.ahrm.sioyek", file, "--page", tostring(page) }
 end
 
@@ -68,7 +68,7 @@ local rga_source = {
       picker:close()
       if item.ext == "pdf" then
         -- Open PDF at the correct page
-        vim.fn.jobstart(pdw_viewer_command(item.file, item.page), { detach = true })
+        vim.fn.jobstart(pdf_viewer_command(item.file, item.page), { detach = true })
       else
         vim.cmd(("edit +%d %s"):format(item.pos[1], vim.fn.fnameescape(item.file)))
       end
