@@ -4,6 +4,7 @@
 local colorscheme = { import = "etiennecollin.plugins.colorscheme" }
 local core = { import = "etiennecollin.plugins.core" }
 local git = { import = "etiennecollin.plugins.git" }
+local ui = { import = "etiennecollin.plugins.ui" }
 -- ============
 
 -- ============
@@ -29,12 +30,14 @@ elseif config_type == 2 then
     colorscheme,
     core,
     git,
+    ui,
   }
 elseif config_type == 3 then
   imports = {
     colorscheme,
     core,
     git,
+    ui,
     language_specific,
     misc,
     extra,
