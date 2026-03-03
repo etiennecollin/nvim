@@ -14,6 +14,7 @@ return {
       { "<leader>k", group = "Debug" },
       { "<leader>l", group = "Linting" },
       { "<leader>g", group = "Git" },
+      { "<leader>o", group = "Overseer" },
       { "<leader>r", group = "LSP" },
       { "<leader>s", group = "Search" },
       { "<leader>so", group = "Obsidian" },

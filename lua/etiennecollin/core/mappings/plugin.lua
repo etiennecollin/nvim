@@ -64,6 +64,28 @@ function M.boole()
   vim.keymap.set({ "n", "v" }, "<leader>-", "<cmd>Boole decrement<cr>", { desc = "Boole decrement" })
 end
 
+function M.overseer()
+  local overseer = require("overseer")
+  vim.keymap.set({ "n", "x" }, "<leader>oR", "<cmd>OverseerRestartLast<cr>", { desc = "Restart last" })
+  vim.keymap.set({ "n", "x" }, "<leader>or", "<cmd>OverseerRun<cr>", { desc = "Run" })
+  vim.keymap.set({ "n", "x" }, "<leader>ou", "<cmd>OverseerToggle<cr>", { desc = "Toggle UI" })
+  vim.keymap.set({ "n", "x" }, "<leader>ov", function()
+    overseer.create_task_output_view(0, {
+      list_task_opts = {
+        filter = function(task)
+          return task.time_start ~= nil
+        end,
+      },
+      select = function(self, tasks, task_under_cursor)
+        table.sort(tasks, function(a, b)
+          return a.time_start > b.time_start
+        end)
+        return tasks[1]
+      end,
+    })
+  end, { desc = "View most recent output" })
+end
+
 function M.language_specific()
   local is_file_type = function(x)
     local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })

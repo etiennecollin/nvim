@@ -4,6 +4,7 @@ return {
   cmd = { "DapNew" },
   dependencies = {
     { "jay-babu/mason-nvim-dap.nvim", dependencies = "mason-org/mason.nvim", config = false },
+    "stevearc/overseer.nvim",
   },
   config = function()
     -----------------------------------------------------------------------
@@ -81,5 +82,8 @@ return {
         numhl = sign[3],
       })
     end
+
+    -- Enable overseer dap integration for preLaunchTask and postDebugTask
+    require("overseer").enable_dap()
   end,
 }

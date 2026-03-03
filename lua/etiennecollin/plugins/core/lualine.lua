@@ -1,6 +1,9 @@
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = "nvim-tree/nvim-web-devicons",
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+    "stevearc/overseer.nvim",
+  },
   init = function()
     require("etiennecollin.utils.global").set_colorscheme()
   end,
@@ -69,6 +72,7 @@ return {
         },
       },
       lualine_x = {
+        { "overseer" },
         {
           require("lazy.status").updates,
           cond = require("lazy.status").has_updates,
