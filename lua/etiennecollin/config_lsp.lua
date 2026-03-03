@@ -26,6 +26,10 @@ M.basedpyright = {
           variableTypes = true,
         },
         autoFormatStrings = true,
+        diagnosticSeverityOverrides = {
+          -- Enable non-exhaustive match checking as an error
+          reportMatchNotExhaustive = "error",
+        },
       },
       linting = { enabled = true },
     },
