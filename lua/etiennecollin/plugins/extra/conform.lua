@@ -39,32 +39,7 @@ return {
     -- Install formatters with mason
     require("mason-conform").setup()
 
-    -- Create commands to enable/disable autoformat-on-save
-    vim.api.nvim_create_user_command("FormatDisable", function(args)
-      if args.bang then
-        -- FormatDisable! will disable formatting just for this buffer
-        vim.b.disable_autoformat = true
-      else
-        vim.g.disable_autoformat = true
-      end
-    end, {
-      desc = "Disable autoformat-on-save",
-      bang = true,
-    })
-    vim.api.nvim_create_user_command("FormatEnable", function()
-      vim.b.disable_autoformat = false
-      vim.g.disable_autoformat = false
-    end, {
-      desc = "Enable autoformat-on-save",
-    })
-
-    vim.api.nvim_create_user_command("Format", function(opts)
-      conform.format({ async = false, timeout_ms = tonumber(opts.fargs[1]) or nil })
-    end, {
-      desc = "Format current buffer",
-      nargs = "?",
-    })
-
+    -- Format mapping
     vim.keymap.set({ "n", "v" }, "<leader>f", function()
       conform.format({ async = true }, function(err, did_edit)
         if err then
@@ -72,5 +47,45 @@ return {
         end
       end)
     end, { desc = "Format buffer" })
+
+    local function enable_autoformat(enable, buff_local)
+      buff_local = buff_local or false
+
+      vim.b.disable_autoformat = not enable
+      if not buff_local then
+        vim.g.disable_autoformat = not enable
+      end
+      local state = enable and "enabled" or "disabled"
+      vim.notify("Autoformat " .. state, vim.log.levels.INFO)
+    end
+
+    -- Toggle autoformat
+    local autoformat_enabled = true
+    vim.keymap.set({ "n", "v" }, "<leader>F", function()
+      autoformat_enabled = not autoformat_enabled
+      enable_autoformat(autoformat_enabled, false)
+    end, { desc = "Toggle autoformat-on-save" })
+
+    -- Create commands to enable/disable autoformat-on-save
+    vim.api.nvim_create_user_command("FormatDisable", function(args)
+      enable_autoformat(false, args.bang)
+    end, {
+      desc = "Disable autoformat-on-save",
+      bang = true,
+    })
+    vim.api.nvim_create_user_command("FormatEnable", function(args)
+      enable_autoformat(true, args.bang)
+    end, {
+      desc = "Enable autoformat-on-save",
+      bang = true,
+    })
+
+    -- Create command to format buffer
+    vim.api.nvim_create_user_command("Format", function(opts)
+      conform.format({ async = false, timeout_ms = tonumber(opts.fargs[1]) or nil })
+    end, {
+      desc = "Format current buffer",
+      nargs = "?",
+    })
   end,
 }
