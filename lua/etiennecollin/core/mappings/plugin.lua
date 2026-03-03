@@ -267,6 +267,7 @@ function M.snacks()
 
   -- Snacks picker
   vim.keymap.set({ "n" }, "<leader><leader>", function() Snacks.picker.buffers({ sort_lastused = false }) end, { desc = "Buffers" })
+  vim.keymap.set({ "n" }, "<leader>s0", require("etiennecollin.plugins.core.snacks-pickers.markdown-headings").picker, { desc = "Goto Markdown Heading" })
   vim.keymap.set({ "n" }, '<leader>s"', function() Snacks.picker.registers() end, { desc = "Registers" })
   vim.keymap.set({ "n" }, "<leader>s:", function() Snacks.picker.commands() end, { desc = "Commands" })
   vim.keymap.set({ "n" }, "<leader>s;", function() Snacks.picker.command_history() end, { desc = "Command History" })
@@ -306,6 +307,7 @@ function M.snacks()
   vim.keymap.set({ "n" }, "gI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" })
   vim.keymap.set({ "n" }, "gr", function() Snacks.picker.lsp_references() end, { nowait = true, desc = "References" })
   vim.keymap.set({ "n" }, "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" })
+
 end
 
 function M.lsp(_, bufnr)
