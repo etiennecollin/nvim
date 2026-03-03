@@ -1,4 +1,4 @@
-local default_sources = { "lsp", "path", "snippets", "buffer" }
+local default_sources = { "lsp", "path", "snippets", "omni", "buffer" }
 local function merge_default_sources(sources)
   return vim.list_extend(vim.deepcopy(default_sources), sources)
 end
