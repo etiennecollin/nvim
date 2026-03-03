@@ -16,7 +16,6 @@ return {
   priority = 1000,
   lazy = false,
   dependencies = { "nvim-tree/nvim-web-devicons" },
-  ---@module 'oil'
   ---@type oil.SetupOpts
   opts = {
     default_file_explorer = false,

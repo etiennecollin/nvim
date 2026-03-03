@@ -13,6 +13,7 @@ return {
     "brenoprata10/nvim-highlight-colors",
   },
   version = "1.*",
+  ---@type blink.cmp.Config
   opts = {
     completion = {
       documentation = {

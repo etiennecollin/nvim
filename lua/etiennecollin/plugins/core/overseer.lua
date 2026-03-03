@@ -1,7 +1,6 @@
 return {
   "stevearc/overseer.nvim",
   cmd = { "OverseerRun", "OverseerToggle", "OverseerShell" },
-  ---@module 'overseer'
   ---@type overseer.SetupOpts
   opts = {
     dap = false,
