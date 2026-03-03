@@ -27,6 +27,9 @@ vim.keymap.set("n", "<s-tab>", "<<", { desc = "Unindent line" })
 vim.keymap.set("x", "<tab>", ">gv", { desc = "Indent selection" })
 vim.keymap.set("x", "<s-tab>", "<gv", { desc = "Unindent selection" })
 
+-- Esc to exit terminal mode
+vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { desc = "Enter normal mode" })
+
 -- Search in visual mode
 vim.keymap.set("v", "/", "<Esc>/\\%V")
 vim.keymap.set("v", "?", "<Esc>?\\%V")
