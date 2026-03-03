@@ -86,6 +86,10 @@ function M.overseer()
   end, { desc = "View most recent output" })
 end
 
+function M.oil()
+  vim.keymap.set("n", "<leader>E", "<cmd>Oil<cr>", { desc = "Oil" })
+end
+
 function M.language_specific()
   local is_file_type = function(x)
     local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
