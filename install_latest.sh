@@ -4,29 +4,42 @@ set -euo pipefail
 # --- Platform assertion ---
 OS="$(uname -s)"
 ARCH="$(uname -m)"
+NVIM_ARCH=""
 
-if [[ "$OS" != "Linux" ]]; then
-  echo "Error: This installer supports Linux only (detected: $OS)."
+if [[ "${OS}" != "Linux" ]]; then
+  echo "Error: This installer supports Linux only (detected: ${OS})."
   exit 1
 fi
 
-if [[ "$ARCH" != "x86_64" ]]; then
-  echo "Error: This installer supports x86_64 only (detected: $ARCH)."
+case "${ARCH}" in
+x86_64)
+  NVIM_ARCH="x86_64"
+  ;;
+aarch64 | arm64)
+  NVIM_ARCH="arm64"
+  ;;
+*)
+  echo "Error: Unsupported architecture: ${ARCH} (supported: x86_64, arm64/aarch64)"
   exit 1
-fi
+  ;;
+esac
+
+echo "Detected architecture: ${NVIM_ARCH}"
+
 # --------------------------
 
-URL="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
+URL="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-${NVIM_ARCH}.tar.gz"
 INSTALL_BASE="${HOME}/.local/opt"
 BIN_DIR="${HOME}/.local/bin"
+BIN_NAME="nvim-linux-${NVIM_ARCH}"
 
 mkdir -p "${INSTALL_BASE}" "${BIN_DIR}"
 
 echo "Downloading and extracting latest Neovim..."
-rm -rf "${INSTALL_BASE}/nvim-linux-x86_64"
+rm -rf "${INSTALL_BASE}/${BIN_NAME}"
 curl -L "${URL}" | tar -xz -C "${INSTALL_BASE}"
 
-STAGING_DIR="${INSTALL_BASE}/nvim-linux-x86_64"
+STAGING_DIR="${INSTALL_BASE}/${BIN_NAME}"
 
 if [[ ! -x "${STAGING_DIR}/bin/nvim" ]]; then
   echo "Extraction failed: nvim binary not found."
