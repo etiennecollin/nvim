@@ -70,7 +70,25 @@ function M.overseer()
   vim.keymap.set({ "n", "x" }, "<leader>or", "<cmd>OverseerRun<cr>", { desc = "Run" })
   vim.keymap.set({ "n", "x" }, "<leader>ou", "<cmd>OverseerToggle<cr>", { desc = "Toggle UI" })
   vim.keymap.set({ "n", "x" }, "<leader>ov", function()
-    overseer.create_task_output_view(0, {
+    -- floating window size
+    local width = math.floor(vim.o.columns * 0.95)
+    local height = math.floor(vim.o.lines * 0.95)
+
+    local row = math.floor((vim.o.lines - height) / 2)
+    local col = math.floor((vim.o.columns - width) / 2)
+
+    -- open floating window
+    local winid = vim.api.nvim_open_win(0, true, {
+      relative = "editor",
+      row = row,
+      col = col,
+      width = width,
+      height = height,
+      style = "minimal",
+      noautocmd = true,
+    })
+
+    overseer.create_task_output_view(winid, {
       list_task_opts = {
         filter = function(task)
           return task.time_start ~= nil
@@ -83,6 +101,15 @@ function M.overseer()
         return tasks[1]
       end,
     })
+
+    require("overseer.util").scroll_to_end(winid)
+
+    local buf = vim.api.nvim_win_get_buf(winid)
+    vim.keymap.set("n", "q", function()
+      if vim.api.nvim_win_is_valid(winid) then
+        vim.api.nvim_win_close(winid, true)
+      end
+    end, { buffer = buf, nowait = true })
   end, { desc = "View most recent output" })
 end
 
