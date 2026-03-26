@@ -1,7 +1,8 @@
-local default_sources = { "lsp", "path", "snippets", "omni", "buffer" }
-local function merge_default_sources(sources)
-  return vim.list_extend(vim.deepcopy(default_sources), sources)
+local base_sources = { "lsp", "path", "snippets", "buffer" }
+local function merge_sources(a, b)
+  return vim.list_extend(vim.deepcopy(a), vim.deepcopy(b))
 end
+local default_sources = merge_sources(base_sources, { "omni" })
 
 return {
   "saghen/blink.cmp",
@@ -15,6 +16,48 @@ return {
   version = "1.*",
   ---@type blink.cmp.Config
   opts = {
+    keymap = { preset = "super-tab" },
+    signature = {
+      enabled = true,
+      window = {
+        show_documentation = false,
+      },
+    },
+    cmdline = {
+      sources = { "buffer", "cmdline", "path" },
+    },
+    term = {
+      enabled = true,
+    },
+    fuzzy = {
+      implementation = "prefer_rust_with_warning",
+    },
+    sources = {
+      default = default_sources,
+      per_filetype = {
+        typst = merge_sources(default_sources, { "references" }),
+        markdown = merge_sources(default_sources, { "references" }),
+        lua = merge_sources(default_sources, { "lazydev" }),
+        ["dap-repl"] = base_sources,
+      },
+      providers = {
+        snippets = {
+          -- Disable snippets after trigger character
+          should_show_items = function(ctx)
+            return ctx.trigger.initial_kind ~= "trigger_character"
+          end,
+        },
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          score_offset = 100,
+        },
+        references = {
+          name = "pandoc_references",
+          module = "cmp-pandoc-references.blink",
+        },
+      },
+    },
     completion = {
       documentation = {
         auto_show = true,
@@ -57,41 +100,6 @@ return {
               end,
             },
           },
-        },
-      },
-    },
-    fuzzy = {
-      implementation = "prefer_rust_with_warning",
-    },
-    keymap = { preset = "super-tab" },
-    signature = {
-      enabled = true,
-      window = {
-        show_documentation = false,
-      },
-    },
-    sources = {
-      default = default_sources,
-      per_filetype = {
-        typst = merge_default_sources({ "references" }),
-        markdown = merge_default_sources({ "references" }),
-        lua = merge_default_sources({ "lazydev" }),
-      },
-      providers = {
-        snippets = {
-          -- Disable snippets after trigger character
-          should_show_items = function(ctx)
-            return ctx.trigger.initial_kind ~= "trigger_character"
-          end,
-        },
-        lazydev = {
-          name = "LazyDev",
-          module = "lazydev.integrations.blink",
-          score_offset = 100,
-        },
-        references = {
-          name = "pandoc_references",
-          module = "cmp-pandoc-references.blink",
         },
       },
     },
