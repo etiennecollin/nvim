@@ -26,6 +26,9 @@ return {
       disabled_filetypes = {
         -- Filetypes to disable lualine for.
         "dap-repl",
+        "dap-repl",
+        "dap-view",
+        "dap-view-term",
         "dapui-terminal",
         "dapui_breakpoints",
         "dapui_console",

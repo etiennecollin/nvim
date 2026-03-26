@@ -216,16 +216,6 @@ function M.flash()
   vim.keymap.set({ "n", "x", "o" }, "<s-cr>", flash.treesitter, { desc = "Flash Treesitter" })
 end
 
-function M.dapui()
-  local dapui = require("dapui")
-  local virtual_text = require("nvim-dap-virtual-text")
-  vim.keymap.set("n", "<leader>ku", function()
-    dapui.toggle()
-    virtual_text.refresh()
-  end, { desc = "Dap UI Toggle" })
-  vim.keymap.set({ "n", "x" }, "<leader>ke", dapui.eval, { desc = "Dap UI Eval" })
-end
-
 -- stylua: ignore start
 function M.snacks()
   -- Snacks other
@@ -357,6 +347,26 @@ function M.lsp(_, bufnr)
   vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Goto next diagnostic" })
   vim.keymap.set("n", "lh", function() vim.diagnostic.hide() end, { desc = "Hide diagnostics" })
   vim.keymap.set("n", "ls", function() vim.diagnostic.show() end, { desc = "Show diagnostics" })
+end
+
+function M.dapui()
+  local dapui = require("dapui")
+  local virtual_text = require("nvim-dap-virtual-text")
+  vim.keymap.set("n", "<leader>ku", function()
+    dapui.toggle()
+    virtual_text.refresh()
+  end, { desc = "Dap UI Toggle" })
+  vim.keymap.set({ "n", "x" }, "<leader>ke", dapui.eval, { desc = "Dap UI Eval" })
+end
+
+
+function M.dapview()
+  local dapview = require("dap-view")
+  local virtual_text = require("nvim-dap-virtual-text")
+  vim.keymap.set("n", "<leader>ku", function()
+    dapview.toggle()
+    virtual_text.refresh()
+  end, { desc = "Dap View Toggle" })
 end
 
 function M.dap()
