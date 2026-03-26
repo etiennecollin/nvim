@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd("User", {
   pattern = "GitConflictDetected",
   callback = function(event)
     local buf_name = vim.api.nvim_buf_get_name(event.buf)
-    vim.notify("Conflict detected in " .. buf_name)
+    vim.notify("Conflict detected in " .. buf_name, vim.log.levels.WARN)
   end,
 })
 vim.api.nvim_create_autocmd("User", {
@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd("User", {
   pattern = "GitConflictResolved",
   callback = function(event)
     local buf_name = vim.api.nvim_buf_get_name(event.buf)
-    vim.notify("Conflicts resolved in " .. buf_name)
+    vim.notify("Conflicts resolved in " .. buf_name, vim.log.levels.INFO)
   end,
 })
 
