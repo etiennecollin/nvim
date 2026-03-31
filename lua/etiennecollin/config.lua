@@ -25,8 +25,7 @@ M.ensure_installed_treesitter =
   { "vim", "regex", "lua", "bash", "markdown", "markdown_inline", "comment", "python", "c", "cpp" }
 
 --- The LSPs to be installed by Mason.
-M.ensure_installed_lsps =
-  { "lua_ls", "clangd", "basedpyright", "bashls", "tinymist", "ts_ls", "neocmake", "markdown_oxide" }
+M.ensure_installed_lsps = { "lua_ls", "clangd", "ty", "bashls", "tinymist", "ts_ls", "neocmake", "markdown_oxide" }
 
 --- The Linters to be installed by Mason.
 M.ensure_installed_linters = {
