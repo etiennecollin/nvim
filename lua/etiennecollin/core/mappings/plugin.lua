@@ -349,23 +349,10 @@ function M.lsp(_, bufnr)
   vim.keymap.set("n", "ls", function() vim.diagnostic.show() end, { desc = "Show diagnostics" })
 end
 
-function M.dapui()
-  local dapui = require("dapui")
-  local virtual_text = require("nvim-dap-virtual-text")
-  vim.keymap.set("n", "<leader>ku", function()
-    dapui.toggle()
-    virtual_text.refresh()
-  end, { desc = "Dap UI Toggle" })
-  vim.keymap.set({ "n", "x" }, "<leader>ke", dapui.eval, { desc = "Dap UI Eval" })
-end
-
-
 function M.dapview()
   local dapview = require("dap-view")
-  local virtual_text = require("nvim-dap-virtual-text")
   vim.keymap.set("n", "<leader>ku", function()
     dapview.toggle()
-    virtual_text.refresh()
   end, { desc = "Dap View Toggle" })
 end
 

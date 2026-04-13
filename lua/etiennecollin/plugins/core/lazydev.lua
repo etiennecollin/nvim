@@ -3,7 +3,6 @@ return {
   ft = "lua",
   opts = {
     library = {
-      "nvim-dap-ui",
       "lazy.nvim",
       { path = "${3rd}/luv/library", words = { "vim%.uv" } },
       { path = "snacks.nvim", words = { "Snacks" } },
