@@ -80,24 +80,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   desc = "Restore cursor to file position in previous editing session.",
 })
 
--- -- https://github.com/mcauley-penney/nvim/
--- vim.api.nvim_create_autocmd({ "WinScrolled", "WinResized", "VimResized" }, {
---   group = vim.api.nvim_create_augroup("etiennecollin-scrolloff", { clear = true }),
---   callback = function()
---     local win_h = vim.api.nvim_win_get_height(0) -- Height of window
---     local off = math.min(vim.o.scrolloff, math.floor(win_h / 2)) -- Scroll offset
---     local dist = vim.fn.line("$") - vim.fn.line(".") -- Distance from current line to last line
---     local rem = vim.fn.line("w$") - vim.fn.line("w0") + 1 -- Num visible lines in current window
---
---     if dist < off and win_h - rem + dist < off then
---       local view = vim.fn.winsaveview()
---       view.topline = view.topline + off - (win_h - rem + dist)
---       vim.fn.winrestview(view)
---     end
---   end,
---   desc = "Always respect scrolloff.",
--- })
-
 vim.api.nvim_create_autocmd("VimResized", {
   group = vim.api.nvim_create_augroup("etiennecollin-resize", { clear = true }),
   command = "tabdo wincmd =",
