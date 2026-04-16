@@ -6,6 +6,7 @@ vim.filetype.add({
     puml = "plantuml",
   },
   filename = {
-    [".env"] = "config",
+    ["*.env"] = "sh",
+    [".env.*"] = "sh",
   },
 })
