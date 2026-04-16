@@ -38,9 +38,16 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<c-d>", "<c-d>zz")
 vim.keymap.set("n", "<c-u>", "<c-u>zz")
 
+-- Clear search highlights
+vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>")
+
 -- Search next/previous with centered view
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
+
+-- Search in visual mode
+vim.keymap.set("v", "/", "<Esc>/\\%V")
+vim.keymap.set("v", "?", "<Esc>?\\%V")
 
 -- Tab and Shift-Tab for indentation
 vim.keymap.set("n", "<tab>", ">>", { desc = "Indent line" })
@@ -51,10 +58,6 @@ vim.keymap.set("x", "<s-tab>", "<gv", { desc = "Unindent selection" })
 
 -- Esc to exit terminal mode
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter normal mode" })
-
--- Search in visual mode
-vim.keymap.set("v", "/", "<Esc>/\\%V")
-vim.keymap.set("v", "?", "<Esc>?\\%V")
 
 -- Wrapping
 vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "Toggle wrap" })
