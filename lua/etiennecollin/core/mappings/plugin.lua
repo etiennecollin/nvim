@@ -23,10 +23,6 @@ function M.cellular_automaton()
   vim.keymap.set("n", "<leader>XA", "<cmd>CellularAutomaton make_it_rain<cr>", { desc = "Cellular automaton" })
 end
 
-function M.undotree()
-  vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Undotree" })
-end
-
 function M.silicon()
   vim.keymap.set("v", "<leader>XS", ":Silicon<cr>", { desc = "Silicon" })
 end

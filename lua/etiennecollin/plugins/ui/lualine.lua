@@ -44,7 +44,7 @@ return {
         "terminal",
         "toggleterm",
         "Trouble",
-        "undotree",
+        "nvim-undotree",
         "", -- Hover popups such as Treesitter syntax investigation popup, lsp popups...
         statusline = {}, -- only ignores the ft for statusline.
         winbar = {}, -- only ignores the ft for winbar.
