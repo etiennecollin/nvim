@@ -135,14 +135,14 @@ vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
   end,
   desc = "Hide cursorline in inactive window.",
 })
-vim.api.nvim_create_autocmd("CmdLineEnter", {
+vim.api.nvim_create_autocmd("CmdlineEnter", {
   group = group_cursorline,
   callback = function()
     vim.opt.cursorlineopt = "both"
   end,
-  desc = "When entering command-line , highlight both number and screenline.",
+  desc = "When entering command-line, highlight both number and screenline.",
 })
-vim.api.nvim_create_autocmd("CmdLineLeave", {
+vim.api.nvim_create_autocmd("CmdlineLeave", {
   group = group_cursorline,
   callback = function()
     vim.opt.cursorlineopt = "number"
