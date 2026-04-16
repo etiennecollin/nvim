@@ -192,6 +192,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 2000
 vim.opt.redrawtime = 1000
 vim.opt.showcmd = false
+vim.o.cmdheight = 0
 
 --------------------------------------------------------------------------------
 -- Neovide

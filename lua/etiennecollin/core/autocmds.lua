@@ -150,6 +150,22 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
   desc = "When leaving command-line, revert cursorline highlight to just number.",
 })
 
+local group_cmdheight = vim.api.nvim_create_augroup("etiennecollin-cmdheight", { clear = true })
+vim.api.nvim_create_autocmd("CmdlineEnter", {
+  group = group_cmdheight,
+  callback = function()
+    vim.o.cmdheight = 1
+  end,
+  desc = "When entering command-line, show command bar.",
+})
+vim.api.nvim_create_autocmd("CmdlineEnter", {
+  group = group_cmdheight,
+  callback = function()
+    vim.o.cmdheight = 0
+  end,
+  desc = "When leaving command-line, hide command bar.",
+})
+
 local group_diagnostic_autohide = vim.api.nvim_create_augroup("etiennecollin-diagnostic-autohide", { clear = true })
 vim.api.nvim_create_autocmd("InsertEnter", {
   group = group_diagnostic_autohide,
