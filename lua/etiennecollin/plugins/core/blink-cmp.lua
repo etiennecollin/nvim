@@ -25,6 +25,7 @@ return {
     },
     cmdline = {
       enabled = true,
+      keymap = { preset = "inherit" },
       completion = {
         menu = {
           auto_show = true,
@@ -33,7 +34,11 @@ return {
       sources = { "buffer", "cmdline", "path" },
     },
     term = {
-      enabled = true,
+      enabled = false,
+      keymap = {
+        preset = "inherit",
+        ["<c-p>"] = false,
+      },
     },
     fuzzy = {
       implementation = "prefer_rust_with_warning",
