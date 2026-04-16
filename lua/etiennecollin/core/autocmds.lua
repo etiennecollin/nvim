@@ -150,3 +150,18 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
   desc = "When leaving command-line, revert cursorline highlight to just number.",
 })
 
+local group_diagnostic_autohide = vim.api.nvim_create_augroup("etiennecollin-diagnostic-autohide", { clear = true })
+vim.api.nvim_create_autocmd("InsertEnter", {
+  group = group_diagnostic_autohide,
+  callback = function()
+    vim.diagnostic.enable(false)
+  end,
+  desc = "When entering insert mode, hide diagnostics.",
+})
+vim.api.nvim_create_autocmd("InsertLeave", {
+  group = group_diagnostic_autohide,
+  callback = function()
+    vim.diagnostic.enable(true)
+  end,
+  desc = "When leaving insert mode, show diagnostics.",
+})
