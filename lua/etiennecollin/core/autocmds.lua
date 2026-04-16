@@ -118,18 +118,22 @@ vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
   desc = "Hide cursorline in inactive window.",
 })
 
-local group_diagnostic_autohide = vim.api.nvim_create_augroup("etiennecollin-diagnostic-autohide", { clear = true })
+local group_insert_mode_perf = vim.api.nvim_create_augroup("etiennecollin-insert-mode-perf", { clear = true })
 vim.api.nvim_create_autocmd("InsertEnter", {
-  group = group_diagnostic_autohide,
+  group = group_insert_mode_perf,
   callback = function()
     vim.diagnostic.enable(false)
+    vim.opt.cursorline = false
+    vim.opt_local.cursorlineopt = "number"
   end,
-  desc = "When entering insert mode, hide diagnostics.",
+  desc = "Apply UI tweaks for insert mode.",
 })
 vim.api.nvim_create_autocmd("InsertLeave", {
-  group = group_diagnostic_autohide,
+  group = group_insert_mode_perf,
   callback = function()
     vim.diagnostic.enable(true)
+    vim.opt_local.cursorline = true
+    vim.opt_local.cursorlineopt = "both"
   end,
-  desc = "When leaving insert mode, show diagnostics.",
+  desc = "Revert UI tweaks for insert mode.",
 })
