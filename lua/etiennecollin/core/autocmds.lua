@@ -135,36 +135,6 @@ vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
   end,
   desc = "Hide cursorline in inactive window.",
 })
-vim.api.nvim_create_autocmd("CmdlineEnter", {
-  group = group_cursorline,
-  callback = function()
-    vim.opt.cursorlineopt = "both"
-  end,
-  desc = "When entering command-line, highlight both number and screenline.",
-})
-vim.api.nvim_create_autocmd("CmdlineLeave", {
-  group = group_cursorline,
-  callback = function()
-    vim.opt.cursorlineopt = "number"
-  end,
-  desc = "When leaving command-line, revert cursorline highlight to just number.",
-})
-
-local group_cmdheight = vim.api.nvim_create_augroup("etiennecollin-cmdheight", { clear = true })
-vim.api.nvim_create_autocmd("CmdlineEnter", {
-  group = group_cmdheight,
-  callback = function()
-    vim.o.cmdheight = 1
-  end,
-  desc = "When entering command-line, show command bar.",
-})
-vim.api.nvim_create_autocmd("CmdlineEnter", {
-  group = group_cmdheight,
-  callback = function()
-    vim.o.cmdheight = 0
-  end,
-  desc = "When leaving command-line, hide command bar.",
-})
 
 local group_diagnostic_autohide = vim.api.nvim_create_augroup("etiennecollin-diagnostic-autohide", { clear = true })
 vim.api.nvim_create_autocmd("InsertEnter", {
