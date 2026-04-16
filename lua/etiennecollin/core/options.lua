@@ -15,6 +15,12 @@ vim.opt.background = require("etiennecollin.config").background_style
 -- Set floating window border
 --------------------------------------------------------------------------------
 vim.opt.winborder = "rounded"
+vim.opt.pumborder = "rounded"
+
+--------------------------------------------------------------------------------
+-- Vim ui2
+--------------------------------------------------------------------------------
+require("vim._core.ui2").enable()
 
 --------------------------------------------------------------------------------
 -- Set diagnostics
@@ -26,7 +32,11 @@ local s = vim.diagnostic.severity
 vim.diagnostic.config({
   virtual_text = {
     severity = { min = vim.diagnostic.severity.WARN },
+    spacing = 4,
+    source = "if_many",
+    prefix = "●",
   },
+
   -- virtual_lines = { current_line = true },
   update_in_insert = true,
   underline = true,
@@ -35,7 +45,7 @@ vim.diagnostic.config({
     focusable = false,
     style = "minimal",
     border = "rounded",
-    source = true,
+    source = "if_many",
     header = "",
     prefix = "",
   },
@@ -91,7 +101,7 @@ vim.opt.laststatus = 3
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 vim.opt.cursorline = true
 -- Only highlight the line number in the cursor line
-vim.opt.cursorlineopt = "number"
+vim.opt.cursorlineopt = "both"
 vim.opt.colorcolumn = { "80", "120" }
 
 --------------------------------------------------------------------------------
@@ -121,6 +131,8 @@ vim.opt.smartindent = true
 
 -- << and >> shift to the nearest tabstop
 vim.opt.shiftround = true
+
+vim.opt.virtualedit = "block"
 
 --------------------------------------------------------------------------------
 -- Set search options
@@ -161,6 +173,7 @@ vim.opt.hidden = true
 --------------------------------------------------------------------------------
 vim.opt.backup = false
 vim.opt.undofile = true
+vim.opt.undolevels = 10000
 -- vim.opt.swapfile = false
 -- vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
@@ -180,19 +193,29 @@ vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 5
 
 --------------------------------------------------------------------------------
+-- Saving
+--------------------------------------------------------------------------------
+vim.opt.autoread = true
+vim.opt.autowrite = true
+
+--------------------------------------------------------------------------------
 -- Command timeout (used for WhichKey)
 --------------------------------------------------------------------------------
 vim.opt.timeout = true
 vim.opt.timeoutlen = 500
+vim.opt.ttimeout = true
+vim.opt.ttimeoutlen = 0
 
 --------------------------------------------------------------------------------
 -- Other settings
 --------------------------------------------------------------------------------
 vim.opt.isfname:append("@-@")
-vim.opt.updatetime = 2000
+vim.opt.updatetime = 500
 vim.opt.redrawtime = 1000
 vim.opt.showcmd = false
-vim.o.cmdheight = 0
+vim.opt.cmdheight = 1
+vim.opt.confirm = true
+vim.opt.completeopt = "menu,menuone,noselect,popup"
 
 --------------------------------------------------------------------------------
 -- Neovide
