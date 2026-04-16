@@ -31,6 +31,9 @@ return {
         return a.name:lower() < b.name:lower()
       end,
     },
+    virtual_text = {
+      enabled = true,
+    },
     auto_toggle = true,
   },
   config = function(_, opts)
