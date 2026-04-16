@@ -2,34 +2,6 @@
 -- They should be called in the respective plugin config function.
 local M = {}
 
-function M.slime()
-  local function toggle_slime_tmux_nvim()
-    pcall(function()
-      vim.b.slime_config = nil
-      vim.g.slime_default_config = nil
-    end)
-    if vim.g.slime_target == "tmux" then
-      -- Use neovim terminal for slime
-      vim.g.slime_target = "neovim"
-      vim.g.slime_bracketed_paste = true
-      vim.g.slime_python_ipython = false
-      print("Using neovim terminal for slime")
-    elseif vim.g.slime_target == "neovim" then
-      -- Use tmux for slime
-      vim.g.slime_target = "tmux"
-      vim.g.slime_bracketed_paste = true
-      vim.g.slime_python_ipython = false
-      vim.g.slime_default_config = { socket_name = "default", target_pane = ".2" }
-      print("Using tmux for slime")
-    end
-  end
-
-  vim.keymap.set("n", "<leader>tsc", "<cmd>SlimeConfig<cr>", { desc = "Configure slime" })
-  vim.keymap.set("n", "<leader>tso", toggle_slime_tmux_nvim, { desc = "Toggle tmux/nvim terminal for slime" })
-  vim.keymap.set("n", "<leader><cr>", "<plug>SlimeSendCell", { desc = "Slime send cell" })
-  vim.keymap.set("v", "<leader><cr>", "<plug>SlimeRegionSend", { desc = "Slime send visual" })
-end
-
 function M.cloak()
   vim.keymap.set("n", "<leader>`", "<cmd>CloakPreviewLine<cr>", { desc = "Cloak preview line" })
 end
