@@ -1,6 +1,6 @@
 return {
   "OXY2DEV/markview.nvim",
-  lazy = false,
+  lazy = false, -- Lazy loading is done by the plugin
   dependencies = { "saghen/blink.cmp" },
   opts = {
     markdown = {
