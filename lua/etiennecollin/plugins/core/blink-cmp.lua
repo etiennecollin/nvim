@@ -24,6 +24,12 @@ return {
       },
     },
     cmdline = {
+      enabled = true,
+      completion = {
+        menu = {
+          auto_show = true,
+        },
+      },
       sources = { "buffer", "cmdline", "path" },
     },
     term = {
@@ -42,6 +48,7 @@ return {
       },
       providers = {
         snippets = {
+          name = "Snippets",
           -- Disable snippets after trigger character
           should_show_items = function(ctx)
             return ctx.trigger.initial_kind ~= "trigger_character"
@@ -67,6 +74,7 @@ return {
         enabled = false,
       },
       menu = {
+        border = "none",
         draw = {
           treesitter = { "lsp" },
           -- Use nvim-highlight-colors to show colors in the menu
