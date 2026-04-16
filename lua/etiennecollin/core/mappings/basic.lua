@@ -5,8 +5,30 @@ vim.g.maplocalleader = ","
 vim.keymap.set({ "n", "i", "v", "t" }, "<F1>", "")
 
 -- Move up/down selected lines
-vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
+vim.keymap.set("n", "<a-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move down" })
+vim.keymap.set("n", "<a-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move up" })
+vim.keymap.set("i", "<a-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
+vim.keymap.set("i", "<a-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
+vim.keymap.set("v", "<a-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move down" })
+vim.keymap.set("v", "<a-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move up" })
+vim.keymap.set("n", "<a-down>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move down" })
+vim.keymap.set("n", "<a-up>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move up" })
+vim.keymap.set("i", "<a-down>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
+vim.keymap.set("i", "<a-up>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
+vim.keymap.set("v", "<a-down>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move down" })
+vim.keymap.set("v", "<a-up>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move up" })
+vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move selection down" })
+vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move selection up" })
+
+-- Move to beginning/end of line
+vim.keymap.set("n", "<a-h>", "^", { desc = "Go to start of line" })
+vim.keymap.set("n", "<a-l>", "$", { desc = "Go to end of line" })
+vim.keymap.set("n", "<a-left>", "^", { desc = "Go to start of line" })
+vim.keymap.set("n", "<a-right>", "$", { desc = "Go to end of line" })
+
+-- Selection
+vim.keymap.set("n", "==", "ggVG", { desc = "Select all" })
+vim.keymap.set("n", "<a-a>", "ggVG", { desc = "Select all" })
 
 -- Join current line with line below and replace
 -- cursor at initial position
@@ -34,22 +56,15 @@ vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter normal mode" })
 vim.keymap.set("v", "/", "<Esc>/\\%V")
 vim.keymap.set("v", "?", "<Esc>?\\%V")
 
+-- Wrapping
+vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "Toggle wrap" })
+
 -- Yanking and pasting
-vim.keymap.set("v", "<leader>P", '"_dP', {
-  desc = "Delete and paste (keep clipboard)",
-})
-vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', {
-  desc = "Paste from system clipboard",
-})
-vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', {
-  desc = "Yank selection to system clipboard",
-})
-vim.keymap.set("n", "<leader>Y", '"+Y', {
-  desc = "Yank whole line to system clipboard",
-})
-vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', {
-  desc = "Delete without yank",
-})
+vim.keymap.set("v", "p", '"_dP', { desc = "Paste" })
+vim.keymap.set({ "v" }, "<leader>p", '"_d"+P', { desc = "Paste from system clipboard" })
+vim.keymap.set({ "n" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank selection to system clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yank" })
 
 -- I'll get cancelled too...
 vim.keymap.set("i", "<c-c>", "<Esc>", { desc = "Insert mode escape" })
@@ -111,18 +126,44 @@ vim.keymap.set("n", "<leader>v", "<cmd>vsplit<cr>", { desc = "VSplit window" })
 -- Buffers
 vim.keymap.set("n", "<leader>bD", "<cmd>%bd|e#|bd#<cr>", { desc = "Delete all buffers" })
 vim.keymap.set("n", "<leader>bF", "<cmd>ene | startinsert<cr>", { desc = "New fullscreen buffer" })
-vim.keymap.set("n", "<leader>bN", "<cmd>bp<cr>", { desc = "Previous buffer" })
 vim.keymap.set("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Delete buffer" })
 vim.keymap.set("n", "<leader>bf", "<cmd>tab split<cr>", { desc = "Open current buffer in fullscreen tab" })
 vim.keymap.set("n", "<leader>bn", "<cmd>bn<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>bp", "<cmd>bp<cr>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<leader>bs", "<cmd>new<cr>", { desc = "New split buffer" })
+vim.keymap.set("n", "<leader>bv", "<cmd>vnew<cr>", { desc = "New vertical split buffer" })
+vim.keymap.set("n", "<leader>bh", "<cmd>new<cr>", { desc = "New horizontal split buffer" })
 
 -- Tabs
 vim.keymap.set("n", "<leader>Bc", "<cmd>tabc<cr>", { desc = "Close tab" })
 vim.keymap.set("n", "<leader>Bn", "<cmd>tabn<cr>", { desc = "Next tab" })
 vim.keymap.set("n", "<leader>Bo", "<cmd>tabe<cr>", { desc = "Open tab" })
 vim.keymap.set("n", "<leader>Bp", "<cmd>tabp<cr>", { desc = "Previous tab" })
+
+-- Folds
+vim.keymap.set("n", "zv", "zMzvzz", { desc = "Close all folds except the current one" })
+vim.keymap.set("n", "zj", "zcjzOzz", { desc = "Close current fold when open. Always open next fold." })
+vim.keymap.set("n", "zk", "zckzOzz", { desc = "Close current fold when open. Always open previous fold." })
+
+-- Diagnostics
+-- diagnostic keymaps
+local diagnostic_goto = function(next, severity)
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    vim.diagnostic.jump({ count = next and 1 or -1, float = true, severity = severity })
+  end
+end
+
+vim.keymap.set("n", "H", function()
+  vim.diagnostic.open_float(nil, { focusable = true, scope = "cursor", source = "if_many" })
+end, { desc = "Hover Diagnostics" })
+vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+vim.keymap.set("n", "lh", vim.diagnostic.hide, { desc = "Hide diagnostics" })
+vim.keymap.set("n", "ls", vim.diagnostic.show, { desc = "Show diagnostics" })
 
 -- Saving and quitting
 vim.keymap.set("n", "<leader>q", function()

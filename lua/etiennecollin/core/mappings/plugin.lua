@@ -304,17 +304,10 @@ function M.lsp(_, bufnr)
 
   map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
   map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
-  map("n", "H", function() vim.diagnostic.open_float(nil, { focusable = true, scope = "cursor", source = "if_many" }) end, "Hover Diagnostics")
   map("n", "K", vim.lsp.buf.hover, "Hover Documentation")
   map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
   map("n", "<leader>rs", ":LspRestart<cr>", "Restart")
   map({ "n", "i" }, "<c-s>", vim.lsp.buf.signature_help, "Signature help")
-
-  -- TODO: I should find a better place for these mappings as they are not necessarily LSP specific
-  vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Goto previous diagnostic" })
-  vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Goto next diagnostic" })
-  vim.keymap.set("n", "lh", function() vim.diagnostic.hide() end, { desc = "Hide diagnostics" })
-  vim.keymap.set("n", "ls", function() vim.diagnostic.show() end, { desc = "Show diagnostics" })
 end
 
 function M.dapview()
