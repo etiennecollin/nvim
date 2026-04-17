@@ -39,7 +39,7 @@ vim.keymap.set("n", "<c-d>", "<c-d>zz")
 vim.keymap.set("n", "<c-u>", "<c-u>zz")
 
 -- Clear search highlights
-vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>")
+vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlights" })
 
 -- Search next/previous with centered view
 vim.keymap.set("n", "n", "nzzzv")
