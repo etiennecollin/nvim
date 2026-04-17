@@ -58,6 +58,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
   desc = "Enable inlay hints if the server supports them.",
 })
 
+vim.api.nvim_create_autocmd("LspProgress", {
+  callback = function(ev)
+    local value = ev.data.params.value or {}
+    local msg = value.message or "done"
+
+    -- rust-analyzer in particular sends extremely long messages
+    if #msg > 40 then
+      msg = msg:sub(1, 37) .. "..."
+    end
+
+    vim.api.nvim_echo({ { msg } }, false, {
+      id = "lsp." .. ev.data.client_id,
+      kind = "progress",
+      source = "vim.lsp",
+      title = value.title,
+      status = value.kind ~= "end" and "running" or "success",
+      percent = value.percentage,
+    })
+  end,
+  desc = "Log LSP progress.",
+})
+
 -- https://www.reddit.com/r/neovim/comments/10383z1/open_help_in_buffer_instead_of_split/
 vim.api.nvim_create_autocmd("BufWinEnter", {
   group = vim.api.nvim_create_augroup("etiennecollin-help", { clear = true }),
