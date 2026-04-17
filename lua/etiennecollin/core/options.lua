@@ -20,7 +20,51 @@ vim.opt.pumborder = "rounded"
 --------------------------------------------------------------------------------
 -- Vim ui2
 --------------------------------------------------------------------------------
-require("vim._core.ui2").enable()
+require("vim._core.ui2").enable({
+  enable = true,
+
+  msg = {
+    targets = {
+      empty = "cmd", -- Empty message (`:echo ""`), with empty `content`. Should clear messages sharing the 'cmdheight' area if it is the only message in a batch.
+      bufwrite = "cmd", -- |:write| message
+      confirm = "dialog", -- Message preceding a prompt (|:confirm|, |confirm()|, |inputlist()|, |z=|, …)
+      emsg = "msg", -- Error (|errors|, internal error, |:throw|, …)
+      echo = "msg", -- |:echo| message
+      echomsg = "msg", -- |:echomsg| message
+      echoerr = "msg", -- |:echoerr| message
+      completion = "cmd", -- |ins-completion-menu| message
+      list_cmd = "pager", -- List output for various commands (|:ls|, |:set|, …)
+      lua_error = "pager", -- Error in |:lua| code
+      lua_print = "msg", -- |print()| from |:lua| code
+      progress = "msg", -- Progress message emitted by |nvim_echo()|
+      rpc_error = "pager", -- Error response from |rpcrequest()|
+      quickfix = "cmd", -- Quickfix navigation message
+      search_cmd = "cmd", -- Entered search command
+      search_count = "cmd", -- Search count message ("S" flag of 'shortmess')
+      shell_cmd = "cmd", -- |:!cmd| executed command
+      shell_err = "pager", -- |:!cmd| shell stderr output
+      shell_out = "pager", -- |:!cmd| shell stdout output
+      shell_ret = "msg", -- |:!cmd| shell return code
+      undo = "cmd", -- |:undo| and |:redo| message
+      verbose = "cmd", -- 'verbose' message
+      wildlist = "cmd", -- 'wildmode' "list" message
+      wmsg = "msg", -- Warning ("search hit BOTTOM", |W10|, …)
+    },
+    cmd = {
+      height = 0.5,
+    },
+    dialog = {
+      height = 0.5,
+    },
+    msg = {
+      height = 0.5,
+      timeout = 2000,
+    },
+    pager = {
+      height = 1,
+    },
+  },
+})
 
 --------------------------------------------------------------------------------
 -- Set diagnostics
@@ -213,9 +257,10 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 500
 vim.opt.redrawtime = 1000
 vim.opt.showcmd = false
-vim.opt.cmdheight = 1
+vim.opt.cmdheight = 0
 vim.opt.confirm = true
 vim.opt.completeopt = "menu,menuone,noselect,popup"
+vim.opt.shortmess = "atToOCF"
 
 --------------------------------------------------------------------------------
 -- Neovide
