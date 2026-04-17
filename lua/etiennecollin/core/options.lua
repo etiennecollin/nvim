@@ -260,6 +260,7 @@ vim.opt.showcmd = false
 vim.opt.cmdheight = 0
 vim.opt.confirm = true
 vim.opt.completeopt = "menu,menuone,noselect,popup"
+vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,terminal,globals"
 vim.opt.shortmess = "atToOCF"
 
 --------------------------------------------------------------------------------

@@ -187,7 +187,7 @@ vim.keymap.set("n", "<leader>q", function()
     vim.notify("Last window", vim.log.levels.INFO)
   end
 end, { desc = "Close window" })
-vim.keymap.set("n", "<leader>Q", "<cmd>q<cr>", { desc = "Quit" })
+vim.keymap.set("n", "<leader>Q", "<cmd>qa<cr>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>w", "<cmd>silent up!<cr>", { desc = "Save" })
 
 -- Utilities

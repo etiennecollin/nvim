@@ -1,9 +1,12 @@
 return {
   "echasnovski/mini.nvim",
-  event = { "BufReadPre", "BufNewFile" },
   version = "*",
   dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
   config = function()
+    require("mini.sessions").setup({
+      directory = "", -- Disable global sessions
+    })
+
     local ai = require("mini.ai")
     ai.setup({
       custom_textobjects = {
@@ -24,7 +27,6 @@ return {
 
     require("mini.align").setup()
     require("mini.pairs").setup()
-    require("mini.sessions").setup()
     require("mini.splitjoin").setup()
     require("mini.surround").setup({
       mappings = {
@@ -39,5 +41,7 @@ return {
         suffix_next = "n", -- Suffix to search with "next" method
       },
     })
+
+    require("etiennecollin.core.mappings.plugin").mini()
   end,
 }

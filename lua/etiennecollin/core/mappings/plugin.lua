@@ -32,6 +32,26 @@ function M.boole()
   vim.keymap.set({ "n", "v" }, "<leader>-", "<cmd>Boole decrement<cr>", { desc = "Boole decrement" })
 end
 
+function M.mini()
+  vim.keymap.set("n", "<leader>.r", function()
+    local sessions = require("mini.sessions")
+    sessions.read(sessions.config.file)
+  end, { desc = "Read local session" })
+  vim.keymap.set("n", "<leader>.w", function()
+    local sessions = require("mini.sessions")
+    sessions.write(sessions.config.file)
+  end, { desc = "Create local session" })
+  vim.keymap.set("n", "<leader>.d", function()
+    local sessions = require("mini.sessions")
+    if not pcall(function()
+      sessions.delete(sessions.config.file, { force = true })
+    end) then
+      local session_path = vim.fn.fnamemodify(vim.fn.getcwd(), ":p") .. sessions.config.file
+      vim.notify("Session does not exist " .. session_path, vim.log.levels.WARN)
+    end
+  end, { desc = "Delete local session" })
+end
+
 function M.overseer()
   local overseer = require("overseer")
   vim.keymap.set({ "n", "x" }, "<leader>oR", "<cmd>OverseerRestartLast<cr>", { desc = "Restart last" })

@@ -9,6 +9,7 @@ return {
     })
     whichkey.add({
       mode = { "n" },
+      { "<leader>.", group = "Sessions" },
       { "<leader>b", group = "Buffer" },
       { "<leader>B", group = "Tab" },
       { "<leader>k", group = "Debug" },
