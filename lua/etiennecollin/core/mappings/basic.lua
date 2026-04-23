@@ -198,7 +198,7 @@ vim.keymap.set("n", "<leader>zm", "<cmd>Mason<cr>", { desc = "Mason" })
 
 -- Undotree
 local function open_undotree()
-  vim.cmd("packadd nvim.undotree")
+  vim.cmd.packadd("nvim.undotree")
   require("undotree").open()
 end
 vim.keymap.set("n", "<leader>U", open_undotree, { desc = "Undotree" })
