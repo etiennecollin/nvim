@@ -192,6 +192,12 @@ vim.keymap.set("n", "<leader>w", "<cmd>silent up!<cr>", { desc = "Save" })
 
 -- Utilities
 vim.keymap.set("n", "<leader>XE", "<cmd>set fileformat=unix<cr>", { desc = "Set file format to unix" })
+vim.keymap.set("x", "<leader>'", function()
+  local start_line = vim.fn.line("v")
+  local end_line = vim.fn.line(".")
+  local count = math.abs(end_line - start_line) + 1
+  vim.notify("Selected lines: " .. count, vim.log.levels.INFO)
+end, { desc = "Count selected lines" })
 vim.keymap.set("n", "<leader>XX", "<cmd>!chmod +x %<cr>", { desc = "Make executable" })
 vim.keymap.set("n", "<leader>zl", "<cmd>Lazy<cr>", { desc = "Lazy" })
 vim.keymap.set("n", "<leader>zm", "<cmd>Mason<cr>", { desc = "Mason" })
