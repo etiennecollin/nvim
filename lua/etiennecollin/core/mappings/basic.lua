@@ -27,7 +27,6 @@ vim.keymap.set("n", "<a-left>", "^", { desc = "Go to start of line" })
 vim.keymap.set("n", "<a-right>", "$", { desc = "Go to end of line" })
 
 -- Selection
-vim.keymap.set("n", "==", "ggVG", { desc = "Select all" })
 vim.keymap.set("n", "<a-a>", "ggVG", { desc = "Select all" })
 
 -- Join current line with line below and replace
