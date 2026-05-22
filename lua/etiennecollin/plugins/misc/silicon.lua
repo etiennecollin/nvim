@@ -5,7 +5,7 @@ return {
     font = "Maple Mono NF=34",
     theme = "gruvbox-dark",
     background = nil,
-    background_image = vim.fn.expand("~/Pictures/wallpapers/ancient_bristlecone_pine_forest.jpg"),
+    -- background_image = vim.fn.expand("~/Pictures/wallpapers/ancient_bristlecone_pine_forest.jpg"),
     shadow_color = "#161618",
     to_clipboard = true,
     line_offset = 0,
