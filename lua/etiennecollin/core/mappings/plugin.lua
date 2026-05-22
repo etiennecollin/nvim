@@ -53,7 +53,6 @@ function M.mini()
 end
 
 function M.overseer()
-  local overseer = require("overseer")
   vim.keymap.set({ "n", "x" }, "<leader>oR", "<cmd>OverseerRestartLast<cr>", { desc = "Restart last" })
   vim.keymap.set({ "n", "x" }, "<leader>or", "<cmd>OverseerRun<cr>", { desc = "Run" })
   vim.keymap.set({ "n", "x" }, "<leader>ou", "<cmd>OverseerToggle<cr>", { desc = "Toggle UI" })
@@ -76,7 +75,7 @@ function M.overseer()
       noautocmd = true,
     })
 
-    overseer.create_task_output_view(winid, {
+    require("overseer").create_task_output_view(winid, {
       list_task_opts = {
         filter = function(task)
           return task.time_start ~= nil
