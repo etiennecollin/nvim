@@ -1,5 +1,5 @@
 return {
-  "echasnovski/mini.nvim",
+  "nvim-mini/mini.nvim",
   version = "*",
   dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
   config = function()
