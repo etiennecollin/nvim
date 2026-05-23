@@ -22,7 +22,6 @@ vim.opt.pumborder = "rounded"
 --------------------------------------------------------------------------------
 require("vim._core.ui2").enable({
   enable = true,
-
   msg = {
     targets = {
       empty = "cmd", -- Empty message (`:echo ""`), with empty `content`. Should clear messages sharing the 'cmdheight' area if it is the only message in a batch.
