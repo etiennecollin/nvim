@@ -28,6 +28,9 @@ return {
           -- https://rust-analyzer.github.io/book/configuration.html
           -- https://github.com/rust-lang/rust-analyzer/blob/8b624868e4ce2cb5b39559175f0978bee86bdeea/docs/book/src/configuration_generated.md
           ["rust-analyzer"] = {
+            cargo = {
+              cfg = { "test" },
+            },
             check = {
               command = "clippy",
               extraArgs = {
@@ -38,7 +41,7 @@ return {
                 "-W",
                 "clippy::all",
               },
-              allTargets = false,
+              allTargets = true,
             },
             checkOnSave = true,
             inlayHints = {
