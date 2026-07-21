@@ -11,13 +11,19 @@ return {
     line_offset = 0,
     window_title = function()
       local file = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
-      -- Fullname
-      return vim.fn.fnamemodify(file, ":t")
+      local filename = vim.fn.fnamemodify(file, ":t:r")
+      return filename
     end,
     output = function()
       local file = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
-      -- Basename .. timestamp .. _code.png
-      return vim.fn.fnamemodify(file, ":r") .. os.date("!%Y%m%dT%H%M%S") .. "_code.png"
+      local filename = vim.fn.fnamemodify(file, ":t:r")
+
+      local dir = vim.fn.expand("~/Pictures/code-snippets")
+      vim.fn.mkdir(dir, "p")
+
+      local timestamp = os.date("!%Y%m%dT%H%M%S")
+
+      return string.format("%s/%s_%s_code.png", dir, timestamp, filename)
     end,
   },
   init = function()
