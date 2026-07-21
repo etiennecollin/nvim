@@ -256,7 +256,7 @@ return {
 
         -- Lower priority for files inside deps/
         if item.file:match("deps/") then
-          item.score_add = (item.score_add or 0) - 100
+          item.score_add = (item.score_add or 0) - 25
         end
 
         return item
