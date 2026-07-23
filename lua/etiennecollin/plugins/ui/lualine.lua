@@ -80,6 +80,7 @@ return {
           require("lazy.status").updates,
           cond = require("lazy.status").has_updates,
         },
+        { "searchcount" },
         { "encoding" },
         { "fileformat" },
         { "filetype" },
