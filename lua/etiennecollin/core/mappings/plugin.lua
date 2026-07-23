@@ -199,8 +199,8 @@ function M.flash()
   vim.keymap.set({ "n", "x", "o" }, "<s-cr>", flash.treesitter, { desc = "Flash Treesitter" })
 end
 
--- stylua: ignore start
 function M.snacks()
+  -- stylua: ignore start
   -- Snacks other
   vim.keymap.set("n", "<leader>zh", function() Snacks.notifier.show_history() end, { desc = "Notification History" })
   vim.keymap.set("n", "<leader>rf", function() Snacks.rename.rename_file() end, { desc = "Rename File" })
@@ -220,12 +220,15 @@ function M.snacks()
   vim.keymap.set("n", "<leader>gL", function() Snacks.picker.git_log_line() end, { desc = "Log line" })
   vim.keymap.set("n", "<leader>go", function() Snacks.gitbrowse() end, { desc = "Git Browse" })
   vim.keymap.set("n", "<leader>gx", function() Snacks.picker.git_status() end, { desc = "Git Status" })
+  -- stylua: ignore end
 
   -- Snacks explorer
   -- Show hidden/ignored only if current buffer is hidden/ignored
   local function buf_is_hidden_or_ignored()
     local file = vim.api.nvim_buf_get_name(0)
-    if file == "" then return false end
+    if file == "" then
+      return false
+    end
 
     -- Normalize paths
     file = vim.fn.fnamemodify(file, ":p")
@@ -265,6 +268,8 @@ function M.snacks()
     end
   end
 
+
+  -- stylua: ignore start
   vim.keymap.set({ "n" }, "<leader>e", function() explorer_smart() end, { desc = "Toggle Explorer" })
 
   -- Snacks picker
@@ -309,7 +314,7 @@ function M.snacks()
   vim.keymap.set({ "n" }, "gI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" })
   vim.keymap.set({ "n" }, "gr", function() Snacks.picker.lsp_references() end, { nowait = true, desc = "References" })
   vim.keymap.set({ "n" }, "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" })
-
+  -- stylua: ignore end
 end
 
 function M.lsp(_, bufnr)
@@ -317,12 +322,14 @@ function M.lsp(_, bufnr)
     vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
   end
 
+  -- stylua: ignore start
   map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
   map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
   map("n", "K", vim.lsp.buf.hover, "Hover Documentation")
   map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
   map("n", "<leader>rs", ":LspRestart<cr>", "Restart")
   map({ "n", "i" }, "<c-s>", vim.lsp.buf.signature_help, "Signature help")
+  -- stylua: ignore end
 end
 
 function M.dapview()
@@ -354,6 +361,7 @@ function M.dap()
   local dap = require("dap")
   local widgets = require("dap.ui.widgets")
 
+  -- stylua: ignore start
   map("<leader>kB", function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, "breakpoint condition")
   map("<leader>kC", dap.run_to_cursor, "Run to cursor")
   map("<leader>kO", dap.step_out, "Step out")
@@ -374,7 +382,7 @@ function M.dap()
   map("<leader>ks", dap.session, "Session")
   map("<leader>kT", dap.terminate, "Terminate")
   map("<leader>kt", function() widgets.centered_float(widgets.threads) end, "Threads")
+  -- stylua: ignore end
 end
--- stylua: ignore end
 
 return M
