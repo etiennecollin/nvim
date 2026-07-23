@@ -62,9 +62,10 @@ vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter normal mode" })
 vim.keymap.set("n", "<leader>tw", "<cmd>set wrap!<CR>", { desc = "Toggle wrap" })
 
 -- Yanking and pasting
-vim.keymap.set("v", "p", '"_dP', { desc = "Paste" })
-vim.keymap.set({ "v" }, "<leader>p", '"_d"+P', { desc = "Paste from system clipboard" })
+vim.keymap.set({ "v" }, "p", '"_di<c-r>"<esc>', { desc = "Paste" })
+vim.keymap.set({ "v" }, "<leader>p", '"_di<c-r>+<esc>', { desc = "Paste from system clipboard" })
 vim.keymap.set({ "n" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+vim.keymap.set({ "n" }, "<leader>P", '"+P', { desc = "Paste from system clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank selection to system clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yank" })
 
