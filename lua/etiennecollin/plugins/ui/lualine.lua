@@ -75,18 +75,18 @@ return {
         },
       },
       lualine_x = {
-        { "overseer" },
         {
           require("lazy.status").updates,
           cond = require("lazy.status").has_updates,
         },
-        { "searchcount" },
+        { "overseer" },
+        { "filesize" },
         { "encoding" },
         { "fileformat" },
         { "filetype" },
       },
-      lualine_y = { "progress" },
-      lualine_z = { "location" },
+      lualine_y = { "selectioncount", "searchcount" },
+      lualine_z = { "location", "progress" },
     },
     inactive_sections = {
       lualine_a = {},
