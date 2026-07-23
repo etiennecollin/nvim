@@ -19,10 +19,6 @@ function M.img_clip()
   end, { desc = "Pick image" })
 end
 
-function M.cellular_automaton()
-  vim.keymap.set("n", "<leader>XA", "<cmd>CellularAutomaton make_it_rain<cr>", { desc = "Cellular automaton" })
-end
-
 function M.silicon()
   vim.keymap.set("v", "<leader>XS", ":Silicon<cr>", { desc = "Silicon" })
 end
