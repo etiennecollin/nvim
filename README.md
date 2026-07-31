@@ -22,3 +22,11 @@
 ## Rustaceanvim
 
 - `rust-analyzer` with `rustup component add rust-analyzer`
+
+## Markdown Preview
+
+To locally render plantuml diagrams embedded in markdown documents, a local plantuml must be running on port 8091. You may start one with:
+
+```sh
+docker run --restart "unless-stopped" -d -p 8091:8080 plantuml/plantuml-server:jetty
+```
