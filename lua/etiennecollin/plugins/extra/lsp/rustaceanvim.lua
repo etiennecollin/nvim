@@ -1,6 +1,6 @@
 return {
   "mrcjkb/rustaceanvim",
-  version = "^6",
+  version = "^9",
   dependencies = { "mfussenegger/nvim-dap" },
   ft = { "rust" },
   config = function()
@@ -29,19 +29,19 @@ return {
           -- https://github.com/rust-lang/rust-analyzer/blob/8b624868e4ce2cb5b39559175f0978bee86bdeea/docs/book/src/configuration_generated.md
           ["rust-analyzer"] = {
             cargo = {
+              allTargets = true,
               cfg = { "test" },
             },
             check = {
+              allTargets = true,
               command = "clippy",
               extraArgs = {
-                "--all",
-                -- "--all-targets",
-                -- "--all-features",
                 "--",
                 "-W",
                 "clippy::all",
               },
-              allTargets = true,
+              features = "all",
+              workspace = true,
             },
             checkOnSave = true,
             inlayHints = {
