@@ -29,9 +29,6 @@ return {
         google_java_format = {
           prepend_args = { "--aosp" },
         },
-        prettier = {
-          prepend_args = { "--tab-width=2" },
-        },
       },
       formatters_by_ft = require("etiennecollin.config").ensure_installed_formatters,
     })
