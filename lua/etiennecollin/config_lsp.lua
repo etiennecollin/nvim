@@ -40,6 +40,7 @@ M.basedpyright = {
 M.clangd = {
   cmd = {
     "clangd",
+    "--query-driver=/usr/bin/arm-none-eabi-*",
     '--fallback-style="{BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 120}"',
   },
 }
