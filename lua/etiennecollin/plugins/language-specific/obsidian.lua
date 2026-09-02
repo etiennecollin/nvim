@@ -50,7 +50,7 @@ return {
       },
     },
     picker = {
-      name = "snacks.pick",
+      name = "snacks.picker",
     },
     comment = {
       enabled = true,
