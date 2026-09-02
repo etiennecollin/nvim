@@ -65,6 +65,8 @@ M.ensure_installed_daps = { "codelldb", "cpptools", "debugpy" }
 
 --- Decrease tabstop for certain filetypes
 M.reduced_tabstop = {
+  "cpp",
+  "c",
   "fpp",
   "javascript",
   "javascriptreact",
