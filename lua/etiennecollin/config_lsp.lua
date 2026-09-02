@@ -40,8 +40,7 @@ M.basedpyright = {
 M.clangd = {
   cmd = {
     "clangd",
-    "--fallback-style=Google",
-    "--offset-encoding=utf-16",
+    '--fallback-style="{BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 120}"',
   },
 }
 
