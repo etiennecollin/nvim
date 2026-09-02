@@ -24,7 +24,7 @@ return {
           prepend_args = { "--line-length=120" },
         },
         clang_format = {
-          prepend_args = { "--style={BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 120}" },
+          prepend_args = { '--style="{BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 120}"' },
         },
         google_java_format = {
           prepend_args = { "--aosp" },
