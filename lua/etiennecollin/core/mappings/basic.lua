@@ -223,12 +223,13 @@ local function fire_save()
     return
   end
 
+  local username = vim.env.USER or vim.env.USERNAME or "user"
   local ts = os.date("%Y%m%d%H%M%S")
-  local branch = "etiennecollin-fire-" .. ts
+  local branch = username .. "-fire-" .. ts
 
   vim.cmd("!git checkout -b " .. branch)
   vim.cmd("!git add -A")
-  vim.cmd(string.format('!git commit -m "FIRE, THIS COMMIT SAVES THE STATE OF MY WORK: %s"', ts))
+  vim.cmd(string.format('!git commit -m "FIRE, THIS COMMIT SAVES THE STATE OF %s\'S WORK AS OF %s"', username, ts))
   vim.cmd("!git push -u origin " .. branch)
 
   vim.notify("Fire save complete on branch: " .. branch, 3)
