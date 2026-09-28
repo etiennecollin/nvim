@@ -206,7 +206,7 @@ function M.snacks()
   vim.keymap.set("n", "<leader>rf", function() Snacks.rename.rename_file() end, { desc = "Rename File" })
   vim.keymap.set({ "n", "t" }, "]]", function() Snacks.words.jump(vim.v.count1) end, { desc = "Next Reference" })
   vim.keymap.set({ "n", "t" }, "[[", function() Snacks.words.jump(-vim.v.count1) end, { desc = "Prev Reference" })
-  vim.keymap.set("n", "<leader>XZ", function() Snacks.zen() end, { desc = "Toggle zen mode" })
+  vim.keymap.set("n", "<leader>tz", function() Snacks.zen() end, { desc = "Toggle zen mode" })
   vim.keymap.set("n", "<leader>zs", function() Snacks.scratch() end, { desc = "Scratch buffer" })
 
   -- Snacks terminal
