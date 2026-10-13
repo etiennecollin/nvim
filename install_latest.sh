@@ -4,12 +4,23 @@ set -euo pipefail
 # --- Platform assertion ---
 OS="$(uname -s)"
 ARCH="$(uname -m)"
+NVIM_OS=""
 NVIM_ARCH=""
 
-if [[ "${OS}" != "Linux" ]]; then
-  echo "Error: This installer supports Linux only (detected: ${OS})."
+case "${OS}" in
+Linux)
+  NVIM_OS="linux"
+  ;;
+Darwin)
+  NVIM_OS="macos"
+  ;;
+*)
+  echo "Error: Unsupported OS: ${OS} (supported: Linux, macOS)"
   exit 1
-fi
+  ;;
+esac
+
+echo "Detected OS: ${NVIM_OS}"
 
 case "${ARCH}" in
 x86_64)
@@ -28,10 +39,10 @@ echo "Detected architecture: ${NVIM_ARCH}"
 
 # --------------------------
 
-URL="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-${NVIM_ARCH}.tar.gz"
+URL="https://github.com/neovim/neovim/releases/latest/download/nvim-${NVIM_OS}-${NVIM_ARCH}.tar.gz"
 INSTALL_BASE="${HOME}/.local/opt"
 BIN_DIR="${HOME}/.local/bin"
-BIN_NAME="nvim-linux-${NVIM_ARCH}"
+BIN_NAME="nvim-${NVIM_OS}-${NVIM_ARCH}"
 
 mkdir -p "${INSTALL_BASE}" "${BIN_DIR}"
 
