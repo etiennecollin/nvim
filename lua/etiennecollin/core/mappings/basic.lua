@@ -37,12 +37,45 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<c-d>", "<c-d>zz")
 vim.keymap.set("n", "<c-u>", "<c-u>zz")
 
--- Clear search highlights
-vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlights" })
+-- Show the current search count as virtual text at the end of the line
+local search_count_extmark_id
+local function show_search_index()
+  local namespaceId = vim.api.nvim_create_namespace("search")
+  vim.api.nvim_buf_clear_namespace(0, namespaceId, 0, -1)
+  local searchCount = vim.fn.searchcount()
+  search_count_extmark_id = vim.api.nvim_buf_set_extmark(0, namespaceId, vim.api.nvim_win_get_cursor(0)[1] - 1, 0, {
+    virt_text = { { "[" .. searchCount.current .. "/" .. searchCount.total .. "]", "StatusLine" } },
+    virt_text_pos = "eol",
+  })
 
--- Search next/previous with centered view
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+  vim.cmd("redraw")
+end
+
+-- Clear search highlights and search count virtual text
+vim.keymap.set("n", "<esc>", function()
+  local namespaceId = vim.api.nvim_get_namespaces()["search"]
+  vim.api.nvim_buf_del_extmark(0, namespaceId, search_count_extmark_id)
+  vim.cmd("nohlsearch")
+end, { desc = "Clear search highlights" })
+
+-- Search next/previous with centered view and trigger show_search_index
+local keys = { "n", "N", "*", "#", "g*", "g#" }
+for _, key in ipairs(keys) do
+  vim.keymap.set("n", key, function()
+    vim.cmd("silent! normal! " .. key .. "zzzv")
+    show_search_index()
+  end, { desc = "Prev/Next search result" })
+end
+
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+  group = vim.api.nvim_create_augroup("etiennecollin-search-index", { clear = true }),
+  callback = function(event)
+    -- for some reason "pattern" doesn't work when adding "?"
+    if event.match == "/" or event.match == "?" then
+      show_search_index()
+    end
+  end,
+})
 
 -- Search in visual mode
 vim.keymap.set("v", "/", "<Esc>/\\%V")
