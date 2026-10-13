@@ -1,10 +1,12 @@
 return {
   "nat-418/boole.nvim",
-  cmd = "Boole",
+  event = { "BufReadPre", "BufNewFile" },
   opts = {
     mappings = {
-      increment = nil,
-      decrement = nil,
+      -- increment = nil,
+      -- decrement = nil,
+      increment = "<c-a>",
+      decrement = "<c-x>",
     },
     -- User defined loops
     -- additions = {
@@ -18,7 +20,4 @@ return {
       -- ENABLE → DISABLE
     },
   },
-  init = function()
-    require("etiennecollin.core.mappings.plugin").boole()
-  end,
 }

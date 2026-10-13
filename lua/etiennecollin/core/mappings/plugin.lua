@@ -23,11 +23,6 @@ function M.silicon()
   vim.keymap.set("v", "<leader>XS", ":Silicon<cr>", { desc = "Silicon" })
 end
 
-function M.boole()
-  vim.keymap.set({ "n", "v" }, "<leader>=", "<cmd>Boole increment<cr>", { desc = "Boole increment" })
-  vim.keymap.set({ "n", "v" }, "<leader>-", "<cmd>Boole decrement<cr>", { desc = "Boole decrement" })
-end
-
 function M.mini()
   vim.keymap.set("n", "<leader>.r", function()
     local sessions = require("mini.sessions")
