@@ -68,7 +68,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup(imports, {
   checker = { enabled = true, notify = false },
   change_detection = { enabled = true, notify = false },
-  dev = { path = "~/github/" },
+  dev = { path = "~/projects" },
   install = {
     colorscheme = { require("etiennecollin.config").colorscheme },
   },
