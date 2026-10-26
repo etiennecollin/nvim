@@ -37,14 +37,18 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<c-d>", "<c-d>zz")
 vim.keymap.set("n", "<c-u>", "<c-u>zz")
 
+-- Create the namespace once, when this file is loaded
+local search_namespace_id = vim.api.nvim_create_namespace("etiennecollin-search-index")
+
 -- Show the current search count as virtual text at the end of the line
-local search_count_extmark_id
 local function show_search_index()
-  local namespaceId = vim.api.nvim_create_namespace("search")
-  vim.api.nvim_buf_clear_namespace(0, namespaceId, 0, -1)
+  local bufnr = vim.api.nvim_get_current_buf()
+  vim.api.nvim_buf_clear_namespace(bufnr, search_namespace_id, 0, -1)
   local searchCount = vim.fn.searchcount()
-  search_count_extmark_id = vim.api.nvim_buf_set_extmark(0, namespaceId, vim.api.nvim_win_get_cursor(0)[1] - 1, 0, {
-    virt_text = { { "[" .. searchCount.current .. "/" .. searchCount.total .. "]", "StatusLine" } },
+  vim.api.nvim_buf_set_extmark(bufnr, search_namespace_id, vim.api.nvim_win_get_cursor(0)[1] - 1, 0, {
+    virt_text = {
+      { "[" .. searchCount.current .. "/" .. searchCount.total .. "]", "StatusLine" },
+    },
     virt_text_pos = "eol",
   })
 
@@ -53,8 +57,7 @@ end
 
 -- Clear search highlights and search count virtual text
 vim.keymap.set("n", "<esc>", function()
-  local namespaceId = vim.api.nvim_get_namespaces()["search"]
-  vim.api.nvim_buf_del_extmark(0, namespaceId, search_count_extmark_id)
+  vim.api.nvim_buf_clear_namespace(0, search_namespace_id, 0, -1)
   vim.cmd("nohlsearch")
 end, { desc = "Clear search highlights" })
 
