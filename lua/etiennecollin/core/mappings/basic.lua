@@ -272,3 +272,7 @@ local function fire_save()
 end
 
 vim.keymap.set("n", "<leader>XF", fire_save, { desc = "Fire-save snapshot" })
+
+vim.keymap.set("n", "gh", function()
+  require("etiennecollin.utils.number_preview").show()
+end, { desc = "Preview number representations" })
